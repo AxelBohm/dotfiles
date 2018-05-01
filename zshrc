@@ -96,3 +96,7 @@ source $ZSH/oh-my-zsh.sh
 
 export VISUAL=vi
 export EDITOR="$VISUAL"
+
+# aliases
+alias franz="./Franz/Franz"
+alias Franz="./Franz/Franz"

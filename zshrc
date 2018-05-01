@@ -98,5 +98,5 @@ export VISUAL=vi
 export EDITOR="$VISUAL"
 
 # aliases
-alias franz="./Franz/Franz"
-alias Franz="./Franz/Franz"
+alias franz="./Franz/Franz & disown"
+alias Franz="./Franz/Franz & disown"

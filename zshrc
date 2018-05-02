@@ -99,6 +99,10 @@ source $ZSH/oh-my-zsh.sh
 export VISUAL=vi
 export EDITOR="$VISUAL"
 
+# add miniconda to path
+export PATH="/home/axel/miniconda/bin:$PATH"
+
+
 # aliases
 alias franz="./Franz/Franz & disown"
 alias Franz="./Franz/Franz & disown"

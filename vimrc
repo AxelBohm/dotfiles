@@ -18,3 +18,6 @@ ino [ []<left>
 ino { {}<left>
 ino {<CR> {<CR>}<ESC>O
 ino {;<CR> {<CR>};<ESC>O
+
+" linenumbers
+set number relativenumber

@@ -104,3 +104,6 @@ xset r rate 150 70
 # aliases
 alias franz="./Franz/Franz & disown"
 alias Franz="./Franz/Franz & disown"
+open(){
+  xdg-open "$1" & disown
+}

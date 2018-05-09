@@ -9,3 +9,12 @@ try
 source ~/.vim_runtime/my_configs.vim
 catch
 endtry
+
+" cheap autoclosing for brackets and alike
+ino " ""<left>
+ino ' ''<left>
+ino ( ()<left>
+ino [ []<left>
+ino { {}<left>
+ino {<CR> {<CR>}<ESC>O
+ino {;<CR> {<CR>};<ESC>O

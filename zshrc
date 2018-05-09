@@ -92,7 +92,7 @@ source $ZSH/oh-my-zsh.sh
 # For a full list of active aliases, run `alias`.
 
 
-export VISUAL=vi
+export VISUAL=vim.tiny
 export EDITOR="$VISUAL"
 
 # add miniconda to path
@@ -107,3 +107,9 @@ alias Franz="./Franz/Franz & disown"
 open(){
   xdg-open "$1" & disown
 }
+
+alias gc="git commit"
+alias ga="git add"
+alias gs="git status"
+alias gd="git diff"
+

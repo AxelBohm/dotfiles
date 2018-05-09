@@ -1,5 +1,5 @@
-# set vi as default editor
-export VISUAL=vi
+# set vim as default editor
+export VISUAL=vim
 export EDITOR="$VISUAL"
 
 # ~/.bashrc: executed by bash(1) for non-login shells.

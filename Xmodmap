@@ -1,0 +1,17 @@
+! make capslock control
+clear lock
+add control = Caps_Lock 
+
+! make right alt escape
+remove Mod1 = Alt_R
+keysym Alt_R = Escape
+
+! make left alt backspace
+remove Mod1 = Alt_L
+keycode 64 = BackSpace
+
+! make left control alt
+remove control = Control_L
+keysym Control_L = Alt_L
+
+!setxkbmap -option ctrl:nocaps

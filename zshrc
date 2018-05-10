@@ -94,7 +94,8 @@ source $ZSH/oh-my-zsh.sh
 # set "prompt"
 USER=''
 
-export VISUAL=vim.tiny
+# set editor
+export VISUAL=vim
 export EDITOR="$VISUAL"
 
 # add miniconda to path

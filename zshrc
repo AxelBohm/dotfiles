@@ -101,9 +101,6 @@ export EDITOR="$VISUAL"
 # add miniconda to path
 export PATH="/home/axel/miniconda/bin:$PATH"
 
-# key repeat and delay speed
-xset r rate 150 70
-
 # aliases
 alias franz="./Franz/Franz & disown"
 alias Franz="./Franz/Franz & disown"

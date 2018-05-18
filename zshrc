@@ -94,6 +94,9 @@ source $ZSH/oh-my-zsh.sh
 # set "prompt"
 USER=''
 
+# vim mode in CL
+bindkey -v  
+
 # set editor
 export VISUAL=vim
 export EDITOR="$VISUAL"

@@ -116,3 +116,5 @@ alias ga="git add -p"
 alias gs="git status"
 alias gd="git diff"
 
+alias sai="sudo apt install"
+

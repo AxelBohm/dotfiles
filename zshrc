@@ -112,7 +112,7 @@ open(){
 }
 
 alias gc="git commit"
-alias ga="git add"
+alias ga="git add -p"
 alias gs="git status"
 alias gd="git diff"
 

@@ -118,3 +118,7 @@ alias gd="git diff"
 
 alias sai="sudo apt install"
 
+
+# hacky :(
+xset r rate 150 70
+setxkbmap -option ctrl:nocaps

@@ -1,17 +1,26 @@
-! make capslock control
+!!! make capslock control
 clear lock
-add control = Caps_Lock 
+clear control
+keycode 66 = Control_L
+add control = Control_L Control_R
+! clear lock
+! clear control
+! add control = Caps_Lock Control_L Control_R
 
-! make right alt escape
+!!! make right alt escape
 remove Mod1 = Alt_R
 keysym Alt_R = Escape
 
-! make left alt backspace
-remove Mod1 = Alt_L
-keycode 64 = BackSpace
+!!! make left alt backspace
+! remove Mod1 = Alt_L
+! keycode 64 = BackSpace
 
-! make left control alt
-remove control = Control_L
-keysym Control_L = Alt_L
+!!! make left control alt
+! remove control = Control_L
+! keysym Control_L = Alt_L
 
-!setxkbmap -option ctrl:nocaps
+!!! make print button alt
+! clear lock
+! clear mod1
+! keycode 108 = Alt_R
+! add mod1 = Alt_L Alt_R

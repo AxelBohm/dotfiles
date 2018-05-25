@@ -20,6 +20,22 @@ call vundle#begin()
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
 
+""" R
+Plugin 'jalvesaq/Nvim-R'
+" get completion in R
+" Plugin 'roxma/nvim-completion-manager' "still stuff to figure out here"
+Plugin 'gaalcaras/ncm-R'
+
+" linting requires install.packages('lintr')
+Plugin 'w0rp/ale'
+
+" for snippet support
+" Plugin 'sirver/UltiSnips' " complains about mmissing python??"
+
+
+" You Complete Me
+" Plugin 'Valloric/YouCompleteMe' requires Vim compiled with Python support
+
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required

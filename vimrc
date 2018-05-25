@@ -64,3 +64,13 @@ vnoremap { <esc>`>a}<esc>`<i{<esc>
 vnoremap " <esc>`>a"<esc>`<i"<esc>
 vnoremap ' <esc>`>a'<esc>`<i'<esc>
 
+
+""" R config stuff
+
+let g:Rout_more_colors = 1
+let g:rout_follow_colorscheme = 1
+
+nmap <leader>, <Plug>RSendLine
+vmap <leader>, <Plug>RDSendSelection
+" vmap ,e <Plug>RESendSelection
+

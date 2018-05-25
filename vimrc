@@ -53,3 +53,14 @@ ino {;<CR> {<CR>};<ESC>O
 
 " linenumbers
 set number relativenumber
+
+" copy to clipboard
+set clipboard=unnamed
+
+" wrap words after visual selection
+vnoremap ( <esc>`>a)<esc>`<i(<esc>
+vnoremap [ <esc>`>a]<esc>`<i[<esc>
+vnoremap { <esc>`>a}<esc>`<i{<esc>
+vnoremap " <esc>`>a"<esc>`<i"<esc>
+vnoremap ' <esc>`>a'<esc>`<i'<esc>
+

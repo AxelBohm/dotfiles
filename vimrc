@@ -42,6 +42,10 @@ call vundle#end()            " required
 filetype plugin indent on    " required
 
 
+"otherwise colors don't work in most terminals..
+set t_Co=256
+
+
 " cheap autoclosing for brackets and alike
 ino " ""<left>
 ino ' ''<left>

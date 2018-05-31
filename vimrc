@@ -55,6 +55,11 @@ ino { {}<left>
 ino {<CR> {<CR>}<ESC>O
 ino {;<CR> {<CR>};<ESC>O
 
+" insert empty line without leaving normal mode
+nnoremap <leader>ij o<esc>
+nnoremap <leader>ik O<esc>
+
+
 " linenumbers
 set number relativenumber
 

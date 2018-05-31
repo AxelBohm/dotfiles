@@ -1,3 +1,10 @@
+
+"  set leader (has to be before any leader command is defined)
+nnoremap <space> <Nop>
+let mapleader = " "
+
+
+
 set runtimepath+=~/.vim_runtime
 
 source ~/.vim_runtime/vimrcs/basic.vim
@@ -42,9 +49,16 @@ call vundle#end()            " required
 filetype plugin indent on    " required
 
 
+"-----------------------------------------------------------
+"-----------------------------------------------------------
+
+map <leader>s /
+
+" Fast saving
+nmap <leader>w :w!<cr>
+
 "otherwise colors don't work in most terminals..
 set t_Co=256
-
 
 " cheap autoclosing for brackets and alike
 ino " ""<left>
@@ -58,7 +72,6 @@ ino {;<CR> {<CR>};<ESC>O
 " insert empty line without leaving normal mode
 nnoremap <leader>ij o<esc>
 nnoremap <leader>ik O<esc>
-
 
 " linenumbers
 set number relativenumber

@@ -68,6 +68,8 @@ nmap <leader>w :w!<cr>
 " Fast save plus quit
 map <leader>q :wq!<cr>
 
+" a little emacs behaviour
+inoremap <C-F> <Right>
 
 " cheap autoclosing for brackets and alike
 ino " ""<left>

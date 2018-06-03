@@ -58,6 +58,10 @@ set t_Co=256
 " protect those pinkies
 map <leader>s /
 
+" press j and k at the same time to get escape
+inoremap jk <esc>
+inoremap kj <esc>
+
 " Fast saving
 nmap <leader>w :w!<cr>
 

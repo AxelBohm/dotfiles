@@ -85,6 +85,7 @@ vnoremap [ <esc>`>a]<esc>`<i[<esc>
 vnoremap { <esc>`>a}<esc>`<i{<esc>
 vnoremap " <esc>`>a"<esc>`<i"<esc>
 vnoremap ' <esc>`>a'<esc>`<i'<esc>
+vnoremap $ <esc>`>a$<esc>`<i$<esc>
 
 
 """ R config stuff

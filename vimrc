@@ -52,13 +52,18 @@ filetype plugin indent on    " required
 "-----------------------------------------------------------
 "-----------------------------------------------------------
 
+"otherwise colors don't work in most terminals..
+set t_Co=256
+
+" protect those pinkies
 map <leader>s /
 
 " Fast saving
 nmap <leader>w :w!<cr>
 
-"otherwise colors don't work in most terminals..
-set t_Co=256
+" Fast save plus quit
+map <leader>q :wq!<cr>
+
 
 " cheap autoclosing for brackets and alike
 ino " ""<left>

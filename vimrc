@@ -53,6 +53,9 @@ set t_Co=256
 " protect those pinkies
 map <leader>s /
 
+" Make Y behave like other commands
+nnoremap Y y$
+
 " press j and k at the same time to get escape
 inoremap jk <esc>
 inoremap kj <esc>

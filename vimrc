@@ -51,7 +51,7 @@ filetype plugin indent on    " required
 set t_Co=256
 
 " protect those pinkies
-map <leader>s /
+nnoremap <leader>s /
 
 " Make Y behave like other commands
 nnoremap Y y$

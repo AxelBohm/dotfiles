@@ -71,12 +71,11 @@ inoremap <C-F> <Right>
 
 " cheap autoclosing for brackets and alike
 ino " ""<left>
-ino ' ''<left>
+" ino ' ''<left> "keeps messing with my apostrophes (maybe i shouldn't use so much slang)
 ino ( ()<left>
 ino [ []<left>
 ino { {}<left>
-ino {<CR> {<CR>}<ESC>O
-ino {;<CR> {<CR>};<ESC>O
+" ino {<CR> {<CR>}<ESC>O "i'm not fast enough for this
 
 " insert empty line without leaving normal mode
 nnoremap <leader>ij o<esc>

@@ -108,3 +108,19 @@ nmap <leader>, <Plug>RSendLine
 vmap <leader>, <Plug>RDSendSelection
 " vmap ,e <Plug>RESendSelection
 
+
+""" LaTex
+
+" Compile document using xelatex:
+" autocmd FileType tex inoremap <F5> <Esc>:w <cr>:!latexmk % <cr><cr>
+autocmd FileType tex nnoremap <leader>, :w <cr>:!latexmk % <cr><cr>
+
+
+
+
+
+
+
+
+
+

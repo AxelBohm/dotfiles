@@ -56,6 +56,9 @@ nnoremap <leader>s /
 " Make Y behave like other commands
 nnoremap Y y$
 
+" $ is  a pain. use L instead. i never use L anyways..
+nnoremap L $
+
 " press j and k at the same time to get escape
 inoremap jk <esc>
 inoremap kj <esc>

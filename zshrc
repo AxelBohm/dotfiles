@@ -119,6 +119,7 @@ alias gd="git diff"
 alias sai="sudo apt install"
 
 alias v="vim"
+alias vrc="vim .vimrc"
 
 # hacky :(
 xset r rate 150 70

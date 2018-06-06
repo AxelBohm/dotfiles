@@ -71,6 +71,10 @@ nmap <leader>w :w!<cr>
 " Fast save plus quit
 map <leader>q :wq!<cr>
 
+" :W sudo saves the file 
+" (useful for handling the permission-denied error)
+command W w !sudo tee % > /dev/null
+"
 " a little emacs behaviour
 inoremap <C-F> <Right>
 
@@ -99,6 +103,12 @@ vnoremap { <esc>`>a}<esc>`<i{<esc>
 vnoremap " <esc>`>a"<esc>`<i"<esc>
 vnoremap ' <esc>`>a'<esc>`<i'<esc>
 vnoremap $ <esc>`>a$<esc>`<i$<esc>
+
+" Smart way to move between windows
+map <C-j> <C-W>j
+map <C-k> <C-W>k
+map <C-h> <C-W>h
+map <C-l> <C-W>l
 
 
 """ R config stuff

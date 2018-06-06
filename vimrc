@@ -34,6 +34,8 @@ Plugin 'w0rp/ale'
 " for snippet support
 " Plugin 'sirver/UltiSnips' " complains about mmissing python??"
 
+" commentary (gc(c))
+Plugin 'tpope/vim-commentary'
 
 " You Complete Me
 " Plugin 'Valloric/YouCompleteMe' requires Vim compiled with Python support

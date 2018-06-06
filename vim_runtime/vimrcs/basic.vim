@@ -9,19 +9,6 @@
 "
 "           https://github.com/amix/vimrc
 "
-" Sections:
-"    -> General
-"    -> VIM user interface
-"    -> Colors and Fonts
-"    -> Files and backups
-"    -> Text, tab and indent related
-"    -> Visual mode related
-"    -> Moving around, tabs and buffers
-"    -> Status line
-"    -> Editing mappings
-"    -> vimgrep searching and cope displaying
-"    -> Spell checking
-"    -> Misc
 "    -> Helper functions
 "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -106,11 +93,6 @@ set novisualbell
 set t_vb=
 set tm=500
 
-" Properly disable sound on errors on MacVim
-if has("gui_macvim")
-    autocmd GUIEnter * set vb t_vb=
-endif
-
 
 " Add a bit extra margin to the left
 set foldcolumn=1
@@ -121,26 +103,6 @@ set foldcolumn=1
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Enable syntax highlighting
 syntax enable 
-
-" " Enable 256 colors palette in Gnome Terminal
-" if $COLORTERM == 'gnome-terminal'
-"     set t_Co=256
-" endif
-
-" try
-"     colorscheme vim-colors-solarized
-" catch
-" endtry
-
-" set background=dark
-
-" " Set extra options when running in GUI mode
-" if has("gui_running")
-"     set guioptions-=T
-"     set guioptions-=e
-"     set t_Co=256
-"     set guitablabel=%M\ %t
-" endif
 
 " Set utf8 as standard encoding and en_US as the standard language
 set encoding=utf8

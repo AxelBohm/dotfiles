@@ -115,6 +115,8 @@ alias gc="git commit"
 alias ga="git add -p"
 alias gs="git status"
 alias gd="git diff"
+alias gp="git push"
+alias gca="git commit --amend"
 
 alias sai="sudo apt install"
 

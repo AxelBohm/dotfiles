@@ -109,6 +109,11 @@ alias v="vim"
 alias vrc="vim .vimrc"
 alias zrc="vim .zshrc"
 
+# who can remember this command !?
+alias chterm="sudo update-alternatives --config x-terminal-emulator"
+
+
+### Other ###
 # hacky :(
 xset r rate 150 70
 setxkbmap -option ctrl:nocaps

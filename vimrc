@@ -40,6 +40,10 @@ Plugin 'tpope/vim-commentary'
 " You Complete Me
 " Plugin 'Valloric/YouCompleteMe' requires Vim compiled with Python support
 
+" simply maps all the different vim built in autocompletions to tab
+Plugin 'ajh17/VimCompletesMe'
+
+
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required

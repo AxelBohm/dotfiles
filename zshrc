@@ -115,5 +115,5 @@ alias chterm="sudo update-alternatives --config x-terminal-emulator"
 
 ### Other ###
 # hacky :(
-xset r rate 150 70
+xset r rate 180 70
 setxkbmap -option ctrl:nocaps

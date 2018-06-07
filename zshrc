@@ -119,9 +119,11 @@ alias gp="git push"
 alias gca="git commit --amend"
 
 alias sai="sudo apt install"
+alias p="sudo pacman -S"
 
 alias v="vim"
 alias vrc="vim .vimrc"
+alias zrc="vim .zshrc"
 
 # hacky :(
 xset r rate 150 70

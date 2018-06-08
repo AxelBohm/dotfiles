@@ -91,8 +91,14 @@ export PATH="~/miniconda/bin:$PATH"
 ### aliases ###
 alias franz="./Franz/Franz & disown"
 alias Franz="./Franz/Franz & disown"
+
+
 open(){
   xdg-open "$1" & disown
+}
+
+z(){
+  zathura "$1" & disown
 }
 
 alias gc="git commit"

@@ -112,8 +112,8 @@ alias sai="sudo apt install"
 alias p="sudo pacman -S"
 
 alias v="vim"
-alias vrc="vim .vimrc"
-alias zrc="vim .zshrc"
+alias vrc="vim ~/.vimrc"
+alias zrc="vim ~/.zshrc"
 
 # who can remember this command !?
 alias chterm="sudo update-alternatives --config x-terminal-emulator"

@@ -118,6 +118,9 @@ alias zrc="vim ~/.zshrc"
 # who can remember this command !?
 alias chterm="sudo update-alternatives --config x-terminal-emulator"
 
+# starwars in ascii
+alias starwars="telnet towel.blinkenlights.nl"
+
 
 ### Other ###
 # hacky :(

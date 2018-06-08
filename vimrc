@@ -56,6 +56,9 @@ filetype plugin indent on    " required
 "otherwise colors don't work in most terminals..
 set t_Co=256
 
+" duration vim waits for next key in command chain
+set timeoutlen=300
+
 " protect those pinkies
 nnoremap <leader>s /
 

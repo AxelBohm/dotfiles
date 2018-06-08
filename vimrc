@@ -135,11 +135,16 @@ vmap <leader>, <Plug>RDSendSelection
 autocmd FileType tex nnoremap <leader>, :w <cr>:!latexmk % <cr><cr>
 
 
+""" Markdown
 
+" no folding since i don't know how to unfold
+let g:vim_markdown_folding_disabled = 1
 
+" compile latex
+let g:vim_markdown_math = 1
 
-
-
+" dislplay eg __ __ as bold/italic
+set conceallevel=2
 
 
 

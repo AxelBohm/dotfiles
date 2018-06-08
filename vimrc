@@ -62,6 +62,9 @@ set timeoutlen=300
 "Hide mouse when typing
 set mousehide
 
+" highlight entire line of curser
+set cursorline
+
 " protect those pinkies
 nnoremap <leader>s /
 

@@ -127,6 +127,9 @@ nmap <leader>, <Plug>RSendLine
 vmap <leader>, <Plug>RDSendSelection
 " vmap ,e <Plug>RESendSelection
 
+" think about a better command for <- than _ 
+" what about the pipe aka %>%
+
 
 """ LaTex
 

@@ -59,6 +59,9 @@ set t_Co=256
 " duration vim waits for next key in command chain
 set timeoutlen=300
 
+"Hide mouse when typing
+set mousehide
+
 " protect those pinkies
 nnoremap <leader>s /
 

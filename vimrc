@@ -75,6 +75,9 @@ nnoremap L $
 inoremap jk <esc>
 inoremap kj <esc>
 
+" underscore is just so hard to reach
+inoremap <C-u> _
+
 " Fast saving
 nmap <leader>w :w!<cr>
 

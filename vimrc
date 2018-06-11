@@ -65,6 +65,9 @@ set mousehide
 " highlight entire line of curser
 set cursorline
 
+" search into subfolders when using :find
+set path+=**
+
 " protect those pinkies
 nnoremap <leader>s /
 

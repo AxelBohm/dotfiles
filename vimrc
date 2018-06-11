@@ -113,7 +113,7 @@ nnoremap <leader>ik O<esc>
 set number relativenumber
 
 " copy to clipboard
-set clipboard=unnamed
+set clipboard=unnamedplus
 
 " wrap words after visual selection
 vnoremap ( <esc>`>a)<esc>`<i(<esc>

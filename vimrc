@@ -43,6 +43,11 @@ Plugin 'tpope/vim-commentary'
 " simply maps all the different vim built in autocompletions to tab
 Plugin 'ajh17/VimCompletesMe'
 
+""" snippets (snipmate)
+Plugin 'MarcWeber/vim-addon-mw-utils'
+Plugin 'tomtom/tlib_vim'
+Plugin 'garbas/vim-snipmate'
+set rtp+=~/.vim/snippets
 
 
 " All of your Plugins must be added before the following line
@@ -161,5 +166,4 @@ let g:vim_markdown_math = 1
 " dislplay eg __ __ as bold/italic
 set conceallevel=2
 
-
-
+imap <cr> <Plug>snipMateTrigger 

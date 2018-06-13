@@ -25,8 +25,8 @@ Plugin 'VundleVim/Vundle.vim'
 """ R
 Plugin 'jalvesaq/Nvim-R'
 " get completion in R
-" Plugin 'roxma/nvim-completion-manager' "still stuff to figure out here"
-Plugin 'gaalcaras/ncm-R'
+Plugin 'roxma/nvim-completion-manager' "still stuff to figure out here
+Plugin 'gaalcaras/ncm-R' "only works if above plugin (nvim-completion-manger) works
 
 " linting requires install.packages('lintr')
 Plugin 'w0rp/ale'
@@ -58,8 +58,15 @@ filetype plugin indent on    " required
 "-----------------------------------------------------------
 "-----------------------------------------------------------
 
+" Colorscheme
+set background=dark
+colorscheme gruvbox
+
 "otherwise colors don't work in most terminals..
 set t_Co=256
+
+" Enable syntax highlighting
+syntax enable 
 
 " duration vim waits for next key in command chain
 set timeoutlen=300
@@ -70,11 +77,14 @@ set mousehide
 " highlight entire line of curser
 set cursorline
 
+" Set 7 lines to the cursor - when moving vertically using j/k
+set so=7
+
 " search into subfolders when using :find
 set path+=**
 
 " protect those pinkies
-nnoremap <leader>s /
+" nnoremap <leader>s /
 
 " Make Y behave like other commands
 nnoremap Y y$
@@ -93,7 +103,7 @@ inoremap <C-u> _
 nmap <leader>w :w!<cr>
 
 " Fast save plus quit
-map <leader>q :wq!<cr>
+nmap <leader>q :wq!<cr>
 
 " :W sudo saves the file 
 " (useful for handling the permission-denied error)
@@ -134,6 +144,31 @@ map <C-k> <C-W>k
 map <C-h> <C-W>h
 map <C-l> <C-W>l
 
+" Bash like keys for the command line
+cnoremap <C-A>		<Home>
+cnoremap <C-E>		<End>
+cnoremap <C-K>		<C-U>
+
+cnoremap <C-P> <Up>
+cnoremap <C-N> <Down>
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Fast editing and reloading of vimrc configs
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+map <leader>e :e! ~/.vimrc<cr>
+autocmd! bufwritepost ~/.vimrc source ~/.vimrc
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Turn persistent undo on 
+"    means that you can undo even when you close a buffer/VIM
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+try
+    set undodir=~/.vim_runtime/temp_dirs/undodir
+    set undofile
+catch
+endtry
+
+
 
 """ R config stuff
 
@@ -143,8 +178,10 @@ let g:rout_follow_colorscheme = 1
 nmap <leader>, <Plug>RSendLine
 vmap <leader>, <Plug>RDSendSelection
 " vmap ,e <Plug>RESendSelection
-nmap <leader>aa \aa
-nmap <leader>rf \rf
+nmap <leader>aa <Plug>>RSendFile
+" nmap <leader>rf \rf
+nmap <leader>rs <Plug>RStart
+nmap <leader>rc <Plug>RClose
 
 " think about a better command for <- than _ 
 " what about the pipe aka %>%
@@ -171,3 +208,29 @@ set conceallevel=2
 
 """ snippets
 imap <C-cr> <Plug>snipMateNextOrTrigger 
+
+
+
+
+"""" helper functions
+
+" Visual mode pressing / searches for the current selection
+" Super useful! From an idea by Michael Naumann
+vnoremap <silent> / :<C-u>call VisualSelection('', '')<CR>/<C-R>=@/<CR><CR>
+
+function! VisualSelection(direction, extra_filter) range
+    let l:saved_reg = @"
+    execute "normal! vgvy"
+
+    let l:pattern = escape(@", "\\/.*'$^~[]")
+    let l:pattern = substitute(l:pattern, "\n$", "", "")
+
+    if a:direction == 'gv'
+        call CmdLine("Ack '" . l:pattern . "' " )
+    elseif a:direction == 'replace'
+        call CmdLine("%s" . '/'. l:pattern . '/')
+    endif
+
+    let @/ = l:pattern
+    let @" = l:saved_reg
+endfunction

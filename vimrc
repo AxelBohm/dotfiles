@@ -143,6 +143,8 @@ let g:rout_follow_colorscheme = 1
 nmap <leader>, <Plug>RSendLine
 vmap <leader>, <Plug>RDSendSelection
 " vmap ,e <Plug>RESendSelection
+nmap <leader>aa \aa
+nmap <leader>rf \rf
 
 " think about a better command for <- than _ 
 " what about the pipe aka %>%

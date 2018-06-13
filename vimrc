@@ -98,7 +98,7 @@ map <leader>q :wq!<cr>
 " :W sudo saves the file 
 " (useful for handling the permission-denied error)
 command! W w !sudo tee % > /dev/null
-"
+
 " a little emacs behaviour
 inoremap <C-F> <Right>
 
@@ -152,7 +152,7 @@ nmap <leader>rf \rf
 
 """ LaTex
 
-" Compile document using xelatex:
+" Compile document
 " autocmd FileType tex inoremap <F5> <Esc>:w <cr>:!latexmk % <cr><cr>
 autocmd FileType tex nnoremap <leader>, :w <cr>:!latexmk % <cr><cr>
 
@@ -168,4 +168,6 @@ let g:vim_markdown_math = 1
 " dislplay eg __ __ as bold/italic
 set conceallevel=2
 
+
+""" snippets
 imap <C-cr> <Plug>snipMateNextOrTrigger 

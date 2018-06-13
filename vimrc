@@ -143,6 +143,8 @@ let g:rout_follow_colorscheme = 1
 nmap <leader>, <Plug>RSendLine
 vmap <leader>, <Plug>RDSendSelection
 " vmap ,e <Plug>RESendSelection
+nmap <leader>aa \aa
+nmap <leader>rf \rf
 
 " think about a better command for <- than _ 
 " what about the pipe aka %>%
@@ -166,4 +168,4 @@ let g:vim_markdown_math = 1
 " dislplay eg __ __ as bold/italic
 set conceallevel=2
 
-imap <cr> <Plug>snipMateTrigger 
+imap <C-cr> <Plug>snipMateNextOrTrigger 

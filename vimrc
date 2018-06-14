@@ -49,6 +49,10 @@ Plugin 'tomtom/tlib_vim'
 Plugin 'garbas/vim-snipmate'
 set rtp+=~/.vim/snippets
 
+" kill ring
+Plugin 'maxbrunsfeld/vim-yankstack'
+" it is important to call this before any mappings involving y,d,c
+call yankstack#setup()
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -210,6 +214,13 @@ set conceallevel=2
 imap <C-cr> <Plug>snipMateNextOrTrigger 
 
 
+""""""""""""""""""""""""""""""
+" => YankStack
+""""""""""""""""""""""""""""""
+let g:yankstack_yank_keys = ['y', 'd']
+
+nmap <c-p> <Plug>yankstack_substitute_older_paste
+nmap <c-n> <Plug>yankstack_substitute_newer_paste
 
 
 """" helper functions

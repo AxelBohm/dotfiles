@@ -31,13 +31,13 @@ let MRU_Max_Entries = 400
 map <leader>f :MRU<CR>
 
 
-""""""""""""""""""""""""""""""
-" => YankStack
-""""""""""""""""""""""""""""""
-let g:yankstack_yank_keys = ['y', 'd']
+"""""""""""""""""""""""""""""""
+"" => YankStack
+"""""""""""""""""""""""""""""""
+"let g:yankstack_yank_keys = ['y', 'd']
 
-nmap <c-p> <Plug>yankstack_substitute_older_paste
-nmap <c-n> <Plug>yankstack_substitute_newer_paste
+"nmap <c-p> <Plug>yankstack_substitute_older_paste
+"nmap <c-n> <Plug>yankstack_substitute_newer_paste
 
 
 """"""""""""""""""""""""""""""

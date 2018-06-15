@@ -74,6 +74,8 @@ source $ZSH/oh-my-zsh.sh
 # oh-my-zsh users are encouraged to define aliases within the ZSH_CUSTOM folder.
 # For a full list of active aliases, run `alias`.
 
+# put the scripts in the path
+export PATH=~/bin:$PATH
 
 # set "prompt"
 USER=''

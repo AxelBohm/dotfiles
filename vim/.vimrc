@@ -196,6 +196,7 @@ nmap <leader>rc <Plug>RClose
 " Compile document
 " autocmd FileType tex inoremap <F5> <Esc>:w <cr>:!latexmk % <cr><cr>
 autocmd FileType tex nnoremap <leader>, :w <cr>:!latexmk % <cr><cr>
+autocmd FileType tex inoremap ;h ^{}<left> 
 
 
 """ Markdown

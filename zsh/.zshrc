@@ -114,7 +114,7 @@ alias gp="git push"
 alias gca="git commit --amend"
 
 # store credentials
-alias gsc"git config credential.helper store"
+alias gsc="git config credential.helper store"
 
 alias sai="sudo apt install"
 alias p="sudo pacman -S"

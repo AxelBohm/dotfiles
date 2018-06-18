@@ -74,6 +74,7 @@ source $ZSH/oh-my-zsh.sh
 # oh-my-zsh users are encouraged to define aliases within the ZSH_CUSTOM folder.
 # For a full list of active aliases, run `alias`.
 
+# colorscheme
 COLOR_SCHEME=~/bin/base16-gruvbox-dark-medium.sh
 [[ -s $COLOR_SCHEME ]] && source $COLOR_SCHEME
 
@@ -99,11 +100,11 @@ alias Franz="./Franz/Franz & disown"
 
 
 open(){
-  xdg-open "$1" & disown
+  xdg-open "$1" && exit
 }
 
 z(){
-  zathura "$1" & disown
+  zathura "$1" && exit
 }
 
 alias gc="git commit"

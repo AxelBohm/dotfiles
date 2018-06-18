@@ -224,10 +224,11 @@ nmap <c-p> <Plug>yankstack_substitute_older_paste
 nmap <c-n> <Plug>yankstack_substitute_newer_paste
 
 
-"""" helper functions
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Helper functions
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " Visual mode pressing / searches for the current selection
-" Super useful! From an idea by Michael Naumann
 vnoremap <silent> / :<C-u>call VisualSelection('', '')<CR>/<C-R>=@/<CR><CR>
 
 " When you press <leader>r you can search and replace the selected text
@@ -249,3 +250,19 @@ function! VisualSelection(direction, extra_filter) range
     let @/ = l:pattern
     let @" = l:saved_reg
 endfunction
+
+
+" deletes everything until the last slash when browsing on the command line
+func! DeleteTillSlash()
+    let g:cmd = getcmdline()
+
+    let g:cmd_edited = substitute(g:cmd, "\\(.*\[/\]\\).*", "\\1", "")
+
+    if g:cmd == g:cmd_edited
+        let g:cmd_edited = substitute(g:cmd, "\\(.*\[/\]\\).*/", "\\1", "")
+    endif   
+
+    return g:cmd_edited
+endfunc
+
+cno <C-BS> <C-\>eDeleteTillSlash()<cr>

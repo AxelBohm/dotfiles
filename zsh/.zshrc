@@ -103,8 +103,14 @@ open(){
   xdg-open "$1" && exit
 }
 
+# open the the pdf and exit the terminal
 z(){
   zathura "$1" && exit
+}
+
+# open the the pdf and Keep the termin
+zk(){
+  zathura "$1" & disown
 }
 
 alias gc="git commit"

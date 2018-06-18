@@ -185,7 +185,7 @@ let g:rout_follow_colorscheme = 1
 nmap <leader>, <Plug>RSendLine
 vmap <leader>, <Plug>RDSendSelection
 " vmap ,e <Plug>RESendSelection
-nmap <leader>aa <Plug>>RSendFile
+nmap <leader>aa <Plug>RSendFile
 " nmap <leader>rf \rf
 nmap <leader>rs <Plug>RStart
 nmap <leader>rc <Plug>RClose

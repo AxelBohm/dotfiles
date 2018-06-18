@@ -40,9 +40,6 @@ vnoremap <silent> gv :call VisualSelection('gv', '')<CR>
 " Open Ack and put the cursor in the right position
 map <leader>g :Ack 
 
-" When you press <leader>r you can search and replace the selected text
-vnoremap <silent> <leader>r :call VisualSelection('replace', '')<CR>
-
 " Do :help cope if you are unsure what cope is. It's super useful!
 "
 " When you search with Ack, display your results in cope by doing:

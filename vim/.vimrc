@@ -230,6 +230,9 @@ nmap <c-n> <Plug>yankstack_substitute_newer_paste
 " Super useful! From an idea by Michael Naumann
 vnoremap <silent> / :<C-u>call VisualSelection('', '')<CR>/<C-R>=@/<CR><CR>
 
+" When you press <leader>r you can search and replace the selected text
+vnoremap <silent> <leader>r :call VisualSelection('replace', '')<CR>
+
 function! VisualSelection(direction, extra_filter) range
     let l:saved_reg = @"
     execute "normal! vgvy"

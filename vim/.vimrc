@@ -200,6 +200,8 @@ nmap <leader>rc <Plug>RClose
 autocmd FileType tex nnoremap <leader>, :w <cr>:!latexmk % <cr><cr>
 autocmd FileType tex inoremap ;h ^{}<left> 
 autocmd FileType tex inoremap ;u _{}<left> 
+autocmd FileType tex inoremap ;r \R
+autocmd FileType tex inoremap ;f function
 
 
 """ Markdown

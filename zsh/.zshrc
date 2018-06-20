@@ -83,15 +83,15 @@ alias Franz="./Franz/Franz & disown"
 
 
 open(){
-  xdg-open "$1" && exit
+  xdg-open "$1" & disown && exit
 }
 
 # open the the pdf and exit the terminal
 z(){
-  zathura "$1" && exit
+  zathura "$1" & disown && exit
 }
 
-# open the the pdf and Keep the termin
+# open the the pdf and Keep the terminal
 zk(){
   zathura "$1" & disown
 }

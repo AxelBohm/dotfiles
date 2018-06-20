@@ -42,6 +42,7 @@ bindsym XF86AudioMute           exec amixer -q set Master toggle
 # workspace
 bindsym $mod+Tab            workspace next
 bindsym $mod+Shift+Tab      workspace prev
+bindsym $mod+space          workspace back_and_forth
 
 # chat
 bindsym $mod+c           exec $term -e ./Franz/Franz & disown
@@ -145,10 +146,10 @@ bindsym $mod+f fullscreen toggle
 # bindsym $mod+ layout toggle split
 
 # toggle tiling / floating
-bindsym $mod+Shift+space floating toggle
+# bindsym $mod+Shift+space floating toggle
 
 # change focus between tiling / floating windows
-bindsym $mod+space focus mode_toggle
+# bindsym $mod+space focus mode_toggle
 
 # focus the parent container
 bindsym $mod+a focus parent

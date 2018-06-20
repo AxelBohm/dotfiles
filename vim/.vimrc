@@ -216,7 +216,12 @@ set conceallevel=2
 
 
 """ snippets
-imap <C-cr> <Plug>snipMateNextOrTrigger 
+" imap <C-cr> <Plug>snipMateNextOrTrigger 
+""""""""""""""""""""""""""""""
+" => snipMate (beside <TAB> support <CTRL-j>)
+""""""""""""""""""""""""""""""
+inoremap <c-j> <c-r>=snipMate#TriggerSnippet()<cr>
+snoremap <c-j> <esc>i<right><c-r>=snipMate#TriggerSnippet()<cr>
 
 
 """"""""""""""""""""""""""""""

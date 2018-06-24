@@ -236,7 +236,7 @@ au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g
 " => Fast editing and reloading of vimrc configs
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 map <leader>e :e! ~/.vimrc<cr>
-autocmd! bufwritepost ~/.vimrc source ~/.vimrc
+autocmd! bufwritepost ~/.vimrc nested source ~/.vimrc
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Turn persistent undo on 

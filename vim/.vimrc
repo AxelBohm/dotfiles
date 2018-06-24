@@ -97,7 +97,8 @@ set path+=**
 nnoremap Y y$
 
 " $ is  a pain. use L instead. i never use L anyways..
-nnoremap L $
+noremap L $
+noremap H ^
 
 " press j and k at the same time to get escape
 inoremap jk <esc>

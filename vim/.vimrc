@@ -232,7 +232,7 @@ let g:vim_markdown_folding_disabled = 1
 let g:vim_markdown_math = 1
 
 " dislplay eg __ __ as bold/italic
-set conceallevel=2
+" set conceallevel=2
 
 
 """ snippets

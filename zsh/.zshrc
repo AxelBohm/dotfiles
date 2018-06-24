@@ -94,7 +94,8 @@ zk(){
 }
 
 alias gc="git commit"
-alias ga="git add -p"
+alias ga="git add"
+alias gap="git add -p"
 alias gs="git status"
 alias gd="git diff"
 alias gp="git push"

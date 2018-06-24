@@ -6,8 +6,7 @@ let mapleader = " "
 
 
 set runtimepath+=~/.vim_runtime
-
-source ~/.vim_runtime/vimrcs/basic.vim
+set runtimepath+=~/.vim
 source ~/.vim_runtime/vimrcs/plugins_config.vim
 source ~/.vim_runtime/vimrcs/extended.vim
 
@@ -26,8 +25,25 @@ syntax enable               "syntax highlighting
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Basics
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" Set to auto read when a file is changed from the outside
+set autoread
+
+" A buffer becomes hidden when it is abandoned
+set hidden
+
+set encoding=utf8
+
+" Use Unix as the standard file type
+set ffs=unix,dos,mac
+
 " duration vim waits for next key in command chain
 set timeoutlen=300
+
+" Turn backup off
+set nobackup
+set nowb
+set noswapfile
 
 "Hide mouse when typing
 set mousehide
@@ -36,11 +52,48 @@ set mousehide
 set cursorline
 
 " Set 7 lines to the cursor - when moving vertically using j/k
-set so=7
+set scrolloff=7
 
 " search into subfolders when using :find
 set path+=**
 
+" Always show the status line
+set laststatus=2
+
+" Turn on the Wild menu
+set wildmenu
+
+" Configure backspace so it acts as it should act
+set backspace=eol,start,indent
+set whichwrap+=<,>,h,l
+
+" Ignore case when searching
+set ignorecase
+
+" When searching try to be smart about cases 
+set smartcase
+
+" Highlight search results
+set hlsearch
+
+" Makes search act like search in modern browsers
+set incsearch 
+
+" Don't redraw while executing macros (good performance config)
+set lazyredraw 
+
+" For regular expressions turn magic on
+set magic
+
+" Show matching brackets when text indicator is over them
+set showmatch 
+" How many tenths of a second to blink when matching brackets
+set mat=2
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => nifty custom mappings
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Make Y behave like other commands
 nnoremap Y y$
 
@@ -74,6 +127,32 @@ set number relativenumber
 " copy to clipboard
 set clipboard=unnamedplus
 
+" Switch CWD to the directory of the open buffer
+map <leader>cd :cd %:p:h<cr>:pwd<cr>
+
+" Add a bit extra margin to the left
+" set foldcolumn=1
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Text, tab and indent related
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Use spaces instead of tabs
+set expandtab
+
+" Be smart when using tabs ;)
+set smarttab
+
+" 1 tab == 4 spaces
+set shiftwidth=4
+set tabstop=4
+
+" Linebreak on 500 characters
+" set linebreak
+" set textwidth=500
+
+set autoindent 
+set smartindent
+set wrap "Wrap lines
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Brackets
@@ -117,7 +196,7 @@ nnoremap <leader>1 <c-w>=
 " => Buffer
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-map <leader>bd :Bclose<cr>     " Close the current buffer
+map <leader>bd :bdelete<cr>     " delete the current buffer
 
 map <leader>bl :bnext<cr>
 map <leader>bh :bprevious<cr>

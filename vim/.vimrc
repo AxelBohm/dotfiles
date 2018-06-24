@@ -165,6 +165,19 @@ nnoremap <leader>1 <c-w>=
 " => Other
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
+map <leader>bd :Bclose<cr>     " Close the current buffer
+
+map <leader>bl :bnext<cr>
+map <leader>bh :bprevious<cr>
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Other
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" Disable highlight when <leader><cr> is pressed
+map <silent> <leader><cr> :noh<cr>
+
 " underscore is just so hard to reach
 inoremap <C-u> _
 
@@ -181,6 +194,12 @@ cnoremap <C-E>		<End>
 cnoremap <C-K>		<C-U>
 cnoremap <C-P>      <Up>
 cnoremap <C-N>      <Down>
+
+" Quickly open a markdown buffer for scribble
+map <leader>m :e ~/scribbles.md<cr>
+
+" Return to last edit position when opening files (You want this!)
+au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Fast editing and reloading of vimrc configs

@@ -116,6 +116,9 @@ nnoremap <leader>q :q<cr>
 " Fast save and quit
 nnoremap <leader>x :wq<cr>
 
+" colon is annoying
+nnoremap <leader>; :
+
 " :W sudo saves the file 
 " (useful for handling the permission-denied error)
 command! W w !sudo tee % > /dev/null

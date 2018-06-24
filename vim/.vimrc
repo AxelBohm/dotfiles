@@ -157,6 +157,13 @@ map <C-k> <C-W>k
 map <C-h> <C-W>h
 map <C-l> <C-W>l
 
+" Resize splits
+nnoremap ;h :vertical resize +5<cr>
+nnoremap ;l :vertical resize -5<cr>
+nnoremap ;k :resize +5<cr>
+nnoremap ;j :resize -5<cr>
+nnoremap <leader>1 <c-w>=
+
 " Bash like keys for the command line
 cnoremap <C-A>		<Home>
 cnoremap <C-E>		<End>

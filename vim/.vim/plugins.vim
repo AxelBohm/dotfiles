@@ -29,6 +29,9 @@ Plugin 'tpope/vim-commentary'
 " You Complete Me
 " Plugin 'Valloric/YouCompleteMe' requires Vim compiled with Python support
 
+" kill ring
+Plugin 'maxbrunsfeld/vim-yankstack'
+
 " simply maps all the different vim built in autocompletions to tab
 Plugin 'ajh17/VimCompletesMe'
 
@@ -36,12 +39,8 @@ Plugin 'ajh17/VimCompletesMe'
 Plugin 'MarcWeber/vim-addon-mw-utils'
 Plugin 'tomtom/tlib_vim'
 Plugin 'garbas/vim-snipmate'
-set rtp+=~/.vim/snippets
+" set rtp+=~/.vim/snippets
 
-" kill ring
-Plugin 'maxbrunsfeld/vim-yankstack'
-" it is important to call this before any mappings involving y,d,c
-call yankstack#setup()
 
 " lightline
 Plugin 'itchyny/lightline.vim'

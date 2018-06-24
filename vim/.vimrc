@@ -4,7 +4,6 @@ nnoremap <space> <Nop>
 let mapleader = " "
 
 
-
 set runtimepath+=~/.vim_runtime
 set runtimepath+=~/.vim
 source ~/.vim_runtime/vimrcs/plugins_config.vim
@@ -94,6 +93,8 @@ set mat=2
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => nifty custom mappings
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+call yankstack#setup()
+
 " Make Y behave like other commands
 nnoremap Y y$
 

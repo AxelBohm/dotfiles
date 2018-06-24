@@ -108,10 +108,13 @@ inoremap kj <esc>
 inoremap <C-u> _
 
 " Fast saving
-nmap <leader>w :w!<cr>
+nnoremap <leader>w :w!<cr>
 
-" Fast save plus quit
-nmap <leader>q :wq!<cr>
+" Fast quit
+nnoremap <leader>q :q<cr>
+
+" Fast save and quit
+nnoremap <leader>x :wq<cr>
 
 " :W sudo saves the file 
 " (useful for handling the permission-denied error)

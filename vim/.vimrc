@@ -22,6 +22,9 @@ call vundle#begin()
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
 
+" colorscheme
+Plugin 'morhetz/gruvbox'
+
 """ R
 Plugin 'jalvesaq/Nvim-R'
 " get completion in R

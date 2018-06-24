@@ -62,19 +62,18 @@ call vundle#end()            " required
 filetype plugin indent on    " required
 
 
-"-----------------------------------------------------------
-"-----------------------------------------------------------
 
-" Colorscheme
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Colors
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set background=dark
 colorscheme gruvbox
+set t_Co=256                "colors in terminal
+syntax enable               "syntax highlighting
 
-"otherwise colors don't work in most terminals..
-set t_Co=256
-
-" Enable syntax highlighting
-syntax enable 
-
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Basics
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " duration vim waits for next key in command chain
 set timeoutlen=300
 
@@ -90,9 +89,6 @@ set so=7
 " search into subfolders when using :find
 set path+=**
 
-" protect those pinkies
-" nnoremap <leader>s /
-
 " Make Y behave like other commands
 nnoremap Y y$
 
@@ -103,9 +99,6 @@ noremap H ^
 " press j and k at the same time to get escape
 inoremap jk <esc>
 inoremap kj <esc>
-
-" underscore is just so hard to reach
-inoremap <C-u> _
 
 " Fast saving
 nnoremap <leader>w :w!<cr>
@@ -123,8 +116,16 @@ nnoremap <leader>; :
 " (useful for handling the permission-denied error)
 command! W w !sudo tee % > /dev/null
 
-" a little emacs behaviour
-inoremap <C-F> <Right>
+" linenumbers
+set number relativenumber
+
+" copy to clipboard
+set clipboard=unnamedplus
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Brackets
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " cheap autoclosing for brackets and alike
 inoremap " ""<left>
@@ -132,16 +133,6 @@ inoremap " ""<left>
 inoremap ( ()<left>
 inoremap [ []<left>
 inoremap { {}<left>
-
-" insert empty line without leaving normal mode
-nnoremap <leader>ij o<esc>
-nnoremap <leader>ik O<esc>
-
-" linenumbers
-set number relativenumber
-
-" copy to clipboard
-set clipboard=unnamedplus
 
 " wrap words after visual selection
 vnoremap ( <esc>`>a)<esc>`<i(<esc>
@@ -151,7 +142,12 @@ vnoremap " <esc>`>a"<esc>`<i"<esc>
 vnoremap ' <esc>`>a'<esc>`<i'<esc>
 vnoremap $ <esc>`>a$<esc>`<i$<esc>
 
-" Smart way to move between windows
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => windows
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" move between windows
 map <C-j> <C-W>j
 map <C-k> <C-W>k
 map <C-h> <C-W>h
@@ -164,13 +160,27 @@ nnoremap ;k :resize +5<cr>
 nnoremap ;j :resize -5<cr>
 nnoremap <leader>1 <c-w>=
 
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Other
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" underscore is just so hard to reach
+inoremap <C-u> _
+
+" a little emacs behaviour
+inoremap <C-F> <Right>
+
+" insert empty line without leaving normal mode
+nnoremap <leader>ij o<esc>
+nnoremap <leader>ik O<esc>
+
 " Bash like keys for the command line
 cnoremap <C-A>		<Home>
 cnoremap <C-E>		<End>
 cnoremap <C-K>		<C-U>
-
-cnoremap <C-P> <Up>
-cnoremap <C-N> <Down>
+cnoremap <C-P>      <Up>
+cnoremap <C-N>      <Down>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Fast editing and reloading of vimrc configs
@@ -209,7 +219,6 @@ nmap <C-\> <Plug>RSendLine<esc>j
 
 autocmd FileType r inoremap ;m %>%
 " think about a better command for <- than _ 
-" what about the pipe aka %>%
 
 
 """ LaTex

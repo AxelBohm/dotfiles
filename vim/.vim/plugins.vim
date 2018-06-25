@@ -41,12 +41,17 @@ Plugin 'tomtom/tlib_vim'
 Plugin 'garbas/vim-snipmate'
 " set rtp+=~/.vim/snippets
 
-
 " lightline
 Plugin 'itchyny/lightline.vim'
 
 " buffer explorer
 Plugin 'jlanzarotta/bufexplorer'
+
+" zen mode
+Plugin 'junegunn/goyo.vim'
+Plugin 'amix/vim-zenroom2'
+
+
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required

@@ -12,6 +12,12 @@
 # remove all window borders
 for_window [class="^.*"] border pixel 0
 
+gaps inner 15
+gaps outer 10
+
+bindsym $mod+g gaps inner current set 0; gaps outer current set 0
+bindsym $mod+Shift+g gaps inner current set 15; gaps outer current set 10
+
 
 # --------------------- Definitions-------------------------------
 set $mod Mod4

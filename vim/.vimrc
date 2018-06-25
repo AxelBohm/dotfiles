@@ -152,7 +152,7 @@ set tabstop=4
 " set textwidth=500
 
 set autoindent 
-set smartindent
+" set smartindent
 set wrap "Wrap lines
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""

@@ -102,7 +102,8 @@ alias gca="git commit --amend"
 alias gsc="git config credential.helper store"
 
 alias sai="sudo apt install"
-alias p="sudo pacman -S"
+alias pi="sudo pacman -S"
+alias pr="sudo pacman -R"
 
 alias v="vim"
 alias vrc="vim ~/.vimrc"

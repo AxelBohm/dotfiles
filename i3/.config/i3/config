@@ -12,6 +12,10 @@
 # remove all window borders
 for_window [class="^.*"] border pixel 2
 
+# only works if version >= 4.13
+hide_edge_borders smart
+
+# gaps
 gaps inner 15
 gaps outer 10
 

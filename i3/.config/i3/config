@@ -69,8 +69,10 @@ bindsym $mod+b          exec firefox
 bindsym $mod+z          exec $term -e calcurse
 
 # phd directory # not working
-bindsym $mod+p          exec $term -e ~/Phd
+bindsym $mod+p          exec $term -e ranger ~/PhD
 
+# ranger file manager
+bindsym $mod+Shift+Return   exec $term -e ranger
 
 # ---------------------------------------------------------
 

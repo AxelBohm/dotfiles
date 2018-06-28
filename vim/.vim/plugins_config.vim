@@ -91,6 +91,7 @@ map <leader>o :BufExplorer<cr>
 " Enable all functions in all modes
 let g:user_zen_mode='a'
 
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Vimroom
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -98,3 +99,32 @@ let g:goyo_width=100
 let g:goyo_margin_top = 2
 let g:goyo_margin_bottom = 2
 nnoremap <silent> <leader>z :Goyo<cr>
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Syntastic (syntax checker)
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:ale_linters = {
+\   'javascript': ['jshint'],
+\   'python': ['flake8'],
+\}
+
+nmap <silent> <leader>a <Plug>(ale_next_wrap)
+
+let g:ale_pattern_options = {
+\   '.*\.tex$': {'ale_enabled': 0},
+\}
+
+
+"""""""""""""""""""""""""""""
+" => MRU plugin
+""""""""""""""""""""""""""""""
+let MRU_Max_Entries = 400
+map <leader>f :MRU<CR>
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Git gutter (Git diff)
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:gitgutter_enabled=0
+nnoremap <silent> <leader>d :GitGutterToggle<cr>

@@ -54,6 +54,12 @@ Plugin 'amix/vim-zenroom2'
 " change surrounding paranthesis/quotes
 Plugin 'tpope/vim-surround'
 
+" most recently used file browser
+Plugin 'yegappan/mru'
+
+" shows git diffs on the side
+Plugin 'airblade/vim-gitgutter'
+
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required

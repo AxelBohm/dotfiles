@@ -72,11 +72,13 @@ au FileType mako vmap Si S"i${ _(<esc>2f"a) }<esc>
 let g:ale_linters = {
 \   'javascript': ['jshint'],
 \   'python': ['flake8'],
-\   'go': ['go', 'golint', 'errcheck']
 \}
 
 nmap <silent> <leader>a <Plug>(ale_next_wrap)
 
+let g:ale_pattern_options = {
+\   '.*\.tex$': {'ale_enabled': 0},
+\}
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Git gutter (Git diff)

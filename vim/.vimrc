@@ -264,8 +264,8 @@ autocmd FileType r inoremap ;m %>%
 " Compile document
 " autocmd FileType tex inoremap <F5> <Esc>:w <cr>:!latexmk % <cr><cr>
 autocmd FileType tex nnoremap <leader>, :w <cr>:!latexmk % <cr><cr>
-autocmd FileType tex inoremap ;h ^{}<left> 
-autocmd FileType tex inoremap ;u _{}<left> 
+autocmd FileType tex inoremap ;h ^{}<esc>i
+autocmd FileType tex inoremap ;u _{}<esc>i
 autocmd FileType tex inoremap ;r \R
 autocmd FileType tex inoremap ;f function
 

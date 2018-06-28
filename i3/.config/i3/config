@@ -39,7 +39,7 @@ set $term st
 
 # --------------------- Screen-------------------------------
 # screenlock
-bindsym $mod+Delete         exec i3lock
+bindsym $mod+Delete         exec i3lock -c 7c6f64
 
 # set wallpaper
 exec --no-startup-id feh --bg-fill ~/.config/i3/wallpapers/wallpaper.png

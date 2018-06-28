@@ -161,7 +161,7 @@ snippet sub* \subsection*
 	\\label{sub:${2:$1}}
 	${0}
 # Sub Sub Section
-snippet ssub \subsubsection
+snippet ssub \subsubsection subsubsection
 	\\subsubsection{${1:subsubsection name}}
 	\\label{ssub:${2:$1}}
 	${0}
@@ -199,21 +199,10 @@ snippet page reference to a page
 snippet index \index
 	\\index{${1:index}} ${0}
 #Citations
-snippet citen \citen
-	\\citen{${1}} ${0}
-# natbib citations
-snippet citep \citep
-	\\citep{${1}} ${0}
-snippet citet \citet
-	\\citet{${1}} ${0}
 snippet cite \cite[]{}
 	\\cite[${1}]{${2}} ${0}
 snippet citea \citeauthor
 	\\citeauthor{${1}} ${0}
-snippet citey \citeyear
-	\\citeyear{${1}} ${0}
-snippet fcite \footcite[]{}
-	\\footcite[${1}]{${2}}${0}
 #Formating text: italic, bold, underline, small capital, emphase ..
 snippet ita italic text
 	\\textit{${1:${VISUAL:text}}} ${0}
@@ -242,8 +231,6 @@ snippet mc mathcal
 snippet ms mathscr
 	\\mathscr{${1:${VISUAL:text}}} ${0}
 #misc
-snippet ft \footnote
-	\\footnote{${1:${VISUAL:text}}} ${0}
 snippet fig figure environment (includegraphics)
 	\\begin{figure}
 	\\begin{center}
@@ -287,17 +274,18 @@ snippet tikzcd* tikzcd environment in equation*
 	\\end{tikzcd}
 	\\end{equation*}
 	${0}
+
 #math
-snippet stackrel \stackrel{}{}
-	\\stackrel{${1:above}}{${2:below}} ${0}
 snippet frac \frac{}{}
 	\\frac{${1:num}}{${2:denom}} ${0}
 snippet sum \sum^{}_{}
 	\\sum_{${1:i=1}}^{${2:n}} ${0}
 snippet int \int^{}_{}
-	\\int_{${1:0}}^{${2:T}} ${0}
+	\\int_{${1:0}}^{${2:T}} ${0} \diff 
 snippet lim \lim_{}
 	\\lim_{${1:n \\to \\infty}} ${0}
+snippet sup \sup_{}
+	\\sup_{${1}} ${0}
 snippet frame frame environment
 	\\begin{frame}[${1:t}]{${2:title}}
 		${0:${VISUAL}}
@@ -306,33 +294,9 @@ snippet block block environment
 	\\begin{block}{${1:title}}
 		${0:${VISUAL}}
 	\\end{block}
-snippet alert alert text
-	\\alert{${1:${VISUAL:text}}} ${0}
-snippet alertblock alertblock environment
-	\\begin{alertblock}{${1:title}}
-		${0:${VISUAL}}
-	\\end{alertblock}
-snippet example exampleblock environment
-	\\begin{exampleblock}{${1:title}}
-		${0:${VISUAL}}
-	\\end{exampleblock}
-snippet col2 two-column environment
-	\\begin{columns}
-		\\begin{column}{0.5\\textwidth}
-			${1}
-		\\end{column}
-		\\begin{column}{0.5\\textwidth}
-			${0}
-		\\end{column}
-	\\end{columns}
-snippet multicol2 two-column environment with multicol
-	\\begin{multicols}{2}
-		${1}
-		\columnbreak
-		${0}
-	\\end{multicols}
 snippet \{ \{ \}
 	\\{ ${0} \\}
+
 #delimiter
 snippet lr left right
 	\\left${1} ${0} \\right$1
@@ -346,23 +310,19 @@ snippet lr[ left[ right]
 	\\left[ ${0} \\right]
 snippet lra langle rangle
 	\\langle ${0} \\rangle
-# Code listings
-snippet lst
-	\\begin{listing}[language=${1:language}]
-		${0:${VISUAL}}
-	\\end{listing}
-snippet lsi
-	\\lstinline|${1}| ${0}
-# Hyperlinks
-snippet url
-	\\url{${1}} ${0}
-snippet href
-	\\href{${1}}{${2}} ${0}
-# URL from Clipboard.
-snippet urlc
-	\\url{`@+`} ${0}
-snippet hrefc
-	\\href{`@+`}{${1}} ${0}
-# enquote from package csquotes
-snippet enq enquote
-	\\enquote{${1:${VISUAL:text}}} ${0}
+snippet norm
+	\\lVert ${0} \\rVert
+snippet lrnorm
+	\\left\\lVert ${0} \\right\\rVert
+
+# greek letters
+snippet g ga gamma
+	\\gamma
+snippet l la lambda
+	\\lambda
+snippet a al alpha
+	\\alpha
+snippet b be beta
+	\\beta
+snippet t tau
+	\\tau

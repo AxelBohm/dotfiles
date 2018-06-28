@@ -33,8 +33,8 @@ let g:vim_markdown_math = 1
 """"""""""""""""""""""""""""""
 " => snipMate 
 """"""""""""""""""""""""""""""
-inoremap <c-j> <c-r>=snipMate#TriggerSnippet()<cr>
-snoremap <c-j> <esc>i<right><c-r>=snipMate#TriggerSnippet()<cr>
+imap <C-J> <Plug>snipMateNextOrTrigger
+smap <C-J> <Plug>snipMateNextOrTrigger
 
 
 """"""""""""""""""""""""""""""

@@ -6,8 +6,6 @@ let mapleader = " "
 
 set runtimepath+=~/.vim_runtime
 set runtimepath+=~/.vim
-source ~/.vim_runtime/vimrcs/plugins_config.vim
-source ~/.vim_runtime/vimrcs/extended.vim
 
 
 source ~/.vim/plugins.vim

@@ -50,8 +50,8 @@ bindsym $mod+Shift+s        exec --no-startup-id ~/.config/i3/monitor.sh
 
 
 # --------------------- Sound -----------------------------------
-bindsym XF86AudioRaiseVolume    exec amixer -q set Master 2dB+ unmute
-bindsym XF86AudioLowerVolume    exec amixer -q set Master 2dB- unmute
+bindsym XF86AudioRaiseVolume    exec amixer -c 0 -q set Master 2dB+ unmute
+bindsym XF86AudioLowerVolume    exec amixer -c 0 -q set Master 2dB- unmute
 bindsym XF86AudioMute           exec amixer -q set Master toggle
 
 

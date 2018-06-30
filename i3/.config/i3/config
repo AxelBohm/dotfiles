@@ -89,6 +89,9 @@ bindsym $mod+p          exec $term -e ranger ~/PhD
 # ranger file manager
 bindsym $mod+Shift+Return   exec $term -e ranger
 
+# mail
+bindsym $mod+m              exec $term -e neomutt
+
 # ---------------------------------------------------------
 
 # Font for window titles. Will also be used by the bar unless a different font

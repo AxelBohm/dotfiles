@@ -48,6 +48,8 @@ exec --no-startup-id feh --bg-fill ~/.config/i3/wallpapers/wallpaper.png
 # change screen setup
 bindsym $mod+Shift+s        exec --no-startup-id ~/.config/i3/monitor.sh
 
+bindsym XF86MonBrightnessDown     exec sudo xbacklight -dec 10
+bindsym XF86MonBrightnessUp       exec sudo xbacklight -inc 10     
 
 # --------------------- Sound -----------------------------------
 bindsym XF86AudioRaiseVolume    exec amixer -c 0 -q set Master 2dB+ unmute

@@ -1,0 +1,29 @@
+# vim: filetype=neomuttrc
+# muttrc file for account ymail
+set realname = "Axel Böhm"
+set from = "axel.boehm@ymail.com"
+set smtp_url = "smtp://axel.boehm@ymail.com@smtp.mail.yahoo.com:587/"
+set sendmail = "/usr/bin/msmtp -a ymail"
+set folder = "~/.mail/ymail"
+set header_cache = ~/.config/mutt/accounts/ymail/cache/headers
+set message_cachedir = ~/.config/mutt/accounts/ymail/cache/bodies
+set certificate_file = ~/.config/mutt/accounts/ymail/certificates
+source "~/.config/mutt/credentials/getmuttpass ymail |"
+
+set mbox_type = Maildir
+set ssl_starttls = yes
+set ssl_force_tls = yes
+set spoolfile = "+Inbox"
+
+bind index,pager gg noop
+bind index,pager g noop
+bind index gg first-entry
+unmailboxes *
+mailboxes =ymail =------------------- "=Inbox" "=Bulk Mail" "=Drafts" "=Trash" "=Archive.2016" "=Deleted Messages" "=Sent" "=Archive" "=Sent Messages" "=Gesendet" "=Draft"
+macro index,pager gs "<change-folder>=Sent<enter>" "Go to sent."
+macro index,pager gd "<change-folder>=Drafts<enter>" "Go to drafts."
+macro index,pager gt "<change-folder>=Trash<enter>" "Go to trash."
+macro index,pager ga "<change-folder>=Archive.2016<enter>" "Go to archive."
+set record = "+Sent"
+set postponed = "+Drafts"
+set trash = "+Trash"

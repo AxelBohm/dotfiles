@@ -66,7 +66,7 @@ bindsym $mod+Shift+Tab      workspace prev
 bindsym $mod+space          workspace back_and_forth
 
 # chat
-bindsym $mod+c           exec $term -e ./Franz/Franz & disown
+bindsym $mod+c           exec franz
 
 # emacs
 bindsym $mod+e           exec emacs

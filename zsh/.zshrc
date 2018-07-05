@@ -69,11 +69,7 @@ export VISUAL=vim
 export EDITOR="$VISUAL"
 
 # add miniconda to path
-export PATH=~/miniconda/bin:$PATH
-
-### aliases ###
-alias franz="./Franz/Franz & disown"
-alias Franz="./Franz/Franz & disown"
+export PATH=/opt/miniconda/bin:$PATH
 
 
 open(){

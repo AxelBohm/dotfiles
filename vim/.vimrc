@@ -129,8 +129,8 @@ set clipboard=unnamedplus
 " Switch CWD to the directory of the open buffer
 map <leader>cd :cd %:p:h<cr>:pwd<cr>
 
-" Add a bit extra margin to the left
-" set foldcolumn=1
+" activate spell checking
+nnoremap <leader>ss :set spell!<cr>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Text, tab and indent related

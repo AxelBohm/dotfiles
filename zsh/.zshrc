@@ -116,3 +116,4 @@ alias starwars="telnet towel.blinkenlights.nl"
 # hacky :(
 xset r rate 180 70
 setxkbmap -option ctrl:nocaps
+setxkbmap -option ctrl:ralt_rctrl

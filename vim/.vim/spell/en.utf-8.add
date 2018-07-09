@@ -3,3 +3,6 @@ subgradient
 stepsizes
 Fenchel
 stepsize
+nonsmooth
+emacs
+LaTex

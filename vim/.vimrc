@@ -249,10 +249,10 @@ endtry
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Plugin config
+" => Filetype config
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-
+""" R
 autocmd FileType r inoremap ;m %>%
 " think about a better command for <- than _ 
 

@@ -105,6 +105,8 @@ alias v="vim"
 alias vrc="vim ~/.vimrc"
 alias zrc="vim ~/.zshrc"
 
+alias R="R --quiet --no-save"
+
 # who can remember this command !?
 alias chterm="sudo update-alternatives --config x-terminal-emulator"
 

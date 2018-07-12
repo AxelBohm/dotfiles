@@ -47,7 +47,6 @@ snippet al align environment
 # Align(ed)
 snippet ali align(ed) environment
 	\\begin{align${1:ed}}
-		\\label{eq:${2}}
 		${0:${VISUAL}}
 	\\end{align$1}
 # Gather(ed)
@@ -118,6 +117,11 @@ snippet mat smart matrix environment
 	\\begin{${1:p/b/v/V/B/small}matrix}
 		${0:${VISUAL}}
 	\\end{$1matrix}
+# PMatrix
+snippet pmat pm pmatrix environment
+	\\begin{pmatrix}
+		${0:${VISUAL}}
+	\\end{pmatrix}
 # Cases
 snippet cas cases environment
 	\\begin{cases}
@@ -151,7 +155,7 @@ snippet sec* \section*
 	\\label{sec:${2:$1}}
 	${0}
 # Sub Section
-snippet sub \subsection
+snippet sub \subsection subsection
 	\\subsection{${1:subsection name}}
 	\\label{sub:${2:$1}}
 	${0}
@@ -314,7 +318,10 @@ snippet norm
 	\\lVert ${0} \\rVert
 snippet lrnorm
 	\\left\\lVert ${0} \\right\\rVert
-
+snippet norms
+	\\lVert ${0} \\rVert^2
+snippet lrnorms
+	\\left\\lVert ${0} \\right\\rVert^2
 # greek letters
 snippet g ga gamma
 	\\gamma
@@ -326,3 +333,12 @@ snippet b be beta
 	\\beta
 snippet t tau
 	\\tau
+# theorem, lemma,...
+snippet lem lemma
+	\\begin{lemma}
+		${0:${VISUAL}}
+	\\end{lemma}
+snippet th thm theorem
+	\\begin{theorem}
+		${0:${VISUAL}}
+	\\end{theorem}

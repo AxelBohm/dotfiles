@@ -17,7 +17,13 @@ Plugin 'jalvesaq/Nvim-R'
 " Plugin 'roxma/nvim-completion-manager' "still stuff to figure out here
 " Plugin 'gaalcaras/ncm-R' "only works if above plugin (nvim-completion-manger) works
 
-" linting requires install.packages('lintr')
+""" Rmarkdown
+Plugin 'vim-pandoc/vim-pandoc'
+Plugin 'vim-pandoc/vim-pandoc-syntax' 
+Plugin 'vim-pandoc/vim-rmarkdown'
+
+""" linting 
+" for R needs install.packages('lintr')
 Plugin 'w0rp/ale'
 
 " for snippet support

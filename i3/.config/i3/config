@@ -92,6 +92,12 @@ bindsym $mod+Shift+Return   exec $term -e ranger
 # mail
 bindsym $mod+m              exec $term -e neomutt
 
+# wifi
+bindsym $mod+w              exec $term -e wicd-gtk
+
+# music
+bindsym $mod+t              exec $term -e ncmpcpp
+
 # ---------------------------------------------------------
 
 # Font for window titles. Will also be used by the bar unless a different font
@@ -120,7 +126,7 @@ set $right l
 floating_modifier Mod1
 
 # start a terminal
-bindsym $mod+Return exec $term
+bindsym $mod+Return split horizontal ;; exec $term
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -163,7 +169,7 @@ bindsym $mod+f fullscreen toggle
 # bindsym $mod+Shift+space floating toggle
 
 # change focus between tiling / floating windows
-bindsym $mod+t focus mode_toggle
+# bindsym $mod+t focus mode_toggle
 
 # focus the parent container
 bindsym $mod+a focus parent

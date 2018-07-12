@@ -72,8 +72,8 @@ export EDITOR="$VISUAL"
 export PATH=/opt/miniconda/bin:$PATH
 
 
-open(){
-  xdg-open "$1" & disown && exit
+e(){
+  evince "$1" & disown && exit
 }
 
 # open the the pdf and exit the terminal
@@ -106,6 +106,8 @@ alias vrc="vim ~/.vimrc"
 alias zrc="vim ~/.zshrc"
 
 alias R="R --quiet --no-save"
+
+alias encdrop="encfs ~/Dropbox/Encrypted/ ~/Private"
 
 # who can remember this command !?
 alias chterm="sudo update-alternatives --config x-terminal-emulator"

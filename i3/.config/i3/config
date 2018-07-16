@@ -66,25 +66,25 @@ bindsym $mod+Shift+Tab      workspace prev
 bindsym $mod+space          workspace back_and_forth
 
 # chat
-bindsym $mod+c           exec franz
+bindsym $mod+c              exec franz
 
 # emacs
-bindsym $mod+e           exec emacs
+bindsym $mod+e              exec emacs
 
 # edit i3 config file
-bindsym $mod+i           exec $term -e vim  ~/.config/i3/config
+bindsym $mod+i              exec $term -e vim  ~/.config/i3/config
  
 # open terminal under current window
 bindsym $mod+apostrophe     split vertical ;; exec $term 
 
 # browser
-bindsym $mod+b          exec firefox
+bindsym $mod+b              exec firefox
 
 # cal
-bindsym $mod+z          exec $term -e calcurse
+bindsym $mod+z              exec $term -e calcurse
 
 # phd directory # not working
-bindsym $mod+p          exec $term -e ranger ~/PhD
+bindsym $mod+p              exec $term -e ranger ~/PhD
 
 # ranger file manager
 bindsym $mod+Shift+Return   exec $term -e ranger
@@ -122,9 +122,6 @@ set $down j
 set $left h
 set $right l
  
-#use Mouse+Mod1 to drag floating windows to their wanted position
-floating_modifier Mod1
-
 # start a terminal
 bindsym $mod+Return split horizontal ;; exec $term
 
@@ -160,22 +157,8 @@ bindsym $mod+v split v
 # enter fullscreen mode for the focused container
 bindsym $mod+f fullscreen toggle
 
-# change container layout (stacked, tabbed, toggle split)
-# bindsym $mod+s layout stacking
-# bindsym $mod+w layout tabbed
-# bindsym $mod+ layout toggle split
-
 # toggle tiling / floating
-# bindsym $mod+Shift+space floating toggle
-
-# change focus between tiling / floating windows
-# bindsym $mod+t focus mode_toggle
-
-# focus the parent container
-bindsym $mod+a focus parent
-
-# focus the child container
-#bindsym $mod+d focus child
+bindsym $mod+Shift+space floating toggle
 
 # move the currently focused window to the scratchpad
 bindsym $mod+Shift+minus move scratchpad
@@ -211,7 +194,7 @@ bindsym $mod+Shift+0 move container to workspace 10
 # reload the configuration file
 bindsym $mod+Shift+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
-bindsym $mod+Shift+r restart
+bindsym $mod+F2 restart
 # exit i3 (logs you out of your X session)
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
 
@@ -253,3 +236,21 @@ bar {
 }
 
 # exec_always --no-startup-id $HOME/.config/polybar/launch.sh
+
+# change container layout (stacked, tabbed, toggle split)
+# bindsym $mod+s layout stacking
+# bindsym $mod+w layout tabbed
+# bindsym $mod+ layout toggle split
+
+# change focus between tiling / floating windows
+# bindsym $mod+t focus mode_toggle
+
+# focus the parent container
+# bindsym $mod+a focus parent
+
+# focus the child container
+#bindsym $mod+d focus child
+
+#use Mouse+Mod1 to drag floating windows to their wanted position
+# floating_modifier Mod1
+

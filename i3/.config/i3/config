@@ -36,6 +36,13 @@ set $mod Mod4
 set $term st
 
 
+# --------------------- Start external stuff-------------------------------
+
+# Music player daemon:
+exec --no-startup-id    mpd
+
+# wifi
+exec --no-startup-id    sudo wicd
 
 # --------------------- Screen-------------------------------
 # screenlock

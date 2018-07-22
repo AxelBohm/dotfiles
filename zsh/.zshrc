@@ -106,6 +106,7 @@ alias vrc="vim ~/.vimrc"
 alias zrc="vim ~/.zshrc"
 
 alias R="R --quiet --no-save"
+alias t="tmux"
 
 alias encdrop="encfs ~/Dropbox/Encrypted/ ~/Private"
 

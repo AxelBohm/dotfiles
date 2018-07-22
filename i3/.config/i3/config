@@ -100,7 +100,7 @@ bindsym $mod+Shift+Return   exec $term -e ranger
 bindsym $mod+m              exec $term -e neomutt
 
 # wifi
-bindsym $mod+w              exec $term -e wicd-gtk
+bindsym XF86WLAN       exec $term -e wicd-gtk
 
 # music
 bindsym $mod+t              exec $term -e ncmpcpp

@@ -50,10 +50,11 @@ setxkbmap -option ctrl:nocaps
 # make altgr control
 setxkbmap -option ctrl:ralt_rctrl
 
-
 #dropbox
 ./dropbox-dist/dropboxd
 
 # wicd for wifi(eduroam)
 sudo wicd
 
+# music
+mpd

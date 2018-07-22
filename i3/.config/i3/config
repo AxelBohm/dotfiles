@@ -246,7 +246,7 @@ for_window [instance="math"] floating enable
 for_window [instance="math"] resize set 800 300
 for_window [instance="math"] move scratchpad
 for_window [instance="math"] border pixel 2
-exec --no-startup-id $term -n math -f mono:pixelsize=16 -e R --quiet --no-save
+exec        $term -n math -f mono:pixelsize=16 -e R --quiet --no-save
 bindsym $mod+a [instance="math"] scratchpad show; [instance="math"] move position center
 
 # dropdown terminal
@@ -254,8 +254,14 @@ for_window [instance="dropdown"] floating enable
 for_window [instance="dropdown"] resize set 625 500
 for_window [instance="dropdown"] move scratchpad
 for_window [instance="dropdown"] border pixel 2
-exec_always       $term -n dropdown
+exec       $term -n dropdown
 bindsym $mod+semicolon [instance="dropdown"] scratchpad show; [instance="dropdown"] move position center
+
+# for_window [instance="scribbles"] floating enable
+# for_window [instance="scribbles"] resize set 625 500
+bindsym $mod+Shift+n              exec $term -e vim ~/scribbles.md
+
+
 # exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 
 # change container layout (stacked, tabbed, toggle split)

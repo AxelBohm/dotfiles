@@ -264,9 +264,24 @@ autocmd FileType tex inoremap ;h ^{}<esc>i
 autocmd FileType tex inoremap ;u _{}<esc>i
 autocmd FileType tex inoremap ;r \R
 autocmd FileType tex inoremap ;f function
+autocmd FileType tex inoremap $ $$<left>
 
+" Open corresponding .pdf
+map <leader>p :!zathura <c-r>%<backspace><backspace><backspace>pdf &<CR><CR>
 
-
+"MARKDOWN
+	autocmd Filetype markdown,rmd inoremap ,n ---<Enter><Enter>
+	autocmd Filetype markdown,rmd inoremap ,b ****<++><Esc>F*hi
+	autocmd Filetype markdown,rmd inoremap ,s ~~~~<++><Esc>F~hi
+	autocmd Filetype markdown,rmd inoremap ,e **<++><Esc>F*i
+	autocmd Filetype markdown,rmd inoremap ,h ====<Space><++><Esc>F=hi
+	autocmd Filetype markdown,rmd inoremap ,i ![](<++>)<++><Esc>F[a
+	autocmd Filetype markdown,rmd inoremap ,a [](<++>)<++><Esc>F[a
+	autocmd Filetype markdown,rmd inoremap ,l --------<Enter>
+	autocmd Filetype rmd inoremap ,r ```{r}<CR>```<CR><CR><esc>2kO
+	autocmd Filetype rmd inoremap ,p ```{python}<CR>```<CR><CR><esc>2kO
+    autocmd Filetype rmd inoremap ,c ```<cr>```<cr><cr><esc>2kO
+    autocmd Filetype rmd nmap <leader>, :RMarkdown<cr>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => General abbreviations

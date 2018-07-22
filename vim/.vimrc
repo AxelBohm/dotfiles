@@ -184,19 +184,17 @@ map <C-h> <C-W>h
 map <C-l> <C-W>l
 
 " Resize splits
-nnoremap ;h :vertical resize +5<cr>
-nnoremap ;l :vertical resize -5<cr>
-nnoremap ;k :resize +5<cr>
-nnoremap ;j :resize -5<cr>
 nnoremap <leader>1 <c-w>=
-
+nnoremap <Left> :vertical resize +5<cr>
+nnoremap <Right> :vertical resize -5<cr>
+nnoremap <Up> :resize +5<cr>
+nnoremap <Down> :resize -5<cr>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Buffer
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 map <leader>bd :bdelete<cr>     " delete the current buffer
-
 map <leader>bl :bnext<cr>
 map <leader>bh :bprevious<cr>
 

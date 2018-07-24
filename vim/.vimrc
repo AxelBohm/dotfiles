@@ -72,16 +72,18 @@ set hlsearch
 " Makes search act like search in modern browsers
 set incsearch 
 
-" Don't redraw while executing macros (good performance config)
-set lazyredraw 
-
 " For regular expressions turn magic on
 set magic
 
 " Show matching brackets when text indicator is over them
 set showmatch 
+
 " How many tenths of a second to blink when matching brackets
 set mat=2
+
+" default split position
+set splitright
+set splitbelow
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -102,12 +104,14 @@ inoremap kj <esc>
 
 " Fast saving
 nnoremap <leader>w :w!<cr>
-
 " Fast quit
 nnoremap <leader>q :q<cr>
-
 " Fast save and quit
-nnoremap <leader>x :wq<cr>
+nnoremap <leader>x :x<cr>
+
+" splits
+nnoremap <leader>v :vsplit<CR>:Ex<CR>
+nnoremap <leader>s :split<CR>:Ex<CR>
 
 " colon is annoying
 nnoremap <leader>; :

@@ -1,12 +1,8 @@
-
 " set leader (has to be before any leader command is defined)
 nnoremap <space> <Nop>
 let mapleader = " "
 
-
-set runtimepath+=~/.vim_runtime
 set runtimepath+=~/.vim
-
 
 source ~/.vim/plugins.vim
 source ~/.vim/plugins_config.vim

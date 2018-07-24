@@ -19,9 +19,6 @@ fi
 # set PATH so it includes user's private bin directories
 PATH="$HOME/bin:$HOME/.local/bin:$PATH"
 
-# set PATH so it includes Franz
-PATH="$HOME/Franz:$PATH"
-
 
 # keyspeed and remap
 xset r rate 180 70

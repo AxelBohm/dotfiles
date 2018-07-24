@@ -109,12 +109,17 @@ c() {
 	cd $1;
     ls;
 }
-alias cd="c"
 
+alias cd="c"
 alias la="ls -A"
 
-### Other ###
-# hacky :(
-xset r rate 180 70
-setxkbmap -option ctrl:nocaps
-setxkbmap -option ctrl:ralt_rctrl
+### oh-my-zsh ####
+bindkey '^s' autosuggest-accept
+bindkey '^e' autosuggest-execute
+bindkey '^ ' autosuggest-accept
+
+# ### Other ###
+# # hacky :(
+# xset r rate 180 70
+# setxkbmap -option ctrl:nocaps
+# setxkbmap -option ctrl:ralt_rctrl

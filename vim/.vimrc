@@ -35,7 +35,7 @@ set encoding=utf8
 set ffs=unix,dos,mac
 
 " duration vim waits for next key in command chain
-set timeoutlen=300
+set timeoutlen=500
 
 " Turn backup off
 set nobackup
@@ -245,6 +245,10 @@ try
 catch
 endtry
 
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => r in tmux
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let R_source = '~/.vim/bundle/Nvim-R/R/tmux_split.vim'
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Filetype config

@@ -258,7 +258,6 @@ let R_source = '~/.vim/bundle/Nvim-R/R/tmux_split.vim'
 autocmd FileType r inoremap ;m %>%
 " think about a better command for <- than _ 
 
-
 """ LaTex
 
 " Compile document
@@ -291,6 +290,14 @@ map <leader>p :!zathura <c-r>%<backspace><backspace><backspace>pdf &<CR><CR>
 " => General abbreviations
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 iab xdate <c-r>=strftime("%d/%m/%y %H:%M:%S")<cr>
+
+iab oe; ö
+iab lg; Liebe Grüße<cr>Axel
+iab bg; Beste Grüße<cr>Axel Böhm
+iab br; Best regards<cr>Axel Böhm
+iab sgh; Sehr geehrter Herr 
+iab sghp; Sehr geehrter Herr Professor
+iab dp; Dear Professor
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""

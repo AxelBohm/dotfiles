@@ -86,6 +86,9 @@ zk(){
   zathura "$1" & disown
 }
 
+###############################################################
+# => Aliases
+###############################################################
 alias gc="git commit"
 alias ga="git add"
 alias gap="git add -p"
@@ -93,7 +96,6 @@ alias gs="git status"
 alias gd="git diff"
 alias gp="git push"
 alias gca="git commit --amend"
-
 # store credentials
 alias gsc="git config credential.helper store"
 
@@ -116,6 +118,14 @@ alias chterm="sudo update-alternatives --config x-terminal-emulator"
 # starwars in ascii
 alias starwars="telnet towel.blinkenlights.nl"
 
+# Custom cd
+c() {
+	cd $1;
+    ls;
+}
+alias cd="c"
+
+alias la="ls -A"
 
 ### Other ###
 # hacky :(

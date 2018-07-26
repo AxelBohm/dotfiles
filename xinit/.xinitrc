@@ -43,7 +43,7 @@ exec xterm -geometry 80x66+0+0 -name login
 ########################################
 
 # key repeat and delay speed
-xset r rate 150 70
+xset r rate 180 70
 
 # make capslock control
 setxkbmap -option ctrl:nocaps

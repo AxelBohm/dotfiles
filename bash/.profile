@@ -23,3 +23,4 @@ PATH="$HOME/bin:$HOME/.local/bin:$PATH"
 # keyspeed and remap
 xset r rate 180 70
 setxkbmap -option ctrl:nocaps
+setxkbmap -option ctrl:ralt_rctrl

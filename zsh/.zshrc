@@ -122,4 +122,4 @@ bindkey '^ ' autosuggest-accept
 # # hacky :(
 # xset r rate 180 70
 # setxkbmap -option ctrl:nocaps
-# setxkbmap -option ctrl:ralt_rctrl
+setxkbmap -option ctrl:ralt_rctrl

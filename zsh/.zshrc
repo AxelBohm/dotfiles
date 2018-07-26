@@ -109,8 +109,8 @@ c() {
 	cd $1;
     ls;
 }
-
 alias cd="c"
+
 alias la="ls -A"
 
 ### oh-my-zsh ####

@@ -82,6 +82,7 @@ alias gs="git status"
 alias gd="git diff"
 alias gp="git push"
 alias gca="git commit --amend"
+alias gco="git checkout"
 # store credentials
 alias gsc="git config credential.helper store"
 

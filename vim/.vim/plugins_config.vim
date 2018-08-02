@@ -13,7 +13,7 @@ nmap <leader>aa <Plug>RSendFile
 " nmap <leader>rf \rf
 nmap <leader>rs <Plug>RStart
 nmap <leader>rc <Plug>RClose
-nmap <C-\> <Plug>RSendLine<esc>j
+nmap <C-]> <Plug>RSendLine<esc>j
 
 
 """"""""""""""""""""""""""""""

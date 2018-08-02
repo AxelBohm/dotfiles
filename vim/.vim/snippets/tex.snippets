@@ -336,9 +336,16 @@ snippet t tau
 # theorem, lemma,...
 snippet lem lemma
 	\\begin{lemma}
+		\label{lem:${1}}
 		${0:${VISUAL}}
 	\\end{lemma}
 snippet th thm theorem
 	\\begin{theorem}
-		${0:${VISUAL}}
+		${0}
 	\\end{theorem}
+# references
+snippet ref
+	\\ref{${0}}
+snippet eqref
+	\\eqref{eq:${0}}
+

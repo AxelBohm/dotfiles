@@ -266,6 +266,9 @@ autocmd FileType tex nnoremap <leader>, :w <cr>:!latexmk % <cr><cr>
 autocmd FileType tex inoremap ;h ^{}<esc>i
 autocmd FileType tex inoremap ;u _{}<esc>i
 autocmd FileType tex inoremap ;r \R
+autocmd FileType tex inoremap ;k _{k} 
+autocmd FileType tex inoremap ;j _{k+1}
+autocmd FileType tex inoremap ;l _{k-1}
 autocmd FileType tex inoremap ;f function
 autocmd FileType tex inoremap $ $$<left>
 

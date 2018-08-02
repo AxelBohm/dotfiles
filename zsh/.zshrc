@@ -9,11 +9,6 @@ ZSH_THEME="robbyrussell"
 # The optional three formats: "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
 # HIST_STAMPS="mm/dd/yyyy"
 
-# You may need to manually set your language environment
-# export LANG=en_US.UTF-8
-# LC_CTYPE=en_US.UTF-8
-# LC_ALL=en_US.UTF-8
-
 # Which plugins would you like to load? 
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(

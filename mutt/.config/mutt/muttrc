@@ -34,13 +34,13 @@ bind pager j next-line
 bind pager k previous-line
 bind pager gg top
 bind pager G bottom
-bind index d half-down
-bind index u half-up
-bind index D delete-message
-bind index U undelete-message
+bind index \Cd half-down
+bind index \Cu half-up
+bind index d delete-message
+# bind index U undelete-message
 bind index F search
 bind index,pager R group-reply
-macro index,pager S '<sync-mailbox><shell-escape>pkill -RTMIN+12 i3blocks<enter>'
+# macro index,pager S '<sync-mailbox><shell-escape>pkill -RTMIN+12 i3blocks<enter>'
 macro index,pager \Cu |urlview\n
 
 # View attachments properly.
@@ -70,7 +70,7 @@ macro index \Cf "<enter-command>unset wait_key<enter><shell-escape>read -p 'notm
 macro index A "<limit>all\n" "show all messages (undo limit)"
 
 # Sidebar mappings
-set sidebar_visible = yes
+# set sidebar_visible = yes
 set sidebar_width = 20
 set sidebar_short_path = yes
 set sidebar_next_new_wrap = yes

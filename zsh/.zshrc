@@ -115,13 +115,21 @@ alias cd="c"
 
 alias la="ls -A"
 
-### oh-my-zsh ####
+###############################################################
+# => plugin config
+###############################################################
+
+# autosuggestions
 bindkey '^s' autosuggest-accept
 bindkey '^e' autosuggest-execute
 bindkey '^ ' autosuggest-accept
 
+# history substring search
+bindkey "^[[A" history-substring-search-up
+bindkey "^[[B" history-substring-search-down
+
 # ### Other ###
 # # hacky :(
-# xset r rate 180 70
-# setxkbmap -option ctrl:nocaps
+xset r rate 180 70
+setxkbmap -option ctrl:nocaps
 setxkbmap -option ctrl:ralt_rctrl

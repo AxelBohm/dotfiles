@@ -256,7 +256,7 @@ let R_source = '~/.vim/bundle/Nvim-R/R/tmux_split.vim'
 
 """ R
 autocmd FileType r inoremap ;m %>%
-" think about a better command for <- than _ 
+autocmd FileType r inoremap ;n <-
 
 """ LaTex
 

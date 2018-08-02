@@ -20,6 +20,7 @@ plugins=(
   git
   zsh-syntax-highlighting
   zsh-autosuggestions 
+  history-substring-search
 )
 
 # Path to your oh-my-zsh installation.

@@ -1,0 +1,9 @@
+# vim: filetype=neomuttrc
+# A file for aliases
+
+alias bot radu.bot@univie.ac.at
+alias michael michael.sedlmayer@univie.ac.at
+alias teresa teresa.scarinci@univie.ac.at
+alias print mobile-print.mathematik@univie.ac.at
+alias khoa dang-khoa.nguyen@univie.ac.at
+alias caroline Caroline Geiersbach <caroline.geiersbach@univie.ac.at>

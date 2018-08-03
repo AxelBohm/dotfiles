@@ -15,6 +15,9 @@ nmap <leader>rs <Plug>RStart
 nmap <leader>rc <Plug>RClose
 nmap <C-]> <Plug>RSendLine<esc>j
 
+" run r in tmux
+let R_source = '~/.vim/bundle/Nvim-R/R/tmux_split.vim'
+
 
 """"""""""""""""""""""""""""""
 " => Markdown
@@ -100,6 +103,27 @@ let g:goyo_margin_top = 2
 let g:goyo_margin_bottom = 2
 nnoremap <silent> <leader>z :Goyo<cr>
 
+" lets you quit goyo _and vim_ at the same time
+function! s:goyo_enter()
+  let b:quitting = 0
+  let b:quitting_bang = 0
+  autocmd QuitPre <buffer> let b:quitting = 1
+  cabbrev <buffer> q! let b:quitting_bang = 1 <bar> q!
+endfunction
+
+function! s:goyo_leave()
+  " Quit Vim if this is the only remaining buffer
+  if b:quitting && len(filter(range(1, bufnr('$')), 'buflisted(v:val)')) == 1
+    if b:quitting_bang
+      qa!
+    else
+      qa
+    endif
+  endif
+endfunction
+
+autocmd! User GoyoEnter call <SID>goyo_enter()
+autocmd! User GoyoLeave call <SID>goyo_leave()
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Syntastic (syntax checker)

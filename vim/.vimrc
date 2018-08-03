@@ -229,6 +229,10 @@ map <leader>m :e ~/scribbles.md<cr>
 " Return to last edit position when opening files (You want this!)
 au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 
+" fast snippet configuring
+map <leader>n :SnipMateOpenSnippetFiles<CR>
+
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Fast editing and reloading of vimrc configs
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -246,13 +250,15 @@ catch
 endtry
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => r in tmux
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let R_source = '~/.vim/bundle/Nvim-R/R/tmux_split.vim'
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Filetype config
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" neomutt
+autocmd BufRead /tmp/neomutt-* Goyo
+autocmd BufRead /tmp/neomutt-* :set spell!
+" autocmd BufRead setlocal fo+=aw
+autocmd BufRead /tmp/neomutt-* :normal 4O 
+autocmd BufRead /tmp/neomutt-* :normal gg
 
 """ R
 autocmd FileType r inoremap ;m %>%

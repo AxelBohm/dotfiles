@@ -25,6 +25,8 @@ auto_view text/html
 auto_view application/pdf
 alternative_order text/plain text/enriched text/html
 set rfc2047_parameters = yes
+# flow more??
+set text_flowed = yes
 
 # General remappings
 bind editor <space> noop

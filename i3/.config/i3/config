@@ -16,11 +16,13 @@ for_window [class="^.*"] border pixel 2
 hide_edge_borders smart
 
 # gaps
-gaps inner 15
-gaps outer 10
+set $gap_outer 3
+set $gap_inner 7
+gaps inner $gap_inner
+gaps outer $gap_outer
 
 bindsym $mod+g gaps inner current set 0; gaps outer current set 0
-bindsym $mod+Shift+g gaps inner current set 15; gaps outer current set 10
+bindsym $mod+Shift+g gaps inner current set $gap_inner; gaps outer current set $gap_outer
 
 
 

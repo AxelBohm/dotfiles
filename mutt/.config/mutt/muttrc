@@ -8,7 +8,6 @@ source etc/aliases
 set sleep_time = 0
 set sort = 'reverse-date'
 set editor = $EDITOR
-#set copy = no
 set timeout = "5"
 set mail_check = "10"
 set mailcap_path = ~/.config/mutt/etc/mailcap
@@ -18,7 +17,6 @@ set date_format="%d/%m %I:%M"
 set index_format="%2C %Z %?X?A& ? %D %-15.15F %s (%-4.4c)"
 set markers = no
 set mark_old = no
-set mime_forward = yes
 set smtp_authenticators = 'gssapi:login'
 set wait_key = no
 auto_view text/html
@@ -38,9 +36,6 @@ bind pager gg top
 bind pager G bottom
 bind index \Cd half-down
 bind index \Cu half-up
-bind index d delete-message
-# bind index U undelete-message
-bind index F search
 bind index,pager R group-reply
 # macro index,pager S '<sync-mailbox><shell-escape>pkill -RTMIN+12 i3blocks<enter>'
 macro index,pager \Cu |urlview\n
@@ -49,7 +44,6 @@ macro index,pager \Cu |urlview\n
 bind attach <return> view-mailcap
 set fast_reply           # skip to compose when replying
 set fcc_attach           # save attachments with the body
-unset mime_forward       # forward attachments as part of body
 set forward_format = "Fwd: %s"       # format of subject when forwarding
 set forward_decode                   # decode when forwarding
 set forward_quote                    # include message in forwards

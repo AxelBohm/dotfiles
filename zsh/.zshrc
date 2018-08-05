@@ -93,7 +93,7 @@ alias zrc="vim ~/.zshrc"
 alias R="R --quiet --no-save"
 alias t="tmux"
 
-alias encdrop="encfs ~/Dropbox/Encrypted/ ~/Private"
+alias encdropbox="encfs ~/Dropbox/Encrypted/ ~/Private"
 
 # who can remember this command !?
 alias chterm="sudo update-alternatives --config x-terminal-emulator"

@@ -51,7 +51,7 @@ setxkbmap -option ctrl:nocaps
 setxkbmap -option ctrl:ralt_rctrl
 
 #dropbox
-./dropbox-dist/dropboxd
+.dropbox-dist/dropboxd
 
 # wicd for wifi(eduroam)
 sudo wicd

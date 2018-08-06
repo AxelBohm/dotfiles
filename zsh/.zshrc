@@ -1,13 +1,5 @@
-# If you come from bash you might have to change your $PATH.
-# export PATH=$HOME/bin:/usr/local/bin:$PATH
-
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-ZSH_THEME="robbyrussell"
-
-# Uncomment the following line if you want to change the command execution time
-# stamp shown in the history command output.
-# The optional three formats: "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
-# HIST_STAMPS="mm/dd/yyyy"
+ZSH_THEME="arrow"
 
 # Which plugins would you like to load? 
 # Add wisely, as too many plugins slow down shell startup.
@@ -18,33 +10,16 @@ plugins=(
   history-substring-search
 )
 
+###############################################################
+# => exports
+###############################################################
+
 # Path to your oh-my-zsh installation.
 export ZSH=~/.oh-my-zsh
-
 source $ZSH/oh-my-zsh.sh
-
-# User configuration
-
-# export MANPATH="/usr/local/man:$MANPATH"
-
-# Compilation flags
-# export ARCHFLAGS="-arch x86_64"
-
-# ssh
-# export SSH_KEY_PATH="~/.ssh/rsa_id"
-
-# oh-my-zsh users are encouraged to define aliases within the ZSH_CUSTOM folder.
-# For a full list of active aliases, run `alias`.
-
 
 # put the scripts in the path
 export PATH=~/bin:$PATH
-
-# set "prompt"
-USER=''
-
-# vim mode in CL
-bindkey -v  
 
 # set editor
 export VISUAL=vim
@@ -53,6 +28,12 @@ export EDITOR="$VISUAL"
 # add miniconda to path
 export PATH=/opt/miniconda/bin:$PATH
 
+###############################################################
+# => misc
+###############################################################
+
+# vim mode in CL
+bindkey -v  
 
 e(){
   evince "$1" & disown && exit

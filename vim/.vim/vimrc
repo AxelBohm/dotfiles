@@ -2,7 +2,7 @@
 nnoremap <space> <Nop>
 let mapleader = " "
 
-set runtimepath+=~/.vim
+" set runtimepath+=~/.vim
 
 source ~/.vim/plugins.vim
 source ~/.vim/plugins_config.vim
@@ -236,8 +236,8 @@ map <leader>n :SnipMateOpenSnippetFiles<CR>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Fast editing and reloading of vimrc configs
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-map <leader>e :e! ~/.vimrc<cr>
-autocmd! bufwritepost ~/.vimrc nested source ~/.vimrc
+map <leader>e :e! ~/.vim/vimrc<cr>
+autocmd! bufwritepost ~/.vim/vimrc nested source ~/.vim/vimrc
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Turn persistent undo on 
@@ -254,11 +254,11 @@ endtry
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " neomutt
-autocmd BufRead /tmp/neomutt-* Goyo
-autocmd BufRead /tmp/neomutt-* :set spell!
+autocmd BufRead /tmp/neomutt-* Goyo         "distraction free typing of mail
+autocmd BufRead /tmp/neomutt-* :set spell!  "spellchecking for mail
 " autocmd BufRead setlocal fo+=aw
-autocmd BufRead /tmp/neomutt-* :normal 4O 
-autocmd BufRead /tmp/neomutt-* :normal gg
+autocmd BufRead /tmp/neomutt-* :normal 4O   "couple new lines at beginning of file
+autocmd BufRead /tmp/neomutt-* :normal gg   "go to beginning of above newlines
 
 """ R
 autocmd FileType r inoremap ;m %>%
@@ -272,11 +272,15 @@ autocmd FileType tex nnoremap <leader>, :w <cr>:!latexmk % <cr><cr>
 autocmd FileType tex inoremap ;h ^{}<esc>i
 autocmd FileType tex inoremap ;u _{}<esc>i
 autocmd FileType tex inoremap ;r \R
-autocmd FileType tex inoremap ;k _{k} 
+autocmd FileType tex inoremap ;k _{k}
 autocmd FileType tex inoremap ;j _{k+1}
 autocmd FileType tex inoremap ;l _{k-1}
 autocmd FileType tex inoremap ;f function
 autocmd FileType tex inoremap $ $$<left>
+autocmd FileType tex inoremap ;a \alpha
+autocmd FileType tex inoremap ;b \beta
+autocmd FileType tex inoremap ;g \gamma
+autocmd FileType tex inoremap ;i \in
 
 " Open corresponding .pdf
 map <leader>p :!zathura <c-r>%<backspace><backspace><backspace>pdf &<CR><CR>

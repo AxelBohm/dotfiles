@@ -110,8 +110,8 @@ nnoremap <leader>q :q<cr>
 nnoremap <leader>x :x<cr>
 
 " splits
-nnoremap <leader>v :vsplit<CR>:Ex<CR>
-nnoremap <leader>s :split<CR>:Ex<CR>
+nnoremap <leader>v :vsplit<CR>:Explore<CR>
+nnoremap <leader>s :split<CR>:Explore<CR>
 
 " colon is annoying
 nnoremap <leader>; :
@@ -257,8 +257,10 @@ endtry
 autocmd BufRead /tmp/neomutt-* Goyo         "distraction free typing of mail
 autocmd BufRead /tmp/neomutt-* :set spell!  "spellchecking for mail
 " autocmd BufRead setlocal fo+=aw
-autocmd BufRead /tmp/neomutt-* :normal 4O   "couple new lines at beginning of file
-autocmd BufRead /tmp/neomutt-* :normal gg   "go to beginning of above newlines
+
+" couple of new lines and go to beginning
+autocmd BufRead /tmp/neomutt-* :normal 4O
+autocmd BufRead /tmp/neomutt-* :normal gg
 
 """ R
 autocmd FileType r inoremap ;m %>%
@@ -309,6 +311,7 @@ iab lg; Liebe Grüße<cr>Axel
 iab bg; Beste Grüße<cr>Axel Böhm
 iab br; Best regards<cr>Axel Böhm
 iab sgh; Sehr geehrter Herr 
+iab sgf; Sehr geehrte Frau
 iab sghp; Sehr geehrter Herr Professor
 iab dp; Dear Professor
 

@@ -26,7 +26,7 @@ export VISUAL=vim
 export EDITOR="$VISUAL"
 
 # add miniconda to path
-export PATH=/opt/miniconda/bin:$PATH
+# export PATH=/opt/miniconda/bin:$PATH
 
 ###############################################################
 # => misc
@@ -68,7 +68,7 @@ alias pi="sudo pacman -S"
 alias pr="sudo pacman -R"
 
 alias v="vim"
-alias vrc="vim ~/.vimrc"
+alias vrc="vim ~/.vim/vimrc"
 alias zrc="vim ~/.zshrc"
 
 alias R="R --quiet --no-save"

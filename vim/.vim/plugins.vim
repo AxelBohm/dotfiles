@@ -1,9 +1,6 @@
-
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
-" alternatively, pass a path where Vundle should install plugins
-"call vundle#begin('~/some/path/here')
 
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
@@ -27,19 +24,19 @@ Plugin 'vim-pandoc/vim-rmarkdown'
 Plugin 'w0rp/ale'
 
 " for snippet support
-" Plugin 'sirver/UltiSnips' " complains about mmissing python??"
+" Plugin 'sirver/UltiSnips' " complains about mmissing python??
 
 " commentary (gc(c))
 Plugin 'tpope/vim-commentary'
 
 " You Complete Me
-" Plugin 'Valloric/YouCompleteMe' requires Vim compiled with Python support
+Plugin 'Valloric/YouCompleteMe'
 
 " kill ring
 Plugin 'maxbrunsfeld/vim-yankstack'
 
 " simply maps all the different vim built in autocompletions to tab
-Plugin 'ajh17/VimCompletesMe'
+" Plugin 'ajh17/VimCompletesMe'
 
 """ snippets (snipmate)
 Plugin 'MarcWeber/vim-addon-mw-utils'
@@ -60,8 +57,8 @@ Plugin 'amix/vim-zenroom2'
 " change surrounding paranthesis/quotes
 Plugin 'tpope/vim-surround'
 
-" most recently used file browser
-Plugin 'yegappan/mru'
+" " most recently used file browser
+" Plugin 'yegappan/mru'
 
 " shows git diffs on the side
 Plugin 'airblade/vim-gitgutter'

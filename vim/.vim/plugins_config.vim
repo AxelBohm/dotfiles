@@ -1,4 +1,5 @@
 
+
 """"""""""""""""""""""""""""""
 " => R
 """"""""""""""""""""""""""""""
@@ -23,15 +24,7 @@ let R_source = '~/.vim/bundle/Nvim-R/R/tmux_split.vim'
 " => Markdown
 """"""""""""""""""""""""""""""
 
-" no folding since i don't know how to unfold
-let g:vim_markdown_folding_disabled = 1
-
-" compile latex
-let g:vim_markdown_math = 1
-
-" dislplay eg __ __ as bold/italic
-" set conceallevel=2
-
+let g:pandoc#syntax#conceal#use = 0
 
 """"""""""""""""""""""""""""""
 " => snipMate 

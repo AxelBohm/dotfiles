@@ -85,6 +85,11 @@ set mat=2
 set splitright
 set splitbelow
 
+" linenumbers
+set number relativenumber
+
+" copy to clipboard
+set clipboard=unnamedplus
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => nifty custom mappings
@@ -120,11 +125,6 @@ nnoremap <leader>; :
 " (useful for handling the permission-denied error)
 command! W w !sudo tee % > /dev/null
 
-" linenumbers
-set number relativenumber
-
-" copy to clipboard
-set clipboard=unnamedplus
 
 " Switch CWD to the directory of the open buffer
 map <leader>cd :cd %:p:h<cr>:pwd<cr>
@@ -268,7 +268,6 @@ autocmd FileType r inoremap ;n <-
 
 """ LaTex
 
-" Compile document
 " autocmd FileType tex inoremap <F5> <Esc>:w <cr>:!latexmk % <cr><cr>
 autocmd FileType tex nnoremap <leader>, :w <cr>:!latexmk % <cr><cr>
 autocmd FileType tex inoremap ;h ^{}<esc>i
@@ -299,7 +298,7 @@ map <leader>p :!zathura <c-r>%<backspace><backspace><backspace>pdf &<CR><CR>
 	autocmd Filetype rmd inoremap ,r ```{r}<CR>```<CR><CR><esc>2kO
 	autocmd Filetype rmd inoremap ,p ```{python}<CR>```<CR><CR><esc>2kO
     autocmd Filetype rmd inoremap ,c ```<cr>```<cr><cr><esc>2kO
-    autocmd Filetype rmd nmap <leader>, :RMarkdown<cr>
+    autocmd Filetype rmd nmap <leader>, :AsyncRun render-Rmarkdown.sh %<cr>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => General abbreviations

@@ -15,9 +15,12 @@ Plugin 'jalvesaq/Nvim-R'
 " Plugin 'gaalcaras/ncm-R' "only works if above plugin (nvim-completion-manger) works
 
 """ Rmarkdown
-Plugin 'vim-pandoc/vim-pandoc'
+" Plugin 'vim-pandoc/vim-pandoc'
 Plugin 'vim-pandoc/vim-pandoc-syntax' 
-Plugin 'vim-pandoc/vim-rmarkdown'
+" Plugin 'vim-pandoc/vim-rmarkdown'
+
+""" run shell commands asynchronously
+Plugin 'skywind3000/asyncrun.vim'
 
 """ linting 
 " for R needs install.packages('lintr')

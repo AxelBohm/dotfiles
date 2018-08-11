@@ -89,8 +89,8 @@ bindsym $mod+apostrophe     split vertical ;; exec $term
 # browser
 bindsym $mod+b              exec firefox
 
-# cal
-bindsym $mod+z              exec $term -n cal -e calcurse
+# calcurse
+bindsym $mod+z              exec $term -n calcurse -e calcurse
 
 # phd directory # not working
 bindsym $mod+p              exec $term -e ranger ~/PhD
@@ -278,12 +278,12 @@ exec_always       $term -n mail -e neomutt
 for_window [instance="mail"] move absolute position 50px 90px
 assign [instance="mail"] $ws1
 
-for_window [instance="cal"] floating enable
-for_window [instance="cal"] resize set 680 480
-for_window [instance="cal"] border pixel 3
-exec_always       $term -n cal -e calcurse
-for_window [instance="cal"] move absolute position 1160px 540px
-assign [instance="cal"] $ws1
+for_window [instance="calcurse"] floating enable
+for_window [instance="calcurse"] resize set 680 480
+for_window [instance="calcurse"] border pixel 3
+exec_always       $term -n calcurse -e calcurse
+for_window [instance="calcurse"] move absolute position 1160px 540px
+assign [instance="calcurse"] $ws1
 
 for_window [instance="rss"] floating enable
 for_window [instance="rss"] resize set 770 420

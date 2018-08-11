@@ -1,2 +1,2 @@
-#/bin/sh
-/usr/bin/firefox "$@" &
+#!/bin/bash
+/usr/bin/qutebrowser "$@" &

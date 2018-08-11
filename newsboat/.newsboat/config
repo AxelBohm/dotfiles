@@ -21,14 +21,15 @@ bind-key D pb-download
 bind-key U show-urls
 bind-key x pb-delete
 
-color listnormal color240 default
-color listfocus color247 color238
-color listnormal_unread color247 default
-color listfocus_unread magenta color238 bold
-color info color117 black bold
-#color article color247 default
+color listnormal            color244    default
+color listfocus             color244    color237
+color listnormal_unread     color253    default
+color listfocus_unread      magenta     color237
+#color info                  color117    color239    bold
+color info                  color235    color0    bold
+#color article               color247    default
 
-#browser linkhandler
+browser "~/bin/newsboat-browser.sh"
 #macro , open-in-browser
 #macro t set browser "tsp youtube-dl --add-metadata -ic"; open-in-browser ; set browser linkhandler
 #macro a set browser "tsp youtube-dl --add-metadata -xic"; open-in-browser ; set browser linkhandler

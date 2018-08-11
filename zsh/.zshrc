@@ -70,6 +70,8 @@ alias pr="sudo pacman -R"
 alias v="vim"
 alias vrc="vim ~/.vim/vimrc"
 alias zrc="vim ~/.zshrc"
+alias mrc="vim ~/.config/mutt/muttrc"
+alias nrc="vim ~/.newsboat/config"
 
 alias R="R --quiet --no-save"
 alias t="tmux"

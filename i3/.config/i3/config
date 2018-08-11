@@ -90,7 +90,7 @@ bindsym $mod+apostrophe     split vertical ;; exec $term
 bindsym $mod+b              exec firefox
 
 # cal
-bindsym $mod+z              exec $term -e calcurse
+bindsym $mod+z              exec $term -n cal -e calcurse
 
 # phd directory # not working
 bindsym $mod+p              exec $term -e ranger ~/PhD
@@ -99,7 +99,7 @@ bindsym $mod+p              exec $term -e ranger ~/PhD
 bindsym $mod+Shift+Return   exec $term -e ranger
 
 # mail
-bindsym $mod+m              exec $term -e neomutt
+bindsym $mod+m              exec $term -n mail -e neomutt 
 
 # wifi
 bindsym XF86WLAN       exec $term -e wicd-gtk
@@ -111,7 +111,7 @@ bindsym $mod+t              exec $term -e ncmpcpp
 bindsym $mod+s              exec qutebrowser https://scholar.google.com
 
 # newsboat
-bindsym $mod+n              exec $term -e newsboat
+bindsym $mod+n              exec $term -n rss -e newsboat
 
 # ---------------------------------------------------------
 
@@ -265,9 +265,33 @@ for_window [instance="dropdown"] border pixel 2
 exec       $term -n dropdown
 bindsym $mod+semicolon [instance="dropdown"] scratchpad show; [instance="dropdown"] move position center
 
-# for_window [instance="scribbles"] floating enable
-# for_window [instance="scribbles"] resize set 625 500
+#""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+# start screen
+#""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+set $ws1 "1"
+
+for_window [instance="mail"] floating enable
+for_window [instance="mail"] resize set 900 920
+for_window [instance="mail"] border pixel 3
+exec_always       $term -n mail -e neomutt
+for_window [instance="mail"] move absolute position 50px 90px
+assign [instance="mail"] $ws1
+
+for_window [instance="cal"] floating enable
+for_window [instance="cal"] resize set 680 480
+for_window [instance="cal"] border pixel 3
+exec_always       $term -n cal -e calcurse
+for_window [instance="cal"] move absolute position 1160px 540px
+assign [instance="cal"] $ws1
+
+for_window [instance="rss"] floating enable
+for_window [instance="rss"] resize set 770 420
+for_window [instance="rss"] border pixel 3
+exec_always       $term -n rss -e newsboat
+for_window [instance="rss"] move absolute position 1060px 70px
+assign [instance="rss"] $ws1
+
+
+# scribbles
 bindsym $mod+Shift+n              exec $term -e vim ~/scribbles.md
-
-
-# exec_always --no-startup-id $HOME/.config/polybar/launch.sh

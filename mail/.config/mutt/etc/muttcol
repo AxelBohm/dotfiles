@@ -6,23 +6,33 @@ color index_author color240 default '.*'
 color index_number color244 default
 color index_subject color247 default '.*'
 
-# For new mail:
-color index red black "~N"
-color index_author brightred black "~N"
-color index_subject red black "~N"
+## For new mail:
+color index magenta default "~N"
+color index_author brightmagenta default "~N"
+color index_subject magenta default "~N"
 
-# Header colors:
-color header blue default ".*"
+## flagged (!)
+color index green default "~F"
+color index_author brightgreen default "~F"
+color index_subject green default "~F"
+
+## Header colors:
+# color header blue default ".*" # this kills the CC line?!?
+# color hdrdefault blue default
 color header brightmagenta default "^(From)"
 color header brightcyan default "^(Subject)"
-color header brightwhite default "^(CC|BCC)"
+# color header red default "^(Cc|BCC)"
+color header cyan default "CC: "
+ignore date
+# unignore from subject to cc
 
 mono bold bold
 mono underline underline
 mono indicator reverse
 mono error bold
+
 color normal default default
-color indicator brightblack white
+color indicator default color237
 color sidebar_highlight red default
 color sidebar_divider color8 black
 color sidebar_flagged red black
@@ -34,8 +44,11 @@ color message cyan default
 color markers red white
 color attachment white default
 color search brightmagenta default
+
+## statusline
 # color status color117 default
-color status color235 default
+color status color239 color239
+
 color hdrdefault brightgreen default
 color quoted green default
 color quoted1 blue default

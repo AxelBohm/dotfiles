@@ -2,8 +2,6 @@
 nnoremap <space> <Nop>
 let mapleader = " "
 
-" set runtimepath+=~/.vim
-
 source ~/.vim/plugins.vim
 source ~/.vim/plugins_config.vim
 
@@ -125,7 +123,6 @@ nnoremap <leader>; :
 " (useful for handling the permission-denied error)
 command! W w !sudo tee % > /dev/null
 
-
 " Switch CWD to the directory of the open buffer
 map <leader>cd :cd %:p:h<cr>:pwd<cr>
 
@@ -232,11 +229,13 @@ au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g
 " fast snippet configuring
 map <leader>n :SnipMateOpenSnippetFiles<CR>
 
+" filebrowsing
+map <leader>e :Explore<cr>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Fast editing and reloading of vimrc configs
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-map <leader>e :e! ~/.vim/vimrc<cr>
+map <leader>r :e! ~/.vim/vimrc<cr>
 autocmd! bufwritepost ~/.vim/vimrc nested source ~/.vim/vimrc
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -306,6 +305,7 @@ map <leader>p :!zathura <c-r>%<backspace><backspace><backspace>pdf &<CR><CR>
 iab xdate <c-r>=strftime("%d/%m/%y %H:%M:%S")<cr>
 
 iab oe; ö
+inoremap ;s ß
 iab lg; Liebe Grüße<cr>Axel
 iab bg; Beste Grüße<cr>Axel Böhm
 iab br; Best regards<cr>Axel Böhm
@@ -372,3 +372,16 @@ endfun
 if has("autocmd")
     autocmd BufWritePre *.txt,*.js,*.py,*.wiki,*.sh,*.coffee :call CleanExtraSpaces()
 endif
+
+
+" "" fix meta-keys which generate <Esc>a .. <Esc>z
+" let c='k'
+" while c <= 'z'
+"   exec "set <M-".toupper(c).">=\e".c
+"   exec "imap \e".c." <M-".toupper(c).">"
+"   let c = nr2char(1+char2nr(c))
+" endw
+
+" set <M-k>=k
+" inoremap k <M-k>
+" inoremap <M-k> <esc>dd

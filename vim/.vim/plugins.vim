@@ -26,9 +26,6 @@ Plugin 'skywind3000/asyncrun.vim'
 " for R needs install.packages('lintr')
 Plugin 'w0rp/ale'
 
-" for snippet support
-" Plugin 'sirver/UltiSnips' " complains about mmissing python??
-
 " commentary (gc(c))
 Plugin 'tpope/vim-commentary'
 
@@ -45,7 +42,6 @@ Plugin 'maxbrunsfeld/vim-yankstack'
 Plugin 'MarcWeber/vim-addon-mw-utils'
 Plugin 'tomtom/tlib_vim'
 Plugin 'garbas/vim-snipmate'
-" set rtp+=~/.vim/snippets
 
 " lightline
 Plugin 'itchyny/lightline.vim'
@@ -59,9 +55,6 @@ Plugin 'amix/vim-zenroom2'
 
 " change surrounding paranthesis/quotes
 Plugin 'tpope/vim-surround'
-
-" " most recently used file browser
-" Plugin 'yegappan/mru'
 
 " shows git diffs on the side
 Plugin 'airblade/vim-gitgutter'

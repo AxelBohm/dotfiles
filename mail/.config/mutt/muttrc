@@ -3,8 +3,10 @@
 bind index,pager i noop
 bind index,pager g noop
 bind index \Cf noop
+
 source etc/muttcol
 source etc/aliases
+
 set sleep_time = 0
 set sort = 'reverse-date'
 set editor = $EDITOR
@@ -25,6 +27,8 @@ alternative_order text/plain text/enriched text/html
 set rfc2047_parameters = yes
 # flow more??
 set text_flowed = yes
+# show pager even if email is opened
+set pager_index_lines = 6
 
 # General remappings
 bind editor <space> noop

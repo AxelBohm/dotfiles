@@ -29,9 +29,10 @@ let g:pandoc#syntax#conceal#use = 0
 """"""""""""""""""""""""""""""
 " => snipMate 
 """"""""""""""""""""""""""""""
-imap <C-J> <Plug>snipMateNextOrTrigger
-smap <C-J> <Plug>snipMateNextOrTrigger
-
+imap <C-A> <Plug>snipMateNextOrTrigger
+smap <C-A> <Plug>snipMateNextOrTrigger
+imap <C-M> <Plug>snipMateNextOrTrigger
+smap <C-M> <Plug>snipMateNextOrTrigger
 
 """"""""""""""""""""""""""""""
 " => YankStack

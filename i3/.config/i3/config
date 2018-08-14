@@ -272,10 +272,10 @@ bindsym $mod+semicolon [instance="dropdown"] scratchpad show; [instance="dropdow
 set $ws1 "1"
 
 for_window [instance="mail"] floating enable
-for_window [instance="mail"] resize set 900 920
+for_window [instance="mail"] resize set 900 980
 for_window [instance="mail"] border pixel 3
 exec_always       $term -n mail -e neomutt
-for_window [instance="mail"] move absolute position 50px 90px
+for_window [instance="mail"] move absolute position 50px 50px
 assign [instance="mail"] $ws1
 
 for_window [instance="calcurse"] floating enable
@@ -286,10 +286,10 @@ for_window [instance="calcurse"] move absolute position 1160px 540px
 assign [instance="calcurse"] $ws1
 
 for_window [instance="rss"] floating enable
-for_window [instance="rss"] resize set 770 420
+for_window [instance="rss"] resize set 800 420
 for_window [instance="rss"] border pixel 3
 exec_always       $term -n rss -e newsboat
-for_window [instance="rss"] move absolute position 1060px 70px
+for_window [instance="rss"] move absolute position 1040px 70px
 assign [instance="rss"] $ws1
 
 

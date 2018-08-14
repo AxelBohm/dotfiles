@@ -72,11 +72,14 @@ alias vrc="vim ~/.vim/vimrc"
 alias zrc="vim ~/.zshrc"
 alias mrc="vim ~/.config/mutt/muttrc"
 alias nrc="vim ~/.newsboat/config"
+alias rrc="vim ~/.config/ranger/rc.conf"
+alias irc="vim ~/.config/i3/config"
 
 alias R="R --quiet --no-save"
 alias t="tmux"
+alias r="ranger"
 
-alias encdropbox="encfs ~/Dropbox/Encrypted/ ~/Private"
+alias decryptdropbox="encfs ~/Dropbox/Encrypted/ ~/Private"
 
 # who can remember this command !?
 alias chterm="sudo update-alternatives --config x-terminal-emulator"
@@ -98,13 +101,14 @@ alias la="ls -A"
 ###############################################################
 
 # autosuggestions
-bindkey '^s' autosuggest-accept
+bindkey '^s' autosuggest-execute
 bindkey '^e' autosuggest-execute
 bindkey '^ ' autosuggest-accept
 
 # history substring search
 bindkey "^[[A" history-substring-search-up
 bindkey "^[[B" history-substring-search-down
+
 
 # ### Other ###
 # # hacky :(

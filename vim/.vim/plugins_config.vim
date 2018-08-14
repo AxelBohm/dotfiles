@@ -1,5 +1,4 @@
 
-
 """"""""""""""""""""""""""""""
 " => R
 """"""""""""""""""""""""""""""
@@ -19,20 +18,16 @@ nmap <C-]> <Plug>RSendLine<esc>j
 " run r in tmux
 let R_source = '~/.vim/bundle/Nvim-R/R/tmux_split.vim'
 
-
 """"""""""""""""""""""""""""""
 " => Markdown
 """"""""""""""""""""""""""""""
-
 let g:pandoc#syntax#conceal#use = 0
 
 """"""""""""""""""""""""""""""
 " => snipMate 
 """"""""""""""""""""""""""""""
-imap <C-A> <Plug>snipMateNextOrTrigger
-smap <C-A> <Plug>snipMateNextOrTrigger
-imap <C-M> <Plug>snipMateNextOrTrigger
-smap <C-M> <Plug>snipMateNextOrTrigger
+imap <C-J> <Plug>snipMateNextOrTrigger
+smap <C-J> <Plug>snipMateNextOrTrigger
 
 """"""""""""""""""""""""""""""
 " => YankStack
@@ -46,12 +41,12 @@ nmap <c-n> <Plug>yankstack_substitute_newer_paste
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => lightline
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:lightline = {
-      \ 'colorscheme': 'wombat',
-      \ }
+" let g:lightline = {
+"       \ 'colorscheme': 'wombat',
+"       \ }
 
 let g:lightline = {
-      \ 'colorscheme': 'wombat',
+      \ 'colorscheme': 'gruvbox',
       \ 'active': {
       \   'left': [ ['mode', 'paste'],
       \             ['fugitive', 'readonly', 'filename', 'modified'] ],

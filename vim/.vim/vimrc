@@ -39,6 +39,9 @@ set noswapfile
 "Hide mouse when typing
 set mousehide
 
+" redundant information because of statusline
+set noshowmode
+
 " highlight entire line of curser
 set cursorline
 

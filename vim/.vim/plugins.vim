@@ -32,6 +32,9 @@ Plugin 'tpope/vim-commentary'
 " You Complete Me
 Plugin 'Valloric/YouCompleteMe'
 
+" comply to PEP8
+Plugin 'nvie/vim-flake8'
+
 " kill ring
 Plugin 'maxbrunsfeld/vim-yankstack'
 
@@ -61,6 +64,9 @@ Plugin 'airblade/vim-gitgutter'
 
 " consistent navigation between vim and tmux
 Plugin 'christoomey/vim-tmux-navigator'
+
+" buffers as tabs on top
+Plugin 'ap/vim-buftabline'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required

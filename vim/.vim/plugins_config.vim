@@ -1,3 +1,8 @@
+""""""""""""""""""""""""""""""
+" => flake8
+""""""""""""""""""""""""""""""
+autocmd FileType python map <buffer> <leader>f :call Flake8()<CR>
+
 
 """"""""""""""""""""""""""""""
 " => R
@@ -17,6 +22,7 @@ nmap <C-]> <Plug>RSendLine<esc>j
 
 " run r in tmux
 let R_source = '~/.vim/bundle/Nvim-R/R/tmux_split.vim'
+
 
 """"""""""""""""""""""""""""""
 " => Markdown
@@ -41,9 +47,6 @@ nmap <c-n> <Plug>yankstack_substitute_newer_paste
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => lightline
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" let g:lightline = {
-"       \ 'colorscheme': 'wombat',
-"       \ }
 
 let g:lightline = {
       \ 'colorscheme': 'gruvbox',
@@ -75,6 +78,12 @@ let g:bufExplorerShowRelativePath=1
 let g:bufExplorerFindActive=1
 let g:bufExplorerSortBy='name'
 map <leader>o :BufExplorer<cr>
+
+
+""""""""""""""""""""""""""""""
+" => buftabline
+""""""""""""""""""""""""""""""
+let g:buftabline_show=1
 
 
 """"""""""""""""""""""""""""""
@@ -127,13 +136,6 @@ nmap <silent> <leader>a <Plug>(ale_next_wrap)
 let g:ale_pattern_options = {
 \   '.*\.tex$': {'ale_enabled': 0},
 \}
-
-
-"""""""""""""""""""""""""""""
-" => MRU plugin
-""""""""""""""""""""""""""""""
-let MRU_Max_Entries = 400
-map <leader>f :MRU<CR>
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""

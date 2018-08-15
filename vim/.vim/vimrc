@@ -345,6 +345,10 @@ function! VisualSelection(direction, extra_filter) range
     let @" = l:saved_reg
 endfunction
 
+function! CmdLine(str)
+    call feedkeys(":" . a:str)
+endfunction 
+
 
 " deletes everything until the last slash when browsing on the command line
 func! DeleteTillSlash()

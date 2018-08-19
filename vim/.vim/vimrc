@@ -87,7 +87,7 @@ set splitright
 set splitbelow
 
 " linenumbers
-set number relativenumber
+set number
 
 " copy to clipboard
 set clipboard=unnamedplus
@@ -101,8 +101,8 @@ call yankstack#setup()
 nnoremap Y y$
 
 " $ is  a pain. use L instead. i never use L anyways..
-noremap L $
-noremap H ^
+nnoremap L $
+nnoremap H ^
 
 " press j and k at the same time to get escape
 inoremap jk <esc>
@@ -194,7 +194,7 @@ nnoremap <Down> :resize -5<cr>
 " => Buffer
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-map <leader>bd :bdelete<cr>     " delete the current buffer
+map <leader>bd :bp\|bd #<cr>     " delete the current buffer
 map <leader>bl :bnext<cr>
 map <leader>bh :bprevious<cr>
 
@@ -271,19 +271,22 @@ autocmd FileType r inoremap ;n <-
 """ LaTex
 
 " autocmd FileType tex inoremap <F5> <Esc>:w <cr>:!latexmk % <cr><cr>
-autocmd FileType tex nnoremap <leader>, :w <cr>:!latexmk % <cr><cr>
-autocmd FileType tex inoremap ;h ^{}<esc>i
-autocmd FileType tex inoremap ;u _{}<esc>i
+autocmd FileType tex nnoremap <leader>, :w <cr>:AsyncRun latexmk % <cr>
+autocmd FileType tex inoremap ;n ^{}<esc>i
+autocmd FileType tex inoremap ;m _{}<esc>i
 autocmd FileType tex inoremap ;r \R
 autocmd FileType tex inoremap ;k _{k}
 autocmd FileType tex inoremap ;j _{k+1}
 autocmd FileType tex inoremap ;l _{k-1}
-autocmd FileType tex inoremap ;f function
+autocmd FileType tex inoremap ;i ^{k}
+autocmd FileType tex inoremap ;u ^{k+1}
+autocmd FileType tex inoremap ;s ^*
+
 autocmd FileType tex inoremap $ $$<left>
 autocmd FileType tex inoremap ;a \alpha
 autocmd FileType tex inoremap ;b \beta
 autocmd FileType tex inoremap ;g \gamma
-autocmd FileType tex inoremap ;i \in
+
 
 " Open corresponding .pdf
 map <leader>p :!zathura <c-r>%<backspace><backspace><backspace>pdf &<CR><CR>
@@ -307,8 +310,10 @@ map <leader>p :!zathura <c-r>%<backspace><backspace><backspace>pdf &<CR><CR>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 iab xdate <c-r>=strftime("%d/%m/%y %H:%M:%S")<cr>
 
+iab wrt with respect to
+
 iab oe; ö
-inoremap ;s ß
+inoremap s; ß
 iab lg; Liebe Grüße<cr>Axel
 iab bg; Beste Grüße<cr>Axel Böhm
 iab br; Best regards<cr>Axel Böhm
@@ -392,3 +397,9 @@ endif
 " set <M-k>=k
 " inoremap k <M-k>
 " inoremap <M-k> <esc>dd
+
+
+:set guioptions-=m  "remove menu bar
+:set guioptions-=T  "remove toolbar
+:set guioptions-=r  "remove right-hand scroll bar
+:set guioptions-=L  "remove left-hand scroll bar

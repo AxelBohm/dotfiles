@@ -38,13 +38,11 @@ Plugin 'nvie/vim-flake8'
 " kill ring
 Plugin 'maxbrunsfeld/vim-yankstack'
 
-" simply maps all the different vim built in autocompletions to tab
-" Plugin 'ajh17/VimCompletesMe'
 
 """ snippets (snipmate)
-Plugin 'MarcWeber/vim-addon-mw-utils'
-Plugin 'tomtom/tlib_vim'
-Plugin 'garbas/vim-snipmate'
+" Plugin 'MarcWeber/vim-addon-mw-utils'
+" Plugin 'tomtom/tlib_vim'
+Plugin 'SirVer/ultisnips'
 
 " lightline
 Plugin 'itchyny/lightline.vim'

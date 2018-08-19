@@ -35,6 +35,14 @@ let g:pandoc#syntax#conceal#use = 0
 imap <C-J> <Plug>snipMateNextOrTrigger
 smap <C-J> <Plug>snipMateNextOrTrigger
 
+
+""""""""""""""""""""""""""""""
+" => UltiSnips
+""""""""""""""""""""""""""""""
+let g:UltiSnipsExpandTrigger="<c-b>"
+" let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+
 """"""""""""""""""""""""""""""
 " => YankStack
 """"""""""""""""""""""""""""""

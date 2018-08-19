@@ -68,6 +68,10 @@ Plugin 'christoomey/vim-tmux-navigator'
 " buffers as tabs on top
 Plugin 'ap/vim-buftabline'
 
+" fancy start screen
+Plugin 'mhinz/vim-startify'
+
+
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required

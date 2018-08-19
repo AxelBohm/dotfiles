@@ -47,7 +47,7 @@ snippet al align environment
 # Aligned
 snippet ald aligned environment
 	\\begin{aligned}
-		${0:${VISUAL}}
+		${0}
 	\\end{aligned}
 # Gather(ed)
 snippet gat gather(ed) environment
@@ -70,6 +70,10 @@ snippet eq* unnumbered equation environment
 	\\begin{equation*}
 		${0:${VISUAL}}
 	\\end{equation*}
+snippet algo algorithm environment
+	\\begin{algo}
+		${0:${VISUAL}}
+	\\end{algo}
 # Unnumbered Equation
 snippet \ unnumbered equation: \[ ... \]
 	\\[
@@ -82,7 +86,7 @@ snippet eqnarray eqnarray environment
 	\\end{eqnarray}
 # Label
 snippet lab \label
-	\\label{${1:eq:}${2:fig:}${3:tab:}${0}}
+	\\label{eq:${0}}
 # Enumerate
 snippet enum enumerate environment
 	\\begin{enumerate}
@@ -280,7 +284,7 @@ snippet tikzcd* tikzcd environment in equation*
 	${0}
 
 #math
-snippet frac \frac{}{}
+snippet fr frac \frac{}{}
 	\\frac{${1:num}}{${2:denom}} ${0}
 snippet sum \sum^{}_{}
 	\\sum_{${1:i=1}}^{${2:n}} ${0}
@@ -305,7 +309,7 @@ snippet \{ \{ \}
 snippet lr left right
 	\\left${1} ${0} \\right$1
 snippet lr( left( right)
-	\\left( ${0} \\right)
+	\\left( ${0} \\right
 snippet lr| left| right|
 	\\left| ${0} \\right|
 snippet lr{ left\{ right\}
@@ -313,7 +317,7 @@ snippet lr{ left\{ right\}
 snippet lr[ left[ right]
 	\\left[ ${0} \\right]
 snippet lra langle rangle
-	\\langle ${0} \\rangle
+	\\left\\langle ${0} \\right\\rangle
 snippet norm
 	\\lVert ${0} \\rVert
 snippet lrnorm
@@ -322,6 +326,9 @@ snippet norms
 	\\lVert ${0} \\rVert^2
 snippet lrnorms
 	\\left\\lVert ${0} \\right\\rVert^2
+# nabla
+snippet n nab nabla
+	\\nabla
 # greek letters
 snippet g ga gamma
 	\\gamma
@@ -337,15 +344,18 @@ snippet t tau
 snippet lem lemma
 	\\begin{lemma}
 		\label{lem:${1}}
-		${0:${VISUAL}}
+		${0}
 	\\end{lemma}
 snippet th thm theorem
 	\\begin{theorem}
 		${0}
 	\\end{theorem}
+snippet pr proof
+	\\begin{proof}
+		${0}
+	\\end{proof}
 # references
 snippet ref
 	\\ref{${0}}
 snippet eqref
 	\\eqref{eq:${0}}
-

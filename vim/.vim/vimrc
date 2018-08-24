@@ -43,7 +43,7 @@ set mousehide
 set noshowmode
 
 " highlight entire line of curser
-set cursorline
+" set cursorline
 
 " Set 7 lines to the cursor - when moving vertically using j/k
 set scrolloff=7
@@ -87,7 +87,8 @@ set splitright
 set splitbelow
 
 " linenumbers
-set number
+set number 
+" set relativenumber 
 
 " copy to clipboard
 set clipboard=unnamedplus
@@ -194,7 +195,9 @@ nnoremap <Down> :resize -5<cr>
 " => Buffer
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-map <leader>bd :bp\|bd #<cr>     " delete the current buffer
+" delete the current buffer but keep split open
+map <leader>bd :bp\|bd #<cr>     
+
 map <leader>bl :bnext<cr>
 map <leader>bh :bprevious<cr>
 
@@ -210,7 +213,7 @@ map <silent> <leader><cr> :noh<cr>
 inoremap <C-u> _
 
 " a little emacs behaviour
-inoremap <C-F> <Right>
+" inoremap <C-F> <Right>
 
 " insert empty line without leaving normal mode
 nnoremap <leader>ij o<esc>
@@ -230,7 +233,7 @@ map <leader>m :e ~/scribbles.md<cr>
 au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 
 " fast snippet configuring
-map <leader>n :SnipMateOpenSnippetFiles<CR>
+map <leader>n :UltiSnipsEdit<CR>
 
 " filebrowsing
 map <leader>e :Explore<cr>
@@ -283,9 +286,6 @@ autocmd FileType tex inoremap ;u ^{k+1}
 autocmd FileType tex inoremap ;s ^*
 
 autocmd FileType tex inoremap $ $$<left>
-autocmd FileType tex inoremap ;a \alpha
-autocmd FileType tex inoremap ;b \beta
-autocmd FileType tex inoremap ;g \gamma
 
 
 " Open corresponding .pdf

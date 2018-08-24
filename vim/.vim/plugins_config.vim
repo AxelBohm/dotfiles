@@ -29,19 +29,14 @@ let R_source = '~/.vim/bundle/Nvim-R/R/tmux_split.vim'
 """"""""""""""""""""""""""""""
 let g:pandoc#syntax#conceal#use = 0
 
-""""""""""""""""""""""""""""""
-" => snipMate 
-""""""""""""""""""""""""""""""
-imap <C-J> <Plug>snipMateNextOrTrigger
-smap <C-J> <Plug>snipMateNextOrTrigger
-
 
 """"""""""""""""""""""""""""""
 " => UltiSnips
 """"""""""""""""""""""""""""""
-let g:UltiSnipsExpandTrigger="<c-b>"
-" let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsExpandTrigger="<c-j>"
+let g:UltiSnipsJumpForwardTrigger="<c-f>"
 let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+
 
 """"""""""""""""""""""""""""""
 " => YankStack

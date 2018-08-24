@@ -38,10 +38,7 @@ Plugin 'nvie/vim-flake8'
 " kill ring
 Plugin 'maxbrunsfeld/vim-yankstack'
 
-
-""" snippets (snipmate)
-" Plugin 'MarcWeber/vim-addon-mw-utils'
-" Plugin 'tomtom/tlib_vim'
+""" snippets
 Plugin 'SirVer/ultisnips'
 
 " lightline

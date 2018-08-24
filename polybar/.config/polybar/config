@@ -45,24 +45,11 @@ font-1 = unifont:fontformat=truetype:size=8:antialias=false;0
 font-2 = WunconSiji:pixelsize=10;0
 
 modules-left = i3
-modules-center = 
-modules-right = volume memory cpu wlan eth battery temperature date powermenu
+modules-center = mpd xbacklight
+modules-right = mpd xbacklight volume memory wcpuclan eth battery temperature date
 
 tray-position = right
 tray-padding = 2
-;tray-transparent = true
-;tray-background = #0063ff
-
-;wm-restack = bspwm
-;wm-restack = i3
-
-;override-redirect = true
-
-;scroll-up = bspwm-desknext
-;scroll-down = bspwm-deskprev
-
-;scroll-up = i3wm-wsnext
-;scroll-down = i3wm-wsprev
 
 cursor-click = pointer
 cursor-scroll = ns-resize
@@ -154,6 +141,10 @@ label-urgent-padding = ${module/bspwm.label-urgent-padding}
 type = internal/mpd
 format-online = <label-song>  <icon-prev> <icon-stop> <toggle> <icon-next>
 
+host = 127.0.0.1
+port = 6600
+interval = 2
+
 icon-prev = 
 icon-stop = 
 icon-play = 
@@ -162,6 +153,7 @@ icon-next = 
 
 label-song-maxlen = 25
 label-song-ellipsis = true
+
 
 [module/xbacklight]
 type = internal/xbacklight
@@ -366,7 +358,7 @@ screenchange-reload = true
 ;compositing-border = over
 
 [global/wm]
-margin-top = 5
-margin-bottom = 5
+margin-top = 1
+margin-bottom = 1
 
 ; vim:ft=dosini

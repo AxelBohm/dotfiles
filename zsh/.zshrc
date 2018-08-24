@@ -74,6 +74,7 @@ alias mrc="vim ~/.config/mutt/muttrc"
 alias nrc="vim ~/.newsboat/config"
 alias rrc="vim ~/.config/ranger/rc.conf"
 alias irc="vim ~/.config/i3/config"
+alias prc="vim ~/.config/polybar/config"
 
 alias R="R --quiet --no-save"
 alias t="tmux"
@@ -115,3 +116,4 @@ bindkey "^[[B" history-substring-search-down
 xset r rate 180 70
 setxkbmap -option ctrl:nocaps
 setxkbmap -option ctrl:ralt_rctrl
+xmodmap -e "keycode 64 = Escape"

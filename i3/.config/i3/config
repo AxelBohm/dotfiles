@@ -8,9 +8,20 @@
 # To get a config file with the same key positions, but for your current
 # layout, use the i3-config-wizard
 
+##########################
+# Definitions
+##########################
 
-# remove all window borders
-for_window [class="^.*"] border pixel 2
+set $mod Mod4
+set $term st
+
+
+##########################
+# window design
+##########################
+
+# set border pixel
+for_window [class="^.*"] border pixel 3
 
 # only works if version >= 4.13
 hide_edge_borders smart
@@ -18,14 +29,19 @@ hide_edge_borders smart
 # gaps
 set $gap_outer 3
 set $gap_inner 7
+
+# gaps default on
 gaps inner $gap_inner
 gaps outer $gap_outer
 
+# switch between gaps and no gaps
 bindsym $mod+g gaps inner current set 0; gaps outer current set 0
 bindsym $mod+Shift+g gaps inner current set $gap_inner; gaps outer current set $gap_outer
 
 
-
+##########################
+# colors
+##########################
 #                       BORDER      BACKGROUND       TEXT        INDICATOR       CHILD_BORDER
 client.focused          #79740e      #79740e    #79740e      #79740e
 # client.focused_inactive #333333      #5f676a    #ffffff      #484e50
@@ -33,85 +49,113 @@ client.focused          #79740e      #79740e    #79740e      #79740e
 # client.urgent           #2f343a      #900000    #ffffff      #900000
 # client.placeholder      #000000      #0c0c0c    #ffffff      #000000      
     
-# --------------------- Definitions-------------------------------
-set $mod Mod4
-set $term st
 
+##########################
+# launch stuff
+##########################
 
-# --------------------- Start external stuff-------------------------------
+# bar {
+#         i3bar_command $HOME/.config/polybar/launch.sh
+# }
+exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 
 # Music player daemon:
-exec --no-startup-id    mpd
+exec --no-startup-id            mpd
 
 # wifi
-exec --no-startup-id    sudo wicd
+exec --no-startup-id            sudo wicd
 
-# --------------------- Screen-------------------------------
+## screen related launch
+# if external monitor change to external
+exec  --no-startup-id           ~/.config/i3/set-external.sh
+
+
+##########################
+# screen config
+##########################
+
 # screenlock
-bindsym $mod+Delete         exec i3lock -c 7c6f64
-
-# set wallpaper
-exec_always --no-startup-id feh --bg-fill ~/.config/i3/wallpapers/wallpaper.png
-
+bindsym $mod+Delete                 exec i3lock -c 7c6f64
 
 # change screen setup
-bindsym $mod+Shift+s        exec --no-startup-id ~/.config/i3/monitor.sh
+bindsym $mod+Shift+s                exec --no-startup-id ~/.config/i3/monitor.sh
 
 # brightness
-bindsym XF86MonBrightnessDown     exec sudo xbacklight -dec 10
-bindsym XF86MonBrightnessUp       exec sudo xbacklight -inc 10     
-
-# --------------------- Sound -----------------------------------
-bindsym XF86AudioRaiseVolume    exec amixer -c 0 -q set Master 2dB+ unmute
-bindsym XF86AudioLowerVolume    exec amixer -c 0 -q set Master 2dB- unmute
-bindsym XF86AudioMute           exec amixer -q set Master toggle
+bindsym XF86MonBrightnessDown       exec sudo xbacklight -dec 10
+bindsym XF86MonBrightnessUp         exec sudo xbacklight -inc 10     
 
 
-# --------------------- additional shortcuts --------------------
+##########################
+# Sound
+##########################
+bindsym XF86AudioRaiseVolume        exec amixer -c 0 -q set Master 2dB+ unmute
+bindsym XF86AudioLowerVolume        exec amixer -c 0 -q set Master 2dB- unmute
+bindsym XF86AudioMute               exec amixer -q set Master toggle
+
+
+##########################
+# all shortcuts
+##########################
 
 # workspace
-bindsym $mod+Tab            workspace next
-bindsym $mod+Shift+Tab      workspace prev
-bindsym $mod+space          workspace back_and_forth
+bindsym $mod+Tab                workspace next
+bindsym $mod+Shift+Tab          workspace prev
+bindsym $mod+space              workspace back_and_forth
 
 # chat
-bindsym $mod+c              exec franz
+bindsym $mod+c                  exec --no-startup-id franz
 
 # emacs
-bindsym $mod+e              exec emacs
+bindsym $mod+e                  exec --no-startup-id emacs
 
 # edit i3 config file
-bindsym $mod+i              exec $term -e vim  ~/.config/i3/config
+bindsym $mod+i                  exec $term -e vim  ~/.config/i3/config
  
-# open terminal under current window
-bindsym $mod+apostrophe     split vertical ;; exec $term 
+# open terminal below
+bindsym $mod+apostrophe         split vertical ;; exec $term 
 
 # browser
-bindsym $mod+b              exec firefox
+bindsym $mod+b                  exec --no-startup-id firefox
 
 # calcurse
-bindsym $mod+z              exec $term -n calcurse -e calcurse
+bindsym $mod+z                  exec $term -n calcurse -e calcurse
 
-# phd directory # not working
-bindsym $mod+p              exec $term -e ranger ~/PhD
+# phd directory 
+bindsym $mod+p                  exec $term -e ranger ~/PhD
 
 # ranger file manager
-bindsym $mod+Shift+Return   exec $term -e ranger
+bindsym $mod+Shift+Return       exec $term -e ranger
 
 # mail
-bindsym $mod+m              exec $term -n mail -e neomutt 
+bindsym $mod+m                  exec $term -n mail -e neomutt 
 
 # wifi
-bindsym XF86WLAN       exec $term -e wicd-gtk
+bindsym XF86WLAN                exec $term -e wicd-gtk
 
 # music
-bindsym $mod+t              exec $term -e ncmpcpp
+bindsym $mod+t                  exec $term -e ncmpcpp
 
 # google scholar 
-bindsym $mod+s              exec qutebrowser https://scholar.google.com
+bindsym $mod+s                  exec qutebrowser https://scholar.google.com
 
 # newsboat
-bindsym $mod+n              exec $term -n rss -e newsboat
+bindsym $mod+n                  exec $term -n rss -e newsboat
+
+# vim
+bindsym $mod+comma              exec $term -e vim
+
+# scribbles
+bindsym $mod+Shift+n            exec $term -e vim ~/scribbles.md
+
+# quickswitch
+bindsym $mod+Shift+d            exec quickswitch
+
+# start dmenu (a program launcher)
+bindsym $mod+d                  exec dmenu_run
+
+# start a terminal
+bindsym $mod+Return             split horizontal ;; exec $term
+
 
 # ---------------------------------------------------------
 
@@ -119,48 +163,8 @@ bindsym $mod+n              exec $term -n rss -e newsboat
 # is used in the bar {} block below.
 font pango:monospace 8
 
-# This font is widely installed, provides lots of unicode glyphs, right-to-left
-# text rendering and scalability on retina/hidpi displays (thanks to pango).
-#font pango:DejaVu Sans Mono 8
-
-# Before i3 v4.8, we used to recommend this one as the default:
-# font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
-# The font above is very space-efficient, that is, it looks good, sharp and
-# clear in small sizes. However, its unicode glyph coverage is limited, the old
-# X core fonts rendering does not support right-to-left and this being a bitmap
-# font, it doesn’t scale on retina/hidpi displays.
-
-# use these keys for focus, movement, and resize directions when reaching for
-# the arrows is not convenient
-set $up k
-set $down j
-set $left h
-set $right l
- 
-# start a terminal
-bindsym $mod+Return split horizontal ;; exec $term
-
 # kill focused window
 bindsym $mod+q [con_id="__focused__" instance="^(?!math|dropdown).*$"] kill
-
-# start dmenu (a program launcher)
-bindsym $mod+d exec dmenu_run
-# There also is the (new) i3-dmenu-desktop which only displays applications
-# shipping a .desktop file. It is a wrapper around dmenu, so you need that
-# installed.
-# bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
-
-# change focus
-bindsym $mod+$left focus left
-bindsym $mod+$down focus down
-bindsym $mod+$up focus up
-bindsym $mod+$right focus right
-
-# move focused window
-bindsym $mod+Shift+$left move left
-bindsym $mod+Shift+$down move down
-bindsym $mod+Shift+$up move up
-bindsym $mod+Shift+$right move right
 
 # split in horizontal orientation
 bindsym $mod+Shift+a split h
@@ -180,6 +184,29 @@ bindsym $mod+Shift+minus move scratchpad
 # Show the next scratchpad window or hide the focused scratchpad window.
 # If there are multiple scratchpad windows, this command cycles through them.
 bindsym $mod+minus scratchpad show
+
+
+##########################
+# Movement
+##########################
+
+# definitions
+set $up k
+set $down j
+set $left h
+set $right l
+
+# change focus
+bindsym $mod+$left focus left
+bindsym $mod+$down focus down
+bindsym $mod+$up focus up
+bindsym $mod+$right focus right
+
+# move focused window
+bindsym $mod+Shift+$left move left
+bindsym $mod+Shift+$down move down
+bindsym $mod+Shift+$up move up
+bindsym $mod+Shift+$right move right
 
 # switch to workspace
 bindsym $mod+1 workspace 1
@@ -238,16 +265,10 @@ mode "resize" {
 
 bindsym $mod+r mode "resize"
 
-# Start i3bar to display a workspace bar (plus the system information i3status
-# finds out, if available)
-bar {
-        i3bar_command $HOME/.config/polybar/launch.sh
-        # status_command ~/bumblebee-status/bumblebee-status # -m  amixer battery cpu datetime -p datetime.format="%a %d %b %Y %H:%M" -t gruvbox-powerline
 
-        # position bottom
-        # status_command i3status
-        # tray_output primary
-}
+##############################
+# scratchpad/dropdown stuff
+##############################
 
 # dropdown calculator
 for_window [instance="math"] floating enable
@@ -265,33 +286,39 @@ for_window [instance="dropdown"] border pixel 2
 exec       $term -n dropdown
 bindsym $mod+semicolon [instance="dropdown"] scratchpad show; [instance="dropdown"] move position center
 
-#""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+##########################
 # start screen
-#""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+##########################
 
 set $ws1 "1"
+set $bphome 4
 
 for_window [instance="mail"] floating enable
-for_window [instance="mail"] resize set 900 980
-for_window [instance="mail"] border pixel 3
-exec_always       $term -n mail -e neomutt
+for_window [instance="mail"] resize set 900 970
+for_window [instance="mail"] border pixel $bphome
+exec       $term -n mail -e neomutt
 for_window [instance="mail"] move absolute position 50px 50px
 assign [instance="mail"] $ws1
 
 for_window [instance="calcurse"] floating enable
-for_window [instance="calcurse"] resize set 680 480
-for_window [instance="calcurse"] border pixel 3
-exec_always       $term -n calcurse -e calcurse
-for_window [instance="calcurse"] move absolute position 1160px 540px
+for_window [instance="calcurse"] resize set 700 540
+for_window [instance="calcurse"] border pixel $bphome
+exec       $term -n calcurse -e calcurse
+for_window [instance="calcurse"] move absolute position 1120px 520px
 assign [instance="calcurse"] $ws1
 
 for_window [instance="rss"] floating enable
-for_window [instance="rss"] resize set 800 420
-for_window [instance="rss"] border pixel 3
-exec_always       $term -n rss -e newsboat
+for_window [instance="rss"] resize set 820 420
+for_window [instance="rss"] border pixel $bphome
+exec       $term -n rss -e newsboat
 for_window [instance="rss"] move absolute position 1040px 70px
 assign [instance="rss"] $ws1
 
 
-# scribbles
-bindsym $mod+Shift+n              exec $term -e vim ~/scribbles.md
+##########################
+# set wallpaper again
+##########################
+exec_always --no-startup-id     feh --bg-fill ~/.config/i3/wallpapers/wallpaper.png
+
+

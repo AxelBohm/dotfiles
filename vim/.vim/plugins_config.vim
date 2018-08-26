@@ -33,9 +33,9 @@ let g:pandoc#syntax#conceal#use = 0
 """"""""""""""""""""""""""""""
 " => UltiSnips
 """"""""""""""""""""""""""""""
-let g:UltiSnipsExpandTrigger="<c-j>"
-let g:UltiSnipsJumpForwardTrigger="<c-f>"
-let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+let g:UltiSnipsExpandTrigger='<c-j>'
+let g:UltiSnipsJumpForwardTrigger='<c-f>'
+let g:UltiSnipsJumpBackwardTrigger='<c-z>'
 
 
 """"""""""""""""""""""""""""""
@@ -71,6 +71,32 @@ let g:lightline = {
       \ 'separator': { 'left': ' ', 'right': ' ' },
       \ 'subseparator': { 'left': ' ', 'right': ' ' }
       \ }
+
+let g:lightline.component_expand = {
+      \  'linter_checking': 'lightline#ale#checking',
+      \  'linter_warnings': 'lightline#ale#warnings',
+      \  'linter_errors': 'lightline#ale#errors',
+      \  'linter_ok': 'lightline#ale#ok',
+      \ }
+
+" set color to components
+let g:lightline.component_type = {
+      \     'linter_checking': 'left',
+      \     'linter_warnings': 'warning',
+      \     'linter_errors': 'error',
+      \     'linter_ok': 'left',
+      \ }
+
+let g:lightline.active = { 
+        \   'right': [ 
+        \   ['lineinfo'], ['percent'],
+        \   ['linter_checking', 'linter_errors', 'linter_warnings', 'linter_ok']
+        \   ]
+\}
+
+"" requires nerdfonts and fontawesome
+" let g:lightline#ale#indicator_warnings = "\uf071"
+" let g:lightline#ale#indicator_errors = "\uf05e"
 
 
 """"""""""""""""""""""""""""""
@@ -132,13 +158,14 @@ autocmd! User GoyoLeave call <SID>goyo_leave()
 let g:ale_linters = {
 \   'javascript': ['jshint'],
 \   'python': ['flake8'],
+\   'LaTex': ['lacheck'],
 \}
+let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
+" let g:ale_pattern_options = {
+" \   '.*\.tex$': {'ale_enabled': 0},
+" \}
 
 nmap <silent> <leader>a <Plug>(ale_next_wrap)
-
-let g:ale_pattern_options = {
-\   '.*\.tex$': {'ale_enabled': 0},
-\}
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -146,3 +173,11 @@ let g:ale_pattern_options = {
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:gitgutter_enabled=0
 nnoremap <silent> <leader>d :GitGutterToggle<cr>
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Latex live preview
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:livepreview_previewer = 'zathura'
+" let g:livepreview_engine = 'latexmk'
+

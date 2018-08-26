@@ -4,6 +4,11 @@ auto-reload yes
 
 external-url-viewer "urlview"
 
+
+########################
+# keys
+########################
+
 bind-key j down
 bind-key k up
 #bind-key j next articlelist
@@ -23,12 +28,35 @@ bind-key D pb-download
 bind-key U show-urls
 bind-key x pb-delete
 
+
+########################
+# colors
+########################
+
 color listnormal            color244    default
 color listfocus             color244    color237
 color listnormal_unread     color253    default
-color listfocus_unread      magenta     color237
+color listfocus_unread      color166     color237
 #color info                  color117    color239    bold
 color info                  color235    color0    bold
 #color article               color247    default
+
+########################
+# highlights
+########################
+
+# title
+highlight article "^(Title):.*$" color172 default
+
+# links
+# highlight article "https?://[^\" ]+" red default
+
+# names of authors in arxiv
+highlight article "\">[^\"]+" red default
+
+
+########################
+# browser
+########################
 
 browser "~/bin/newsboat-browser.sh"

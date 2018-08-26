@@ -23,4 +23,3 @@ for _, row in df.iterrows():
 
 
 os.system("echo 'done..'")
-

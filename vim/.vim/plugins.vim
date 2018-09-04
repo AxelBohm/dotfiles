@@ -32,9 +32,6 @@ Plugin 'tpope/vim-commentary'
 " You Complete Me
 Plugin 'Valloric/YouCompleteMe'
 
-" comply to PEP8
-Plugin 'nvie/vim-flake8'
-
 " kill ring
 Plugin 'maxbrunsfeld/vim-yankstack'
 

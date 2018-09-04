@@ -8,7 +8,9 @@ source etc/muttcol
 source etc/aliases
 
 set sleep_time = 0
-set sort = 'reverse-date'
+#set sort = 'reverse-date'
+set sort=threads
+set sort_aux=reverse-date
 set editor = $EDITOR
 set timeout = "5"
 set mail_check = "10"

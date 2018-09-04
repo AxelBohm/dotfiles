@@ -42,28 +42,22 @@ bindsym $mod+Shift+g gaps inner current set $gap_inner; gaps outer current set $
 ##########################
 # colors
 ##########################
-#                       BORDER      BACKGROUND       TEXT        INDICATOR       CHILD_BORDER
-# client.focused          #79740e      #79740e    #79740e      #79740e
-# client.focused_inactive #333333      #5f676a    #ffffff      #484e50
-# client.unfocused        #333333      #222222    #888888      #292d2e
-# client.urgent           #2f343a      #900000    #ffffff      #900000
-# client.placeholder      #000000      #0c0c0c    #ffffff      #000000      
  
  # Color scheme (Gruvbox dark)
-set $color_normal_white  #a89984
-set $color_bright_white  #ebdbb2
-set $color_normal_gray   #222222
-set $color_bright_gray   #3c3836
-set $color_bright_yellow #d79921
-set $color_normal_black  #282828
-set $color_unused        #ff0000
+set $normal_white  #a89984
+set $bright_white  #ebdbb2
+set $normal_gray   #222222
+set $bright_gray   #3c3836
+set $bright_yellow #d79921
+set $normal_black  #282828
+set $unused        #ff0000
 
-# Colors                  border                 background             text                   indicator       child_border
-client.focused            $color_bright_gray     $color_bright_gray     $color_bright_white    $color_unused   $color_normal_white
-client.focused_inactive   $color_bright_gray     $color_bright_gray     $color_bright_white    $color_unused   $color_normal_black
-client.unfocused          $color_normal_gray     $color_normal_gray     $color_normal_white    $color_unused   $color_normal_black
-client.urgent             $color_bright_yellow   $color_bright_yellow   $color_normal_black    $color_unused   $color_unused
-client.placeholder $color_unused $color_normal_black $color_unused $color_unused $color_unused   
+# Colors                  border           background       text             indicator      child_border
+client.focused            $bright_gray     $bright_gray     $bright_white    $unused        $normal_white
+client.focused_inactive   $bright_gray     $bright_gray     $bright_white    $unused        $normal_black
+client.unfocused          $normal_gray     $normal_gray     $normal_white    $unused        $normal_black
+client.urgent             $bright_yellow   $bright_yellow   $normal_black    $unused        $unused
+client.placeholder        $unused          $normal_black    $unused          $unused        $unused   
 
 ##########################
 # launch stuff
@@ -118,7 +112,7 @@ bindsym $mod+Shift+Tab          workspace prev
 bindsym $mod+space              workspace back_and_forth
 
 # chat
-bindsym $mod+c                  exec --no-startup-id franz
+bindsym $mod+c                  exec --no-startup-id rambox
 
 # emacs
 bindsym $mod+e                  exec --no-startup-id emacs
@@ -130,8 +124,8 @@ bindsym $mod+i                  exec $term -e vim  ~/.config/i3/config
 bindsym $mod+apostrophe         split vertical ;; exec $term 
 
 # browser
-bindsym $mod+b                  exec --no-startup-id firefox -n browser
-assign [instance="browser"] $ws2
+bindsym $mod+b                  exec --no-startup-id firefox -n browser 
+assign [instance="browser"] "2"
 
 # calcurse
 bindsym $mod+z                  exec $term -n calcurse -e calcurse
@@ -152,8 +146,8 @@ bindsym XF86WLAN                exec $term -e wicd-gtk
 bindsym $mod+t                  exec $term -e ncmpcpp
 
 # google scholar 
-bindsym $mod+s                  exec qutebrowser https://scholar.google.com -n qutebrowser
-assign [instance="qutebrowser"] $ws2
+bindsym $mod+s                  exec qutebrowser https://scholar.google.com 
+# assign [instance="qutebrowser"] "2"
 
 # newsboat
 bindsym $mod+n                  exec $term -n rss -e newsboat
@@ -167,7 +161,7 @@ bindsym $mod+Shift+n            exec $term -e vim ~/scribbles.md
 # quickswitch
 bindsym $mod+Shift+d            exec quickswitch
 
-# start dmenu (a program launcher)
+# start dmenu (program launcher)
 bindsym $mod+d                  exec dmenu_run
 
 # start a terminal

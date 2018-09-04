@@ -149,18 +149,14 @@ autocmd! User GoyoLeave call <SID>goyo_leave()
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Syntastic (syntax checker)
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:ale_linters = {
-\   'javascript': ['jshint'],
-\   'python': ['flake8'],
-\   'LaTex': ['lacheck'],
-\}
 let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
 " let g:ale_pattern_options = {
 " \   '.*\.tex$': {'ale_enabled': 0},
 " \}
 
-nmap <silent> <leader>a <Plug>(ale_next_wrap)
-
+nmap <silent> <leader>a :ALEToggle<cr>
+" if you don't want linters to run on opening a file
+let g:ale_lint_on_enter = 0
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Git gutter (Git diff)
@@ -173,5 +169,4 @@ nnoremap <silent> <leader>d :GitGutterToggle<cr>
 " => Latex live preview
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:livepreview_previewer = 'zathura'
-" let g:livepreview_engine = 'latexmk'
 

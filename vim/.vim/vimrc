@@ -169,7 +169,7 @@ inoremap { {}<left>
 vnoremap ( <esc>`>a)<esc>`<i(<esc>
 vnoremap [ <esc>`>a]<esc>`<i[<esc>
 vnoremap { <esc>`>a}<esc>`<i{<esc>
-vnoremap " <esc>`>a"<esc>`<i"<esc>
+" vnoremap " <esc>`>a"<esc>`<i"<esc>
 vnoremap ' <esc>`>a'<esc>`<i'<esc>
 vnoremap $ <esc>`>a$<esc>`<i$<esc>
 
@@ -311,6 +311,7 @@ map <leader>p :!zathura <c-r>%<backspace><backspace><backspace>pdf &<CR><CR>
 iab xdate <c-r>=strftime("%d/%m/%y %H:%M:%S")<cr>
 
 iab wrt with respect to
+iab lsc lower semicontinuous
 
 iab oe; ö
 inoremap s; ß

@@ -43,7 +43,7 @@ def add_row(snip):
 endglobal
 
 snippet "beg(in)?" "begin{} / end{}" br
-\begin{${1:something}}
+\begin{${1:something}}%
 	${0:${VISUAL}}
 \end{$1}
 endsnippet
@@ -296,9 +296,16 @@ endsnippet
 #################
 
 snippet cal "mathcal" w
-\mathcal{${1}} ${0}
+\mathcal{${1}}${0}
 endsnippet
 
+snippet equiv "Leftrightarrow" w
+\Leftrightarrow
+endsnippet
+
+snippet prox "prox" w
+\prox{${1}}{${2}}${0}
+endsnippet
 
 
 #################
@@ -310,19 +317,19 @@ snippet norm "norm" w
 endsnippet
 
 snippet norms "norm squared" w
-\lVert ${0} \rVert^2
+\lVert ${1} \rVert^2${0}
 endsnippet
 
 snippet lrnorm "left right norm" w
-\left\lVert ${0} \right\rVert
+\left\lVert ${1} \right\rVert${0}
 endsnippet
 
 snippet lrnorms "left right norm" w
-\left\lVert ${0} \right\rVert^2
+\left\lVert ${1} \right\rVert^2${0}
 endsnippet
 
 snippet lem "lemma" w
-\begin{lemma}
+\begin{lemma}%
 	\label{lem:${1}}
 	${0}
 \end{lemma}
@@ -341,18 +348,43 @@ snippet pr "proof" w
 endsnippet
 
 snippet th "theorem" w
-\begin{theorem}
+\begin{theorem}%
 	\label{thm:${1}}
 	${0}
 \end{theorem}
 endsnippet
 
+snippet algo "algorithm" w
+\begin{algo}%
+	\label{alg:${1}}
+	${0}
+\end{algo}
+endsnippet
+
+snippet prob "problem" w
+\begin{problem}%
+	\label{prob:${1}}
+	${0}
+\end{problem}
+endsnippet
+
+snippet prop "proposition" w
+\begin{proposition}%
+	\label{prop:${1}}
+	${0}
+\end{proposition}
+endsnippet
+
 snippet ref "ref" w
-\ref{${0}}
+~\ref{${0}}
 endsnippet
 
 snippet eqref "eqref" w
-\eqref{eq:${0}}
+~\eqref{eq:${0}}
+endsnippet
+
+snippet cite "cite" w
+~\cite{${1}}${0}
 endsnippet
 
 snippet lab "label" w
@@ -362,6 +394,19 @@ endsnippet
 snippet over "overset" w
 \overset{${1:top}}{${2:=}} ${0}
 endsnippet
+
+snippet bm "bold math" w
+\bm{${1}}${0}
+endsnippet
+
+snippet bar "overbar (small)" w
+\bar{${1}}${0}
+endsnippet
+
+snippet i "element" w
+\in ${0}
+endsnippet
+
 
 #################
 # GREEK LETTERS #
@@ -409,5 +454,9 @@ endsnippet
 
 snippet d "delta" w
 \delta
+endsnippet
+
+snippet o "omega" w
+\omega
 endsnippet
 

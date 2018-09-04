@@ -46,13 +46,20 @@ color info                  color235    color0    bold
 ########################
 
 # title
-highlight article "^(Title):.*$" color172 default
+highlight article "^(Title):(.*)" color172 default
 
 # links
 # highlight article "https?://[^\" ]+" red default
 
 # names of authors in arxiv
 highlight article "\">[^\"]+" red default
+
+# flagged articles
+highlight all "(.*)!(.*)\d(.*)" green default
+
+#don't show "arXiv" everywhere
+highlight all "\\(arXiv(.*)\)" color235 default
+#highlight feedlist "\(arXiv(.*)" color235 color0
 
 
 ########################

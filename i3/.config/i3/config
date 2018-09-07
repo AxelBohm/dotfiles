@@ -84,7 +84,7 @@ exec  --no-startup-id           ~/.config/i3/set-external.sh
 ##########################
 
 # screenlock
-bindsym $mod+Delete                 exec i3lock -c 7c6f64
+bindsym $mod+Delete                 exec betterlockscreen --lock blur
 
 # change screen setup
 bindsym $mod+Shift+s                exec --no-startup-id ~/.config/i3/monitor.sh

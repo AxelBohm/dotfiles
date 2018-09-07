@@ -71,6 +71,9 @@ Plugin 'xuhdev/vim-latex-live-preview'
 " git wrapper
 Plugin 'tpope/vim-fugitive'
 
+" two char "
+Plugin 'justinmk/vim-sneak'
+
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required

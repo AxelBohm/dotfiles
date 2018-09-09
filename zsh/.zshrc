@@ -1,5 +1,6 @@
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-ZSH_THEME="arrow"
+# ZSH_THEME="xiong-chiamiov-plus"
+ZSH_THEME="bira"
 
 # Which plugins would you like to load? 
 # Add wisely, as too many plugins slow down shell startup.

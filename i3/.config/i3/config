@@ -13,6 +13,7 @@
 ##########################
 
 set $mod Mod4
+set $alt Mod1
 set $term st
 
 
@@ -161,8 +162,12 @@ bindsym $mod+Shift+n            exec $term -e vim ~/scribbles.md
 # quickswitch
 bindsym $mod+Shift+d            exec quickswitch
 
-# start dmenu (program launcher)
+# program launcher
 bindsym $mod+d                  exec dmenu_run
+
+# program launcher&switcher
+bindsym $alt+space              exec "rofi -combi-modi window,drun -show combi"
+
 
 # start a terminal
 bindsym $mod+Return             split horizontal ;; exec $term

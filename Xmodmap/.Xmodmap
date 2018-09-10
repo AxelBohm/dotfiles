@@ -1,1 +1,1 @@
-xmodmap -e "keycode 64 = Escape"
+! xmodmap -e "keycode 64 = Escape"

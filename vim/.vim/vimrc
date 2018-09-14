@@ -91,7 +91,7 @@ set number
 " set relativenumber 
 
 " copy to clipboard
-set clipboard=unnamedplus
+set clipboard^=unnamed,unnamedplus
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => nifty custom mappings
@@ -103,6 +103,7 @@ nnoremap Y y$
 
 " $ is  a pain. use L instead. i never use L anyways..
 nnoremap L $
+vnoremap L $
 nnoremap H ^
 
 " press j and k at the same time to get escape
@@ -146,12 +147,7 @@ set smarttab
 set shiftwidth=4
 set tabstop=4
 
-" Linebreak on 500 characters
-" set linebreak
-" set textwidth=500
-
 set autoindent 
-" set smartindent
 set wrap "Wrap lines
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -169,7 +165,7 @@ inoremap { {}<left>
 vnoremap ( <esc>`>a)<esc>`<i(<esc>
 vnoremap [ <esc>`>a]<esc>`<i[<esc>
 vnoremap { <esc>`>a}<esc>`<i{<esc>
-" vnoremap " <esc>`>a"<esc>`<i"<esc>
+vnoremap " <esc>`>a"<esc>`<i"<esc>
 vnoremap ' <esc>`>a'<esc>`<i'<esc>
 vnoremap $ <esc>`>a$<esc>`<i$<esc>
 

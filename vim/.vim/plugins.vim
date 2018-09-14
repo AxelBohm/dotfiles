@@ -11,7 +11,6 @@ Plugin 'morhetz/gruvbox'
 """ R
 Plugin 'jalvesaq/Nvim-R'
 " get completion in R
-" Plugin 'roxma/nvim-completion-manager' "still stuff to figure out here
 " Plugin 'gaalcaras/ncm-R' "only works if above plugin (nvim-completion-manger) works
 
 """ Rmarkdown

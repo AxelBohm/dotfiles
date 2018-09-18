@@ -96,7 +96,6 @@ set clipboard^=unnamed,unnamedplus
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => nifty custom mappings
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-call yankstack#setup()
 
 " Make Y behave like other commands
 nnoremap Y y$

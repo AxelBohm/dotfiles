@@ -1,25 +1,21 @@
 #!/bin/bash
 
-exec dwm 
-
 
 ########################################
-# My stuff
+# keyboard and launch stuff
+########################################
+. ~/bin/preload.sh &
+
+########################################
+# DWM
 ########################################
 
-# key repeat and delay speed
-xset r rate 180 70
+# Statusbar
+. ~/bin/dwm-status.sh &
 
-# make capslock control
-setxkbmap -option ctrl:nocaps
-# make altgr control
-setxkbmap -option ctrl:ralt_rctrl
+# set background
+~/.fehbg &
+# Autostart section
+pcmanfm & 
 
-#dropbox
-.dropbox-dist/dropboxd
-
-# wicd for wifi(eduroam)
-sudo wicd
-
-# music
-mpd
+exec dwm

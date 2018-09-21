@@ -1,0 +1,40 @@
+[general]
+accounts = uniwien, ymail
+starttls = yes
+ssl = yes
+pythonfile = ~/.config/mutt/credentials/imappwd.py
+
+[Account uniwien]
+
+localrepository = uniwien-local
+remoterepository = uniwien-remote
+
+[Repository uniwien-remote]
+auth_mechanisms = LOGIN
+type = IMAP
+remoteuser = boehma53
+remotepasseval = mailpasswd("uniwien")
+remotehost = imap.univie.ac.at
+remoteport = 993
+sslcacertfile = /etc/ssl/certs/ca-certificates.crt
+
+[Repository uniwien-local]
+type = Maildir
+localfolders = ~/.mail/uniwien
+[Account ymail]
+
+localrepository = ymail-local
+remoterepository = ymail-remote
+
+[Repository ymail-remote]
+auth_mechanisms = LOGIN
+type = IMAP
+remoteuser = axel.boehm@ymail.com
+remotepasseval = mailpasswd("ymail")
+remotehost = imap.mail.yahoo.com
+remoteport = 993
+sslcacertfile = /etc/ssl/certs/ca-certificates.crt
+
+[Repository ymail-local]
+type = Maildir
+localfolders = ~/.mail/ymail

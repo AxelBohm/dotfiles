@@ -12,14 +12,14 @@ get_song_name()
     fi
 }
 
-
 while true;
 do
     f=$(cat /sys/class/thermal/thermal_zone0/temp)
     batt=$( acpi -b | sed 's/.*[Full|charging|unknown], \([0-9]*\)%.*/\1/gi' )
     temp=$(echo $f | cut -b -2)°C
     date=$(date +'%a %b %d, %R')
+    wifi_ssid=$(iwgetid --raw)
     get_song_name
-    xsetroot -name ""$song" | Bat: $batt % | $temp | $date"
-    sleep 0.1;
+    xsetroot -name "$song | wifi: $wifi_ssid | Bat: $batt % | $temp | $date"
+    sleep 0.5;
 done;

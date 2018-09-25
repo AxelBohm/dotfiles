@@ -6,6 +6,7 @@ bind index \Cf noop
 
 source etc/muttcol
 source etc/aliases
+set alias_file= ~/.config/mutt/etc/aliases
 
 set sleep_time = 0
 set sort=reverse-threads

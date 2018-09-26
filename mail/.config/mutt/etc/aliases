@@ -6,11 +6,28 @@ alias michael michael.sedlmayer@univie.ac.at
 alias teresa teresa.scarinci@univie.ac.at
 alias print mobile-print.mathematik@univie.ac.at
 alias khoa dang-khoa.nguyen@univie.ac.at
+alias vuong vuong.phan@univie.ac.at
 alias caroline Caroline Geiersbach <caroline.geiersbach@univie.ac.at>
 alias axel Axel <axel.boehm@univie.ac.at>
 alias morteza Morteza Kimiaei <morteza.kimiaei@gmail.com>
 alias dennis Dennis Meier <meierd61@univie.ac.at>
 alias paul Paul Stocker <paul.stocker@univie.ac.at>
+alias robert.csetnek Ernö Robert Csetnek <ernoe.robert.csetnek@univie.ac.at>
+
+# VDS 
+alias vds.student.steering florian.aigner@univie.ac.at, sascha.biberhofer@univie.ac.at, christopher.heng.chiu@univie.ac.at, manjil.saikia@univie.ac.at, daniel.scherl@univie.ac.at, laura.kanzler@univie.ac.at
+alias vds.mailinglist vds-mathematics@lists.univie.ac.at
 alias bettina.hiebl Bettina Hiebl <bettina.hiebl@univie.ac.at>
 alias florian.aigner Florian Aigner <florian.aigner@univie.ac.at>
 alias vds.mathematik VDS Mathematik <vds.mathematik@univie.ac.at>
+alias sascha.biberhofer Sascha Biberhofer <sascha.biberhofer@univie.ac.at>
+alias christopher.chiu Christopher Chiu <christopher.heng.chiu@univie.ac.at>
+alias laura.kanzler Laura Kanzler <laura.kanzler@univie.ac.at>
+alias manjil Manjil Saikia <manjil.saikia@univie.ac.at>
+alias dani.scherl Daniel Scherl <daniel.scherl@univie.ac.at>
+
+# random
+alias spinoff_fellowship1 Sophie Schober <sophie.schober@meduniwien.ac.at>
+alias spinoff_fellowship2 Inmaculada Sanchez Romero <inma.sanchez@univie.ac.at>
+alias spinoff_fellowship3 Reckling Tobias <tobias.reckling@univie.ac.at>
+alias anna.breger Anna Breger <anna.breger@univie.ac.at>

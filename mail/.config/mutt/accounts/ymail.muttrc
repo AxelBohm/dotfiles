@@ -8,7 +8,8 @@ set folder = "~/.mail/ymail"
 set header_cache = ~/.config/mutt/accounts/ymail/cache/headers
 set message_cachedir = ~/.config/mutt/accounts/ymail/cache/bodies
 set certificate_file = ~/.config/mutt/accounts/ymail/certificates
-source "~/.config/mutt/credentials/getmuttpass ymail |"
+set smtp_pass=`lpass show --password yahoo.com`
+set imap_pass=`lpass show --password yahoo.com`
 
 set mbox_type = Maildir
 set ssl_starttls = yes

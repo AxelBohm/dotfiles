@@ -2,10 +2,10 @@
 EXTERNAL=$(xrandr | grep -o '^VGA\w*')
 INTERNAL=$(xrandr | grep -o '^LVDS\w*')
 
-if [ ! -f ~/.config/i3/monitor_mode.txt ] ; then
+if [ ! -f ~/bin/.monitor_mode.txt ] ; then
     monitor_mode="all"
 else
-    monitor_mode=`cat ~/.config/i3/monitor_mode.txt`
+    monitor_mode=`cat ~/bin/.monitor_mode.txt`
 fi
 
 if [ $monitor_mode = "all" ]; then
@@ -23,6 +23,6 @@ else
 fi
 
 # set wallpaper again
-feh --bg-fill ~/.config/i3/wallpapers/*
+feh --bg-fill ~/.wallpapers/*
 
-echo "${monitor_mode}" > ~/.config/i3/monitor_mode.txt
+echo "${monitor_mode}" > ~/bin/.monitor_mode.txt

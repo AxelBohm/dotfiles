@@ -2,7 +2,7 @@
 accounts = uniwien, ymail
 starttls = yes
 ssl = yes
-pythonfile = ~/.config/mutt/credentials/imappwd.py
+pythonfile = ~/.config/mutt/etc/offlineimap.py
 
 [Account uniwien]
 
@@ -13,7 +13,7 @@ remoterepository = uniwien-remote
 auth_mechanisms = LOGIN
 type = IMAP
 remoteuser = boehma53
-remotepasseval = mailpasswd("uniwien")
+remotepasseval = get_pass("univie-employee")
 remotehost = imap.univie.ac.at
 remoteport = 993
 sslcacertfile = /etc/ssl/certs/ca-certificates.crt
@@ -30,7 +30,7 @@ remoterepository = ymail-remote
 auth_mechanisms = LOGIN
 type = IMAP
 remoteuser = axel.boehm@ymail.com
-remotepasseval = mailpasswd("ymail")
+remotepasseval = get_pass("yahoo.com")
 remotehost = imap.mail.yahoo.com
 remoteport = 993
 sslcacertfile = /etc/ssl/certs/ca-certificates.crt

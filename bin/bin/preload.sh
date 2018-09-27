@@ -1,6 +1,9 @@
 # set screen brightness
 # xbacklight -set 55
 
+# output to external if available
+set-external.sh
+
 # key repeat and delay speed
 xset r rate 180 70
 

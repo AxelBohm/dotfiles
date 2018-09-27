@@ -1,7 +1,7 @@
 #!/bin/bash
-EXTERNAL=VGA-1
-INTERNAL=LVDS-1
 
+EXTERNAL=$(xrandr | grep -o '^VGA\w*')
+INTERNAL=$(xrandr | grep -o '^LVDS\w*')
 
 if xrandr | grep "$EXTERNAL connected"; then
     xrandr --output $INTERNAL --off --output $EXTERNAL --auto

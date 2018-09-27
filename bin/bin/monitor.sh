@@ -1,6 +1,6 @@
 #!/bin/bash
-EXTERNAL="VGA-1"
-INTERNAL="LVDS-1"
+EXTERNAL=$(xrandr | grep -o '^VGA\w*')
+INTERNAL=$(xrandr | grep -o '^LVDS\w*')
 
 if [ ! -f ~/.config/i3/monitor_mode.txt ] ; then
     monitor_mode="all"

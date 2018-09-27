@@ -1,11 +1,11 @@
 #!/bin/bash
 
-EXTERNAL=$(xrandr | grep -o '^VGA\w*')
-INTERNAL=$(xrandr | grep -o '^LVDS\w*')
+external=$(xrandr | grep -o "VGA[\w'-]*\w*")
+internal=$(xrandr | grep -o "LVDS[\w'-]*\w*")
 
-if xrandr | grep "$EXTERNAL connected"; then
-    xrandr --output $INTERNAL --off --output $EXTERNAL --auto
+if xrandr | grep "$external connected"; then
+    xrandr --output $internal --off --output $external --auto
 fi
 
 # set wallpaper again
-feh --bg-fill ~/.config/i3/wallpapers/*
+feh --bg-fill ~/.wallpapers/*

@@ -1,0 +1,11 @@
+[General]
+Binary = calcurse
+Hostname = dav.fruux.com
+Path = calendars/a3298194609/f10c40ff-a4bb-40f3-b1b3-68c865dacaea/
+AuthMethod = basic
+InsecureSSL = Yes
+DryRun = No
+SyncFilter = cal
+Verbose = Yes
+[Auth]
+Username = b3297450509

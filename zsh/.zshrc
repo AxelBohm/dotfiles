@@ -125,6 +125,6 @@ setxkbmap -option ctrl:ralt_rctrl
 ###############################################################
 # => uni wien only
 ###############################################################
-if [[ whoami = "boehm" ]]; then
+if [[ `whoami` = "boehm" ]]; then
     export PATH=~/miniconda/bin:$PATH
 fi

@@ -26,8 +26,7 @@ export PATH=~/bin:$PATH
 export VISUAL=vim
 export EDITOR="$VISUAL"
 
-# add miniconda to path
-# export PATH=/opt/miniconda/bin:$PATH
+export PATH=~/.local/bin:$PATH
 
 ###############################################################
 # => misc

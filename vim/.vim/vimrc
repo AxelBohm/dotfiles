@@ -104,6 +104,7 @@ nnoremap Y y$
 nnoremap L $
 vnoremap L $
 nnoremap H ^
+vnoremap H ^
 
 " press j and k at the same time to get escape
 inoremap jk <esc>

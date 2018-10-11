@@ -290,6 +290,13 @@ snippet lra "left\angle right\rangle)" w
 \left\langle ${1} \right\rangle ${0}
 endsnippet
 
+snippet ri "right" w
+\right
+endsnippet
+
+snippet le "left" w
+\left
+endsnippet
 
 #################
 # lala #
@@ -347,11 +354,18 @@ snippet pr "proof" w
 \end{proof}
 endsnippet
 
-snippet th "theorem" w
+snippet thm "theorem" w
 \begin{theorem}%
 	\label{thm:${1}}
 	${0}
 \end{theorem}
+endsnippet
+
+snippet cor "corollary" w
+\begin{corollary}%
+	\label{cor:${1}}
+	${0}
+\end{corollary}
 endsnippet
 
 snippet algo "algorithm" w

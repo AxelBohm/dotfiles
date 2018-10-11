@@ -73,6 +73,8 @@ Plugin 'tpope/vim-fugitive'
 " two char "
 Plugin 'justinmk/vim-sneak'
 
+" orgmode
+Plugin 'jceb/vim-orgmode'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required

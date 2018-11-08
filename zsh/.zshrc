@@ -81,8 +81,6 @@ alias R="R --quiet --no-save"
 alias t="tmux"
 alias r="ranger"
 
-alias decryptdropbox="encfs ~/Dropbox/Encrypted/ ~/Private"
-
 # who can remember this command !?
 alias chterm="sudo update-alternatives --config x-terminal-emulator"
 

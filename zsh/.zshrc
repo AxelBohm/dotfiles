@@ -22,11 +22,17 @@ source $ZSH/oh-my-zsh.sh
 # put the scripts in the path
 export PATH=~/bin:$PATH
 
+# sinc pip --user
+export PATH=~/.local/bin:$PATH
+
 # set editor
 export VISUAL=vim
 export EDITOR="$VISUAL"
 
 export PATH=~/.local/bin:$PATH
+
+
+source ~/bin/fancy_prompt.rc
 
 ###############################################################
 # => misc

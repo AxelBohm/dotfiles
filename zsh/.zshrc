@@ -22,12 +22,17 @@ source $ZSH/oh-my-zsh.sh
 # put the scripts in the path
 export PATH=~/bin:$PATH
 
+# sinc pip --user
+export PATH=~/.local/bin:$PATH
+
 # set editor
 export VISUAL=vim
 export EDITOR="$VISUAL"
 
-# add miniconda to path
-# export PATH=/opt/miniconda/bin:$PATH
+export PATH=~/.local/bin:$PATH
+
+
+source ~/bin/fancy_prompt.rc
 
 ###############################################################
 # => misc
@@ -81,8 +86,6 @@ alias prc="vim ~/.config/polybar/config"
 alias R="R --quiet --no-save"
 alias t="tmux"
 alias r="ranger"
-
-alias decryptdropbox="encfs ~/Dropbox/Encrypted/ ~/Private"
 
 # who can remember this command !?
 alias chterm="sudo update-alternatives --config x-terminal-emulator"

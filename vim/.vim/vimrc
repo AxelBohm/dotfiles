@@ -104,6 +104,7 @@ nnoremap Y y$
 nnoremap L $
 vnoremap L $
 nnoremap H ^
+vnoremap H ^
 
 " press j and k at the same time to get escape
 inoremap jk <esc>
@@ -253,11 +254,9 @@ endtry
 " => Filetype config
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-" neomutt
-autocmd BufRead /tmp/neomutt-* Goyo         "distraction free typing of mail
-autocmd BufRead /tmp/neomutt-* :set spell!  "spellchecking for mail
-" autocmd BufRead setlocal fo+=aw
-
+""" neomutt
+autocmd BufRead /tmp/neomutt-* Goyo             "distraction free typing of mail
+autocmd BufRead /tmp/neomutt-* :set spell!      "spellchecking for mail
 " couple of new lines and go to beginning
 autocmd BufRead /tmp/neomutt-* :normal 4O
 autocmd BufRead /tmp/neomutt-* :normal gg
@@ -314,6 +313,7 @@ iab oe; ö
 inoremap s; ß
 iab lg; Liebe Grüße<cr>Axel
 iab bg; Beste Grüße<cr>Axel Böhm
+iab ba; Best<cr>Axel
 iab br; Best regards<cr>Axel Böhm
 iab sgh; Sehr geehrter Herr 
 iab sgf; Sehr geehrte Frau

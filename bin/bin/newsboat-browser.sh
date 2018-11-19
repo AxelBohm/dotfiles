@@ -1,2 +1,2 @@
 #!/bin/bash
-/usr/bin/qutebrowser "$@" & disown
+/usr/bin/qutebrowser "$@" > /dev/null & disown

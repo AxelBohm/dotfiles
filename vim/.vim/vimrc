@@ -265,12 +265,17 @@ autocmd BufRead /tmp/neomutt-* :normal gg
 autocmd FileType r inoremap ;m %>%
 autocmd FileType r inoremap ;n <-
 
+
 """ LaTex
 
-" autocmd FileType tex inoremap <F5> <Esc>:w <cr>:!latexmk % <cr><cr>
+" special settings
+autocmd FileType tex setlocal shiftwidth=2 tabstop=2
+autocmd FileType tex inoremap $ $$<left>
+" special commands
 autocmd FileType tex nnoremap <leader>, :w <cr>:AsyncRun latexmk % <cr>
-autocmd FileType tex inoremap ;n ^{}<esc>i
-autocmd FileType tex inoremap ;m _{}<esc>i
+autocmd FileType tex nnoremap <leader>p :!zathura <c-r>%<backspace><backspace><backspace>pdf &<CR><CR>
+autocmd FileType tex inoremap ;n ^{}<left>
+autocmd FileType tex inoremap ;m _{}<left>
 autocmd FileType tex inoremap ;r \R
 autocmd FileType tex inoremap ;k _{k}
 autocmd FileType tex inoremap ;j _{k+1}
@@ -281,13 +286,7 @@ autocmd FileType tex inoremap ;s ^*
 
 autocmd FileType tex nnoremap <leader>t o%TODO:
 
-autocmd FileType tex inoremap $ $$<left>
-
-
-" Open corresponding .pdf
-map <leader>p :!zathura <c-r>%<backspace><backspace><backspace>pdf &<CR><CR>
-
-"MARKDOWN
+""" MARKDOWN
 	autocmd Filetype markdown,rmd inoremap ,n ---<Enter><Enter>
 	autocmd Filetype markdown,rmd inoremap ,b ****<++><Esc>F*hi
 	autocmd Filetype markdown,rmd inoremap ,s ~~~~<++><Esc>F~hi
@@ -313,7 +312,7 @@ iab oe; ö
 inoremap s; ß
 iab lg; Liebe Grüße<cr>Axel
 iab bg; Beste Grüße<cr>Axel Böhm
-iab ba; Best<cr>Axel
+iab ba; Best,<cr>Axel
 iab br; Best regards<cr>Axel Böhm
 iab sgh; Sehr geehrter Herr 
 iab sgf; Sehr geehrte Frau

@@ -276,12 +276,6 @@ snippet sup "sup" w
 \sup_{${1}} ${0}
 endsnippet
 
-snippet frame "frame" w
-\begin{frame}[${1:t}]{${2:title}}
-${0}
-\end{frame}
-endsnippet
-
 snippet lr( "left( right)" w
 \left( ${0} \right
 endsnippet
@@ -312,6 +306,24 @@ endsnippet
 
 snippet prox "prox" w
 \prox{${1}}{${2}}${0}
+endsnippet
+
+
+#################
+# presentations #
+#################
+
+snippet frame "frame" w
+\begin{frame}
+	\frametitle{${1:title}}
+	${0}
+\end{frame}
+endsnippet
+
+snippet bl "Block" b
+\begin{block}{${1:title}}
+	${0}
+\end{block}
 endsnippet
 
 

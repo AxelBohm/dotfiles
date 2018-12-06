@@ -21,17 +21,16 @@ source $ZSH/oh-my-zsh.sh
 
 # put the scripts in the path
 export PATH=~/bin:$PATH
+export PATH=~/bin/xrandr:$PATH
 
-# sinc pip --user
+# needed for pythons pip --user
 export PATH=~/.local/bin:$PATH
 
 # set editor
 export VISUAL=vim
 export EDITOR="$VISUAL"
 
-export PATH=~/.local/bin:$PATH
-
-
+# prompt
 source ~/bin/fancy_prompt.rc
 
 ###############################################################
@@ -80,12 +79,11 @@ alias mrc="vim ~/.config/mutt/muttrc"
 alias arc="vim ~/.config/mutt/etc/aliases"
 alias nrc="vim ~/.newsboat/config"
 alias rrc="vim ~/.config/ranger/rc.conf"
-alias irc="vim ~/.config/i3/config"
-alias prc="vim ~/.config/polybar/config"
 
 alias R="R --quiet --no-save"
 alias t="tmux"
 alias r="ranger"
+alias s="startx"
 
 # who can remember this command !?
 alias chterm="sudo update-alternatives --config x-terminal-emulator"
@@ -117,12 +115,13 @@ bindkey "^[[B" history-substring-search-down
 bindkey "^P" history-substring-search-up
 bindkey "^N" history-substring-search-down
 
-# ### Other ###
-# # hacky :(
-xset r rate 180 70
-setxkbmap -option ctrl:nocaps
-setxkbmap -option ctrl:ralt_rctrl
-# xmodmap -e "keycode 64 = Escape"
+# keyboard stuff
+if [[ `ps -e | grep X` ]]; then
+    xset r rate 180 70
+    setxkbmap -option ctrl:nocaps
+    setxkbmap -option ctrl:ralt_rctrl
+    # xmodmap -e "keycode 64 = Escape"
+fi
 
 
 ###############################################################

@@ -5,32 +5,32 @@
 ########################################
 
 # for some reason this is not working
-~/bin/preload.sh &
+. preload.sh &
 
-# make capslock control
-setxkbmap -option ctrl:nocaps &
-# make altgr control
-setxkbmap -option ctrl:ralt_rctrl &
+# # make capslock control
+# setxkbmap -option ctrl:nocaps &
+# # make altgr control
+# setxkbmap -option ctrl:ralt_rctrl &
 
-# only works if called twice
-~/bin/set-dual-external.sh &
-~/bin/set-dual-external.sh &
+# # only works if called twice
+~/bin/xrandr/set-dual-external.sh &
+~/bin/xrandr/set-dual-external.sh &
 
-# music
-mpd &
+# # music
+# mpd &
 
-# wifi
-sudo wicd &
+# # wifi
+# sudo wicd &
 
-# start dropbox
-~/.dropbox-dist/dropboxd &
+# # start dropbox
+# ~/.dropbox-dist/dropboxd &
 
 ########################################
 # DWM
 ########################################
 
 # Statusbar
-. ~/bin/dwm-status.sh &
+. dwm-status.sh &
 
 # set background
 ~/.fehbg &

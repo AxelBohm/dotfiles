@@ -181,9 +181,9 @@ $0
 endsnippet
 
 
-##############
-# MATH STUFF #
-##############
+################
+# Environments #
+################
 
 snippet eq "Equation" b
 \begin{equation}
@@ -233,6 +233,16 @@ snippet eqann "Equation array without numbers" b
 	$1 & $2 & $0
 \end{eqnarray*}
 endsnippet
+
+snippet cases "cases" b
+\begin{cases}
+	$0
+\end{cases}
+endsnippet
+
+##############
+# MATH STUFF #
+##############
 
 snippet fr "fraction" w
 \frac{${1:${VISUAL}}}{${2}}
@@ -325,6 +335,15 @@ snippet bl "Block" b
 	${0}
 \end{block}
 endsnippet
+
+snippet vis "visible" b
+\visible<${1}->{${0}}
+endsnippet
+
+snippet only "only" b
+\only<${1}->{${0}}
+endsnippet
+
 
 
 #################

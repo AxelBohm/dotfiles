@@ -257,6 +257,7 @@ endtry
 """ neomutt
 autocmd BufRead /tmp/neomutt-* Goyo             "distraction free typing of mail
 autocmd BufRead /tmp/neomutt-* :set spell!      "spellchecking for mail
+autocmd BufRead /tmp/neomutt-* setlocal nonumber
 " couple of new lines and go to beginning
 autocmd BufRead /tmp/neomutt-* :normal 4O
 autocmd BufRead /tmp/neomutt-* :normal gg
@@ -265,6 +266,11 @@ autocmd BufRead /tmp/neomutt-* :normal gg
 autocmd FileType r inoremap ;m %>%
 autocmd FileType r inoremap ;n <-
 
+""" C
+autocmd FileType c nnoremap <leader>, :w <cr>:AsyncRun sudo make install <cr>
+
+""" Org
+autocmd BufRead *.org Goyo
 
 """ LaTex
 
@@ -285,20 +291,21 @@ autocmd FileType tex inoremap ;u ^{k+1}
 autocmd FileType tex inoremap ;s ^*
 
 autocmd FileType tex nnoremap <leader>t o%TODO:
+autocmd Filetype tex nnoremap <leader>b :split bibfile.bib<cr>
 
 """ MARKDOWN
-	autocmd Filetype markdown,rmd inoremap ,n ---<Enter><Enter>
-	autocmd Filetype markdown,rmd inoremap ,b ****<++><Esc>F*hi
-	autocmd Filetype markdown,rmd inoremap ,s ~~~~<++><Esc>F~hi
-	autocmd Filetype markdown,rmd inoremap ,e **<++><Esc>F*i
-	autocmd Filetype markdown,rmd inoremap ,h ====<Space><++><Esc>F=hi
-	autocmd Filetype markdown,rmd inoremap ,i ![](<++>)<++><Esc>F[a
-	autocmd Filetype markdown,rmd inoremap ,a [](<++>)<++><Esc>F[a
-	autocmd Filetype markdown,rmd inoremap ,l --------<Enter>
-	autocmd Filetype rmd inoremap ,r ```{r}<CR>```<CR><CR><esc>2kO
-	autocmd Filetype rmd inoremap ,p ```{python}<CR>```<CR><CR><esc>2kO
-    autocmd Filetype rmd inoremap ,c ```<cr>```<cr><cr><esc>2kO
-    autocmd Filetype rmd nmap <leader>, :AsyncRun render-Rmarkdown.sh %<cr>
+autocmd Filetype markdown,rmd inoremap ,n ---<Enter><Enter>
+autocmd Filetype markdown,rmd inoremap ,b ****<++><Esc>F*hi
+autocmd Filetype markdown,rmd inoremap ,s ~~~~<++><Esc>F~hi
+autocmd Filetype markdown,rmd inoremap ,e **<++><Esc>F*i
+autocmd Filetype markdown,rmd inoremap ,h ====<Space><++><Esc>F=hi
+autocmd Filetype markdown,rmd inoremap ,i ![](<++>)<++><Esc>F[a
+autocmd Filetype markdown,rmd inoremap ,a [](<++>)<++><Esc>F[a
+autocmd Filetype markdown,rmd inoremap ,l --------<Enter>
+autocmd Filetype rmd inoremap ,r ```{r}<CR>```<CR><CR><esc>2kO
+autocmd Filetype rmd inoremap ,p ```{python}<CR>```<CR><CR><esc>2kO
+autocmd Filetype rmd inoremap ,c ```<cr>```<cr><cr><esc>2kO
+autocmd Filetype rmd nmap <leader>, :AsyncRun render-Rmarkdown.sh %<cr>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => General abbreviations

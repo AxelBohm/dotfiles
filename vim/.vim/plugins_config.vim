@@ -106,7 +106,7 @@ map <leader>o :BufExplorer<cr>
 """"""""""""""""""""""""""""""
 " => buftabline
 """"""""""""""""""""""""""""""
-let g:buftabline_show=1
+let g:buftabline_show=0
 
 
 """"""""""""""""""""""""""""""
@@ -175,3 +175,10 @@ let g:livepreview_previewer = 'zathura'
 " => sneak
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:sneak#label = 1
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => terminus
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:TerminusInsertCursorShape=2
+let g:TerminusMouse=0

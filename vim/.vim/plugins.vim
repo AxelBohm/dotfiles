@@ -58,7 +58,7 @@ Plugin 'airblade/vim-gitgutter'
 Plugin 'christoomey/vim-tmux-navigator'
 
 " buffers as tabs on top
-Plugin 'ap/vim-buftabline'
+" Plugin 'ap/vim-buftabline'
 
 " fancy start screen
 Plugin 'mhinz/vim-startify'
@@ -75,6 +75,9 @@ Plugin 'justinmk/vim-sneak'
 
 " orgmode
 Plugin 'jceb/vim-orgmode'
+
+" change curser shape when in insert
+Plugin 'wincent/terminus'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required

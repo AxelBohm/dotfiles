@@ -128,5 +128,5 @@ fi
 # => uni wien only
 ###############################################################
 if [[ `whoami` = "boehm" ]]; then
-    export PATH=~/miniconda/bin:$PATH
+    export PATH=~/miniconda3/bin:$PATH
 fi

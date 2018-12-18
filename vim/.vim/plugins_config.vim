@@ -141,6 +141,7 @@ function! s:goyo_leave()
       qa
     endif
   endif
+  highlight Normal ctermbg=NONE
 endfunction
 
 autocmd! User GoyoEnter call <SID>goyo_enter()

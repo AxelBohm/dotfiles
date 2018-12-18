@@ -12,7 +12,7 @@ set background=dark
 colorscheme gruvbox
 set t_Co=256                "colors in terminal
 syntax enable               "syntax highlighting
-hi Normal ctermbg=NONE
+highlight Normal ctermbg=NONE
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Basics

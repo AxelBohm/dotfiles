@@ -39,6 +39,9 @@ source ~/bin/fancy_prompt.rc
 
 # vim mode in CL
 bindkey -v  
+# but keep some emacs behaviour
+bindkey "^A" vi-beginning-of-line
+bindkey "^E" vi-end-of-line
 
 e(){
   evince "$1" & disown && exit
@@ -106,7 +109,6 @@ alias la="ls -A"
 
 # autosuggestions
 bindkey '^s' autosuggest-execute
-bindkey '^e' autosuggest-execute
 bindkey '^ ' autosuggest-accept
 
 # history substring search

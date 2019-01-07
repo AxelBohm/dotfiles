@@ -290,6 +290,7 @@ autocmd FileType tex inoremap ;l _{k-1}
 autocmd FileType tex inoremap ;i ^{k}
 autocmd FileType tex inoremap ;u ^{k+1}
 autocmd FileType tex inoremap ;s ^*
+autocmd FileType tex inoremap ;t ^2
 
 autocmd FileType tex nnoremap <leader>t o%TODO:
 autocmd Filetype tex nnoremap <leader>b :split bibfile.bib<cr>

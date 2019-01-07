@@ -37,10 +37,10 @@ bind-key x pb-delete
 color listnormal            color244    default
 color listfocus             color244    color237
 color listnormal_unread     color253    default
-color listfocus_unread      color166     color237
-#color info                  color117    color239    bold
-color info                  color235    color0    bold
-#color article               color247    default
+color listfocus_unread      color166    color237
+#color info                 color117    color239    bold
+color info                  color0    color0
+#color article              color247    default
 
 ########################
 # highlights
@@ -59,7 +59,7 @@ highlight article "\">[^\"]+" red default
 highlight all "(.*)!(.*)\d(.*)" green default
 
 #don't show "arXiv" everywhere
-highlight all "\\(arXiv(.*)\)" color235 default
+highlight all "\\(arXiv(.*)\)" color0 color0
 #highlight feedlist "\(arXiv(.*)" color235 color0
 
 

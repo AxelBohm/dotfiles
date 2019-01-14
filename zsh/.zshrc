@@ -43,20 +43,6 @@ bindkey -v
 bindkey "^A" vi-beginning-of-line
 bindkey "^E" vi-end-of-line
 
-e(){
-  evince "$1" & disown && exit
-}
-
-# open the the pdf and exit the terminal
-z(){
-  zathura "$1" & disown && exit
-}
-
-# open the the pdf and Keep the terminal
-zk(){
-  zathura "$1" & disown
-}
-
 ###############################################################
 # => Aliases
 ###############################################################

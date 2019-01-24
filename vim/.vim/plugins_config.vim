@@ -160,17 +160,10 @@ nmap <silent> <leader>a :ALEToggle<cr>
 let g:ale_lint_on_enter = 0
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Git gutter (Git diff)
+" => vimtex
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:gitgutter_enabled=0
-nnoremap <silent> <leader>d :GitGutterToggle<cr>
-
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Latex live preview
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:livepreview_previewer = 'zathura'
-
+let g:vimtex_view_method = 'zathura'
+nnoremap <leader>lt :VimtexTocToggle<cr>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => sneak

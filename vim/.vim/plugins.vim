@@ -50,10 +50,7 @@ Plugin 'amix/vim-zenroom2'
 
 " change surrounding paranthesis/quotes
 Plugin 'tpope/vim-surround'
-
-" shows git diffs on the side
-Plugin 'airblade/vim-gitgutter'
-
+"
 " consistent navigation between vim and tmux
 Plugin 'christoomey/vim-tmux-navigator'
 
@@ -64,12 +61,8 @@ Plugin 'christoomey/vim-tmux-navigator'
 Plugin 'mhinz/vim-startify'
 
 """ LaTeX
-Plugin 'xuhdev/vim-latex-live-preview'
-" Plugin 'lervag/vimtex'
-
-" git wrapper
-Plugin 'tpope/vim-fugitive'
-
+Plugin 'lervag/vimtex'
+"
 " two char "
 Plugin 'justinmk/vim-sneak'
 

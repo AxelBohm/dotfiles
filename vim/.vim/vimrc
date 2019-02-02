@@ -1,6 +1,7 @@
 " set leader (has to be before any leader command is defined)
 nnoremap <space> <Nop>
 let mapleader = " "
+let maplocalleader = ' '
 
 source ~/.vim/plugins.vim
 source ~/.vim/plugins_config.vim
@@ -122,9 +123,6 @@ nnoremap <leader>x :x<cr>
 nnoremap <leader>v :vsplit<CR>:Explore<CR>
 nnoremap <leader>s :split<CR>:Explore<CR>
 
-" colon is annoying
-nnoremap <leader>; :
-
 " :W sudo saves the file 
 " (useful for handling the permission-denied error)
 command! W w !sudo tee % > /dev/null
@@ -205,12 +203,6 @@ map <leader>bh :bprevious<cr>
 
 " Disable highlight when <leader><cr> is pressed
 map <silent> <leader><cr> :noh<cr>
-
-" underscore is just so hard to reach
-inoremap <C-u> _
-
-" a little emacs behaviour
-" inoremap <C-F> <Right>
 
 " insert empty line without leaving normal mode
 nnoremap <leader>ij o<esc>
@@ -390,22 +382,3 @@ endfun
 if has("autocmd")
     autocmd BufWritePre *.txt,*.js,*.py,*.wiki,*.sh,*.coffee :call CleanExtraSpaces()
 endif
-
-
-" "" fix meta-keys which generate <Esc>a .. <Esc>z
-" let c='k'
-" while c <= 'z'
-"   exec "set <M-".toupper(c).">=\e".c
-"   exec "imap \e".c." <M-".toupper(c).">"
-"   let c = nr2char(1+char2nr(c))
-" endw
-
-" set <M-k>=k
-" inoremap k <M-k>
-" inoremap <M-k> <esc>dd
-
-
-:set guioptions-=m  "remove menu bar
-:set guioptions-=T  "remove toolbar
-:set guioptions-=r  "remove right-hand scroll bar
-:set guioptions-=L  "remove left-hand scroll bar

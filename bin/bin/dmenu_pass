@@ -2,5 +2,5 @@
 # dmenu_pass: the simplest dmenu pass script on the market
 
 password=$(find ~/.password-store/ -type f -name '*.gpg' |
-    cut -d'/' -f5- | dmenu -i -p "Pass:")
+    cut -d'/' -f5- | sed 's/.\{4\}$//' | dmenu -i -p "Pass:")
 [ -n "$password" ] && pass show -c "$password"

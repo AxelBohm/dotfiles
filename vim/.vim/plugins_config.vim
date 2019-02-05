@@ -25,6 +25,11 @@ let g:pandoc#syntax#conceal#use = 0
 
 
 """"""""""""""""""""""""""""""
+" => YCM
+""""""""""""""""""""""""""""""
+let g:ycm_autoclose_preview_window_after_completion = 1
+
+""""""""""""""""""""""""""""""
 " => UltiSnips
 """"""""""""""""""""""""""""""
 let g:UltiSnipsExpandTrigger='<c-j>'

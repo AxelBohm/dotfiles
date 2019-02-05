@@ -11,13 +11,11 @@ set alias_file= ~/.config/mutt/etc/aliases
 set sleep_time = 0
 set sort=reverse-threads
 set sort_aux='last-date-received'
-# set sort_aux=reverse-date
 set editor = $EDITOR
 set timeout = "5"
 set mail_check = "10"
 set mailcap_path = ~/.config/mutt/etc/mailcap
-set status_format='-%r- %f [Msgs:%?M?%M/?%m%?n? New:%n?%?o? Old:%o?%?d? Del:%d?%?F? \
-Flag:%F?%?t? Tag:%t?%?p? Post:%p?%?b? Inc:%b?%?l? %l?]---(%s/%S)-%>-(%P)---'
+set status_format='---%r- %f ---%>---'
 set date_format="%d/%m %I:%M"
 set index_format="%2C %Z %?X?A& ? %D %-15.15F %s (%-4.4c)"
 set markers = no
@@ -44,15 +42,14 @@ bind pager G bottom
 bind index \Cd half-down
 bind index \Cu half-up
 bind index,pager R group-reply
-# macro index,pager S '<sync-mailbox><shell-escape>pkill -RTMIN+12 i3blocks<enter>'
 macro index,pager \Cu |urlview\n
 
 # View attachments properly.
 bind attach <return> view-mailcap
 set fast_reply           # skip to compose when replying
-set fcc_attach           # save attachments with the body
+# set fcc_attach           # save attachments with the body
 set forward_format = "Fwd: %s"       # format of subject when forwarding
-set forward_decode                   # decode when forwarding
+# set forward_decode                   # decode when forwarding
 set forward_quote                    # include message in forwards
 set reverse_name                     # reply as whomever it was to
 set include                          # include message in replies
@@ -67,10 +64,6 @@ macro index o "<shell-escape>$HOME/.config/mutt/etc/mailsync.sh -qf INBOX<enter>
 #copy/move dialogs
 macro index C "<copy-message>?<toggle-mailboxes>" "copy a message to a mailbox"
 macro index M "<save-message>?<toggle-mailboxes>" "move a message to a mailbox"
-
-# Notmuch searching
-macro index \Cf "<enter-command>unset wait_key<enter><shell-escape>read -p 'notmuch query: ' x; echo \$x >~/.cache/mutt_terms<enter><limit>~i \"\`notmuch search --output=messages \$(cat ~/.cache/mutt_terms) | head -n 600 | perl -le '@a=<>;chomp@a;s/\^id:// for@a;$,=\"|\";print@a'\`\"<enter>" "show only messages matching a notmuch pattern"
-macro index A "<limit>all\n" "show all messages (undo limit)"
 
 # Sidebar mappings
 # set sidebar_visible = yes

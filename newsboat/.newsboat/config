@@ -29,6 +29,15 @@ bind-key D pb-download
 bind-key U show-urls
 bind-key x pb-delete
 
+########################
+# macros
+########################
+
+# watch video
+macro m set browser "mpv --ytdl --ontop --no-border --force-window --autofit=960x540 --geometry=-20-50 %u > /dev/null &"; open-in-browser ; set browser "$BROWSER %u"
+
+# youtube
+macro y set browser "youtube-viewer %u > /dev/null &"; open-in-browser : set browser "$BROWSER %u"
 
 ########################
 # colors

@@ -45,7 +45,7 @@ set mousehide
 set noshowmode
 
 " highlight entire line of curser
-" set cursorline
+set cursorline
 
 " Set 7 lines to the cursor - when moving vertically using j/k
 set scrolloff=7
@@ -89,7 +89,7 @@ set splitright
 set splitbelow
 
 " linenumbers
-set number 
+" set number 
 " set relativenumber 
 
 " copy to clipboard
@@ -174,10 +174,10 @@ vnoremap $ <esc>`>a$<esc>`<i$<esc>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " move between windows
-nmap <C-j> <C-W>j
-map <C-k> <C-W>k
-map <C-h> <C-W>h
-map <C-l> <C-W>l
+nnoremap <C-j> <C-W>j
+nnoremap <C-k> <C-W>k
+nnoremap <C-h> <C-W>h
+nnoremap <C-l> <C-W>l
 
 " Resize splits
 nnoremap <leader>1 <c-w>=
@@ -286,6 +286,8 @@ autocmd FileType tex inoremap ;t ^2
 
 autocmd FileType tex nnoremap <leader>t o%TODO:
 autocmd Filetype tex nnoremap <leader>b :split bibfile.bib<cr>
+
+set updatetime=1000
 
 """ MARKDOWN
 autocmd Filetype markdown,rmd inoremap ,n ---<Enter><Enter>

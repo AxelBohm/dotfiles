@@ -29,6 +29,9 @@
 # DWM
 ########################################
 
+# compositor
+compton &
+
 # Statusbar
 . dwm-status.sh &
 
@@ -39,3 +42,4 @@
 pcmanfm & 
 
 exec dwm
+

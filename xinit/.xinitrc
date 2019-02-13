@@ -7,23 +7,8 @@
 # for some reason this is not working
 . preload.sh &
 
-# # make capslock control
-# setxkbmap -option ctrl:nocaps &
-# # make altgr control
-# setxkbmap -option ctrl:ralt_rctrl &
-
 # # only works if called twice
-~/bin/xrandr/set-dual-external.sh &
-~/bin/xrandr/set-dual-external.sh &
-
-# # music
-# mpd &
-
-# # wifi
-# sudo wicd &
-
-# # start dropbox
-# ~/.dropbox-dist/dropboxd &
+# ~/bin/xrandr/set-dual-external.sh &
 
 ########################################
 # DWM
@@ -34,6 +19,8 @@ compton &
 
 # Statusbar
 . dwm-status.sh &
+
+~/bin/xrandr/set-dual-external.sh &
 
 # set background
 ~/.fehbg &

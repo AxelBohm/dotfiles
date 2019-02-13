@@ -2,14 +2,21 @@
 export VISUAL=vim
 export EDITOR="$VISUAL"
 
-# case insensitive tab completion
-bind 'set completion-ignore-case on'
 
 # If not running interactively, don't do anything
 case $- in
     *i*) ;;
       *) return;;
 esac
+
+# cycle through completions
+bind "TAB:menu-complete"
+bind "set show-all-if-ambiguous on"
+bind "set menu-complete-display-prefix on"
+
+
+# case insensitive tab completion
+bind 'set completion-ignore-case on'
 
 # don't put duplicate lines or lines starting with space in the history.
 # See bash(1) for more options

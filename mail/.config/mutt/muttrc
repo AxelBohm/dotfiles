@@ -17,7 +17,7 @@ set mail_check = "10"
 set mailcap_path = ~/.config/mutt/etc/mailcap
 set status_format='---%r- %f ---%>---'
 set date_format="%d/%m %I:%M"
-set index_format="%2C %Z %?X?A& ? %D %-15.15F %s (%-4.4c)"
+set index_format="%Z %?X?A& ? %D %-15.15F %s"
 set markers = no
 set mark_old = no
 set smtp_authenticators = 'gssapi:login'
@@ -47,9 +47,7 @@ macro index,pager \Cu |urlview\n
 # View attachments properly.
 bind attach <return> view-mailcap
 set fast_reply           # skip to compose when replying
-# set fcc_attach           # save attachments with the body
 set forward_format = "Fwd: %s"       # format of subject when forwarding
-# set forward_decode                   # decode when forwarding
 set forward_quote                    # include message in forwards
 set reverse_name                     # reply as whomever it was to
 set include                          # include message in replies
@@ -69,7 +67,6 @@ macro index M "<save-message>?<toggle-mailboxes>" "move a message to a mailbox"
 # set sidebar_visible = yes
 set sidebar_width = 20
 set sidebar_short_path = yes
-set sidebar_next_new_wrap = yes
 set mail_check_stats
 set sidebar_format = '%B%?F? [%F]?%* %?N?%N/? %?S?%S?'
 bind index,pager \Ck sidebar-prev

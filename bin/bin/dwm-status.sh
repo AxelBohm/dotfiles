@@ -1,6 +1,5 @@
 #!/bin/bash
 
-
 get_song_name()
 {
     first_line=$(mpc | sed q)

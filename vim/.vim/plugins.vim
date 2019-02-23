@@ -38,8 +38,8 @@ Plugin 'maxbrunsfeld/vim-yankstack'
 Plugin 'SirVer/ultisnips'
 
 " lightline
-Plugin 'itchyny/lightline.vim'
-Plugin 'maximbaz/lightline-ale'
+" Plugin 'itchyny/lightline.vim'
+" Plugin 'maximbaz/lightline-ale'
 
 " buffer explorer
 Plugin 'jlanzarotta/bufexplorer'
@@ -71,6 +71,10 @@ Plugin 'jceb/vim-orgmode'
 
 " change curser shape when in insert
 Plugin 'wincent/terminus'
+
+" autoclose parenthesis
+Plugin 'Townk/vim-autoclose'
+
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required

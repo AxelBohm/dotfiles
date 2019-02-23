@@ -21,6 +21,6 @@ do
     wifi_ssid=$(iwgetid --raw)
     memory=$(free -m | awk 'FNR==2{ printf "%.0f%\n", $3*100/$2 }')
     get_song_name
-    xsetroot -name "$song | wifi: $wifi_ssid | bat: $batt% | mem: $memory | $temp | $date"
+    xsetroot -name "$song   wifi: $wifi_ssid  bat: $batt%  mem: $memory  $temp  $date"
     sleep 0.5;
 done;

@@ -47,8 +47,8 @@ color search brightmagenta default
 
 ## statusline
 # color status color166 default
-color status color239 color239
-color status color0 color0
+color status color3 color0
+color status color4 color0
 
 color hdrdefault brightgreen default
 color quoted green default

@@ -29,6 +29,15 @@ bind-key D pb-download
 bind-key U show-urls
 bind-key x pb-delete
 
+########################
+# macros
+########################
+
+# watch video
+macro m set browser "mpv --ytdl --ontop --no-border --force-window --autofit=960x540 --geometry=-20-50 %u > /dev/null &"; open-in-browser ; set browser "$BROWSER %u"
+
+# youtube
+macro y set browser "youtube-viewer %u > /dev/null &"; open-in-browser : set browser "$BROWSER %u"
 
 ########################
 # colors
@@ -37,9 +46,9 @@ bind-key x pb-delete
 color listnormal            color244    default
 color listfocus             color244    color237
 color listnormal_unread     color253    default
-color listfocus_unread      color166    color237
+color listfocus_unread      color3      color237
 #color info                 color117    color239    bold
-color info                  color0    color0
+color info                  color4    color0
 #color article              color247    default
 
 ########################

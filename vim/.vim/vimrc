@@ -31,7 +31,7 @@ set encoding=utf8
 set fileformats=unix,dos,mac
 
 " duration vim waits for next key in command chain
-set timeoutlen=500
+set timeoutlen=700
 
 " Turn backup off
 set nobackup
@@ -45,7 +45,7 @@ set mousehide
 set noshowmode
 
 " highlight entire line of curser
-" set cursorline
+set cursorline
 
 " Set 7 lines to the cursor - when moving vertically using j/k
 set scrolloff=7
@@ -75,9 +75,6 @@ set hlsearch
 " Makes search act like search in modern browsers
 set incsearch 
 
-" For regular expressions turn magic on
-set magic
-
 " Show matching brackets when text indicator is over them
 set showmatch 
 
@@ -89,11 +86,17 @@ set splitright
 set splitbelow
 
 " linenumbers
-set number 
+" set number 
 " set relativenumber 
 
 " copy to clipboard
 set clipboard^=unnamed,unnamedplus
+
+" configure statusline
+highlight StatusLine ctermbg=0 cterm=NONE
+
+" don't redraw if not necessary
+set lazyredraw 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => nifty custom mappings
@@ -101,12 +104,6 @@ set clipboard^=unnamed,unnamedplus
 
 " Make Y behave like other commands
 nnoremap Y y$
-
-" $ is  a pain. use L instead. i never use L anyways..
-nnoremap L $
-vnoremap L $
-nnoremap H ^
-vnoremap H ^
 
 " press j and k at the same time to get escape
 inoremap jk <esc>
@@ -152,32 +149,22 @@ set wrap "Wrap lines
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Brackets
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-" cheap autoclosing for brackets and alike
-inoremap " ""<left>
-" ino ' ''<left> "keeps messing with my apostrophes (maybe i shouldn't use so much slang)
-inoremap ( ()<left>
-inoremap [ []<left>
-inoremap { {}<left>
-
 " wrap words after visual selection
 vnoremap ( <esc>`>a)<esc>`<i(<esc>
 vnoremap [ <esc>`>a]<esc>`<i[<esc>
 vnoremap { <esc>`>a}<esc>`<i{<esc>
 vnoremap " <esc>`>a"<esc>`<i"<esc>
 vnoremap ' <esc>`>a'<esc>`<i'<esc>
-vnoremap $ <esc>`>a$<esc>`<i$<esc>
-
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => windows
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " move between windows
-nmap <C-j> <C-W>j
-map <C-k> <C-W>k
-map <C-h> <C-W>h
-map <C-l> <C-W>l
+nnoremap <C-j> <C-W>j
+nnoremap <C-k> <C-W>k
+nnoremap <C-h> <C-W>h
+nnoremap <C-l> <C-W>l
 
 " Resize splits
 nnoremap <leader>1 <c-w>=
@@ -252,12 +239,16 @@ autocmd BufRead /tmp/neomutt-* Goyo             "distraction free typing of mail
 autocmd BufRead /tmp/neomutt-* :set spell!      "spellchecking for mail
 autocmd BufRead /tmp/neomutt-* setlocal nonumber
 " couple of new lines and go to beginning
-autocmd BufRead /tmp/neomutt-* :normal 4O
+autocmd BufRead /tmp/neomutt-* :normal 3O
 autocmd BufRead /tmp/neomutt-* :normal gg
 
 """ R
 autocmd FileType r inoremap ;m %>%
 autocmd FileType r inoremap ;n <-
+
+""" python
+autocmd Filetype py nnoremap <leader>st ipdb.set_trace()<esc>
+autocmd Filetype py nnoremap <leader>in import numpy as np<esc>
 
 """ C
 autocmd FileType c nnoremap <leader>, :w <cr>:AsyncRun sudo make install <cr>
@@ -271,7 +262,7 @@ autocmd BufRead *.org Goyo
 autocmd FileType tex setlocal shiftwidth=2 tabstop=2
 autocmd FileType tex inoremap $ $$<left>
 " special commands
-autocmd FileType tex nnoremap <leader>, :w <cr>:AsyncRun latexmk % <cr>
+" autocmd FileType tex nnoremap <leader>, :w <cr>:AsyncRun latexmk % <cr>
 autocmd FileType tex nnoremap <leader>p :!zathura <c-r>%<backspace><backspace><backspace>pdf &<CR><CR>
 autocmd FileType tex inoremap ;n ^{}<left>
 autocmd FileType tex inoremap ;m _{}<left>
@@ -287,18 +278,9 @@ autocmd FileType tex inoremap ;t ^2
 autocmd FileType tex nnoremap <leader>t o%TODO:
 autocmd Filetype tex nnoremap <leader>b :split bibfile.bib<cr>
 
+set updatetime=1000
+
 """ MARKDOWN
-autocmd Filetype markdown,rmd inoremap ,n ---<Enter><Enter>
-autocmd Filetype markdown,rmd inoremap ,b ****<++><Esc>F*hi
-autocmd Filetype markdown,rmd inoremap ,s ~~~~<++><Esc>F~hi
-autocmd Filetype markdown,rmd inoremap ,e **<++><Esc>F*i
-autocmd Filetype markdown,rmd inoremap ,h ====<Space><++><Esc>F=hi
-autocmd Filetype markdown,rmd inoremap ,i ![](<++>)<++><Esc>F[a
-autocmd Filetype markdown,rmd inoremap ,a [](<++>)<++><Esc>F[a
-autocmd Filetype markdown,rmd inoremap ,l --------<Enter>
-autocmd Filetype rmd inoremap ,r ```{r}<CR>```<CR><CR><esc>2kO
-autocmd Filetype rmd inoremap ,p ```{python}<CR>```<CR><CR><esc>2kO
-autocmd Filetype rmd inoremap ,c ```<cr>```<cr><cr><esc>2kO
 autocmd Filetype rmd nmap <leader>, :AsyncRun render-Rmarkdown.sh %<cr>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -351,23 +333,6 @@ endfunction
 function! CmdLine(str)
     call feedkeys(":" . a:str)
 endfunction 
-
-
-" deletes everything until the last slash when browsing on the command line
-func! DeleteTillSlash()
-    let g:cmd = getcmdline()
-
-    let g:cmd_edited = substitute(g:cmd, "\\(.*\[/\]\\).*", "\\1", "")
-
-    if g:cmd == g:cmd_edited
-        let g:cmd_edited = substitute(g:cmd, "\\(.*\[/\]\\).*/", "\\1", "")
-    endif   
-
-    return g:cmd_edited
-endfunc
-
-cno <C-BS> <C-\>eDeleteTillSlash()<cr>
-
 
 
 " Delete trailing white space on save, useful for some filetypes ;)

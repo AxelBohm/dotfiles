@@ -18,7 +18,6 @@ setxkbmap -option ctrl:ralt_rctrl
 mpd
 
 # wifi
-sudo wicd
 
 # dropbox
 ~/.dropbox-dist/dropboxd

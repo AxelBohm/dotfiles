@@ -1,13 +1,12 @@
-# set vim as default editor
-export VISUAL=vim
-export EDITOR="$VISUAL"
-
-
 # If not running interactively, don't do anything
 case $- in
     *i*) ;;
       *) return;;
 esac
+
+# set vim as default editor
+export VISUAL=vim
+export EDITOR="$VISUAL"
 
 # cycle through completions
 bind "TAB:menu-complete"

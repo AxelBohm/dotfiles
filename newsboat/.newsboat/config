@@ -33,6 +33,7 @@ bind-key x pb-delete
 # macros
 ########################
 
+# both should do the same thing
 # watch video
 macro m set browser "mpv --ytdl --ontop --no-border --force-window --autofit=960x540 --geometry=-20-50 %u > /dev/null &"; open-in-browser ; set browser "$BROWSER %u"
 

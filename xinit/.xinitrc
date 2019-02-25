@@ -18,6 +18,9 @@
 # compositor
 compton &
 
+# notifications
+dunst &
+
 # Statusbar
 . dwm-status.sh &
 

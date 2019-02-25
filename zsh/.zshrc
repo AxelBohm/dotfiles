@@ -25,7 +25,7 @@ zstyle ':completion:*' matcher-list 'm:{[:lower:]}={[:upper:]}'
 # source $ZSH/oh-my-zsh.sh
 
 # source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
-source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.plugin.zsh
+# source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.plugin.zsh
 # source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.plugin.zsh
 
 # prompt
@@ -48,9 +48,20 @@ fi
 bindkey '^s' autosuggest-execute
 bindkey '^ ' autosuggest-accept
 
-# # history substring search
+# history substring search
 # bindkey "^[[A" history-substring-search-up
 # bindkey "^[[B" history-substring-search-down
+# bindkey "^P" history-substring-search-up
+# bindkey "^N" history-substring-search-down
+
+
+###############################################################
+# => void only
+###############################################################
+if [[ `uname -n` = "void" ]]; then
+    alias vim=vim-huge-python3
+    source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+fi
 
 ###############################################################
 # => uni wien only

@@ -3,10 +3,8 @@ def_key "f"
 def_key "f"
     find_item_forward
 
-def_key "+"
+def_key "t"
     show_clock
-def_key "="
-    volume_up
 
 def_key "j"
     scroll_down

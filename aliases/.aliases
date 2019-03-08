@@ -13,15 +13,16 @@ alias gco="git checkout"
 # store credentials
 alias gsc="git config credential.helper store"
 
-alias sai="sudo apt install"
 alias p="sudo pacman"
 alias pi="sudo pacman -S"
-alias pr="sudo pacman -R"
+alias pr="sudo pacman -Rns"
 alias pu="sudo pacman -Syu"
 
 alias e="emacs -nw"
 alias v="vim"
+alias nv="nvim"
 alias vrc="vim ~/.vim/vimrc"
+alias nvrc="vim ~/.config/nvim/init.vim"
 alias zrc="vim ~/.zshrc"
 alias mrc="vim ~/.config/mutt/muttrc"
 alias arc="vim ~/.config/mutt/etc/aliases"

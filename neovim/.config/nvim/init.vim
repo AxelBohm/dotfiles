@@ -19,14 +19,14 @@ Plug 'ap/vim-buftabline'
 " linting 
 Plug 'w0rp/ale'
 
-" commentary (gc(c))
-Plug 'tpope/vim-commentary'
-
 " You Complete Me
 Plug 'Valloric/YouCompleteMe'
 
-""" snippets
+" snippets
 Plug 'SirVer/ultisnips'
+
+" commentary (gc(c))
+Plug 'tpope/vim-commentary'
 
 " consistent navigation between vim and tmux
 Plug 'christoomey/vim-tmux-navigator'

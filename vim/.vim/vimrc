@@ -107,7 +107,7 @@ nnoremap Y y$
 
 " press j and k at the same time to get escape
 inoremap jk <esc>
-inoremap kj <esc>
+" inoremap kj <esc>
 
 " Fast saving
 nnoremap <leader>w :w!<cr>
@@ -137,7 +137,7 @@ nnoremap <leader>ss :set spell!<cr>
 set expandtab
 
 " Be smart when using tabs ;)
-set smarttab
+" set smarttab
 
 " 1 tab == 4 spaces
 set shiftwidth=4

@@ -15,7 +15,7 @@ compinit
 # case insensitive completion
 zstyle ':completion:*' matcher-list 'm:{[:lower:]}={[:upper:]}'
 # colored completion suggestions
-zstyle ':completion:*' list-colors "${(@s.:.)LS_COLORS}"
+zstyle ':completion:*:default' list-colors "${(@s.:.)LS_COLORS}"
 
 ###############################################################
 # => exports

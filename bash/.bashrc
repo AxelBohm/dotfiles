@@ -13,6 +13,8 @@ bind "TAB:menu-complete"
 bind "set show-all-if-ambiguous on"
 bind "set menu-complete-display-prefix on"
 
+# use z installed from package manager
+[[ -r "/usr/share/z/z.sh" ]] && source /usr/share/z/z.sh
 
 # case insensitive tab completion
 bind 'set completion-ignore-case on'

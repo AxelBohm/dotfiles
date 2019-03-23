@@ -1,7 +1,6 @@
 """"""""""""""""""""""""""""""
 " => R
 """"""""""""""""""""""""""""""
-
 let g:Rout_more_colors = 1
 let g:rout_follow_colorscheme = 1
 
@@ -121,7 +120,7 @@ nnoremap <leader>lt :VimtexTocToggle<cr>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => sneak
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:sneak#label = 1
+let g:sneak#label = 0
 let g:sneak#use_ic_scs = 1
 
 

@@ -1,6 +1,7 @@
 # vim: filetype=neomuttrc
 # A file for aliases
 
+# uni wien
 alias bot radu.bot@univie.ac.at
 alias michael michael.sedlmayer@univie.ac.at
 alias teresa teresa.scarinci@univie.ac.at
@@ -31,6 +32,11 @@ alias hans.hoengesberg Hans Höngesberg <hans.hoengesberg@univie.ac.at>
 alias markus.gabl Markus Gabl <markus@gabl.com>
 alias anna.breger Anna Breger <anna.breger@univie.ac.at>
 
+# uni
+alias aris Aris Daniilidis <arisd@dim.uchile.cl>
+alias sebastian.chile Sebastian Tapia <stapia@dim.uchile.cl>
+alias terry R T Rockafellar <rtr@uw.edu>
+
 # random
 alias spinoff_fellowship1 Sophie Schober <sophie.schober@meduniwien.ac.at>
 alias spinoff_fellowship2 Inmaculada Sanchez Romero <inma.sanchez@univie.ac.at>
@@ -55,7 +61,6 @@ alias georg.pflug georg pflug <georg.pflug@univie.ac.at>
 alias michi.fischer Michael Fischer <michi.fischer@univie.ac.at>
 alias jonas.adler Jonas Adler <jonasadl@kth.se>
 alias axel.ringh Axel Ringh <aringh@kth.se>
-alias terry R T Rockafellar <rtr@uw.edu>
 alias bernhard.lamel Bernhard Lamel <bernhard.lamel@univie.ac.at>
 alias lisa.carli Lisa Carli <lisa.carli@univie.ac.at>
-alias aris Aris Daniilidis <arisd@dim.uchile.cl>
+alias fritz Friedrich Reichhart <friedrich.reichhart@sdr.at>

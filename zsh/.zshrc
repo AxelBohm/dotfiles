@@ -29,6 +29,12 @@ setopt INC_APPEND_HISTORY
 # bindkey "\eq" quote-line
 # bindkey "\ek" backward-kill-line
 
+# # use the vi navigation keys in menu completion
+# bindkey -M menuselect 'h' vi-backward-char
+# bindkey -M menuselect 'k' vi-up-line-or-history
+# bindkey -M menuselect 'l' vi-forward-char
+# bindkey -M menuselect 'j' vi-down-line-or-history
+
 ###############################################################
 # => fancy
 ###############################################################
@@ -51,6 +57,9 @@ RPROMPT="%F{237}%K{239}█▓░%F{248}%K{239}%T%F{237}%K{239}░▓█
 
 # colored completion suggestions
 zstyle ':completion:*:default' list-colors "${(@s.:.)LS_COLORS}"
+
+# complete also incorrect stuff
+zstyle ':completion:*' completer _complete _correct _approximate
 
 ###############################################################
 # => exports

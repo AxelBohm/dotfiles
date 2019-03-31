@@ -1,9 +1,3 @@
-# Which plugins would you like to load? 
-# Add wisely, as too many plugins slow down shell startup.
-# plugins=(
-#   zsh-syntax-highlighting
-#   zsh-autosuggestions 
-# )
 bindkey -e
 HISTSIZE=100000
 SAVEHIST=100000

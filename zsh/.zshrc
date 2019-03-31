@@ -56,16 +56,7 @@ zstyle ':completion:*:default' list-colors "${(@s.:.)LS_COLORS}"
 # => exports
 ###############################################################
 
-# Path to your oh-my-zsh installation.
-# export ZSH=~/.oh-my-zsh
-# source $ZSH/oh-my-zsh.sh
-
 # source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
-
-# prompt
-# source ~/bin/fancy_prompt.rc
-PROMPT='[%F{green}%n%f@%F{blue}%m%f %F{yellow}%1~%f]%# '
-
 
 ###############################################################
 # => Aliases
@@ -95,9 +86,9 @@ bindkey '^ ' autosuggest-accept
 if [[ `uname -n` = "void" ]]; then
     alias vim=vim-huge-python3
     source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
-else;
+else
     source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.plugin.zsh
-    # source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.plugin.zsh
+    source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.plugin.zsh
 fi
 
 ###############################################################

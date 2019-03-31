@@ -123,6 +123,10 @@ nnoremap <leader>lt :VimtexTocToggle<cr>
 let g:sneak#label = 0
 let g:sneak#use_ic_scs = 1
 
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => sneak
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:AutoCloseExpandSpace = 0 " Make iabbrev work again
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => terminus

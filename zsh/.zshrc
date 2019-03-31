@@ -4,7 +4,8 @@ SAVEHIST=100000
 HISTFILE=~/.zsh_history
 setopt INC_APPEND_HISTORY
 
-autoload -U compinit
+# use z installed from package manager
+[[ -r "/usr/share/z/z.sh" ]] && source /usr/share/z/z.sh
 compinit
 # case insensitive completion
 zstyle ':completion:*' matcher-list 'm:{[:lower:]}={[:upper:]}'

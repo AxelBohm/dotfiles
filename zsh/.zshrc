@@ -6,6 +6,28 @@ setopt INC_APPEND_HISTORY
 
 # use z installed from package manager
 [[ -r "/usr/share/z/z.sh" ]] && source /usr/share/z/z.sh
+
+###############################################################
+# => vi mode
+###############################################################
+# Show vi mode
+# bindkey -v
+
+# function zle-line-init zle-keymap-select {
+#     RPS1="%{$fg[yellow]%}${${KEYMAP/vicmd/%B Normal Mode %b}/(main|viins)/ }%{$reset_color%}"
+#     RPS2=$RPS1
+#     zle reset-prompt
+# }
+
+# zle -N zle-line-init
+# zle -N zle-keymap-select
+
+# bindkey "^R" history-incremental-search-backward
+# bindkey "^[[A" history-beginning-search-backward-end
+# bindkey "^[[B" history-beginning-search-forward-end
+# bindkey "\e." insert-last-word
+# bindkey "\eq" quote-line
+# bindkey "\ek" backward-kill-line
 compinit
 # case insensitive completion
 zstyle ':completion:*' matcher-list 'm:{[:lower:]}={[:upper:]}'

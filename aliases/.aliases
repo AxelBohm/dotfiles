@@ -36,11 +36,7 @@ alias r="ranger"
 alias s="startx"
 
 alias ls="ls --color"
-# who can remember this command !?
-alias chterm="sudo update-alternatives --config x-terminal-emulator"
-
-# starwars in ascii
-alias starwars="telnet towel.blinkenlights.nl"
+alias la="ls -A"
 
 # Custom cd
 c() {
@@ -49,7 +45,12 @@ c() {
 }
 alias cd="c"
 
-alias la="ls -A"
+# who can remember this command !?
+alias chterm="sudo update-alternatives --config x-terminal-emulator"
+
+# starwars in ascii
+alias starwars="telnet towel.blinkenlights.nl"
+
 
 
 ###############################################################
@@ -77,5 +78,5 @@ export PATH=~/bin/xrandr:$PATH
 export PATH=~/.local/bin:$PATH
 
 # set editor
-export VISUAL=vim
+export VISUAL=nvim
 export EDITOR="$VISUAL"

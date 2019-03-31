@@ -4,8 +4,6 @@
 #
 # If it detects new mail, it uses mpv to play a
 # notification sound: notify.opus
-#
-# I have this run as a cronjob every 5 minutes.
 
 export DISPLAY=:0.0
 
@@ -25,6 +23,7 @@ do
 	if [ "$newcount" -gt "0" ]
 	then
 		notify "$account" "$newcount" & disown
+        notify-send "new mail"
 		mpv --quiet ~/.config/mutt/etc/notify.opus
 	fi
 done

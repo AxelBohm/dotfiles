@@ -79,7 +79,7 @@ fi
 ###############################################################
 
 # autosuggestions
-bindkey '^s' autosuggest-execute
+bindkey '^j' autosuggest-execute
 bindkey '^ ' autosuggest-accept
 
 # history substring search

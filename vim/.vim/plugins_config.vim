@@ -124,7 +124,7 @@ let g:sneak#label = 0
 let g:sneak#use_ic_scs = 1
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => sneak
+" => autoclose (breaks iabbrev)
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:AutoCloseExpandSpace = 0 " Make iabbrev work again
 

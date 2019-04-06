@@ -6,6 +6,7 @@ bind index \Cf noop
 
 source etc/muttcol
 source etc/aliases
+# source "gpg --decrypt --quiet ~/.config/mutt/etc/aliases.gpg |"
 set alias_file= ~/.config/mutt/etc/aliases
 
 set sleep_time = 0

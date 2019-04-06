@@ -20,6 +20,7 @@ alias pu="sudo pacman -Syu"
 
 alias e="emacs -nw"
 alias v="vim"
+alias vim="nvim"
 alias nv="nvim"
 alias vrc="vim ~/.vim/vimrc"
 alias nvrc="vim ~/.config/nvim/init.vim"

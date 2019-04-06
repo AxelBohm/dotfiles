@@ -228,6 +228,13 @@ snippet cases "cases" b
 \end{cases}
 endsnippet
 
+snippet def "definition" b
+\begin{definition}%
+	\label{def:$1}
+	$0
+\end{definition}
+endsnippet
+
 ##############
 # MATH STUFF #
 ##############
@@ -341,6 +348,12 @@ endsnippet
 snippet norms "norm squared" w
 \lVert ${1} \rVert^2${0}
 endsnippet
+
+# i keep mistyping
+snippet norsm "norm squared" w
+\lVert ${1} \rVert^2${0}
+endsnippet
+
 
 snippet lrnorm "left right norm" w
 \left\lVert ${1} \right\rVert${0}
@@ -491,5 +504,13 @@ endsnippet
 
 snippet o "omega" w
 \omega
+endsnippet
+
+snippet q "quad" w
+\quad
+endsnippet
+
+snippet p "partial" w
+\partial
 endsnippet
 

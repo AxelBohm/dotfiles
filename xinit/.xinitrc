@@ -16,13 +16,14 @@
 ########################################
 
 # compositor
-compton &
+# compton &
 
 # notifications
 dunst &
 
 # Statusbar
 . dwm-status.sh &
+# slstatus &
 
 # set background
 ~/.fehbg &

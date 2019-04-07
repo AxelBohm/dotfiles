@@ -1,13 +1,16 @@
 #!/bin/bash
 
-get_song_name()
-{
-    first_line=$(mpc | sed q)
-    first_word="${first_line:0:7}"
-    if [[ $first_word = "volume:" ]]; then
-        song=""
+music() {
+    printf "$(mpc current)"
+}
+
+email(){
+    maildirs="$HOME/.mail/*/INBOX/new/"
+    ml="$(find $maildirs -type f | wc -l)"
+    if (( ml > 0 )); then
+        printf "%b" "$ml"
     else
-        song=$first_line
+        printf "0"
     fi
 }
 
@@ -19,7 +22,6 @@ do
     date=$(date +'%a %b %d, %R')
     wifi_ssid=$(iwgetid --raw)
     memory=$(free -m | awk 'FNR==2{ printf "%.0f%\n", $3*100/$2 }')
-    get_song_name
-    xsetroot -name "$song   wifi:$wifi_ssid  bat:$batt%  mem:$memory  $temp  $date"
+    xsetroot -name "$(music)  mail:$(email)  wifi:$wifi_ssid  bat:$batt%  mem:$memory  $temp  $date"
     sleep 1;
 done;

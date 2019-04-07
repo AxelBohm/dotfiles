@@ -17,8 +17,8 @@ call plug#begin('~/.config/nvim/autoload/plug.vim')
 " colorscheme
 Plug 'morhetz/gruvbox'
 
-" " buffers in tabline
-" Plug 'ap/vim-buftabline'
+" buffers in tabline
+Plug 'ap/vim-buftabline'
 
 " linting 
 Plug 'w0rp/ale'
@@ -50,6 +50,9 @@ Plug 'tpope/vim-surround'
 " orgmode
 Plug 'jceb/vim-orgmode'
 
+" statusline
+Plug 'itchyny/lightline.vim'
+
 " hardmode
 Plug 'takac/vim-hardtime'
 
@@ -78,14 +81,37 @@ let g:UltiSnipsExpandTrigger='<c-j>'
 " autoclose
 let g:AutoCloseExpandSpace = 0 " Make iabbrev work again
 
+" when to show buftabline
+let g:buftabline_show = 1
+
 "hardtime
 let g:hardtime_default_on = 1
+
+" statusline configuration
+let g:lightline = {
+	\ 'colorscheme': 'gruvbox',
+	\ 'separator': { 'left': '▓▒░', 'right': '░▒▓' },
+	\ 'subseparator': { 'left': '░', 'right': '░' },
+    \ 'active': {
+    \ 'right': [ [ 'lineinfo' ], ['percent'] ]
+    \ },
+	\ }
+
+" " statusline background override
+" let s:palette = g:lightline#colorscheme#{g:lightline.colorscheme}#palette
+" let s:palette.normal.middle = [ [ 'NONE', 'NONE', 'NONE', 'NONE' ] ]
+" let s:palette.inactive.middle = s:palette.normal.middle
+" let s:palette.tabline.middle = s:palette.normal.middle
+" call insert(s:palette.normal.right, s:palette.normal.left[1], 0)
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => general config
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 colorscheme gruvbox
 highlight Normal ctermbg=NONE
+
+" highlight entire line of curser
+set cursorline
 
 " copy to X clipboard
 set clipboard+=unnamedplus
@@ -122,10 +148,20 @@ nnoremap <leader>w :w!<cr>
 command! W w !sudo tee % > /dev/null
  
 " move between windows
-nnoremap <C-j> <C-W>j
-nnoremap <C-k> <C-W>k
-nnoremap <C-h> <C-W>h
-nnoremap <C-l> <C-W>l
+nnoremap <M-j> <C-W>j
+nnoremap <M-k> <C-W>k
+nnoremap <M-h> <C-W>h
+nnoremap <M-l> <C-W>l
+
+" resize
+nnoremap <Left> :vertical resize +5<CR>
+nnoremap <Right> :vertical resize -5<CR>
+nnoremap <Up> :resize +5<CR>
+nnoremap <Down> :resize -5<CR>
+
+" switch buffer
+nnoremap <C-N> :bnext<CR>
+nnoremap <C-P> :bprev<CR>
 
 " activate spell checking
 nnoremap <leader>ss :set spell!<cr>

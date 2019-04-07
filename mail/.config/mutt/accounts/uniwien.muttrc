@@ -20,7 +20,7 @@ bind index,pager gg noop
 bind index,pager g noop
 bind index gg first-entry
 unmailboxes *
-mailboxes =uniwien =------------------- "=INBOX.Archive.2016" "=INBOX.Trash" "=INBOX.Deleted Messages" "=INBOX.Templates" "=INBOX.Sent Messages" "=INBOX" "=INBOX.Archive.2018" "=INBOX.Sent" "=INBOX.Drafts" "=INBOX.Junk" "=INBOX.Archive"
+mailboxes =uniwien =------------------- "=INBOX.Trash" "=INBOX.Templates" "=INBOX.Sent Messages" "=INBOX" "=INBOX.Archive.2018" "=INBOX.Sent" "=INBOX.Drafts" "=INBOX.Junk" "=INBOX.Archive"
 macro index,pager gi "<change-folder>=INBOX<enter>" "Go to inbox."
 macro index,pager gs "<change-folder>=INBOX.Sent Messages<enter>" "Go to sent."
 macro index,pager gd "<change-folder>=INBOX.Drafts<enter>" "Go to drafts."

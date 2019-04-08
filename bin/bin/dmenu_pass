@@ -1,6 +1,19 @@
-#!/bin/sh
-# dmenu_pass: the simplest dmenu pass script on the market
+#!/bin/bash
 
-password=$(find ~/.password-store/ -type f -name '*.gpg' |
+p_flag='false'
+u_flag=''
+
+while getopts 'pu' flag; do
+    case "${flag}" in
+        p) info='password' ;;
+        u) info='username' ;;
+    esac
+done
+
+password=$(find ~/.password-store/ -name '*.gpg' |
     cut -d'/' -f5- | sed 's/.\{4\}$//' | dmenu -i -p "Pass:")
-[ -n "$password" ] && pass show -c "$password"
+
+case $info in 
+    (password) [ -n "$password" ] && pass show -c "$password" ;;
+    (username) [ -n "$password" ] && pass show "$password" | grep username: | awk '{print $2}' | xclip -selection c;;
+esac

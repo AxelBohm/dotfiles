@@ -4,9 +4,9 @@ let mapleader = ' '
 let maplocalleader = ' '
 
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""
 " => load plugins
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""
 if empty(glob('~/.local/share/nvim/site/autoload/plug.vim'))
     silent !curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs
         \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
@@ -53,16 +53,13 @@ Plug 'jceb/vim-orgmode'
 " statusline
 Plug 'itchyny/lightline.vim'
 
-" hardmode
-Plug 'takac/vim-hardtime'
-
 " Initialize plugin system
 call plug#end()
 
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"""""""""""""""""""""""""""""""""""""""""""""""""""
 " => plugin config
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " ale
 nmap <silent> <leader>a :ALEToggle<cr>
@@ -104,9 +101,9 @@ let g:lightline = {
 " let s:palette.tabline.middle = s:palette.normal.middle
 " call insert(s:palette.normal.right, s:palette.normal.left[1], 0)
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"""""""""""""""""""""""""""""""""""""""""""""""""
 " => general config
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"""""""""""""""""""""""""""""""""""""""""""""""""
 colorscheme gruvbox
 highlight Normal ctermbg=NONE
 
@@ -173,9 +170,16 @@ highlight StatusLine ctermbg=0 cterm=NONE
 au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" persistent undo
+try
+    set undodir=~/.vim/temp_dirs/undodir
+    set undofile
+catch
+endtry
+
+"""""""""""""""""""""""""""""""""
 " => filetype config
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"""""""""""""""""""""""""""""""""
 
 " LaTex
 autocmd FileType tex setlocal shiftwidth=2 tabstop=2

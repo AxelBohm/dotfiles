@@ -38,12 +38,13 @@ bind index G last-entry
 bind index gg first-entry
 bind pager j next-line
 bind pager k previous-line
-bind pager gg top
+bind pager gg top # doesn't work for some reason
 bind pager G bottom
-bind index \Cd half-down
-bind index \Cu half-up
+bind index,pager \Cd half-down
+bind index,pager \Cu half-up
+
 bind index,pager R group-reply
-macro index,pager \Cu |urlview\n
+# macro index,pager \Cu |urlview\n
 
 # View attachments properly.
 bind attach <return> view-mailcap

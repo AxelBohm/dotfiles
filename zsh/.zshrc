@@ -35,6 +35,9 @@ setopt INC_APPEND_HISTORY
 # bindkey -M menuselect 'l' vi-forward-char
 # bindkey -M menuselect 'j' vi-down-line-or-history
 
+# leave insert mode without esc
+# bindkey -M viins 'jk' vi-cmd-mode
+
 ###############################################################
 # => fancy
 ###############################################################
@@ -60,6 +63,11 @@ zstyle ':completion:*:default' list-colors "${(@s.:.)LS_COLORS}"
 
 # complete also incorrect stuff
 zstyle ':completion:*' completer _complete _correct _approximate
+
+# edit command line in $EDITOR
+autoload -U edit-command-line
+zle -N edit-command-line
+bindkey 'jk' edit-command-line
 
 ###############################################################
 # => exports

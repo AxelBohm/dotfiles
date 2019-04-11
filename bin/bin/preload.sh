@@ -18,6 +18,8 @@ setxkbmap -option ctrl:ralt_rctrl
 mpd
 
 # wifi
+sudo dhcpcd wlp2s0
 
 # dropbox
 ~/.dropbox-dist/dropboxd
+./decrypt-dropbox.sh

@@ -67,13 +67,15 @@ let g:ale_lint_on_enter = 0
 
 " vimtex
 let g:vimtex_view_method = 'zathura'
-
+"
 " YCM
 let g:ycm_autoclose_preview_window_after_completion = 1
 
 " ultisnips
 let g:UltiSnipsSnippetDirectories=[$HOME.'/.vim/UltiSnips']
 let g:UltiSnipsExpandTrigger='<c-j>'
+
+map <leader>n :UltiSnipsEdit<CR> " fast snippet configuring
 
 " autoclose
 let g:AutoCloseExpandSpace = 0 " Make iabbrev work again
@@ -139,7 +141,8 @@ set tabstop=4
 inoremap jk <esc>
 
 " Fast saving
-nnoremap <leader>w :w!<cr>
+nnoremap <leader>w :w<cr>
+nnoremap <leader>x :x<cr>
 
  " :W sudo saves the file 
 command! W w !sudo tee % > /dev/null
@@ -176,6 +179,9 @@ try
     set undofile
 catch
 endtry
+
+set spellfile=~/.vim/spell/en.utf-8.add
+
 
 """""""""""""""""""""""""""""""""
 " => filetype config

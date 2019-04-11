@@ -6,12 +6,8 @@ music() {
 
 email(){
     maildirs="$HOME/.mail/*/INBOX/new/"
-    ml="$(find $maildirs -type f | wc -l)"
-    if (( ml > 0 )); then
-        printf "%b" "$ml"
-    else
-        printf "0"
-    fi
+    mail="$(find $maildirs -type f | wc -l)"
+    printf "$mail"
 }
 
 while true;

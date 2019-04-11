@@ -370,6 +370,10 @@ snippet lem "lemma" w
 \end{lemma}
 endsnippet
 
+snippet Lemma "Lemma ref" w
+Lemma~\ref{lem:${1}}
+endsnippet
+
 snippet rem "remark" w
 \begin{remark}
 	${0}
@@ -389,11 +393,19 @@ snippet thm "theorem" w
 \end{theorem}
 endsnippet
 
+snippet Theorem "Theorem ref" w
+Theorem~\ref{thm:${1}}
+endsnippet
+
 snippet cor "corollary" w
 \begin{corollary}%
 	\label{cor:${1}}
 	${0}
 \end{corollary}
+endsnippet
+
+snippet Corollary "Corollary ref" w
+Corollary~\ref{cor:${1}}
 endsnippet
 
 snippet algo "algorithm" w
@@ -403,6 +415,10 @@ snippet algo "algorithm" w
 \end{algo}
 endsnippet
 
+snippet Algorithm "Algorithm ref" w
+Algorithm~\ref{alg:${1}}
+endsnippet
+
 snippet prob "problem" w
 \begin{problem}%
 	\label{prob:${1}}
@@ -410,11 +426,19 @@ snippet prob "problem" w
 \end{problem}
 endsnippet
 
+snippet Problem "Problem ref" w
+Problem~\ref{prob:${1}}
+endsnippet
+
 snippet prop "proposition" w
 \begin{proposition}%
 	\label{prop:${1}}
 	${0}
 \end{proposition}
+endsnippet
+
+snippet Proposition "Proposition ref" w
+Proposition~\ref{prop:${1}}
 endsnippet
 
 snippet ref "ref" w
@@ -453,6 +477,9 @@ snippet sq "sqrt" w
 \sqrt{${1}}${0}
 endsnippet
 
+snippet seq "sequence" w
+{(${1}_{k})}_{k\in\N}${0}
+endsnippet
 
 #################
 # GREEK LETTERS #

@@ -17,7 +17,7 @@ email(){
 wifi(){
     ssid="$(iw dev | grep ssid | awk '{print $2}')"
     # ssid="$(iwgetid --raw)"
-    printf "$(ssid)"
+    printf "$ssid"
 }
 
 while true;

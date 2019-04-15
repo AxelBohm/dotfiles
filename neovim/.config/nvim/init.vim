@@ -201,3 +201,7 @@ autocmd FileType tex inoremap ;i ^{k}
 autocmd FileType tex inoremap ;u ^{k+1}
 autocmd FileType tex inoremap ;s ^*
 autocmd FileType tex inoremap ;t ^2
+
+" mail
+autocmd FileType mail setlocal spell
+autocmd FileType mail setlocal spelllang=en,de

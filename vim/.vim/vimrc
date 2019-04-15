@@ -293,14 +293,6 @@ iab lsc lower semicontinuous
 
 iab oe; ö
 inoremap s; ß
-iab lg; Liebe Grüße<cr>Axel
-iab bg; Beste Grüße<cr>Axel Böhm
-iab ba; Best,<cr>Axel
-iab br; Best regards<cr>Axel Böhm
-iab sgh; Sehr geehrter Herr 
-iab sgf; Sehr geehrte Frau
-iab sghp; Sehr geehrter Herr Professor
-iab dp; Dear Professor
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""

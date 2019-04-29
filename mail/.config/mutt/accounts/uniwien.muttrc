@@ -20,12 +20,12 @@ bind index,pager gg noop
 bind index,pager g noop
 bind index gg first-entry
 unmailboxes *
-mailboxes =uniwien =------------------- "=INBOX.Trash" "=INBOX.Templates" "=INBOX.Sent Messages" "=INBOX" "=INBOX.Archive.2018" "=INBOX.Sent" "=INBOX.Drafts" "=INBOX.Junk" "=INBOX.Archive"
+mailboxes =uniwien =------------------- "=INBOX.Trash" "=INBOX.Templates" "=INBOX" "=INBOX.Archive.2018" "=INBOX.Sent" "=INBOX.Drafts" "=INBOX.Junk" "=INBOX.Archive"
 macro index,pager gi "<change-folder>=INBOX<enter>" "Go to inbox."
-macro index,pager gs "<change-folder>=INBOX.Sent Messages<enter>" "Go to sent."
+macro index,pager gs "<change-folder>=INBOX.Sent<enter>" "Go to sent."
 macro index,pager gd "<change-folder>=INBOX.Drafts<enter>" "Go to drafts."
 macro index,pager gt "<change-folder>=INBOX.Trash<enter>" "Go to trash."
 macro index,pager ga "<change-folder>=INBOX.Archive<enter>" "Go to archive."
-set record = "+INBOX.Sent Messages"
+set record = "+INBOX.Sent"
 set postponed = "+INBOX.Drafts"
 set trash = "+INBOX.Trash"

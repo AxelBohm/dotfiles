@@ -18,6 +18,7 @@ wifi(){
 
 while true;
 do
+    vol=$(amixer get Master | awk -F'[][]' 'END{ print $4":"$2 }')
     f=$(cat /sys/class/thermal/thermal_zone0/temp)
     temp=$(echo $f | cut -b -2)°C
     batt=$(acpi -b | sed 's/.*[Full|charging|unknown], \([0-9]*\)%.*/\1/gi')

@@ -1,5 +1,5 @@
 # vim: filetype=neomuttrc
-# This is the general mutt config which has the settings that all accounts use.
+
 bind index,pager i noop
 bind index,pager g noop
 bind index \Cf noop
@@ -9,6 +9,7 @@ source etc/aliases
 # source "gpg --decrypt --quiet ~/.config/mutt/etc/aliases.gpg |"
 set alias_file= ~/.config/mutt/etc/aliases
 
+## general settings
 set sleep_time = 0
 set sort=reverse-threads
 set sort_aux='last-date-received'
@@ -17,8 +18,6 @@ set timeout = "5"
 set mail_check = "10"
 set mailcap_path = ~/.config/mutt/etc/mailcap
 set status_format='———%r———%f———%>———'
-set date_format="%d/%m %I:%M"
-# set index_format="%Z %?X?A& ? %D %-15.15F %s"
 set index_format = "%2C %Z %[%b %d %R] %-15.15L %s (%?l?%4l&%4c?)"
 set markers = no
 set mark_old = no
@@ -28,45 +27,54 @@ auto_view text/html
 auto_view application/pdf
 alternative_order text/plain text/enriched text/html
 set rfc2047_parameters = yes
-# flow more??
-set text_flowed = yes
-# show pager even if email is opened
-set pager_index_lines = 6
+set text_flowed = yes               # flow more??
+set pager_index_lines = 8           # show pager even if email is opened
+set pager_stop                      # don't go to next message automatically
+set recall=no                       # Don't ask to recall postponed message when Composing
 
-# General remappings
+## General remappings
 bind editor <space> noop
 bind index G last-entry
 bind index gg first-entry
 bind pager j next-line
 bind pager k previous-line
-bind pager gg top # doesn't work for some reason
+bind pager,browser gg top-page
 bind pager G bottom
 bind index,pager \Cd half-down
 bind index,pager \Cu half-up
-
+bind browser l select-entry
+bind index l display-message
+bind pager l view-attachments
+bind pager,attach h exit
+bind index h noop
+bind browser h goto-parent
+bind index,pager S sync-mailbox
 bind index,pager R group-reply
 # macro index,pager \Cu |urlview\n
 
-# View attachments properly.
+## View attachments properly.
 bind attach <return> view-mailcap
-set fast_reply           # skip to compose when replying
-set forward_format = "Fwd: %s"       # format of subject when forwarding
-set forward_quote                    # include message in forwards
-set reverse_name                     # reply as whomever it was to
-set include                          # include message in replies
+set fast_reply                      # skip to compose when replying
+set forward_format = "Fwd: %s"      # format of subject when forwarding
+set forward_quote                   # include message in forwards
+set reverse_name                    # reply as whomever it was to
+set include                         # include message in replies
 
-#Ctrl-R to mark all as read
+## Ctrl-R to mark all as read
 macro index \Cr "T~U<enter><tag-prefix><clear-flag>N<untag-pattern>.<enter>" "mark all messages as read"
 
-#sync email
+## notmuch
+macro index \Cf "<enter-command>unset wait_key<enter><shell-escape>read -p 'notmuch query: ' x; echo \$x >~/.cache/mutt_terms<enter><limit>~i \"\`notmuch search --output=messages \$(cat ~/.cache/mutt_terms) | head -n 600 | perl -le '@a=<>;chomp@a;s/\^id:// for@a;$,=\"|\";print@a'\`\"<enter>" "show only messages matching a notmuch pattern"
+
+## sync email
 macro index O "<shell-escape>$HOME/.config/mutt/etc/mailsync.sh<enter>" "run offlineimap to sync all mail"
 macro index o "<shell-escape>$HOME/.config/mutt/etc/mailsync.sh -qf INBOX<enter>" "run offlineimap to sync inbox"
 
-#copy/move dialogs
+## copy/move dialogs
 macro index C "<copy-message>?<toggle-mailboxes>" "copy a message to a mailbox"
 macro index M "<save-message>?<toggle-mailboxes>" "move a message to a mailbox"
 
-# Sidebar mappings
+## Sidebar mappings
 # set sidebar_visible = yes
 set sidebar_width = 20
 set sidebar_short_path = yes
@@ -79,4 +87,7 @@ bind index,pager \Cp sidebar-prev-new
 bind index,pager \Cn sidebar-next-new
 bind index,pager B sidebar-toggle-visible
 
-source personal.muttrc
+## switch mailboxes
+macro index,pager i1 '<sync-mailbox><enter-command>source /home/xel/.config/mutt/accounts/uniwien.muttrc<enter><change-folder>!<enter>'
+source /home/xel/.config/mutt/accounts/uniwien.muttrc
+macro index,pager i2 '<sync-mailbox><enter-command>source /home/xel/.config/mutt/accounts/ymail.muttrc<enter><change-folder>!<enter>'

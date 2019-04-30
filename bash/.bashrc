@@ -44,6 +44,9 @@ if [ -f ~/.aliases ]; then
     . ~/.aliases
 fi
 
+bind '"\e[A": history-search-backward'            # arrow up
+bind '"\e[B": history-search-forward'             # arrow 
+
 # enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
 # sources /etc/bash.bashrc).

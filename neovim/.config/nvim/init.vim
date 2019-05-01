@@ -74,6 +74,7 @@ let g:ycm_autoclose_preview_window_after_completion = 1
 " ultisnips
 let g:UltiSnipsSnippetDirectories=[$HOME.'/.vim/UltiSnips']
 let g:UltiSnipsExpandTrigger='<c-j>'
+let g:UltiSnipsJumpForwardTrigger='<c-f>'
 
 map <leader>n :UltiSnipsEdit<CR> " fast snippet configuring
 
@@ -83,18 +84,15 @@ let g:AutoCloseExpandSpace = 0 " Make iabbrev work again
 " when to show buftabline
 let g:buftabline_show = 1
 
-"hardtime
-let g:hardtime_default_on = 1
-
 " statusline configuration
 let g:lightline = {
-	\ 'colorscheme': 'gruvbox',
-	\ 'separator': { 'left': '▓▒░', 'right': '░▒▓' },
-	\ 'subseparator': { 'left': '░', 'right': '░' },
+    \ 'colorscheme': 'gruvbox',
+    \ 'separator': { 'left': '▓▒░', 'right': '░▒▓' },
+    \ 'subseparator': { 'left': '░', 'right': '░' },
     \ 'active': {
     \ 'right': [ [ 'lineinfo' ], ['percent'] ]
     \ },
-	\ }
+    \ }
 
 " " statusline background override
 " let s:palette = g:lightline#colorscheme#{g:lightline.colorscheme}#palette
@@ -165,6 +163,9 @@ nnoremap <C-P> :bprev<CR>
 
 " activate spell checking
 nnoremap <leader>ss :set spell!<cr>
+set spellfile=~/.vim/spell/en.utf-8.add
+" accept first correction suggestion
+nnoremap <leader>sc 1z=
 
 " configure statusline
 highlight StatusLine ctermbg=0 cterm=NONE
@@ -180,28 +181,43 @@ try
 catch
 endtry
 
-set spellfile=~/.vim/spell/en.utf-8.add
+" folding
+set foldmethod=syntax
 
+" " show whitespace
+" set list
+
+" don't immediately complete first suggestion
+set wildmode=longest:full,full
+
+" set working dir to dir of file
+set autochdir
 
 """""""""""""""""""""""""""""""""
 " => filetype config
 """""""""""""""""""""""""""""""""
 
 " LaTex
-autocmd FileType tex setlocal shiftwidth=2 tabstop=2
+augroup latex
+    autocmd!
+    autocmd FileType tex setlocal shiftwidth=2 tabstop=2
 
-autocmd FileType tex inoremap ;n ^{}<left>
-autocmd FileType tex inoremap ;m _{}<left>
-autocmd FileType tex inoremap ;r \R
-autocmd FileType tex inoremap ;k _{k}
-autocmd FileType tex inoremap ;j _{k+1}
-autocmd FileType tex inoremap ;h _{k+2}
-autocmd FileType tex inoremap ;l _{k-1}
-autocmd FileType tex inoremap ;i ^{k}
-autocmd FileType tex inoremap ;u ^{k+1}
-autocmd FileType tex inoremap ;s ^*
-autocmd FileType tex inoremap ;t ^2
+    autocmd FileType tex inoremap ;n ^{}<left>
+    autocmd FileType tex inoremap ;m _{}<left>
+    autocmd FileType tex inoremap ;r \R
+    autocmd FileType tex inoremap ;k _{k}
+    autocmd FileType tex inoremap ;j _{k+1}
+    autocmd FileType tex inoremap ;h _{k+2}
+    autocmd FileType tex inoremap ;l _{k-1}
+    autocmd FileType tex inoremap ;i ^{k}
+    autocmd FileType tex inoremap ;u ^{k+1}
+    autocmd FileType tex inoremap ;s ^*
+    autocmd FileType tex inoremap ;t ^2
+augroup END
 
 " mail
-autocmd FileType mail setlocal spell
-autocmd FileType mail setlocal spelllang=en,de
+augroup mail
+    autocmd FileType mail setlocal spell
+    autocmd FileType mail setlocal spelllang=en,de
+augroup END
+

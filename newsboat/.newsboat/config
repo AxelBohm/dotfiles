@@ -44,13 +44,12 @@ macro y set browser "youtube-viewer %u > /dev/null &"; open-in-browser : set bro
 # colors
 ########################
 
-color listnormal            color244    default
-color listfocus             color244    color237
-color listnormal_unread     color253    default
-color listfocus_unread      color3      color237
-#color info                 color117    color239    bold
-color info                  color4    color0
-#color article              color247    default
+color listnormal            color8     default
+color listfocus             color8     color237
+color listnormal_unread     color5     default
+color listfocus_unread      color13    color237
+color info                  color4     color0
+#color article              color15    default
 
 ########################
 # highlights

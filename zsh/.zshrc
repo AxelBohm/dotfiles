@@ -78,24 +78,32 @@ if [ -f ~/.aliases ]; then
     . ~/.aliases
 fi
 
-###############################################################
-# => plugin config
-###############################################################
+################################################################
+## => plugin config
+################################################################
 
-# autosuggestions
+## autosuggestions
 bindkey '^j' autosuggest-execute
 bindkey '^ ' autosuggest-accept
 
-# history substring search
-# bindkey "^[[A" history-substring-search-up
-# bindkey "^[[B" history-substring-search-down
-# bindkey "^P" history-substring-search-up
-# bindkey "^N" history-substring-search-down
+## history substring search
+## bindkey "^[[A" history-substring-search-up
+## bindkey "^[[B" history-substring-search-down
+## bindkey "^P" history-substring-search-up
+## bindkey "^N" history-substring-search-down
 
 
-###############################################################
-# => void only
-###############################################################
+################################################################
+## => functions
+################################################################
+function mdl {
+    youtube-dl --extract-audio --audio-format mp3 "$1"
+}
+
+
+################################################################
+## => void only
+################################################################
 if [[ `uname -n` = "void" ]]; then
     alias vim=vim-huge-python3
     source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
@@ -105,9 +113,9 @@ else
     source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.plugin.zsh
 fi
 
-###############################################################
-# => uni wien only
-###############################################################
+################################################################
+## => uni wien only
+################################################################
 if [[ `whoami` = "boehm" ]]; then
     export PATH=~/miniconda3/bin:$PATH
 fi

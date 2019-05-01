@@ -1,7 +1,18 @@
 #!/bin/bash
 
 music() {
-    printf "$(mpc current)"
+     cur="$(mpc current)"
+     if [[ $cur ]]; then
+         playing="$(mpc | grep playing)"
+         if [[ $playing  ]]; then
+             icon=" "
+         else
+             icon=" "
+         fi
+     else
+         icon=""
+     fi
+     printf "$icon$cur"
 }
 
 email(){

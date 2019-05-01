@@ -50,13 +50,15 @@ zstyle ':completion:*' matcher-list 'm:{[:lower:]}={[:upper:]}'
 # prompt
 autoload -U colors && colors
 
-# PROMPT="%{$fg_bold[green]%}%n@%m %{$fg[blue]%}%~
-# %{$reset_color%}\$  "
+PROMPT="%{$fg_bold[green]%}%n@%m %{$fg[blue]%}%~
+%{$reset_color%}\$  "
 
-PROMPT="%F{237}%K{239}█▓░%{$fg_bold[green]%}%K{239}%n@%m%F{237}%K{239}░▓█%{$reset_color%} %F{237}%K{239}█▓░%{$fg_bold[blue]%}%K{239}%~%F{237}%K{239}░▓█%{$reset_color%}
-%{$reset_color%} "
-RPROMPT="%F{237}%K{239}█▓░%F{248}%K{239}%T%F{237}%K{239}░▓█
-"
+# left prompt
+# PROMPT="%F{237}%K{239}█▓░%{$fg_bold[green]%}%K{239}%n@%m%F{237}%K{239}░▓█%{$reset_color%} %F{237}%K{239}█▓░%{$fg_bold[blue]%}%K{239}%~%F{237}%K{239}░▓█%{$reset_color%}
+# \$ "
+
+## right prompt
+## RPROMPT="%F{237}%K{239}█▓░%F{248}%K{239}%T%F{237}%K{239}░▓█%{$reset_color%}"
 
 # colored completion suggestions
 zstyle ':completion:*:default' list-colors "${(@s.:.)LS_COLORS}"

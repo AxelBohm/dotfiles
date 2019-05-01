@@ -63,23 +63,17 @@ PROMPT="%{$fg_bold[green]%}%n@%m %{$fg[blue]%}%~
 # colored completion suggestions
 zstyle ':completion:*:default' list-colors "${(@s.:.)LS_COLORS}"
 
-# complete also incorrect stuff
+## complete also incorrect stuff
 zstyle ':completion:*' completer _complete _correct _approximate
 
-# edit command line in $EDITOR
+## edit command line in $EDITOR
 autoload -U edit-command-line
 zle -N edit-command-line
 bindkey 'jk' edit-command-line
 
-###############################################################
-# => exports
-###############################################################
-
-# source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
-
-###############################################################
-# => Aliases
-###############################################################
+################################################################
+## => Aliases
+################################################################
 if [ -f ~/.aliases ]; then
     . ~/.aliases
 fi

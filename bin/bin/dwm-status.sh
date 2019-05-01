@@ -47,7 +47,7 @@ battery(){
 
 memory(){
     memory=$(free -m | awk 'FNR==2{ printf "%.0f%\n", $3*100/$2 }')
-    icon=
+    icon=" "
     echo "$icon$memory"
 }
 

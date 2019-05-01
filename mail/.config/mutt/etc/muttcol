@@ -1,10 +1,10 @@
 # vim: filetype=neomuttrc
 
 # Default index colors:
-color index color238 default '.*'
-color index_author color240 default '.*'
-color index_number color244 default
-color index_subject color247 default '.*'
+color index color8 default '.*'
+color index_author color15 default '.*'
+color index_number color7 default
+color index_subject color7 default '.*'
 
 ## For new mail:
 color index magenta default "~N"
@@ -46,8 +46,6 @@ color attachment white default
 color search brightmagenta default
 
 ## statusline
-# color status color166 default
-color status color3 color0
 color status color4 color0
 
 color hdrdefault brightgreen default

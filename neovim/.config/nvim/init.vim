@@ -14,8 +14,18 @@ if empty(glob('~/.local/share/nvim/site/autoload/plug.vim'))
 endif
 
 call plug#begin('~/.config/nvim/autoload/plug.vim')
+
 " colorscheme
 Plug 'morhetz/gruvbox'
+Plug 'chriskempson/base16-vim'
+
+if has('nvim')
+  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+else
+  Plug 'Shougo/deoplete.nvim'
+  Plug 'roxma/nvim-yarp'
+  Plug 'roxma/vim-hug-neovim-rpc'
+endif
 
 " buffers in tabline
 Plug 'ap/vim-buftabline'
@@ -24,7 +34,7 @@ Plug 'ap/vim-buftabline'
 Plug 'w0rp/ale'
 
 " You Complete Me
-Plug 'Valloric/YouCompleteMe'
+" Plug 'Valloric/YouCompleteMe'
 
 " snippets
 Plug 'SirVer/ultisnips'
@@ -53,6 +63,8 @@ Plug 'jceb/vim-orgmode'
 " statusline
 Plug 'itchyny/lightline.vim'
 
+Plug 'ctrlpvim/ctrlp.vim'
+
 " Initialize plugin system
 call plug#end()
 
@@ -60,6 +72,11 @@ call plug#end()
 """""""""""""""""""""""""""""""""""""""""""""""""""
 " => plugin config
 """""""""""""""""""""""""""""""""""""""""""""""""""
+
+" deoplete autocomplete
+let g:deoplete#enable_at_startup = 1
+" use tab to forward cycle
+inoremap <silent><expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
 
 " ale
 nmap <silent> <leader>a :ALEToggle<cr>
@@ -86,9 +103,9 @@ let g:buftabline_show = 1
 
 " statusline configuration
 let g:lightline = {
-    \ 'colorscheme': 'gruvbox',
+    \ 'colorscheme': 'wombat',
     \ 'separator': { 'left': '▓▒░', 'right': '░▒▓' },
-    \ 'subseparator': { 'left': '░', 'right': '░' },
+    \ 'subseparator': { 'left': '', 'right': '░' },
     \ 'active': {
     \ 'right': [ [ 'lineinfo' ], ['percent'] ]
     \ },
@@ -101,10 +118,13 @@ let g:lightline = {
 " let s:palette.tabline.middle = s:palette.normal.middle
 " call insert(s:palette.normal.right, s:palette.normal.left[1], 0)
 
+let g:ctrlp_cmd = 'CtrlPMixed'
+" let g:ctrlp_max_files=0
+
 """""""""""""""""""""""""""""""""""""""""""""""""
 " => general config
 """""""""""""""""""""""""""""""""""""""""""""""""
-colorscheme gruvbox
+colorscheme base16-oceanicnext
 highlight Normal ctermbg=NONE
 
 " highlight entire line of curser
@@ -141,6 +161,7 @@ inoremap jk <esc>
 " Fast saving
 nnoremap <leader>w :w<cr>
 nnoremap <leader>x :x<cr>
+nnoremap <leader>q :q!<cr>
 
  " :W sudo saves the file 
 command! W w !sudo tee % > /dev/null
@@ -158,8 +179,8 @@ nnoremap <Up> :resize +5<CR>
 nnoremap <Down> :resize -5<CR>
 
 " switch buffer
-nnoremap <C-N> :bnext<CR>
-nnoremap <C-P> :bprev<CR>
+" nnoremap <C-N> :bnext<CR>
+" nnoremap <C-P> :bprev<CR>
 
 " activate spell checking
 nnoremap <leader>ss :set spell!<cr>
@@ -192,6 +213,14 @@ set wildmode=longest:full,full
 
 " set working dir to dir of file
 set autochdir
+
+" abbreviaions
+iabbrev taht that
+iabbrev lsc lower semicontinuous
+iabbrev wrt with respect to
+
+" open last buffer
+nnoremap <leader><leader> <C-^>
 
 """""""""""""""""""""""""""""""""
 " => filetype config

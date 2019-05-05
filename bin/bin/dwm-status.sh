@@ -62,9 +62,30 @@ memory(){
     echo "$icon$memory"
 }
 
+get_weather(){
+    wttr=$(curl wttr.in?format='%t+%p')
+    temp=$(echo $wttr | awk '{print $1;}')
+    rain=$(echo $wttr | awk '{print $2;}')
+
+    rain_icon=" "
+    temp_icon=" "
+    printf "$rain_icon$rain, $temp_icon$temp"
+}
+
 while true;
 do
+    if [[ $weather ]]; then
+        minute="$(date +'%M')"
+        if [[ $minute == "00" ]]; then
+            weather=$(get_weather)
+        fi
+    else
+        weather=$(get_weather)
+    fi
+
     date=$(date +'%a %b %d, %R')
-    xsetroot -name "$(music)  $(volume)  $(email)  $(wifi)  $(battery)  $(memory)  $(temp)  $date"
+
+    xsetroot -name "$(music)  $weather  $(volume)  $(email)  $(wifi)  $(battery)  $(memory)  $(temp)  $date"
+
     sleep 1;
 done;

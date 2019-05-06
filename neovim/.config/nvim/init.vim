@@ -19,6 +19,7 @@ call plug#begin('~/.config/nvim/autoload/plug.vim')
 Plug 'morhetz/gruvbox'
 Plug 'chriskempson/base16-vim'
 
+" auto completion
 if has('nvim')
   Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 else
@@ -32,9 +33,6 @@ Plug 'ap/vim-buftabline'
 
 " linting 
 Plug 'w0rp/ale'
-
-" You Complete Me
-" Plug 'Valloric/YouCompleteMe'
 
 " snippets
 Plug 'SirVer/ultisnips'
@@ -84,9 +82,6 @@ let g:ale_lint_on_enter = 0
 
 " vimtex
 let g:vimtex_view_method = 'zathura'
-"
-" YCM
-let g:ycm_autoclose_preview_window_after_completion = 1
 
 " ultisnips
 let g:UltiSnipsSnippetDirectories=[$HOME.'/.vim/UltiSnips']
@@ -119,7 +114,6 @@ let g:lightline = {
 " call insert(s:palette.normal.right, s:palette.normal.left[1], 0)
 
 let g:ctrlp_cmd = 'CtrlPMixed'
-" let g:ctrlp_max_files=0
 
 """""""""""""""""""""""""""""""""""""""""""""""""
 " => general config
@@ -216,6 +210,7 @@ set autochdir
 
 " abbreviaions
 iabbrev taht that
+iabbrev teh the
 iabbrev lsc lower semicontinuous
 iabbrev wrt with respect to
 

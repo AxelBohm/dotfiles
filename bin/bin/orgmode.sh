@@ -1,3 +1,3 @@
 #!/bin/sh
 
-vim ~/org/life.org
+nvim ~/org/life.org

@@ -31,6 +31,7 @@ set text_flowed = yes               # flow more??
 set pager_index_lines = 8           # show pager even if email is opened
 set pager_stop                      # don't go to next message automatically
 set recall=no                       # Don't ask to recall postponed message when Composing
+set delete=yes                      # don't ask for purge. just do
 
 ## General remappings
 bind editor <space> noop
@@ -43,7 +44,9 @@ bind pager G bottom
 bind index,pager \Cd half-down
 bind index,pager \Cu half-up
 bind browser l select-entry
-bind index l display-message
+# sync mailbox when opening so messages don't remain new for ever
+macro index l <display-message><sync-mailbox>
+macro index <space> <display-message><sync-mailbox>
 bind pager l view-attachments
 bind pager,attach h exit
 bind index h noop
@@ -89,5 +92,7 @@ bind index,pager B sidebar-toggle-visible
 
 ## switch mailboxes
 macro index,pager i1 '<sync-mailbox><enter-command>source /home/xel/.config/mutt/accounts/uniwien.muttrc<enter><change-folder>!<enter>'
-source /home/xel/.config/mutt/accounts/uniwien.muttrc
 macro index,pager i2 '<sync-mailbox><enter-command>source /home/xel/.config/mutt/accounts/ymail.muttrc<enter><change-folder>!<enter>'
+
+
+source /home/xel/.config/mutt/accounts/uniwien.muttrc

@@ -17,7 +17,7 @@ call plug#begin('~/.config/nvim/autoload/plug.vim')
 
 " colorscheme
 Plug 'morhetz/gruvbox'
-Plug 'chriskempson/base16-vim'
+Plug 'arcticicestudio/nord-vim'
 
 " auto completion
 if has('nvim')
@@ -97,8 +97,9 @@ let g:AutoCloseExpandSpace = 0 " Make iabbrev work again
 let g:buftabline_show = 1
 
 " statusline configuration
+
 let g:lightline = {
-    \ 'colorscheme': 'wombat',
+    \ 'colorscheme': 'nord',
     \ 'separator': { 'left': '▓▒░', 'right': '░▒▓' },
     \ 'subseparator': { 'left': '', 'right': '░' },
     \ 'active': {
@@ -113,12 +114,15 @@ let g:lightline = {
 " let s:palette.tabline.middle = s:palette.normal.middle
 " call insert(s:palette.normal.right, s:palette.normal.left[1], 0)
 
-let g:ctrlp_cmd = 'CtrlPMixed'
+let g:ctrlp_cmd = 'CtrlPMixed'      " what to show when pressing ^-P
+
+let g:nord_italic_comments = 1
+
 
 """""""""""""""""""""""""""""""""""""""""""""""""
 " => general config
 """""""""""""""""""""""""""""""""""""""""""""""""
-colorscheme base16-oceanicnext
+colorscheme nord
 highlight Normal ctermbg=NONE
 
 " highlight entire line of curser

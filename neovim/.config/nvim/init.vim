@@ -21,47 +21,26 @@ Plug 'arcticicestudio/nord-vim'
 
 " auto completion
 if has('nvim')
-  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+    Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 else
-  Plug 'Shougo/deoplete.nvim'
-  Plug 'roxma/nvim-yarp'
-  Plug 'roxma/vim-hug-neovim-rpc'
+    Plug 'Shougo/deoplete.nvim'
+    Plug 'roxma/nvim-yarp'
+    Plug 'roxma/vim-hug-neovim-rpc'
 endif
+Plug 'deoplete-plugins/deoplete-jedi' " python autocompletion
 
-" buffers in tabline
-Plug 'ap/vim-buftabline'
-
-" linting 
-Plug 'w0rp/ale'
-
-" snippets
+Plug 'ap/vim-buftabline'        " buffers in tabline
+Plug 'w0rp/ale'                 " linting 
 Plug 'SirVer/ultisnips'
-
-" commentary (gc(c))
-Plug 'tpope/vim-commentary'
-
-" consistent navigation between vim and tmux
+Plug 'tpope/vim-commentary'     " commentary (gc(c))
 Plug 'christoomey/vim-tmux-navigator'
-
-" LaTeX
 Plug 'lervag/vimtex'
-
-" autoclose parenthesis
-Plug 'Townk/vim-autoclose'
-
-" two char find
-Plug 'justinmk/vim-sneak'
-
-" change surrounding paranthesis/quotes
-Plug 'tpope/vim-surround'
-
-" orgmode
+Plug 'Townk/vim-autoclose'      " autoclose parenthesis
+Plug 'justinmk/vim-sneak'       " two char find
+Plug 'tpope/vim-surround'       " change surrounding parenthesis/quotes
 Plug 'jceb/vim-orgmode'
-
-" statusline
-Plug 'itchyny/lightline.vim'
-
-Plug 'ctrlpvim/ctrlp.vim'
+Plug 'itchyny/lightline.vim'    " statusline
+Plug 'ctrlpvim/ctrlp.vim'       " fuzzy find
 
 " Initialize plugin system
 call plug#end()
@@ -199,9 +178,6 @@ try
     set undofile
 catch
 endtry
-
-" folding
-set foldmethod=syntax
 
 " " show whitespace
 " set list

@@ -1,10 +1,10 @@
 # vim: filetype=neomuttrc
 
 # Default index colors:
-color index color11 default '.*'
-color index_author color8 default '.*'
-color index_number color7 default
-color index_subject color7 default '.*'
+color index color4 default '.*'
+color index_author color6 default '.*'
+color index_number color8 default
+color index_subject color4 default '.*'
 
 ## For new mail:
 color index magenta default "~N"
@@ -13,7 +13,7 @@ color index_subject magenta default "~N"
 
 ## flagged (!)
 color index green default "~F"
-color index_author green default "~F"
+color index_author brightgreen default "~F"
 color index_subject green default "~F"
 
 ## Header colors:
@@ -33,7 +33,7 @@ mono indicator reverse
 mono error bold
 
 color normal default default
-color indicator default color237
+color indicator default color0
 color sidebar_highlight blue default
 color sidebar_divider color8 black
 # color sidebar_flagged red black

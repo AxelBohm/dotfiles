@@ -90,6 +90,12 @@ bind index,pager \Cp sidebar-prev-new
 bind index,pager \Cn sidebar-next-new
 bind index,pager B sidebar-toggle-visible
 
+## encryption
+set crypt_use_gpgme=yes
+set pgp_default_key="A7E5A6BE53C0FE219E1FA3C543761D748559E30C"
+set pgp_self_encrypt = yes          # when sending encrypted mail save it encrypted (but with my key)
+
+
 ## switch mailboxes
 macro index,pager i1 '<sync-mailbox><enter-command>source /home/xel/.config/mutt/accounts/uniwien.muttrc<enter><change-folder>!<enter>'
 macro index,pager i2 '<sync-mailbox><enter-command>source /home/xel/.config/mutt/accounts/ymail.muttrc<enter><change-folder>!<enter>'

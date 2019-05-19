@@ -8,7 +8,6 @@
 export DISPLAY=:0.0
 
 echo 🔃 > ~/.config/mutt/.dl
-pkill -RTMIN+12 i3blocks
 
 # Run offlineimap. You can feed this script different settings.
 offlineimap -o "$@"
@@ -24,7 +23,6 @@ do
 	then
 		notify "$account" "$newcount" & disown
         notify-send "new mail"
-		mpv --quiet ~/.config/mutt/etc/notify.opus
 	fi
 done
 

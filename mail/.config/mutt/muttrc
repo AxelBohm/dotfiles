@@ -17,7 +17,7 @@ set editor = $EDITOR
 set timeout = "5"
 set mail_check = "10"
 set mailcap_path = ~/.config/mutt/etc/mailcap
-set status_format='———%r———%f———%>———'
+set status_format='---%r---%f---%>---'
 set index_format = "%2C %Z %[%b %d %R] %-15.15L %s (%?l?%4l&%4c?)"
 set markers = no
 set mark_old = no
@@ -30,7 +30,7 @@ set rfc2047_parameters = yes
 set text_flowed = yes               # flow more??
 set pager_index_lines = 8           # show pager even if email is opened
 set pager_stop                      # don't go to next message automatically
-set recall=no                       # Don't ask to recall postponed message when Composing
+# set recall=no                       # Don't ask to recall postponed message when Composing
 set delete=yes                      # don't ask for purge. just do
 
 ## General remappings
@@ -92,8 +92,11 @@ bind index,pager B sidebar-toggle-visible
 
 ## encryption
 set crypt_use_gpgme=yes
-set pgp_default_key="A7E5A6BE53C0FE219E1FA3C543761D748559E30C"
+set pgp_default_key="30ED64E10C65C4A3BAAC07A73A574180808F2FF7"
+set pgp_sign_as="30ED64E10C65C4A3BAAC07A73A574180808F2FF7"
 set pgp_self_encrypt = yes          # when sending encrypted mail save it encrypted (but with my key)
+# set crypt_opportunistic_encrypt
+# set crypt_autosign
 
 
 ## switch mailboxes

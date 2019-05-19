@@ -20,7 +20,7 @@ bind index,pager gg noop
 bind index,pager g noop
 bind index gg first-entry
 unmailboxes *
-mailboxes =ymail =------------------- "=Inbox" "=Bulk Mail" "=Drafts" "=Trash" "=Sent" "=Archive" "=Gesendet" "=Draft"
+mailboxes =ymail =------------------- "=Inbox" "=Bulk Mail" "=Drafts" "=Trash" "=Sent" "=Archive" "=Gesendet"
 macro index,pager gi "<change-folder>=Inbox<enter>" "Go to inbox."
 macro index,pager gs "<change-folder>=Sent<enter>" "Go to sent."
 macro index,pager gd "<change-folder>=Drafts<enter>" "Go to drafts."

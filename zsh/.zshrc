@@ -12,29 +12,24 @@ setopt INC_APPEND_HISTORY
 ###############################################################
 # Show vi mode
 # bindkey -v
-
 # function zle-line-init zle-keymap-select {
 #     RPS1="%{$fg[yellow]%}${${KEYMAP/vicmd/%B Normal Mode %b}/(main|viins)/ }%{$reset_color%}"
 #     RPS2=$RPS1
 #     zle reset-prompt
 # }
-
 # zle -N zle-line-init
 # zle -N zle-keymap-select
-
 # bindkey "^R" history-incremental-search-backward
 # bindkey "^[[A" history-beginning-search-backward-end
 # bindkey "^[[B" history-beginning-search-forward-end
 # bindkey "\e." insert-last-word
 # bindkey "\eq" quote-line
 # bindkey "\ek" backward-kill-line
-
 # # use the vi navigation keys in menu completion
 # bindkey -M menuselect 'h' vi-backward-char
 # bindkey -M menuselect 'k' vi-up-line-or-history
 # bindkey -M menuselect 'l' vi-forward-char
 # bindkey -M menuselect 'j' vi-down-line-or-history
-
 # leave insert mode without esc
 # bindkey -M viins 'jk' vi-cmd-mode
 
@@ -50,7 +45,7 @@ zstyle ':completion:*' matcher-list 'm:{[:lower:]}={[:upper:]}'
 # prompt
 autoload -U colors && colors
 
-PROMPT="%{$fg_bold[green]%}%n@%m %{$fg[blue]%}%~
+PROMPT="%{$fg[green]%}%n@%m %{$fg[blue]%}%~
 %{$reset_color%}\$  "
 
 # left prompt

@@ -2,9 +2,6 @@
 
 auto-reload yes
 
-external-url-viewer "urlview"
-
-
 ########################
 # keys
 ########################
@@ -26,28 +23,17 @@ bind-key a toggle-article-read
 bind-key n next-unread
 bind-key N prev-unread
 bind-key D pb-download
-bind-key U show-urls
 bind-key x pb-delete
 
-########################
-# macros
-########################
-
-# both should do the same thing
-# watch video
-macro m set browser "mpv --ytdl --ontop --no-border --force-window --autofit=960x540 --geometry=-20-50 %u > /dev/null &"; open-in-browser ; set browser "$BROWSER %u"
-
-# youtube
-macro y set browser "youtube-viewer %u > /dev/null &"; open-in-browser : set browser "$BROWSER %u"
 
 ########################
 # colors
 ########################
 
-color listnormal            color8     default
-color listfocus             color8     color237
+color listnormal            color4     default
+color listfocus             color7     color0
 color listnormal_unread     color5     default
-color listfocus_unread      color13    color237
+color listfocus_unread      color13    color0
 color info                  color4     color0
 #color article              color15    default
 

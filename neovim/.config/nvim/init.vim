@@ -132,6 +132,9 @@ set expandtab
 set shiftwidth=4
 set tabstop=4
 
+" linenumbers
+set relativenumber
+
 " avoid escape
 inoremap jk <esc>
 
@@ -185,6 +188,8 @@ endtry
 " don't immediately complete first suggestion
 set wildmode=longest:full,full
 
+set wildignore+=*.aux,*.log,*.fls,*.fdb_latexmk,*.blg,*.synctex.gz,*.pdf
+
 " set working dir to dir of file
 set autochdir
 
@@ -193,9 +198,14 @@ iabbrev taht that
 iabbrev teh the
 iabbrev lsc lower semicontinuous
 iabbrev wrt with respect to
+iabbrev frechet Fr\'echet
 
 " open last buffer
 nnoremap <leader><leader> <C-^>
+
+" get rid of search highlights
+nnoremap <esc> :noh<CR>
+nnoremap <C-space> <Nop>
 
 """""""""""""""""""""""""""""""""
 " => filetype config

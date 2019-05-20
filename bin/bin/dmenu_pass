@@ -1,8 +1,5 @@
 #!/bin/bash
 
-p_flag='false'
-u_flag=''
-
 while getopts 'pu' flag; do
     case "${flag}" in
         p) info='password' && prompt='Pass';;

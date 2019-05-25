@@ -143,6 +143,12 @@ nnoremap <leader>w :w<cr>
 nnoremap <leader>x :x<cr>
 nnoremap <leader>q :q!<cr>
 
+" consistency
+nnoremap Y y$
+
+" format entire and go back to previous position
+nnoremap <leader>f gggqG<C-o><C-o>
+
  " :W sudo saves the file 
 command! W w !sudo tee % > /dev/null
  
@@ -161,6 +167,7 @@ nnoremap <Down> :resize -5<CR>
 " switch buffer
 " nnoremap <C-N> :bnext<CR>
 " nnoremap <C-P> :bprev<CR>
+map <leader>bd :bp\|bd #<cr>     
 
 " activate spell checking
 nnoremap <leader>ss :set spell!<cr>
@@ -188,6 +195,7 @@ endtry
 " don't immediately complete first suggestion
 set wildmode=longest:full,full
 
+" ignore files when :e or ^P
 set wildignore+=*.aux,*.log,*.fls,*.fdb_latexmk,*.blg,*.synctex.gz,*.pdf
 
 " set working dir to dir of file
@@ -235,6 +243,10 @@ augroup mail
     autocmd FileType mail setlocal spelllang=en,de
 augroup END
 
+" augroup myvimrc
+"     au!
+"     au BufWritePost init.vim so ~/config/nvim/init.vim
+" augroup END
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Helper functions

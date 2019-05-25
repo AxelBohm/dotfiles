@@ -46,9 +46,7 @@ function recursedir()
         # Check if directory is a git repository
         if [ -d "$f/.git" ]
         then
-            echo -en "\033[0;35m"
-            echo "${f}"
-            echo -en "\033[0m"
+            echo -e "\033[0;35m ${f}\033[0m"
             mod=0
             cd $f
 
@@ -56,27 +54,21 @@ function recursedir()
             if [ $(git status | grep modified -c) -ne 0 ]
             then
                 mod=1
-                echo -en "\033[0;31m"
-                echo "Modified files"
-                echo -en "\033[0m"
+                echo -e "\033[0;31m Modified files\033[0m"
             fi
 
             # Check for untracked files
             if [ $(git status | grep Untracked -c) -ne 0 ]
             then
                 mod=1
-                echo -en "\033[0;31m"
-                echo "Untracked files"
-                echo -en "\033[0m"
+                echo -e "\033[0;31m Untracked files\033[0m"
             fi
 
             # Check for commits
             if [ $(git status | grep ahead -c) -ne 0 ]
             then
                 mod=1
-                echo -en "\033[0;31m"
-                echo "Needs Push"
-                echo -en "\033[0m"
+                echo -en "\033[0;31m Needs Push\033[0m"
                 read -r -p "Do you want to push? [Y/n] " response
                 if [[ "$response" =~ ^([yY][eE][sS]|[yY])+$|^$ ]]
                 then
@@ -92,9 +84,7 @@ function recursedir()
             if [ $(git status | grep behind -c) -ne 0 ]
             then
                 mod=1
-                echo -en "\033[0;31m"
-                echo "Pull available"
-                echo -en "\033[0m"
+                echo -en "\033[0;31m Pull available\033[0m"
                 read -r -p "Do you want to pull? [Y/n] " response
                 if [[ "$response" =~ ^([yY][eE][sS]|[yY])+$|^$ ]]
                 then
@@ -103,7 +93,6 @@ function recursedir()
                     echo "ok"
                 fi
             fi
-            #fi
 
             # Check if everything is peachy keen
             if [ $mod -eq 0 ]

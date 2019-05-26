@@ -42,7 +42,7 @@ color info                  color4     color0
 ########################
 
 # title
-highlight article "^(Title):(.*)" color172 default
+highlight article "^(Title):(.*)" color2 default
 
 # links
 # highlight article "https?://[^\" ]+" red default

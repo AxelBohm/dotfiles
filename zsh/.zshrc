@@ -8,32 +8,6 @@ setopt INC_APPEND_HISTORY
 [[ -r "/usr/share/z/z.sh" ]] && source /usr/share/z/z.sh
 
 ###############################################################
-# => vi mode
-###############################################################
-# Show vi mode
-# bindkey -v
-# function zle-line-init zle-keymap-select {
-#     RPS1="%{$fg[yellow]%}${${KEYMAP/vicmd/%B Normal Mode %b}/(main|viins)/ }%{$reset_color%}"
-#     RPS2=$RPS1
-#     zle reset-prompt
-# }
-# zle -N zle-line-init
-# zle -N zle-keymap-select
-# bindkey "^R" history-incremental-search-backward
-# bindkey "^[[A" history-beginning-search-backward-end
-# bindkey "^[[B" history-beginning-search-forward-end
-# bindkey "\e." insert-last-word
-# bindkey "\eq" quote-line
-# bindkey "\ek" backward-kill-line
-# # use the vi navigation keys in menu completion
-# bindkey -M menuselect 'h' vi-backward-char
-# bindkey -M menuselect 'k' vi-up-line-or-history
-# bindkey -M menuselect 'l' vi-forward-char
-# bindkey -M menuselect 'j' vi-down-line-or-history
-# leave insert mode without esc
-# bindkey -M viins 'jk' vi-cmd-mode
-
-###############################################################
 # => fancy
 ###############################################################
 
@@ -41,19 +15,6 @@ autoload -Uz compinit
 compinit
 # case insensitive completion
 zstyle ':completion:*' matcher-list 'm:{[:lower:]}={[:upper:]}'
-
-# prompt
-autoload -U colors && colors
-
-PROMPT="%{$fg[green]%}%n@%m %{$fg[blue]%}%~
-%{$reset_color%}\$  "
-
-# left prompt
-# PROMPT="%F{237}%K{239}█▓░%{$fg_bold[green]%}%K{239}%n@%m%F{237}%K{239}░▓█%{$reset_color%} %F{237}%K{239}█▓░%{$fg_bold[blue]%}%K{239}%~%F{237}%K{239}░▓█%{$reset_color%}
-# \$ "
-
-## right prompt
-## RPROMPT="%F{237}%K{239}█▓░%F{248}%K{239}%T%F{237}%K{239}░▓█%{$reset_color%}"
 
 # colored completion suggestions
 zstyle ':completion:*:default' list-colors "${(@s.:.)LS_COLORS}"
@@ -65,6 +26,32 @@ zstyle ':completion:*' completer _complete _correct _approximate
 autoload -U edit-command-line
 zle -N edit-command-line
 bindkey 'jk' edit-command-line
+
+# search for already written text by pressing up/down
+bindkey "^[[A" history-beginning-search-backward
+bindkey "^[[B" history-beginning-search-forward
+
+###############################################################
+# => prompt
+###############################################################
+#
+autoload -U colors && colors
+
+# git prompt
+source .zsh/git.zsh
+
+# vi settings for zsh
+source .zsh/vi.zsh
+
+PROMPT='%{$fg[green]%}%n@%m %{$fg[blue]%}%~ $(git_prompt_string)
+%{$reset_color%}\$ '
+
+# left prompt
+# PROMPT="%F{237}%K{239}█▓░%{$fg_bold[green]%}%K{239}%n@%m%F{237}%K{239}░▓█%{$reset_color%} %F{237}%K{239}█▓░%{$fg_bold[blue]%}%K{239}%~%F{237}%K{239}░▓█%{$reset_color%}
+# \$ "
+
+## right prompt
+## RPROMPT="%F{237}%K{239}█▓░%F{248}%K{239}%T%F{237}%K{239}░▓█%{$reset_color%}"
 
 ################################################################
 ## => Aliases
@@ -87,14 +74,12 @@ bindkey '^ ' autosuggest-accept
 ## bindkey "^P" history-substring-search-up
 ## bindkey "^N" history-substring-search-down
 
-
 ################################################################
 ## => functions
 ################################################################
 function mdl {
     youtube-dl --extract-audio --audio-format mp3 "$1"
 }
-
 
 ################################################################
 ## => void only

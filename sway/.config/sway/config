@@ -120,14 +120,16 @@ bindsym $mod+p                  exec $term -e ranger ~/PhD
 bindsym $mod+Shift+Return       exec $term -e ranger
 
 # mail
-bindsym $mod+m                  exec $term -n mail -e neomutt 
+bindsym $mod+m                  exec $term -n mail -e mutt.sh 
+
+# org
+bindsym $mod+o                  exec $term -n org -e orgmode.sh
 
 # music
-bindsym $mod+t                  exec $term -e ncmpcpp
+bindsym $mod+Shift+m            exec $term -e ncmpcpp
 
 # google scholar 
 bindsym $mod+s                  exec qutebrowser https://scholar.google.com 
-# assign [instance="qutebrowser"] "2"
 
 # newsboat
 bindsym $mod+n                  exec $term -n rss -e newsboat
@@ -138,9 +140,7 @@ bindsym $mod+comma              exec $term -e vim
 # program launcher
 bindsym $mod+d                  exec dmenu_run
 
-# program launcher&switcher
-bindsym $alt+space              exec "rofi -combi-modi window,drun -show combi"
-
+bindsym $mod+p                  exec dmenu_pass "-p"
 
 # start a terminal
 bindsym $mod+Return             split horizontal ;; exec $term

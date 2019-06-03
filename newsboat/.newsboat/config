@@ -51,7 +51,7 @@ highlight article "^(Title):(.*)" color2 default
 highlight article "\">[^\"]+" red default
 
 # flagged articles
-highlight all "(.*)!(.*)\d(.*)" green default
+# highlight all "(.*)!(.*)\d(.*)" green default
 
 #don't show "arXiv" everywhere
 highlight all "\\(arXiv(.*)\)" color0 color0

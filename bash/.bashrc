@@ -8,6 +8,8 @@ esac
 export VISUAL=vim
 export EDITOR="$VISUAL"
 
+# disable ^-q and ^-s
+stty -ixon
 # cycle through completions
 bind "TAB:menu-complete"
 bind "set show-all-if-ambiguous on"
@@ -46,15 +48,3 @@ fi
 
 bind '"\e[A": history-search-backward'            # arrow up
 bind '"\e[B": history-search-forward'             # arrow 
-
-# enable programmable completion features (you don't need to enable
-# this, if it's already enabled in /etc/bash.bashrc and /etc/profile
-# sources /etc/bash.bashrc).
-# if ! shopt -oq posix; then
-#   if [ -f /usr/share/bash-completion/bash_completion ]; then
-#     . /usr/share/bash-completion/bash_completion
-#   elif [ -f /etc/bash_completion ]; then
-#     . /etc/bash_completion
-#   fi
-# fi
-# . /usr/share/bash-completion/bash_completion

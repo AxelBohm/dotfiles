@@ -16,7 +16,6 @@ endif
 call plug#begin('~/.config/nvim/autoload/plug.vim')
 
 " colorscheme
-Plug 'morhetz/gruvbox'
 Plug 'arcticicestudio/nord-vim'
 
 " auto completion

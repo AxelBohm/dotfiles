@@ -52,7 +52,7 @@ volume(){
 }
 
 battery(){
-    batt=$(acpi -b | sed 's/.*[Full|charging|unknown], \([0-9]*\)%.*/\1/gi')
+    batt=$(acpi | cut -d " " 4)
     echo " $batt%"
 }
 

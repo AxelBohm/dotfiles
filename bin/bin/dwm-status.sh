@@ -52,8 +52,8 @@ volume(){
 }
 
 battery(){
-    batt=$(acpi | cut -d " " 4)
-    echo " $batt%"
+    batt=$(acpi | cut -d ' ' -f 4)
+    echo " $batt"
 }
 
 memory(){

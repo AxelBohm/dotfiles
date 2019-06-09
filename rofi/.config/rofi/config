@@ -1,9 +1,0 @@
-rofi.theme: ~/.config/rofi/themes/gruvbox/gruvbox-dark.rasi
-
-rofi.padding:           415
-rofi.columns:           1
-rofi.fake-transparency: true
-rofi.lines:             8
-rofi.bw:                5
-rofi.opacity:           10
-rofi.hide-scrollbar:    true

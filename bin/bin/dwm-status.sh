@@ -52,7 +52,7 @@ volume(){
 }
 
 battery(){
-    batt=$(acpi | cut -d ' ' -f 4)
+    batt=$(acpi | cut -d ',' -f 2 | cut -d " " -f 2)
     echo " $batt"
 }
 

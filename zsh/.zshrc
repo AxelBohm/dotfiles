@@ -38,10 +38,10 @@ bindkey "^[[B" history-beginning-search-forward
 autoload -U colors && colors
 
 # git prompt
-source .zsh/git.zsh
+source ~/.zsh/git.zsh
 
 # vi settings for zsh
-source .zsh/vi.zsh
+source ~/.zsh/vi.zsh
 
 PROMPT='%{$fg[green]%}%n@%m %{$fg[blue]%}%~ $(git_prompt_string)
 %{$reset_color%}\$ '
@@ -69,8 +69,6 @@ bindkey '^j' autosuggest-execute
 bindkey '^ ' autosuggest-accept
 
 ## history substring search
-## bindkey "^[[A" history-substring-search-up
-## bindkey "^[[B" history-substring-search-down
 ## bindkey "^P" history-substring-search-up
 ## bindkey "^N" history-substring-search-down
 

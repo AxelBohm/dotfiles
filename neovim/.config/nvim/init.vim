@@ -28,7 +28,6 @@ else
 endif
 Plug 'deoplete-plugins/deoplete-jedi' " python autocompletion
 
-Plug 'ap/vim-buftabline'        " buffers in tabline
 Plug 'w0rp/ale'                 " linting 
 Plug 'SirVer/ultisnips'
 Plug 'tpope/vim-commentary'     " commentary (gc(c))
@@ -40,6 +39,7 @@ Plug 'tpope/vim-surround'       " change surrounding parenthesis/quotes
 Plug 'jceb/vim-orgmode'
 Plug 'itchyny/lightline.vim'    " statusline
 Plug 'ctrlpvim/ctrlp.vim'       " fuzzy find
+Plug 'mengelbrecht/lightline-bufferline'
 
 " Initialize plugin system
 call plug#end()
@@ -71,29 +71,34 @@ map <leader>n :UltiSnipsEdit<CR> " fast snippet configuring
 " autoclose
 let g:AutoCloseExpandSpace = 0 " Make iabbrev work again
 
-" when to show buftabline
-let g:buftabline_show = 1
-
 " statusline configuration
-
 let g:lightline = {
     \ 'colorscheme': 'nord',
     \ 'separator': { 'left': '▓▒░', 'right': '░▒▓' },
     \ 'subseparator': { 'left': '', 'right': '░' },
     \ 'active': {
-    \ 'right': [ [ 'lineinfo' ], ['percent'] ]
+    \   'right': [ [ 'lineinfo' ], ['percent'] ]
     \ },
+    \ 'tabline': {
+    \   'left': [['buffers']],
+    \   'right': [['']]
+    \},
+    \ 'component_expand': {
+    \ 'buffers': 'lightline#bufferline#buffers'
+    \},
+    \ 'component_type': {'buffers': 'tabsel'},
     \ }
 
-" " statusline background override
-" let s:palette = g:lightline#colorscheme#{g:lightline.colorscheme}#palette
-" let s:palette.normal.middle = [ [ 'NONE', 'NONE', 'NONE', 'NONE' ] ]
-" let s:palette.inactive.middle = s:palette.normal.middle
-" let s:palette.tabline.middle = s:palette.normal.middle
-" call insert(s:palette.normal.right, s:palette.normal.left[1], 0)
+" show lightline-bufferline
+set showtabline=2
 
+let g:lightline#bufferline#shorten_path = 0
+let g:lightline#bufferline#unnamed      = '[No Name]'
+
+" ctrlP
 let g:ctrlp_cmd = 'CtrlPMixed'      " what to show when pressing ^-P
 
+" not yet working
 let g:nord_italic_comments = 1
 
 

@@ -82,3 +82,9 @@ set recolor-darkcolor           "#ECEFF4"
 
 
 map <C-r> recolor
+
+# colemak
+map n scroll down
+map e scroll up
+map i scroll right
+map k search next

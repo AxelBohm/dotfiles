@@ -100,8 +100,21 @@ set pgp_self_encrypt = yes          # when sending encrypted mail save it encryp
 
 
 ## switch mailboxes
-macro index,pager i1 '<sync-mailbox><enter-command>source /home/xel/.config/mutt/accounts/uniwien.muttrc<enter><change-folder>!<enter>'
-macro index,pager i2 '<sync-mailbox><enter-command>source /home/xel/.config/mutt/accounts/ymail.muttrc<enter><change-folder>!<enter>'
+bind index,pager u noop
+macro index,pager u1 '<sync-mailbox><enter-command>source /home/xel/.config/mutt/accounts/uniwien.muttrc<enter><change-folder>!<enter>'
+macro index,pager u2 '<sync-mailbox><enter-command>source /home/xel/.config/mutt/accounts/ymail.muttrc<enter><change-folder>!<enter>'
 
+
+## colemak
+bind pager n next-line
+bind index,attach n next-entry
+bind index,attach e previous-entry
+bind pager e previous-line
+bind pager i view-attachments
+macro index i <display-message><sync-mailbox>
+bind browser i select-entry
+bind attach i view-attach
+bind index,pager \Cs half-down
+bind index,pager \Cl half-up
 
 source /home/xel/.config/mutt/accounts/uniwien.muttrc

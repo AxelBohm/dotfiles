@@ -25,6 +25,14 @@ bind-key N prev-unread
 bind-key D pb-download
 bind-key x pb-delete
 
+# colemak
+bind-key n down
+bind-key e up
+bind-key i open
+bind-key N next-feed articlelist
+bind-key E prev-feed articlelist
+bind-key N next-unread
+
 
 ########################
 # colors

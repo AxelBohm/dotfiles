@@ -13,11 +13,11 @@ noremap i l
 " in the way of hjkl (and E for J)
 noremap k n
 noremap K N
-noremap l u
-noremap L U
+noremap l i
+noremap L I
 noremap N J
 noremap E K
-noremap f e
-noremap F E
+noremap j e
+noremap J E
 
-inoremap ne <esc>
+" let g:UltiSnipsExpandTrigger='<c-j>'

@@ -40,6 +40,7 @@ Plug 'jceb/vim-orgmode'
 Plug 'itchyny/lightline.vim'    " statusline
 Plug 'ctrlpvim/ctrlp.vim'       " fuzzy find
 Plug 'mengelbrecht/lightline-bufferline'
+Plug 'vimwiki/vimwiki'
 
 " Initialize plugin system
 call plug#end()
@@ -54,6 +55,10 @@ let g:deoplete#enable_at_startup = 1
 " use tab to forward cycle
 inoremap <silent><expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
 
+autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
+let g:deoplete#sources#jedi#show_docstring = 0
+let g:deoplete#sources#jedi#ignore_errors = 1
+
 " ale
 nmap <silent> <leader>a :ALEToggle<cr>
 let g:ale_lint_on_enter = 0
@@ -63,7 +68,7 @@ let g:vimtex_view_method = 'zathura'
 
 " ultisnips
 let g:UltiSnipsSnippetDirectories=[$HOME.'/.vim/UltiSnips']
-let g:UltiSnipsExpandTrigger='<c-j>'
+let g:UltiSnipsExpandTrigger='<c-e>'
 let g:UltiSnipsJumpForwardTrigger='<c-f>'
 
 map <leader>n :UltiSnipsEdit<CR> " fast snippet configuring
@@ -89,11 +94,23 @@ let g:lightline = {
     \ 'component_type': {'buffers': 'tabsel'},
     \ }
 
+let g:lightline.mode_map = {
+        \ 'n' : 'N',
+        \ 'i' : 'I',
+        \ 'R' : 'R',
+        \ 'v' : 'V',
+        \ 'V' : 'V',
+        \ "\<C-v>": 'V',
+        \ 's' : 'S',
+        \ 'S' : 'S',
+        \ "\<C-s>": 'S'
+        \ }
+
 " show lightline-bufferline
 set showtabline=2
 
-let g:lightline#bufferline#shorten_path = 0
 let g:lightline#bufferline#unnamed      = '[No Name]'
+let g:lightline#bufferline#filename_modifier = ':t'
 
 " ctrlP
 let g:ctrlp_cmd = 'CtrlPMixed'      " what to show when pressing ^-P
@@ -101,6 +118,8 @@ let g:ctrlp_cmd = 'CtrlPMixed'      " what to show when pressing ^-P
 " not yet working
 let g:nord_italic_comments = 1
 
+let g:vimwiki_list = [{'path': '~/vimwiki/',
+                      \ 'syntax': 'markdown', 'ext': '.md'}]
 
 """""""""""""""""""""""""""""""""""""""""""""""""
 " => general config
@@ -145,7 +164,7 @@ inoremap jk <esc>
 " Fast saving
 nnoremap <leader>w :w<cr>
 nnoremap <leader>x :x<cr>
-nnoremap <leader>q :q!<cr>
+nnoremap <leader>q :wq<cr>
 
 " consistency
 nnoremap Y y$
@@ -169,9 +188,9 @@ nnoremap <Up> :resize +5<CR>
 nnoremap <Down> :resize -5<CR>
 
 " switch buffer
-" nnoremap <C-N> :bnext<CR>
-" nnoremap <C-P> :bprev<CR>
-map <leader>bd :bp\|bd #<cr>     
+nnoremap <leader>bn :bnext<CR>
+nnoremap <leader>bp :bprev<CR>
+nnoremap <leader>bd :bp \| bd #<CR>     
 
 " activate spell checking
 nnoremap <leader>ss :set spell!<cr>
@@ -208,6 +227,7 @@ set autochdir
 " abbreviaions
 iabbrev taht that
 iabbrev teh the
+iabbrev wsl wahrscheinlich
 iabbrev lsc lower semicontinuous
 iabbrev wrt with respect to
 iabbrev frechet Fr\'echet
@@ -247,6 +267,11 @@ augroup mail
     autocmd FileType mail setlocal spelllang=en,de
 augroup END
 
+augroup python
+    " use autopep8 for reformatting
+    autocmd FileType python setlocal formatprg=autopep8\ -
+augroup END
+
 " augroup myvimrc
 "     au!
 "     au BufWritePost init.vim so ~/config/nvim/init.vim
@@ -278,3 +303,6 @@ function! VisualSelection(direction, extra_filter) range
     let @/ = l:pattern
     let @" = l:saved_reg
 endfunction
+
+" source remaps for colemak
+source ~/.config/nvim/colemak.vim

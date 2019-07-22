@@ -23,6 +23,6 @@ else
 fi
 
 # set wallpaper again
-feh --bg-fill ~/.wallpapers/*
+set_background.sh
 
 echo "${monitor_mode}" > ~/bin/.monitor_mode.txt

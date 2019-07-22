@@ -12,4 +12,4 @@ if xrandr | grep "$externalvga connected"; then
 fi
 
 # set wallpaper again
-feh --bg-fill ~/.wallpapers/*
+set_background.sh &

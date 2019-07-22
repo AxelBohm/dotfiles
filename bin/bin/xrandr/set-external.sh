@@ -8,4 +8,4 @@ if xrandr | grep "$external connected"; then
 fi
 
 # set wallpaper again
-feh --bg-fill ~/.wallpapers/*
+set_background.sh

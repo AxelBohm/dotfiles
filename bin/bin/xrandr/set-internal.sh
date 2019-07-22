@@ -13,5 +13,5 @@ externalhdmi=${externalhdmi% connected}
 xrandr --output $internal --auto --output $externalvga --off --output $externalhdmi --off
 
 # set wallpaper again
-feh --bg-fill ~/.wallpapers/*
+set_background.sh
 

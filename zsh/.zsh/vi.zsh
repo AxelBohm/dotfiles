@@ -28,6 +28,3 @@ bindkey "^K" backward-kill-line
 
 bindkey '^a' beginning-of-line
 bindkey '^e' end-of-line
-
-bindkey "^P" up-line-or-search
-bindkey "^N" down-line-or-search

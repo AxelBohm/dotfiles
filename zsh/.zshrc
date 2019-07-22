@@ -8,30 +8,6 @@ setopt INC_APPEND_HISTORY
 [[ -r "/usr/share/z/z.sh" ]] && source /usr/share/z/z.sh
 
 ###############################################################
-# => fancy
-###############################################################
-
-autoload -Uz compinit
-compinit
-# case insensitive completion
-zstyle ':completion:*' matcher-list 'm:{[:lower:]}={[:upper:]}'
-
-# colored completion suggestions
-zstyle ':completion:*:default' list-colors "${(@s.:.)LS_COLORS}"
-
-## complete also incorrect stuff
-zstyle ':completion:*' completer _complete _correct _approximate
-
-## edit command line in $EDITOR
-autoload -U edit-command-line
-zle -N edit-command-line
-bindkey 'jk' edit-command-line
-
-# search for already written text by pressing up/down
-bindkey "^[[A" history-beginning-search-backward
-bindkey "^[[B" history-beginning-search-forward
-
-###############################################################
 # => prompt
 ###############################################################
 #
@@ -52,6 +28,35 @@ PROMPT='%{$fg[green]%}%n@%m %{$fg[blue]%}%~ $(git_prompt_string)
 
 ## right prompt
 ## RPROMPT="%F{237}%K{239}█▓░%F{248}%K{239}%T%F{237}%K{239}░▓█%{$reset_color%}"
+
+###############################################################
+# => fancy
+###############################################################
+
+autoload -Uz compinit
+compinit
+# case insensitive completion
+zstyle ':completion:*' matcher-list 'm:{[:lower:]}={[:upper:]}'
+
+# colored completion suggestions
+zstyle ':completion:*:default' list-colors "${(@s.:.)LS_COLORS}"
+
+## complete also incorrect stuff
+zstyle ':completion:*' completer _complete _correct _approximate
+
+## edit command line in $EDITOR
+autoload -U edit-command-line
+zle -N edit-command-line
+bindkey 'jk' edit-command-line
+
+# search for already written text by pressing up/down
+autoload -U history-search-end
+zle -N history-beginning-search-backward-end history-search-end
+zle -N history-beginning-search-forward-end history-search-end
+bindkey "^P" history-beginning-search-backward-end
+# bindkey "^N" history-beginning-search-forward-end
+bindkey "^[[A" history-beginning-search-backward-end
+bindkey "^[[B" history-beginning-search-forward-end
 
 ################################################################
 ## => Aliases
@@ -97,3 +102,6 @@ fi
 if [[ `whoami` = "boehm" ]]; then
     export PATH=~/miniconda3/bin:$PATH
 fi
+
+# colemak remaps
+source ~/.zsh/colemak.zsh

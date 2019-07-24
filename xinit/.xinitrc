@@ -9,7 +9,6 @@
 
 # # only works if called twice
 ~/bin/xrandr/set-dual-external.sh &
-~/bin/xrandr/set-dual-external.sh &
 
 # dropbox
 ~/.dropbox-dist/dropboxd &
@@ -30,10 +29,10 @@ dunst &
 # slstatus &
 
 # set background
-~/.fehbg &
-
-# Autostart section
-pcmanfm & 
+. set_backgpound.sh &
 
 exec dwm
-
+# exec startkde
+# export XDG_CURRENT_DESKTOP=GNOME-Classic:GNOME
+# export GNOME_SHELL_SESSION_MODE=classic
+# exec gnome-session --session=gnome-classic

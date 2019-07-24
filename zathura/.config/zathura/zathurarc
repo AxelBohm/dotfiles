@@ -14,6 +14,10 @@ set incremental-search true
 map <C-i> zoom in
 map <C-o> zoom out
 
+# unmap things I don't need and only hit on accident
+unmap r # rotate
+unmap d # double page view
+
 # Base16 Gruvbox dark, medium
 # Author: Dawid Kurek (dawikur@gmail.com), morhetz (https://github.com/morhetz/gruvbox)
 
@@ -87,4 +91,8 @@ map <C-r> recolor
 map n scroll down
 map e scroll up
 map i scroll right
-map k search next
+map k search forward
+# map K search backward
+
+abort-clear-search false
+search-hadjust false

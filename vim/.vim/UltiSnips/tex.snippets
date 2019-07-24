@@ -42,7 +42,7 @@ def add_row(snip):
 
 endglobal
 
-snippet "beg(in)?" "begin{} / end{}" br
+snippet "beg" "begin{} / end{}" bA
 \begin{${1:something}}%
 	${0:${VISUAL}}
 \end{$1}
@@ -80,21 +80,21 @@ snippet table "Table environment" b
 endsnippet
 
 snippet fig "Figure environment" b
-\begin{figure}[${2:htpb}]
+\begin{figure}[${1:htpb}]
 	\centering
-	\includegraphics[width=${3:0.8}\linewidth]{${4:name.ext}}
+	\includegraphics[width=${2:0.8}\linewidth]{${3:name.ext}}
 	\caption{${4/(\w+)\.\w+/\u$1/}$0}
 	\label{fig:${4/(\w+)\.\w+/$1/}}
 \end{figure}
 endsnippet
 
-snippet enum "Enumerate" b
+snippet enum "Enumerate" bA
 \begin{enumerate}
 	\item $0
 \end{enumerate}
 endsnippet
 
-snippet item "Itemize" b
+snippet item "Itemize" bA
 \begin{itemize}
 	\item $0
 \end{itemize}
@@ -185,26 +185,26 @@ endsnippet
 # Environments #
 ################
 
-snippet eq "Equation" b
+snippet eq "Equation" bA
 \begin{equation}
 	$0
 \end{equation}
 endsnippet
 
-snippet eql "Equation with label" b
+snippet eql "Equation with label" bA
 \begin{equation}
 	\label{eq:${1}}
 	$0
 \end{equation}
 endsnippet
 
-snippet al "Align" b
+snippet al "Align" bA
 \begin{align}
 	$0
 \end{align}
 endsnippet
 
-snippet ald "Aligned" b
+snippet ald "Aligned" bA
 \begin{aligned}
 	$0
 \end{aligned}
@@ -239,7 +239,7 @@ endsnippet
 # MATH STUFF #
 ##############
 
-snippet fr "fraction" w
+snippet fr "fraction" wA
 \frac{${1:${VISUAL}}}{${2}}
 endsnippet
 
@@ -249,7 +249,7 @@ snippet mat "Smart Matrix"
 \end{$1matrix}
 endsnippet
 
-snippet lr| "left| right|" w
+snippet lr| "left| right|" wA
 \left| ${1:${VISUAL}} \right|
 endsnippet
 
@@ -277,11 +277,11 @@ snippet sup "sup" w
 \sup_{${1}} ${0}
 endsnippet
 
-snippet lr( "left( right)" w
+snippet lr( "left( right)" wA
 \left( ${0} \right
 endsnippet
 
-snippet lra "left\angle right\rangle)" w
+snippet lra "left\angle right\rangle)" wA
 \left\langle ${1} \right\rangle ${0}
 endsnippet
 
@@ -314,7 +314,7 @@ endsnippet
 # presentations #
 #################
 
-snippet frame "frame" w
+snippet frame "frame" b
 \begin{frame}
 	\frametitle{${1:title}}
 	${0}
@@ -386,7 +386,7 @@ snippet pr "proof" w
 \end{proof}
 endsnippet
 
-snippet thm "theorem" w
+snippet thm "theorem" bA
 \begin{theorem}%
 	\label{thm:${1}}
 	${0}
@@ -397,7 +397,7 @@ snippet Theorem "Theorem ref" w
 Theorem~\ref{thm:${1}}
 endsnippet
 
-snippet cor "corollary" w
+snippet cor "corollary" bA
 \begin{corollary}%
 	\label{cor:${1}}
 	${0}
@@ -408,7 +408,7 @@ snippet Corollary "Corollary ref" w
 Corollary~\ref{cor:${1}}
 endsnippet
 
-snippet algo "algorithm" w
+snippet algo "algorithm" bA
 \begin{algo}%
 	\label{alg:${1}}
 	For $x_{0} \in \H$, consider
@@ -425,7 +425,7 @@ snippet Algorithm "Algorithm ref" w
 Algorithm~\ref{alg:${1}}
 endsnippet
 
-snippet prob "problem" w
+snippet prob "problem" b
 \begin{problem}%
 	\label{prob:${1}}
 	${0}
@@ -554,4 +554,16 @@ endsnippet
 
 snippet io "int omega" w
 \int_{\Omega} ${0} \d 
+endsnippet
+
+#################
+# experimental
+#################
+
+snippet xk "x_{k}" iA
+x_{k}
+endsnippet
+
+snippet xk+1 "x_{k}" iA
+x_{k+1}
 endsnippet

@@ -9,6 +9,7 @@
 
 # # only works if called twice
 ~/bin/xrandr/set-dual-external.sh &
+~/bin/xrandr/set-dual-external.sh &
 
 # dropbox
 ~/.dropbox-dist/dropboxd &

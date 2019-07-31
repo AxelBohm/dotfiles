@@ -70,8 +70,10 @@ macro index \Cr "T~U<enter><tag-prefix><clear-flag>N<untag-pattern>.<enter>" "ma
 macro index \Cf "<enter-command>unset wait_key<enter><shell-escape>read -p 'notmuch query: ' x; echo \$x >~/.cache/mutt_terms<enter><limit>~i \"\`notmuch search --output=messages \$(cat ~/.cache/mutt_terms) | head -n 600 | perl -le '@a=<>;chomp@a;s/\^id:// for@a;$,=\"|\";print@a'\`\"<enter>" "show only messages matching a notmuch pattern"
 
 ## sync email
-macro index O "<shell-escape>$HOME/.config/mutt/etc/mailsync.sh<enter>" "run offlineimap to sync all mail"
-macro index o "<shell-escape>$HOME/.config/mutt/etc/mailsync.sh -qf INBOX<enter>" "run offlineimap to sync inbox"
+bind index,pager o noop
+bind index,pager O noop
+macro index P "<shell-escape>$HOME/.config/mutt/etc/mailsync.sh<enter>" "run offlineimap to sync all mail"
+macro index p "<shell-escape>$HOME/.config/mutt/etc/mailsync.sh -qf INBOX<enter>" "run offlineimap to sync inbox"
 
 ## copy/move dialogs
 macro index C "<copy-message>?<toggle-mailboxes>" "copy a message to a mailbox"
@@ -100,16 +102,15 @@ set pgp_self_encrypt = yes          # when sending encrypted mail save it encryp
 
 
 ## switch mailboxes
-bind index,pager u noop
-macro index,pager u1 '<sync-mailbox><enter-command>source /home/xel/.config/mutt/accounts/uniwien.muttrc<enter><change-folder>!<enter>'
-macro index,pager u2 '<sync-mailbox><enter-command>source /home/xel/.config/mutt/accounts/ymail.muttrc<enter><change-folder>!<enter>'
+macro index,pager o1 '<sync-mailbox><enter-command>source /home/xel/.config/mutt/accounts/uniwien.muttrc<enter><change-folder>!<enter>'
+macro index,pager o2 '<sync-mailbox><enter-command>source /home/xel/.config/mutt/accounts/ymail.muttrc<enter><change-folder>!<enter>'
 
 
 ## colemak
 bind pager n next-line
-bind index,attach n next-entry
-bind index,attach e previous-entry
 bind pager e previous-line
+bind index,attach,alias,browser n next-entry
+bind index,attach,alias,browser e previous-entry
 bind pager i view-attachments
 macro index i <display-message><sync-mailbox>
 bind browser i select-entry
@@ -137,17 +138,7 @@ tag-transforms "replied" "↻ "  \
                "signed" "" \
                "attachment" "" \
 
-# # The formats must start with 'G' and the entire sequence is case sensitive.
-# tag-formats "replied" "GR" \
-#             "encrypted" "GE" \
-#             "signed" "GS" \
-#             "attachment" "GA" \
-
-# color status white black
-# # powerline status bar hack
-# color status green black ''
-# color status yellow black ''
-# color status red black ''
+# powerline status bar hack
 color status brightblack blue '(.*)' 1
 color status blue black '.*()' 1
 color status black blue '\s* [0-9]+\s*'

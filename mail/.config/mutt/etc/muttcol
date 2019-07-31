@@ -24,7 +24,6 @@ color header color6 default "^(Subject)"
 color header color7 default "^(To)"
 # color header red default "^(Cc|BCC)"
 color header cyan default "CC: "
-ignore date
 # unignore from subject to cc
 
 mono bold bold

@@ -28,3 +28,6 @@ done
 
 #Create a touch file that indicates the time of the last run of mailsync
 touch ~/.config/mutt/etc/mailsynclastrun
+
+# index mail
+notmuch new

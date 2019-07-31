@@ -39,7 +39,7 @@ alias s="startx"
 alias ls="ls --color"
 alias la="ls -A"
 
-# Custom cd
+# automatically show content when changin into a directory
 c() {
 	cd $1;
     ls;
@@ -52,9 +52,13 @@ alias chterm="sudo update-alternatives --config x-terminal-emulator"
 # starwars in ascii
 alias starwars="telnet towel.blinkenlights.nl"
 
+# command line version of my dmenu-pass script
+# i cant always remember my pass folder structure -> use fuzzy finder
 alias fp="fuzzy_pass.sh -p"
 alias fu="fuzzy_pass.sh -u"
 
+# I want alway everything in the system clipboard. multiple clipboard are to confusing.
+alias xclip="xclip -selection 'clipboard'"
 
 ###############################################################
 # => colored man pages

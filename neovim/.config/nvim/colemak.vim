@@ -20,4 +20,4 @@ noremap E K
 noremap j e
 noremap J E
 
-" let g:UltiSnipsExpandTrigger='<c-j>'
+let g:UltiSnipsExpandTrigger='<c-e>'

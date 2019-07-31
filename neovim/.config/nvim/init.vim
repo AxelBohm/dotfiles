@@ -36,10 +36,9 @@ Plug 'lervag/vimtex'
 Plug 'Townk/vim-autoclose'      " autoclose parenthesis
 Plug 'justinmk/vim-sneak'       " two char find
 Plug 'tpope/vim-surround'       " change surrounding parenthesis/quotes
-Plug 'jceb/vim-orgmode'
 Plug 'itchyny/lightline.vim'    " statusline
-Plug 'ctrlpvim/ctrlp.vim'       " fuzzy find
 Plug 'mengelbrecht/lightline-bufferline'
+Plug 'ctrlpvim/ctrlp.vim'       " fuzzy find
 Plug 'vimwiki/vimwiki'
 
 " Initialize plugin system
@@ -62,13 +61,20 @@ let g:deoplete#sources#jedi#ignore_errors = 1
 " ale
 nmap <silent> <leader>a :ALEToggle<cr>
 let g:ale_lint_on_enter = 0
+nmap <silent> <leader>an :ALENext<cr>
+nmap <silent> <leader>ap :ALEPrevious<cr>
 
 " vimtex
 let g:vimtex_view_method = 'zathura'
+set conceallevel=1
+let g:tex_conceal='abdmg'
+
+hi clear Conceal
+hi Conceal cterm=NONE ctermbg=NONE ctermfg=darkblue
 
 " ultisnips
 let g:UltiSnipsSnippetDirectories=[$HOME.'/.vim/UltiSnips']
-let g:UltiSnipsExpandTrigger='<c-e>'
+let g:UltiSnipsExpandTrigger='<c-j>'
 let g:UltiSnipsJumpForwardTrigger='<c-f>'
 
 map <leader>n :UltiSnipsEdit<CR> " fast snippet configuring
@@ -113,7 +119,7 @@ let g:lightline#bufferline#unnamed      = '[No Name]'
 let g:lightline#bufferline#filename_modifier = ':t'
 
 " ctrlP
-let g:ctrlp_cmd = 'CtrlPMixed'      " what to show when pressing ^-P
+" let g:ctrlp_cmd = 'CtrlPMixed'      " what to show when pressing ^-P
 
 " not yet working
 let g:nord_italic_comments = 1
@@ -162,9 +168,9 @@ set relativenumber
 inoremap jk <esc>
 
 " Fast saving
-nnoremap <leader>w :w<cr>
+nnoremap <C-s> :w<cr>
 nnoremap <leader>x :x<cr>
-nnoremap <leader>q :wq<cr>
+nnoremap <leader>q :q<cr>
 
 " consistency
 nnoremap Y y$
@@ -197,6 +203,7 @@ nnoremap <leader>ss :set spell!<cr>
 set spellfile=~/.vim/spell/en.utf-8.add
 " accept first correction suggestion
 nnoremap <leader>sc 1z=
+inoremap <C-l> <c-g>u<Esc>[s1z=`]a<c-g>u
 
 " configure statusline
 highlight StatusLine ctermbg=0 cterm=NONE
@@ -259,6 +266,10 @@ augroup latex
     autocmd FileType tex inoremap ;u ^{k+1}
     autocmd FileType tex inoremap ;s ^*
     autocmd FileType tex inoremap ;t ^2
+
+    hi clear Conceal
+    hi Conceal cterm=NONE ctermbg=NONE ctermfg=darkblue
+
 augroup END
 
 " mail

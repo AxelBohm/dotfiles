@@ -10,6 +10,7 @@ alias gd="git diff"
 alias gp="git push"
 alias gca="git commit --amend"
 alias gco="git checkout"
+alias gl="git log --pretty=oneline --abbrev-commit"
 # store credentials
 alias gsc="git config credential.helper store"
 

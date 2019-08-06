@@ -1,10 +1,9 @@
 " get control-j back, so switch it with ctrl-n at qwerty position of j
-imap <c-n> <cr>
-cmap <c-n> <cr>
 inoremap <c-j> <c-n>
 cnoremap <c-j> <c-n>
+noremap <c-l> <c-u>
 
-" rotate some keys about to get qwerty "hjkl" back for movement
+" " rotate some keys about to get qwerty "hjkl" back for movement
 noremap n j
 noremap e k
 noremap i l

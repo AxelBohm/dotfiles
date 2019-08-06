@@ -27,7 +27,7 @@ auto_view text/html
 auto_view application/pdf
 alternative_order text/plain text/enriched text/html
 set rfc2047_parameters = yes
-set text_flowed = yes               # flow more??
+set text_flowed = yes               # flow more?? everybody and their grandmother recommends this
 set pager_index_lines = 8           # show pager even if email is opened
 set pager_stop                      # don't go to next message automatically
 # set recall=no                       # Don't ask to recall postponed message when Composing

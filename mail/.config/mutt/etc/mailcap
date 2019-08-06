@@ -4,7 +4,7 @@ text/html; w3m -I %{charset} -T text/html; copiousoutput;
 
 application/pdf; mkdir -p /tmp/mutt \; cp %s /tmp/mutt \; zathura /tmp/mutt/$(basename %s) &
 
-text/plain; vim %s ;
+text/plain; nvim %s ;
 
 image/jpg; mkdir -p /tmp/mutt \; cp %s /tmp/mutt \; feh /tmp/mutt/$(basename %s) &
 image/jpeg; mkdir -p /tmp/mutt \; cp %s /tmp/mutt \; feh /tmp/mutt/$(basename %s) &

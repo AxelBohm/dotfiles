@@ -72,6 +72,22 @@
 :config
 (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1))))
 
+
+; (use-package pdf-tools
+;   ; :ensure t
+;   :pin manual ;; manually update
+;  :config
+;  ;; initialise
+;  (pdf-tools-install)
+;  ;; open pdfs scaled to fit page
+;  (setq-default pdf-view-display-size 'fit-page)
+;  ;; automatically annotate highlights
+;  (setq pdf-annot-activate-created-annotations t)
+;  ;; use normal isearch
+;  (define-key pdf-view-mode-map (kbd "C-s") 'isearch-forward))
+
+
+
 (use-package evil
   :ensure t)
 (evil-mode 1)
@@ -92,11 +108,16 @@
    '(:sub-and-superscripts :greek :arithmetic-nary))
 
 
+; auto closing of parenthesis
 (use-package smartparens
     :ensure t)
 
-; latex
-; (use-package auctex)
+; gc comments stuff out
+(use-package evil-commentary
+  :ensure t)
+(evil-commentary-mode)
+
+;; latex
 (use-package tex-site
   :ensure auctex
   :mode ("\\.tex\\'" . latex-mode)
@@ -117,7 +138,7 @@
 
 ;; Update PDF buffers after successful LaTeX runs
 (add-hook 'TeX-after-TeX-LaTeX-command-finished-hook
-           #'TeX-revert-document-buffer)
+            #'TeX-revert-document-buffer)
 
 ;; to use pdfview with auctex
 (setq TeX-view-program-selection '((output-pdf "Zathura"))
@@ -125,6 +146,18 @@
 (setq TeX-view-program-list '(("Zathura" "TeX-pdf-tools-sync-view"))))
 
 (add-hook 'TeX-mode-hook 'prettify-symbols-mode)
+
+
+
+
+
+
+(use-package tex
+  :defer t
+  :ensure auctex
+  :config
+  (setq TeX-auto-save t))
+
 
 ;; auto completion
 (use-package company
@@ -184,6 +217,79 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  )
+
+;(defun evil-colemak-basics--make-keymap ()
+;  "Initialise the keymap baset on the current configuration."
+;  (let ((keymap (make-sparse-keymap)))
+;    (evil-define-key '(motion normal visual) keymap
+;      "n" 'evil-next-line
+;      "N" 'evil-join
+;      "gn" 'evil-next-visual-line
+;      "gN" 'evil-next-visual-line
+;      "e" 'evil-previous-line
+;      "ge" 'evil-previous-visual-line
+;      "E" 'evil-lookup
+;      "j" 'evil-forward-word-end
+;      "J" 'evil-forward-WORD-end
+;      "gj" 'evil-backward-word-end
+;      "gJ" 'evil-backward-WORD-end
+;      "k" 'evil-search-next
+;      "K" 'evil-search-previous
+;      "gk" 'evil-next-match
+;      "gK" 'evil-previous-match
+;      "zi" 'evil-scroll-column-right
+;      "zI" 'evil-scroll-right
+;      "l" 'evil-insert
+;      "L" 'evil-insert-line
+;      "i" 'evil-forward-char)))
+
+;(defvar evil-colemak-basics-keymap
+;  (evil-colemak-basics--make-keymap)
+;  "Keymap for evil-colemak-basics-mode.")
+
+;(defun evil-colemak-basics--refresh-keymap ()
+;  "Refresh the keymap using the current configuration."
+;  (setq evil-colemak-basics-keymap (evil-colemak-basics--make-keymap)))
+
+;(define-minor-mode evil-colemak-basics-mode
+;  "Minor mode with evil-mode enhancements for the Colemak keyboard layout."
+;  :keymap evil-colemak-basics-keymap
+;  :lighter " hnei")
+
+;;;;###autoload
+;(define-globalized-minor-mode global-evil-colemak-basics-mode
+;  evil-colemak-basics-mode
+;  (lambda () (evil-colemak-basics-mode t))
+;  "Global minor mode with evil-mode enhancements for the Colemak keyboard layout.")
+
+;(global-evil-colemak-basics-mode)
+
+; i needs to be unbound first
+(define-key evil-normal-state-map "i" nil)
+
+(define-key evil-motion-state-map "n" 'evil-next-line)
+(define-key evil-motion-state-map "N" 'evil-join)
+(define-key evil-motion-state-map "gn" 'evil-next-visual-line)
+(define-key evil-motion-state-map "gN" 'evil-next-visual-line)
+(define-key evil-motion-state-map "e" 'evil-previous-line)
+(define-key evil-motion-state-map "ge" 'evil-previous-visual-line)
+(define-key evil-motion-state-map "E" 'evil-lookup)
+(define-key evil-motion-state-map "i" 'evil-forward-char)
+(define-key evil-motion-state-map "j" 'evil-forward-word-end)
+(define-key evil-motion-state-map "J" 'evil-forward-WORD-end)
+(define-key evil-motion-state-map "gj" 'evil-backward-word-end)
+(define-key evil-motion-state-map "gJ" 'evil-backward-WORD-end)
+(define-key evil-motion-state-map "k" 'evil-search-next)
+(define-key evil-motion-state-map "K" 'evil-search-previous)
+(define-key evil-motion-state-map "gk" 'evil-next-match)
+(define-key evil-motion-state-map "gK" 'evil-previous-match)
+(define-key evil-motion-state-map "zi" 'evil-scroll-column-right)
+(define-key evil-motion-state-map "zI" 'evil-scroll-right)
+(define-key evil-motion-state-map "l" 'evil-insert)
+(define-key evil-motion-state-map "L" 'evil-insert-line)
+
+; `i` in visual mode needs extra remap
+; (define-key evil-visual-state-map "i" 'evil-next-visual-line)
 
 ; (require 'org)         ;; The org-mode goodness
 ; (require 'init-org-mode)

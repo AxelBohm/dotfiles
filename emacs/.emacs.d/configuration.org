@@ -1,0 +1,290 @@
+#+TITLE: Emacs Configuration
+#+OPTIONS: toc:nil num:nil
+
+* General settings
+** startup screen
+#+BEGIN_SRC emacs-lisp
+(setq inhibit-startup-screen t)
+(setq initial-scratch-message "") ;; Uh, I know what Scratch is for
+#+END_SRC
+
+** for graphical emacs
+#+BEGIN_SRC emacs-lisp
+(menu-bar-mode -1)
+(tool-bar-mode -1)
+(scroll-bar-mode 0)
+#+END_SRC
+
+; Matches parentheses and such in every mode
+#+BEGIN_SRC emacs-lisp
+(show-paren-mode 1)
+#+END_SRC
+
+; stop creating backup~ files
+#+BEGIN_SRC emacs-lisp
+(setq make-backup-files nil)
+; stop creating #autosave# files
+(setq auto-save-default nil)
+#+END_SRC
+
+** strip trailing whitespace when saving
+#+BEGIN_SRC emacs-lisp
+(add-hook 'before-save-hook 'delete-trailing-whitespace)
+#+END_SRC
+
+** tabs vs spaces
+#+BEGIN_SRC emacs-lisp
+(setq-default indent-tabs-mode nil)
+(setq tab-width 2)
+#+END_SRC
+
+** Answering just 'y' or 'n' will do
+#+BEGIN_SRC emacs-lisp
+(defalias 'yes-or-no-p 'y-or-n-p)
+#+END_SRC
+
+** quick access to emacs config
+#+BEGIN_SRC emacs-lisp
+(defun ab/visit-emacs-config ()
+  (interactive)
+  (find-file "~/.emacs.d/configuration.org"))
+
+(global-set-key (kbd "C-c e") 'ab/visit-emacs-config)
+#+END_SRC
+
+
+* Packages
+
+** colors
+#+BEGIN_SRC emacs-lisp
+(use-package nord-theme
+  :ensure t)
+(add-to-list 'custom-theme-load-path (expand-file-name "~/.emacs.d/themes/"))
+(load-theme 'nord t)
+#+END_SRC
+
+** org mode
+
+#+BEGIN_SRC emacs-lisp
+(use-package org
+  :ensure t
+  :init
+  (setq org-hide-emphasis-markers t)
+  :bind (("C-c l" . org-store-link)
+         ("C-c a" . org-agenda)
+         ("C-c c" . org-capture)))
+#+END_SRC
+
+*** fancy bullets
+ fancy bullets in org mode
+#+BEGIN_SRC emacs-lisp
+  (use-package org-bullets
+      :ensure t
+      :init
+      ;; (setq org-bullets-bullet-list
+      ;; '("◉" "◎" "⚫" "○" "►" "◇"))
+      :config
+      (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1))))
+#+END_SRC
+
+** vi
+
+no way around vi keybindings
+#+BEGIN_SRC emacs-lisp
+  (use-package evil
+    :ensure t
+    :config
+    (evil-mode 1))
+#+END_SRC
+
+more vim functionality
+#+BEGIN_SRC emacs-lisp
+(use-package evil-leader
+  :ensure t)
+  (global-evil-leader-mode)
+  (evil-leader/set-leader " ")
+  (evil-leader/set-key
+    "b" 'switch-to-buffer
+    "w" 'save-buffer)
+#+END_SRC
+
+*** evil settings
+evil for colemak keyboard layout
+#+BEGIN_SRC emacs-lisp
+; i needs to be unbound first
+(define-key evil-normal-state-map "i" nil)
+
+(define-key evil-motion-state-map "n" 'evil-next-line)
+(define-key evil-motion-state-map "N" 'evil-join)
+(define-key evil-motion-state-map "gn" 'evil-next-visual-line)
+(define-key evil-motion-state-map "gN" 'evil-next-visual-line)
+(define-key evil-motion-state-map "e" 'evil-previous-line)
+(define-key evil-motion-state-map "ge" 'evil-previous-visual-line)
+(define-key evil-motion-state-map "E" 'evil-lookup)
+(define-key evil-motion-state-map "i" 'evil-forward-char)
+(define-key evil-motion-state-map "j" 'evil-forward-word-end)
+(define-key evil-motion-state-map "J" 'evil-forward-WORD-end)
+(define-key evil-motion-state-map "gj" 'evil-backward-word-end)
+(define-key evil-motion-state-map "gJ" 'evil-backward-WORD-end)
+(define-key evil-motion-state-map "k" 'evil-search-next)
+(define-key evil-motion-state-map "K" 'evil-search-previous)
+(define-key evil-motion-state-map "gk" 'evil-next-match)
+(define-key evil-motion-state-map "gK" 'evil-previous-match)
+(define-key evil-motion-state-map "zi" 'evil-scroll-column-right)
+(define-key evil-motion-state-map "zI" 'evil-scroll-right)
+(define-key evil-motion-state-map "l" 'evil-insert)
+(define-key evil-motion-state-map "L" 'evil-insert-line)
+
+; `i` in visual mode needs extra remap
+(define-key evil-visual-state-map "i" 'evil-next-visual-line)
+#+END_SRC
+
+** pretty-mode
+hide greek letters in latex. does auctex provide this already?
+#+BEGIN_SRC emacs-lisp
+(use-package pretty-mode
+  :ensure t)
+  (global-pretty-mode t)
+  (pretty-activate-groups
+   '(:sub-and-superscripts :greek :arithmetic-nary))
+#+END_SRC
+
+** auto closing of parenthesis
+does electric mode already provide this?
+#+BEGIN_SRC emacs-lisp
+(use-package smartparens
+    :ensure t)
+#+END_SRC
+
+** commentary
+gc comments stuff out
+#+BEGIN_SRC emacs-lisp
+(use-package evil-commentary
+  :ensure t)
+(evil-commentary-mode)
+#+END_SRC
+
+** latex
+   which package to use? `tex-site` or `tex` ?
+   is auctex itself a package?
+#+BEGIN_SRC emacs-lisp
+(use-package tex-site
+  :ensure auctex
+  :mode ("\\.tex\\'" . latex-mode)
+  :config
+  (setq TeX-auto-save t)
+  (setq TeX-parse-self t)
+  (setq-default TeX-master nil)
+  (add-hook 'LaTeX-mode-hook
+            (lambda ()
+              (company-mode)
+              (smartparens-mode)
+              (turn-on-reftex)
+              (setq reftex-plug-into-AUCTeX t)
+              (reftex-isearch-minor-mode)
+              (setq TeX-PDF-mode t)
+              (setq TeX-source-correlate-method 'synctex)
+              (setq TeX-source-correlate-start-server t)))
+
+;; Update PDF buffers after successful LaTeX runs
+(add-hook 'TeX-after-TeX-LaTeX-command-finished-hook
+            #'TeX-revert-document-buffer)
+
+;; to use pdfview with auctex
+(setq TeX-view-program-selection '((output-pdf "Zathura"))
+       TeX-source-correlate-start-server t)
+(setq TeX-view-program-list '(("Zathura" "TeX-pdf-tools-sync-view"))))
+
+(add-hook 'TeX-mode-hook 'prettify-symbols-mode)
+
+
+; (use-package tex
+;   :defer t
+;   :ensure auctex
+;   :config
+;   (setq TeX-auto-save t))
+
+#+END_SRC
+
+** auto completion
+
+#+BEGIN_SRC emacs-lisp
+(use-package company
+  :ensure t
+  :init
+  (setq company-dabbrev-ignore-case t
+        company-show-numbers t)
+  (add-hook 'after-init-hook 'global-company-mode)
+  :config
+  (add-to-list 'company-backends 'company-math-symbols-unicode)
+  :bind ("C-:" . company-complete)  ; In case I don't want to wait
+  :diminish company-mode)
+#+END_SRC
+
+** snippets
+#+BEGIN_SRC emacs-lisp
+(use-package yasnippet
+  :ensure t
+  :init
+  (yas-global-mode 1))
+  ; :config
+  ; (add-to-list 'yas-snippet-dirs (ha/emacs-subdirectory "snippets")))
+#+END_SRC
+
+** spell checking
+# #+BEGIN_SRC emacs-lisp
+# (use-package flyspell
+#   :ensure t
+#   :diminish flyspell-mode
+#   :init
+#   (add-hook 'prog-mode-hook 'flyspell-prog-mode)
+
+#   (dolist (hook '(text-mode-hook org-mode-hook))
+#     (add-hook hook (lambda () (flyspell-mode 1))))
+
+#   (dolist (hook '(change-log-mode-hook log-edit-mode-hook org-agenda-mode-hook))
+#     (add-hook hook (lambda () (flyspell-mode -1))))
+
+#   :config
+#   (setq ispell-program-name "/usr/bin/aspell"
+#         ispell-local-dictionary "en_US"
+#         ispell-dictionary "american" ; better for aspell
+#         ispell-extra-args '("--sug-mode=ultra" "--lang=en_US")
+#         ispell-list-command "--list"
+#         ispell-local-dictionary-alist '(("en_US" "[[:alpha:]]" "[^[:alpha:]]" "['‘’]"
+#                                       t ; Many other characters
+#                                       ("-d" "en_US") nil utf-8))))
+# (custom-set-variables
+#  ;; custom-set-variables was added by Custom.
+#  ;; If you edit it by hand, you could mess it up, so be careful.
+#  ;; Your init file should contain only one such instance.
+#  ;; If there is more than one, they won't work right.
+#  '(package-selected-packages
+#    (quote
+#     (auctex yasnippet company use-package org-bullets evil-leader))))
+# (custom-set-faces
+#  ;; custom-set-faces was added by Custom.
+#  ;; If you edit it by hand, you could mess it up, so be careful.
+#  ;; Your init file should contain only one such instance.
+#  ;; If there is more than one, they won't work right.
+#  )
+# #+END_SRC
+
+
+#+BEGIN_SRC emacs-lisp
+
+
+
+; (use-package pdf-tools
+;   ; :ensure t
+;   :pin manual ;; manually update
+;  :config
+;  ;; initialise
+;  (pdf-tools-install)
+;  ;; open pdfs scaled to fit page
+;  (setq-default pdf-view-display-size 'fit-page)
+;  ;; automatically annotate highlights
+;  (setq pdf-annot-activate-created-annotations t)
+;  ;; use normal isearch
+;  (define-key pdf-view-mode-map (kbd "C-s") 'isearch-forward))
+#+END_SRC

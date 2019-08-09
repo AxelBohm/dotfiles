@@ -24,4 +24,8 @@ general.progressbar=yes
 general.systemdialogs=yes
 notification.command=printf '\a'
 notification.notifyall=flagged-only
+
+notification.command=printf '\a'
+daemon.enable=no
+
 notification.warning=300

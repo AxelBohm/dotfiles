@@ -153,7 +153,6 @@ color status yellow black '()\s*' 1
 color status default black ''
 
 # use abook instead of mutt aliases
-unset use_from
 set query_command="abook --mutt-query '%s'"
 # bind pager a noop
 macro index,pager A |'abook --add-email'\n

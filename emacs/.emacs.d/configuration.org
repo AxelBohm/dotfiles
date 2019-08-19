@@ -2,6 +2,14 @@
 #+OPTIONS: toc:nil num:nil
 
 * General settings
+
+** use-package
+
+#+BEGIN_SRC emacs-lisp
+(require 'use-package-ensure)
+(setq use-package-always-ensure t)
+#+END_SRC
+
 ** startup screen
 #+BEGIN_SRC emacs-lisp
 (setq inhibit-startup-screen t)
@@ -15,12 +23,12 @@
 (scroll-bar-mode 0)
 #+END_SRC
 
-; Matches parentheses and such in every mode
+Matches parentheses and such in every mode
 #+BEGIN_SRC emacs-lisp
 (show-paren-mode 1)
 #+END_SRC
 
-; stop creating backup~ files
+stop creating backup~ files
 #+BEGIN_SRC emacs-lisp
 (setq make-backup-files nil)
 ; stop creating #autosave# files

@@ -8,6 +8,10 @@ noremap n j
 noremap e k
 noremap i l
 
+noremap gn gj
+noremap ge ge
+noremap ci cl
+
 " move these keys to their qwerty positions because they are
 " in the way of hjkl (and E for J)
 noremap k n

@@ -4,54 +4,71 @@
 * General settings
 
 ** use-package
-
+   Why does the default behaviour require you to write `:ensure t` for every single package. If I put it there I'm sure I want it!
 #+BEGIN_SRC emacs-lisp
 (require 'use-package-ensure)
 (setq use-package-always-ensure t)
 #+END_SRC
 
 ** startup screen
+   none of these useless messages.
 #+BEGIN_SRC emacs-lisp
 (setq inhibit-startup-screen t)
 (setq initial-scratch-message "") ;; Uh, I know what Scratch is for
 #+END_SRC
 
 ** for graphical emacs
+   remove all junk bars.
 #+BEGIN_SRC emacs-lisp
 (menu-bar-mode -1)
 (tool-bar-mode -1)
 (scroll-bar-mode 0)
 #+END_SRC
 
-Matches parentheses and such in every mode
+** misc defaults
+   emacs keeps asking wether to follow symlinks. can't see a reason why not to...
+#+BEGIN_SRC emacs-lisp
+(setq vc-follow-symlinks t)
+#+END_SRC
+
+    Matches parentheses and such in every mode
 #+BEGIN_SRC emacs-lisp
 (show-paren-mode 1)
 #+END_SRC
 
-stop creating backup~ files
+    Stop creating backup~ files.
 #+BEGIN_SRC emacs-lisp
 (setq make-backup-files nil)
 ; stop creating #autosave# files
 (setq auto-save-default nil)
 #+END_SRC
 
+save position of curser even after closing file.
+#+BEGIN_SRC emacs-lisp
+(save-place-mode t)
+#+END_SRC
 ** strip trailing whitespace when saving
+   nobody needs trailing whitespace.
 #+BEGIN_SRC emacs-lisp
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 #+END_SRC
 
 ** tabs vs spaces
+   use spaces instead of tabs. one tab should be two spaces if not specified otherwise.
 #+BEGIN_SRC emacs-lisp
 (setq-default indent-tabs-mode nil)
 (setq tab-width 2)
 #+END_SRC
 
 ** Answering just 'y' or 'n' will do
+   ain't nobody got time to write entire words..
 #+BEGIN_SRC emacs-lisp
 (defalias 'yes-or-no-p 'y-or-n-p)
 #+END_SRC
 
-** quick access to emacs config
+** emacs config
+*** quick access
+   configuring never stops. keep the config file close.
 #+BEGIN_SRC emacs-lisp
 (defun ab/visit-emacs-config ()
   (interactive)
@@ -59,40 +76,43 @@ stop creating backup~ files
 
 (global-set-key (kbd "C-c e") 'ab/visit-emacs-config)
 #+END_SRC
+*** reload
+When regularly changing configs we also want to be able to use them without restarting emacs.
+#+BEGIN_SRC emacs-lisp
+(defun reload-init-file ()
+  (interactive)
+  (load-file user-init-file))
 
+(global-set-key (kbd "C-c r") 'reload-init-file)
+#+END_SRC
 
+** persistent undo
+such a handy feature!
+#+BEGIN_SRC emacs-lisp
+(global-undo-tree-mode)
+(setq undo-tree-auto-save-history t)
+(setq undo-tree-history-directory-alist '(("." . "~/.emacs.d/undo")))
+#+END_SRC
+
+** custom bindings
+#+BEGIN_SRC emacs-lisp
+(global-set-key (kbd "M-o") 'other-window)
+#+END_SRC
+** TODO buffers
+   find a good way to interact with buffers
+
+#+BEGIN_SRC emacs-lisp
+(setq ido-enable-flex-matching t)
+(setq ido-everywhere t)
+(ido-mode 1)
+#+END_SRC
 * Packages
 
 ** colors
 #+BEGIN_SRC emacs-lisp
-(use-package nord-theme
-  :ensure t)
+(use-package nord-theme)
 (add-to-list 'custom-theme-load-path (expand-file-name "~/.emacs.d/themes/"))
 (load-theme 'nord t)
-#+END_SRC
-
-** org mode
-
-#+BEGIN_SRC emacs-lisp
-(use-package org
-  :ensure t
-  :init
-  (setq org-hide-emphasis-markers t)
-  :bind (("C-c l" . org-store-link)
-         ("C-c a" . org-agenda)
-         ("C-c c" . org-capture)))
-#+END_SRC
-
-*** fancy bullets
- fancy bullets in org mode
-#+BEGIN_SRC emacs-lisp
-  (use-package org-bullets
-      :ensure t
-      :init
-      ;; (setq org-bullets-bullet-list
-      ;; '("◉" "◎" "⚫" "○" "►" "◇"))
-      :config
-      (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1))))
 #+END_SRC
 
 ** vi
@@ -100,21 +120,22 @@ stop creating backup~ files
 no way around vi keybindings
 #+BEGIN_SRC emacs-lisp
   (use-package evil
-    :ensure t
     :config
     (evil-mode 1))
 #+END_SRC
 
-more vim functionality
+*** TODO `evil-leader`
+more vim functionality.
 #+BEGIN_SRC emacs-lisp
 (use-package evil-leader
-  :ensure t)
+  :config
   (global-evil-leader-mode)
   (evil-leader/set-leader " ")
   (evil-leader/set-key
     "b" 'switch-to-buffer
-    "w" 'save-buffer)
+    "w" 'save-buffer))
 #+END_SRC
+this doesn't seem to work...
 
 *** evil settings
 evil for colemak keyboard layout
@@ -147,14 +168,59 @@ evil for colemak keyboard layout
 (define-key evil-visual-state-map "i" 'evil-next-visual-line)
 #+END_SRC
 
-** pretty-mode
-hide greek letters in latex. does auctex provide this already?
+** org mode
+
 #+BEGIN_SRC emacs-lisp
-(use-package pretty-mode
-  :ensure t)
-  (global-pretty-mode t)
-  (pretty-activate-groups
-   '(:sub-and-superscripts :greek :arithmetic-nary))
+(use-package org
+  :init
+  (setq org-hide-emphasis-markers t)
+  :bind (("C-c l" . org-store-link)
+         ("C-c a" . org-agenda)
+         ("C-c c" . org-capture)))
+#+END_SRC
+
+*** fancy bullets
+ fancy bullets in org mode
+#+BEGIN_SRC emacs-lisp
+  (use-package org-bullets
+      :init
+      :config
+      (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1))))
+#+END_SRC
+
+*** different font sizes for "headings"
+    By default the only difference between org leves is a slightly different symbol (when using `org-bullets`) and an almost invisible indent.
+    Different font sizes make much more sense.
+#+BEGIN_SRC emacs-lisp
+(custom-set-faces
+  '(org-level-1 ((t (:inherit outline-1 :height 1.9))))
+  '(org-level-2 ((t (:inherit outline-2 :height 1.5))))
+  '(org-level-3 ((t (:inherit outline-3 :height 1.2))))
+  '(org-level-4 ((t (:inherit outline-4 :height 1.0))))
+  '(org-level-5 ((t (:inherit outline-5 :height 1.0))))
+)
+#+END_SRC
+
+By default orgmode displays ellipsis for collapsed bullets. Here's a custom symbol indicating collapsed bullets.
+#+BEGIN_SRC emacs-lisp
+  (setq org-ellipsis " ...")
+#+END_SRC
+*** TODO evil org
+    better keybindings for org in evil?
+
+** pretty-mode
+   Re-display parts of the Emacs buffer as pretty Unicode symbols.
+#+BEGIN_SRC emacs-lisp
+  ;; (use-package pretty-mode
+  ;;   :ensure t)
+  ;;   (global-pretty-mode t)
+  ;;   (pretty-activate-groups
+  ;;    '(:sub-and-superscripts :greek :arithmetic-nary))
+#+END_SRC
+
+emacs ships default with `prettify-symbols mode`.
+#+BEGIN_SRC emacs-lisp
+(global-prettify-symbols-mode 1)
 #+END_SRC
 
 ** auto closing of parenthesis
@@ -162,6 +228,8 @@ does electric mode already provide this?
 #+BEGIN_SRC emacs-lisp
 (use-package smartparens
     :ensure t)
+
+(smartparens-global-mode 1)
 #+END_SRC
 
 ** commentary
@@ -172,7 +240,7 @@ gc comments stuff out
 (evil-commentary-mode)
 #+END_SRC
 
-** latex
+** LaTex
    which package to use? `tex-site` or `tex` ?
    is auctex itself a package?
 #+BEGIN_SRC emacs-lisp
@@ -218,7 +286,6 @@ gc comments stuff out
 
 #+BEGIN_SRC emacs-lisp
 (use-package company
-  :ensure t
   :init
   (setq company-dabbrev-ignore-case t
         company-show-numbers t)
@@ -232,11 +299,10 @@ gc comments stuff out
 ** snippets
 #+BEGIN_SRC emacs-lisp
 (use-package yasnippet
-  :ensure t
   :init
   (yas-global-mode 1))
   ; :config
-  ; (add-to-list 'yas-snippet-dirs (ha/emacs-subdirectory "snippets")))
+  ; (add-to-list 'yas-snippet-dirs ("~/.emacs.d/snippets")))
 #+END_SRC
 
 ** spell checking

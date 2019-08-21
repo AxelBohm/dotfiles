@@ -4,7 +4,7 @@
 * General settings
 
 ** use-package
-   Why does the default behaviour require you to write `:ensure t` for every single package. If I put it there I'm sure I want it!
+   Why does the default behaviour require you to write =:ensure t= for every single package. If I put it there I'm sure I want it!
 #+BEGIN_SRC emacs-lisp
 (require 'use-package-ensure)
 (setq use-package-always-ensure t)
@@ -124,7 +124,7 @@ no way around vi keybindings
     (evil-mode 1))
 #+END_SRC
 
-*** TODO `evil-leader`
+*** TODO =evil-leader=
 more vim functionality.
 #+BEGIN_SRC emacs-lisp
 (use-package evil-leader
@@ -164,7 +164,7 @@ evil for colemak keyboard layout
 (define-key evil-motion-state-map "l" 'evil-insert)
 (define-key evil-motion-state-map "L" 'evil-insert-line)
 
-; `i` in visual mode needs extra remap
+; =i= in visual mode needs extra remap
 (define-key evil-visual-state-map "i" 'evil-next-visual-line)
 #+END_SRC
 
@@ -189,7 +189,7 @@ evil for colemak keyboard layout
 #+END_SRC
 
 *** different font sizes for "headings"
-    By default the only difference between org leves is a slightly different symbol (when using `org-bullets`) and an almost invisible indent.
+    By default the only difference between org leves is a slightly different symbol (when using =org-bullets=) and an almost invisible indent.
     Different font sizes make much more sense.
 #+BEGIN_SRC emacs-lisp
 (custom-set-faces
@@ -218,7 +218,7 @@ By default orgmode displays ellipsis for collapsed bullets. Here's a custom symb
   ;;    '(:sub-and-superscripts :greek :arithmetic-nary))
 #+END_SRC
 
-emacs ships default with `prettify-symbols mode`.
+emacs ships default with =prettify-symbols mode=.
 #+BEGIN_SRC emacs-lisp
 (global-prettify-symbols-mode 1)
 #+END_SRC
@@ -241,7 +241,7 @@ gc comments stuff out
 #+END_SRC
 
 ** LaTex
-   which package to use? `tex-site` or `tex` ?
+   which package to use? =tex-site= or =tex= ?
    is auctex itself a package?
 #+BEGIN_SRC emacs-lisp
 (use-package tex-site

@@ -19,7 +19,7 @@ set spoolfile = "+INBOX"
 bind index,pager gg noop
 bind index,pager g noop
 bind index gg first-entry
-unmailboxes *
+# unmailboxes *
 mailboxes =uniwien =------------------- "=INBOX.Trash" "=INBOX" "=INBOX.Archive.2018" "=INBOX.Sent" "=INBOX.Drafts" "=INBOX.Junk" "=INBOX.Archive"
 macro index,pager gi "<change-folder>=INBOX<enter>" "Go to inbox."
 macro index,pager gs "<change-folder>=INBOX.Sent<enter>" "Go to sent."

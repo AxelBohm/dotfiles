@@ -9,7 +9,7 @@ noremap e k
 noremap i l
 
 noremap gn gj
-noremap ge ge
+noremap ge gk
 noremap ci cl
 
 " move these keys to their qwerty positions because they are

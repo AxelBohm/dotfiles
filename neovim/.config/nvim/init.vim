@@ -255,15 +255,15 @@ augroup latex
     autocmd!
     autocmd FileType tex setlocal shiftwidth=2 tabstop=2
 
-    autocmd FileType tex inoremap ;n ^{}<left>
-    autocmd FileType tex inoremap ;m _{}<left>
+    autocmd FileType tex inoremap ;j ^{}<left>
+    autocmd FileType tex inoremap ;k _{}<left>
     autocmd FileType tex inoremap ;r \R
-    autocmd FileType tex inoremap ;k _{k}
-    autocmd FileType tex inoremap ;j _{k+1}
+    autocmd FileType tex inoremap ;e _k
+    autocmd FileType tex inoremap ;n _{k+1}
     autocmd FileType tex inoremap ;h _{k+2}
-    autocmd FileType tex inoremap ;l _{k-1}
-    autocmd FileType tex inoremap ;i ^{k}
-    autocmd FileType tex inoremap ;u ^{k+1}
+    autocmd FileType tex inoremap ;i _{k-1}
+    autocmd FileType tex inoremap ;u ^{k}
+    autocmd FileType tex inoremap ;l ^{k+1}
     autocmd FileType tex inoremap ;s ^*
     autocmd FileType tex inoremap ;t ^2
 

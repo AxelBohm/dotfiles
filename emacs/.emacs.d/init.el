@@ -31,7 +31,7 @@
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (smartparens-config yasnippet use-package smartparens pretty-mode org-bullets nord-theme evil-leader evil-commentary company auctex))))
+    (auctex-latexmk which-key smartparens-config yasnippet use-package smartparens pretty-mode org-bullets nord-theme evil-leader evil-commentary company auctex))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

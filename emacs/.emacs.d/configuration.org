@@ -4,201 +4,406 @@
 * General settings
 
 ** use-package
-   Why does the default behaviour require you to write =:ensure t= for every single package. If I put it there I'm sure I want it!
+
+Why does the default behaviour require you to write =:ensure t= for every single package. If I put it there I'm sure I want it!
+
 #+BEGIN_SRC emacs-lisp
-(require 'use-package-ensure)
-(setq use-package-always-ensure t)
+  (require 'use-package-ensure)
+  (setq use-package-always-ensure t)
 #+END_SRC
 
 ** startup screen
-   none of these useless messages.
+
+none of these useless messages.
+
 #+BEGIN_SRC emacs-lisp
-(setq inhibit-startup-screen t)
-(setq initial-scratch-message "") ;; Uh, I know what Scratch is for
+  (setq inhibit-startup-screen t)
+  (setq initial-scratch-message "") ;; Uh, I know what Scratch is for
 #+END_SRC
 
 ** for graphical emacs
-   remove all junk bars.
+
+remove all junk bars.
+
 #+BEGIN_SRC emacs-lisp
-(menu-bar-mode -1)
-(tool-bar-mode -1)
-(scroll-bar-mode 0)
+  (menu-bar-mode -1)
+  (tool-bar-mode -1)
+  (scroll-bar-mode 0)
 #+END_SRC
 
 ** misc defaults
-   emacs keeps asking wether to follow symlinks. can't see a reason why not to...
+
+emacs keeps asking wether to follow symlinks. This has the advantage that emacs' version control features work, but the disadvantage that the current directory is changed to weired location (because of stow).
+
 #+BEGIN_SRC emacs-lisp
-(setq vc-follow-symlinks t)
+  (setq vc-follow-symlinks t)
 #+END_SRC
 
-    Matches parentheses and such in every mode
+Matches parentheses and such in every mode
+
 #+BEGIN_SRC emacs-lisp
-(show-paren-mode 1)
+  (show-paren-mode 1)
 #+END_SRC
 
-    Stop creating backup~ files.
+Stop creating backup~ and #autosave# files.
+
 #+BEGIN_SRC emacs-lisp
-(setq make-backup-files nil)
-; stop creating #autosave# files
-(setq auto-save-default nil)
+  (setq make-backup-files nil)
+  (setq auto-save-default nil)
 #+END_SRC
 
 save position of curser even after closing file.
+
 #+BEGIN_SRC emacs-lisp
-(save-place-mode t)
+  (save-place-mode t)
 #+END_SRC
-** strip trailing whitespace when saving
-   nobody needs trailing whitespace.
+
+ain't nobody got time to write entire words..
+
 #+BEGIN_SRC emacs-lisp
-(add-hook 'before-save-hook 'delete-trailing-whitespace)
+  (defalias 'yes-or-no-p 'y-or-n-p)
+#+END_SRC
+
+** strip trailing whitespace when saving
+
+nobody needs trailing whitespace.
+
+#+BEGIN_SRC emacs-lisp
+  (add-hook 'before-save-hook 'delete-trailing-whitespace)
 #+END_SRC
 
 ** tabs vs spaces
-   use spaces instead of tabs. one tab should be two spaces if not specified otherwise.
+
+use spaces instead of tabs. one tab should be two spaces if not specified otherwise.
+
 #+BEGIN_SRC emacs-lisp
-(setq-default indent-tabs-mode nil)
-(setq tab-width 2)
+  (setq-default indent-tabs-mode nil)
+  (define-key text-mode-map (kbd "<tab>") 'tab-to-tab-stop)
+  (global-set-key (kbd "TAB") 'tab-to-tab-stop)
+  (setq tab-stop-list (number-sequence 2 20 2))
 #+END_SRC
 
-** Answering just 'y' or 'n' will do
-   ain't nobody got time to write entire words..
+makes actual tabs appear as specified number of spaces.
+
 #+BEGIN_SRC emacs-lisp
-(defalias 'yes-or-no-p 'y-or-n-p)
+  (setq tab-width 2)
 #+END_SRC
 
 ** emacs config
 *** quick access
-   configuring never stops. keep the config file close.
-#+BEGIN_SRC emacs-lisp
-(defun ab/visit-emacs-config ()
-  (interactive)
-  (find-file "~/.emacs.d/configuration.org"))
 
-(global-set-key (kbd "C-c e") 'ab/visit-emacs-config)
+configuring never stops. keep the config file close.
+
+#+BEGIN_SRC emacs-lisp
+  (defun ab/visit-emacs-config ()
+    (interactive)
+    (find-file "~/.emacs.d/configuration.org"))
+
+  (global-set-key (kbd "C-c e") 'ab/visit-emacs-config)
 #+END_SRC
-*** reload
-When regularly changing configs we also want to be able to use them without restarting emacs.
-#+BEGIN_SRC emacs-lisp
-(defun reload-init-file ()
-  (interactive)
-  (load-file user-init-file))
 
-(global-set-key (kbd "C-c r") 'reload-init-file)
+*** reload
+
+When regularly changing configs we also want to be able to use them without restarting emacs.
+
+#+BEGIN_SRC emacs-lisp
+  (defun reload-init-file ()
+    (interactive)
+    (load-file user-init-file))
+
+  (global-set-key (kbd "C-c r") 'reload-init-file)
 #+END_SRC
 
 ** persistent undo
+
 such a handy feature!
+
 #+BEGIN_SRC emacs-lisp
-(global-undo-tree-mode)
-(setq undo-tree-auto-save-history t)
-(setq undo-tree-history-directory-alist '(("." . "~/.emacs.d/undo")))
+  (global-undo-tree-mode)
+    (setq undo-tree-auto-save-history t)
+    (setq undo-tree-history-directory-alist '(("." . "~/.emacs.d/undo")))
 #+END_SRC
 
 ** custom bindings
-#+BEGIN_SRC emacs-lisp
-(global-set-key (kbd "M-o") 'other-window)
-#+END_SRC
-** TODO buffers
-   find a good way to interact with buffers
+
+Quickly cycle through windows.
 
 #+BEGIN_SRC emacs-lisp
-(setq ido-enable-flex-matching t)
-(setq ido-everywhere t)
-(ido-mode 1)
+  (global-set-key (kbd "M-o") 'other-window)
 #+END_SRC
+** TODO buffers
+
+find a good way to interact with buffers. check out the [[https://www.emacswiki.org/emacs/SwitchingBuffers][emacs wiki]].
+
+This provides a small bar at the bottom with possible suggestions like all the files in the current directory or the open buffers when switching buffer.
+#+BEGIN_SRC emacs-lisp
+  (setq ido-enable-flex-matching t)
+  (setq ido-everywhere t)
+  (ido-mode 1)
+#+END_SRC
+
+Switch back and forth between the two MRU buffers.
+
+#+BEGIN_SRC emacs-lisp
+  (defun ab/switch-to-previous-buffer ()
+  (interactive)
+  (switch-to-buffer (other-buffer (current-buffer) 1)))
+#+END_SRC
+
 * Packages
 
 ** colors
+
 #+BEGIN_SRC emacs-lisp
-(use-package nord-theme)
-(add-to-list 'custom-theme-load-path (expand-file-name "~/.emacs.d/themes/"))
-(load-theme 'nord t)
+  (use-package nord-theme)
+  (add-to-list 'custom-theme-load-path (expand-file-name "~/.emacs.d/themes/"))
+  (load-theme 'nord t)
 #+END_SRC
 
 ** vi
+
 No way around vi keybindings!
 
-By default =C-u= is not bound to srolling up (as it should be).
-For some reason this needs to be called before =evil= is loaded..
-#+BEGIN_SRC emacs-lisp
-  (setq evil-want-C-u-scroll t)
-#+END_SRC
-
-Actually load evil mode.
 #+BEGIN_SRC emacs-lisp
   (use-package evil
+    :init
+    (setq evil-want-C-u-scroll t)
     :config
     (evil-mode 1))
 #+END_SRC
 
+By default =C-u= is not bound to srolling up (as it should be).
+For some reason this needs to be called before =evil= is loaded..
 
-*** TODO =evil-leader=
+*** =evil-leader=
+
 more vim functionality.
-#+BEGIN_SRC emacs-lisp
-(use-package evil-leader
-  :config
-  (global-evil-leader-mode)
-  (evil-leader/set-leader " ")
-  (evil-leader/set-key
-    "b" 'switch-to-buffer
-    "w" 'save-buffer))
-#+END_SRC
-this doesn't seem to work...
 
-*** evil settings
+But first unbind some keys so they can have different functions. do they really? doesn't seem like it..
+
+#+BEGIN_SRC emacs-lisp
+  (with-eval-after-load 'evil-maps
+    (define-key evil-motion-state-map (kbd "SPC") nil)
+    (define-key evil-motion-state-map (kbd "RET") nil))
+  ;;   (define-key evil-motion-state-map (kbd "TAB") nil))
+#+END_SRC
+
+Set the leader key and some very basic keybindings.
+
+#+BEGIN_SRC emacs-lisp
+  (use-package evil-leader
+    :config
+    (global-evil-leader-mode)
+    (evil-leader/set-leader "SPC")
+    (evil-leader/set-key
+      "b" 'switch-to-buffer
+      "r" 'reload-init-file
+      "e" 'ab/visit-emacs-config
+      "w" 'save-buffer))
+#+END_SRC
+
+Most of the time I work with two buffers. I want a really convenient way to switch back and forth.
+
+#+BEGIN_SRC emacs-lisp
+  (evil-leader/set-key "SPC" 'ab/switch-to-previous-buffer)
+#+END_SRC
+
+*** colemak settings
 evil for colemak keyboard layout
 #+BEGIN_SRC emacs-lisp
-; i needs to be unbound first
-(define-key evil-normal-state-map "i" nil)
+(with-eval-after-load 'evil-maps
+  ; i needs to be unbound first
+  (define-key evil-normal-state-map "i" nil)
 
-(define-key evil-motion-state-map "n" 'evil-next-line)
-(define-key evil-motion-state-map "N" 'evil-join)
-(define-key evil-motion-state-map "gn" 'evil-next-visual-line)
-(define-key evil-motion-state-map "gN" 'evil-next-visual-line)
-(define-key evil-motion-state-map "e" 'evil-previous-line)
-(define-key evil-motion-state-map "ge" 'evil-previous-visual-line)
-(define-key evil-motion-state-map "E" 'evil-lookup)
-(define-key evil-motion-state-map "i" 'evil-forward-char)
-(define-key evil-motion-state-map "j" 'evil-forward-word-end)
-(define-key evil-motion-state-map "J" 'evil-forward-WORD-end)
-(define-key evil-motion-state-map "gj" 'evil-backward-word-end)
-(define-key evil-motion-state-map "gJ" 'evil-backward-WORD-end)
-(define-key evil-motion-state-map "k" 'evil-search-next)
-(define-key evil-motion-state-map "K" 'evil-search-previous)
-(define-key evil-motion-state-map "gk" 'evil-next-match)
-(define-key evil-motion-state-map "gK" 'evil-previous-match)
-(define-key evil-motion-state-map "zi" 'evil-scroll-column-right)
-(define-key evil-motion-state-map "zI" 'evil-scroll-right)
-(define-key evil-motion-state-map "l" 'evil-insert)
-(define-key evil-motion-state-map "L" 'evil-insert-line)
+  (define-key evil-motion-state-map "n" 'evil-next-line)
+  (define-key evil-motion-state-map "N" 'evil-join)
+  (define-key evil-motion-state-map "gn" 'evil-next-visual-line)
+  (define-key evil-motion-state-map "gN" 'evil-next-visual-line)
+  (define-key evil-motion-state-map "e" 'evil-previous-line)
+  (define-key evil-motion-state-map "ge" 'evil-previous-visual-line)
+  (define-key evil-motion-state-map "E" 'evil-lookup)
+  (define-key evil-motion-state-map "i" 'evil-forward-char)
+  (define-key evil-motion-state-map "j" 'evil-forward-word-end)
+  (define-key evil-motion-state-map "J" 'evil-forward-WORD-end)
+  (define-key evil-motion-state-map "gj" 'evil-backward-word-end)
+  (define-key evil-motion-state-map "gJ" 'evil-backward-WORD-end)
+  (define-key evil-motion-state-map "k" 'evil-search-next)
+  (define-key evil-motion-state-map "K" 'evil-search-previous)
+  (define-key evil-motion-state-map "gk" 'evil-next-match)
+  (define-key evil-motion-state-map "gK" 'evil-previous-match)
+  (define-key evil-motion-state-map "zi" 'evil-scroll-column-right)
+  (define-key evil-motion-state-map "zI" 'evil-scroll-right)
+  (define-key evil-motion-state-map "l" 'evil-insert)
+  (define-key evil-motion-state-map "L" 'evil-insert-line))
 
-; =i= in visual mode needs extra remap
-(define-key evil-visual-state-map "i" 'evil-next-visual-line)
+  ; =i= in visual mode needs extra remap
+  ;; (define-key evil-visual-state-map "i" 'evil-next-visual-char)
+#+END_SRC
+
+Switching windows also relies on the `hjkl` motions.
+
+#+BEGIN_SRC emacs-lisp
+  (with-eval-after-load 'evil-maps
+    (define-key evil-window-map "n" 'evil-window-down)
+    (define-key evil-window-map "e" 'evil-window-up)
+    (define-key evil-window-map "i" 'evil-window-right))
 #+END_SRC
 
 ** org mode
 
+Load orgmode plus some standard keybindings.
+
 #+BEGIN_SRC emacs-lisp
-(use-package org
-  :init
-  (setq org-hide-emphasis-markers t)
-  :bind (("C-c l" . org-store-link)
-         ("C-c a" . org-agenda)
-         ("C-c c" . org-capture)))
+  (use-package org
+    :init
+    (setq org-hide-emphasis-markers t
+          org-return-follows-link t
+          org-todo-keywords '((sequence "TODO(t)" "Waiting(w)" "|" "DONE(d)")
+                              (sequence "TODO(t)" "Didn't succeed(s)" "|" "to hard(h)" "DONE(d)")))
+    :bind (("C-c l" . org-store-link)
+           ("C-c a" . org-agenda)
+           ("C-c c" . org-capture)))
+#+END_SRC
+
+~org-return-follow-links~ is supposed to give ~RET~ some functionality in evil mode (which it usually doesn't have). However, [[*make RET better][see this section]] for giving the enter key even more functionality.
+
+*** config
+
+Tell org where I store my org stuff.
+
+#+BEGIN_SRC emacs-lisp
+  (setq org-directory "~/org")
+
+  (defun org-file-path (filename)
+    "Return the absolute address of an org file, given its relative name."
+    (concat (file-name-as-directory org-directory) filename))
+
+  (setq org-inbox-file "~/org/inbox.org")
+  (setq org-index-file (org-file-path "index.org"))
+  (setq org-archive-location
+    (concat (org-file-path "archive.org") "::* From %s"))
+#+END_SRC
+
+This sets the file from which the agenda is derived. All my todos are in the index file.
+
+#+BEGIN_SRC emacs-lisp
+  (setq org-agenda-files (list org-index-file))
+  ;; (setq org-agenda-files (list org-directory))
+#+END_SRC
+
+By default org-mode does super ugly truncation of long lines (apparently because of tables). I want line wrapping, however.
+
+#+BEGIN_SRC emacs-lisp
+  (setq org-startup-truncated 'nil)
+#+END_SRC
+
+*** keybindings
+
+Quickly access the org index file.
+
+#+BEGIN_SRC emacs-lisp
+(defun ab/open-index-file ()
+  "Open the master org TODO list."
+  (interactive)
+  (find-file org-index-file)
+  (end-of-buffer))
+
+(global-set-key (kbd "C-c i") 'ab/open-index-file)
+#+END_SRC
+
+Actually, I like vims leader key much better.
+
+#+BEGIN_SRC emacs-lisp
+  (evil-leader/set-key
+      "i" 'ab/open-index-file)
+#+END_SRC
+
+*** make RET better
+
+From [[http://kitchingroup.cheme.cmu.edu/blog/2017/04/09/A-better-return-in-org-mode/][this discussion]], I got the code to replace M-RET in lists with just RET, so that Org acts more like other word processors.
+
+#+BEGIN_SRC emacs-lisp
+  ;; (defun ab/org-return (&optional ignore)
+  ;;   "Add new list item, heading or table row with RET.
+  ;; A double return on an empty element deletes it.
+  ;; Use a prefix arg to get regular RET. "
+  ;;   (interactive "P")
+  ;;   (if ignore
+  ;;       (org-return)
+  ;;     (cond
+  ;;      ;; Open links like usual
+  ;;      ((eq 'link (car (org-element-context)))
+  ;;       (org-return))
+  ;;      ;; lists end with two blank lines, so we need to make sure we are also not
+  ;;      ;; at the beginning of a line to avoid a loop where a new entry gets
+  ;;      ;; created with only one blank line.
+  ;;      ((and (org-in-item-p) (not (bolp)))
+  ;;       (if (org-element-property :contents-begin (org-element-context))
+  ;;           (org-insert-heading)
+  ;;         (beginning-of-line)
+  ;;         (setf (buffer-substring
+  ;;                (line-beginning-position) (line-end-position)) "")
+  ;;         (org-return)))
+  ;;      ((org-at-heading-p)
+  ;;       (if (not (string= "" (org-element-property :title (org-element-context))))
+  ;;           (progn (org-end-of-meta-data)
+  ;;                  (org-insert-heading))
+  ;;         (beginning-of-line)
+  ;;         (setf (buffer-substring
+  ;;                (line-beginning-position) (line-end-position)) "")))
+  ;;      ((org-at-table-p)
+  ;;       (if (-any?
+  ;;            (lambda (x) (not (string= "" x)))
+  ;;            (nth
+  ;;             (- (org-table-current-dline) 1)
+  ;;             (org-table-to-lisp)))
+  ;;           (org-return)
+  ;;         ;; empty row
+  ;;         (beginning-of-line)
+  ;;         (setf (buffer-substring
+  ;;                (line-beginning-position) (line-end-position)) "")
+  ;;         (org-return)))
+  ;;      (t
+  ;;       (org-return)))))
+
+  ;; (define-key org-mode-map (kbd "RET")  #'ab/org-return)
+#+END_SRC
+*** org capture
+
+Templates for capuring. The default keybinding is ~C-c c~ . Also, ~%a~ expands to a link to the file (and position) from which =org-capture= was called.
+I think =%i= is an indent?
+
+#+BEGIN_SRC emacs-lisp
+  (setq org-capture-templates
+       '(("l" "todo with Link" entry
+         (file+headline org-index-file "Inbox")
+         "*** TODO %?\n  %i\n  See: %a")
+
+        ("n" "thought or Note"  entry
+         (file+headline org-index-file "Inbox")
+         "*** %?\n")
+
+        ("t" "Todo" entry
+         (file+headline org-index-file "Inbox")
+         "*** TODO %?\n")))
 #+END_SRC
 
 *** fancy bullets
- fancy bullets in org mode
+
+fancy bullets in org mode
+
 #+BEGIN_SRC emacs-lisp
   (use-package org-bullets
-      :init
-      :config
-      (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1))))
+    :init
+    :config
+    (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1))))
 #+END_SRC
 
 *** different font sizes for "headings"
-    By default the only difference between org leves is a slightly different symbol (when using =org-bullets=) and an almost invisible indent.
-    Different font sizes make much more sense.
+
+By default the only difference between org leves is a slightly different symbol (when using =org-bullets=) and an almost invisible indent.
+Different font sizes make much more sense.
+
 #+BEGIN_SRC emacs-lisp
 (custom-set-faces
   '(org-level-1 ((t (:inherit outline-1 :height 1.9))))
@@ -210,14 +415,29 @@ evil for colemak keyboard layout
 #+END_SRC
 
 By default orgmode displays ellipsis for collapsed bullets. Here's a custom symbol indicating collapsed bullets.
+
 #+BEGIN_SRC emacs-lisp
   (setq org-ellipsis " ...")
 #+END_SRC
 *** TODO evil org
-    better keybindings for org in evil?
+
+better keybindings for org in evil?
+
+*** opening pdfs
+
+I want pdfs to be opened in an external pdf viewer.
+
+#+BEGIN_SRC emacs-lisp
+(add-hook 'org-mode-hook
+      '(lambda ()
+         (delete '("\\.pdf\\'" . default) org-file-apps)
+         (add-to-list 'org-file-apps '("\\.pdf\\'" . "zathura %s"))))
+#+END_SRC
 
 ** pretty-mode
-   Re-display parts of the Emacs buffer as pretty Unicode symbols.
+
+Re-display parts of the Emacs buffer as pretty Unicode symbols.
+
 #+BEGIN_SRC emacs-lisp
   ;; (use-package pretty-mode
   ;;   :ensure t)
@@ -227,17 +447,20 @@ By default orgmode displays ellipsis for collapsed bullets. Here's a custom symb
 #+END_SRC
 
 emacs ships default with =prettify-symbols mode=.
+
 #+BEGIN_SRC emacs-lisp
   (global-prettify-symbols-mode 1)
 #+END_SRC
 
 ** auto closing of parenthesis
-does electric mode already provide this?
-#+BEGIN_SRC emacs-lisp
-(use-package smartparens
-    :ensure t)
 
-(smartparens-global-mode 1)
+does electric mode already provide this?
+
+#+BEGIN_SRC emacs-lisp
+  (use-package smartparens
+      :ensure t)
+
+  (smartparens-global-mode 1)
 #+END_SRC
 
 ** commentary
@@ -249,26 +472,27 @@ gc comments stuff out
 #+END_SRC
 
 ** LaTex
-   which package to use? =tex-site= or =tex= ?
-   is auctex itself a package?
+which package to use? =tex-site= or =tex= ?
+is auctex itself a package?
+
 #+BEGIN_SRC emacs-lisp
-    ;; (use-package tex-site
-    ;;   :ensure auctex
-    ;;   :mode ("\\.tex\\'" . latex-mode)
-    ;;   :config
-    ;;   (setq TeX-auto-save t)
-    ;;   (setq TeX-parse-self t)
-    ;;   (setq-default TeX-master nil)
-    ;;   (add-hook 'LaTeX-mode-hook
-    ;;             (lambda ()
-    ;;               (company-mode)
-    ;;               (smartparens-mode)
-    ;;               (turn-on-reftex)
-    ;;               (setq reftex-plug-into-AUCTeX t)
-    ;;               (reftex-isearch-minor-mode)
-    ;;               (setq TeX-PDF-mode t)
-    ;;               (setq TeX-source-correlate-method 'synctex)
-    ;;               (setq TeX-source-correlate-start-server t)))
+  (use-package tex-site
+    :ensure auctex
+    :mode ("\\.tex\\'" . latex-mode)
+    :config
+    (setq TeX-auto-save t)
+    (setq TeX-parse-self t)
+    (setq-default TeX-master nil)
+    (add-hook 'LaTeX-mode-hook
+              (lambda ()
+                (company-mode)
+                (smartparens-mode)
+                (turn-on-reftex)
+                (setq reftex-plug-into-AUCTeX t)
+                (reftex-isearch-minor-mode)
+                (setq TeX-PDF-mode t)
+                (setq TeX-source-correlate-method 'synctex)
+                (setq TeX-source-correlate-start-server t))))
 
     ;; ;; Update PDF buffers after successful LaTeX runs
     ;; (add-hook 'TeX-after-TeX-LaTeX-command-finished-hook
@@ -281,24 +505,26 @@ gc comments stuff out
 
     ;; ;; (setq TeX-engine 'latex)
     ;; (setq TeX-command-default "Latexmk")
-  (use-package auctex-latexmk
-    :ensure t
-    :init
-    (with-eval-after-load 'tex
-      (auctex-latexmk-setup))
-    :config
+  ;; (use-package auctex-latexmk
+  ;;   :ensure auctex
+  ;;   :init
+  ;;   (with-eval-after-load 'tex
+  ;;     (auctex-latexmk-setup))
+  ;;   :config
 
-    ;; Use Latexmk as the default command.
-    ;; (We have to use a hook instead of `setq-default' because AUCTeX sets this variable on mode activation.)
-    (defun my-tex-set-latexmk-as-default ()
-      (setq TeX-command-default "LatexMk"))
-    (add-hook 'TeX-mode-hook #'my-tex-set-latexmk-as-default)
+  ;;   ;; Use Latexmk as the default command.
+  ;;   ;; (We have to use a hook instead of `setq-default' because AUCTeX sets this variable on mode activation.)
+  ;;   (defun my-tex-set-latexmk-as-default ()
+  ;;     (setq TeX-command-default "LatexMk"))
+  ;;   (add-hook 'TeX-mode-hook #'my-tex-set-latexmk-as-default)
 
-    ;; Compile to PDF when `TeX-PDF-mode' is active.
-    (setq auctex-latexmk-inherit-TeX-PDF-mode t))
+  ;;   ;; Compile to PDF when `TeX-PDF-mode' is active.
+  ;;   (setq auctex-latexmk-inherit-TeX-PDF-mode t))
+  ;; (setq TeX-auto-save t)
 
     (setq TeX-view-program-selection '((output-pdf "Zathura"))
            TeX-source-correlate-start-server t)
+
 #+END_SRC
 
 ** auto completion
@@ -390,4 +616,23 @@ help with commands
   :diminish which-key-mode
   :config
   (which-key-mode +1))
+#+END_SRC
+
+** dashboard
+
+display most recently used files on startup.
+See the [[https://github.com/emacs-dashboard/emacs-dashboard][github]].
+
+This is a dependency.
+
+#+BEGIN_SRC emacs-lisp
+  (use-package page-break-lines)
+#+END_SRC
+
+actual dashboard
+
+#+BEGIN_SRC emacs-lisp
+(use-package dashboard
+  :config
+  (dashboard-setup-startup-hook))
 #+END_SRC

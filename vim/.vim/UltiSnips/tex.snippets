@@ -223,7 +223,7 @@ snippet eql "Equation with label" bA
 \end{equation}
 endsnippet
 
-snippet al "Align" bA
+snippet al "Align" b
 \begin{align}
 	$0
 \end{align}
@@ -247,7 +247,7 @@ snippet eqann "Equation array without numbers" b
 \end{eqnarray*}
 endsnippet
 
-snippet cases "cases" b
+snippet cases "cases" w
 \begin{cases}
 	$0
 \end{cases}
@@ -382,6 +382,12 @@ endsnippet
 # My STUFF #
 #################
 
+context "math()"
+snippet abs "absolute value" w
+\lvert ${0} \rvert
+endsnippet
+
+context "math()"
 snippet norm "norm" w
 \lVert ${0} \rVert
 endsnippet
@@ -508,19 +514,23 @@ snippet lab "label" w
 \label{${0}}
 endsnippet
 
+context "math()"
 snippet over "overset" w
 \overset{${1:top}}{${2:=}} ${0}
 endsnippet
 
+context "math()"
 snippet bm "bold math" w
 \bm{${1}}${0}
 endsnippet
 
+context "math()"
 snippet bar "overbar (small)" w
 \bar{${1}}${0}
 endsnippet
 
-snippet i "element" w
+context "math()"
+snippet in "element" wA
 \in ${0}
 endsnippet
 
@@ -639,6 +649,15 @@ snippet xk "x_{k}" iA
 x_k
 endsnippet
 
-snippet xk+1 "x_{k}" iA
+snippet xK "x_{k+1}" iA
 x_{k+1}
 endsnippet
+
+snippet yk "y_{k}" iA
+y_k
+endsnippet
+
+snippet yK "y_{k+1}" iA
+y_{k+1}
+endsnippet
+

@@ -1,7 +1,6 @@
 ;; Basic config
 
 
-(set-face-background 'region "blue3")
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (require 'package)
 (setq package-archives '(("org"       . "http://orgmode.org/elpa/")
@@ -9,11 +8,6 @@
                          ("melpa"     . "http://melpa.org/packages/")
                          ("marmalade" . "http://marmalade-repo.org/packages/")))
 
-; ; List the packages you want
-; (setq package-list '(evil
-;                      org-bullets
-;                      evil-leader))
-; Activate all the packages (in particular autoloads)
 (package-initialize)
 
 ;; Bootstrap `use-package`
@@ -22,6 +16,10 @@
   (package-install 'use-package))
 (require 'use-package)
 
+;; otherwise emacs will ask on startup
+(setq vc-follow-symlinks t)
+
+;; load actual config file
 (org-babel-load-file "~/.emacs.d/configuration.org")
 
 (custom-set-variables
@@ -31,7 +29,7 @@
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (auctex-latexmk which-key smartparens-config yasnippet use-package smartparens pretty-mode org-bullets nord-theme evil-leader evil-commentary company auctex))))
+    (dashboard page-break-lines auctex-latexmk which-key smartparens-config yasnippet use-package smartparens pretty-mode org-bullets nord-theme evil-leader evil-commentary company auctex))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

@@ -109,8 +109,8 @@ macro index,pager o2 '<sync-mailbox><enter-command>source /home/xel/.config/mutt
 ## colemak
 bind pager n next-line
 bind pager e previous-line
-bind index,query,alias,browser,compose n next-entry
-bind index,query,alias,browser,compose e previous-entry
+bind index,query,alias,browser,compose,attach n next-entry
+bind index,query,alias,browser,compose,attach e previous-entry
 bind pager i view-attachments
 macro index i <display-message><sync-mailbox>
 bind browser i select-entry

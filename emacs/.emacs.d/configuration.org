@@ -257,6 +257,7 @@ This is a evil clone of the surround package found in Vim.
     :config
     (global-evil-surround-mode 1))
 #+END_SRC
+
 *** colemak settings
 
 Evil for colemak keyboard layout.
@@ -645,7 +646,7 @@ is AucTeX itself a package?
 ** snippets
 
 #+BEGIN_SRC emacs-lisp
-    (use-package yasnippet)
+  (use-package yasnippet)
       ;; :config
       ;; (add-to-list 'yas-snippet-dirs ("~/.emacs.d/snippets")))
 
@@ -656,7 +657,8 @@ is AucTeX itself a package?
 
     (define-key yas-minor-mode-map "C-e" 'yas-expand)
     (define-key yas-minor-mode-map "\C-c \C-v" 'yas-visit-snippet-file)
-    (evil-leader/set-key "n n" 'yas-visit-snippet-file)
+    (define-key yas-minor-mode-map "\C-c n" 'yas-new-snippet)
+    (evil-leader/set-key "n n" 'yas-new-snippet)
 
   ;;   (with-eval-after-load 'yasnippet
   ;;     (require 'warnings)

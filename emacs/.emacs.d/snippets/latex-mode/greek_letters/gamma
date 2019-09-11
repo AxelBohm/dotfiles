@@ -1,5 +1,5 @@
 # -*- mode: snippet -*-
-# name: gls
+# name: gamma
 # key: g
 # --
-\gls{${1:label}}
+\gamma

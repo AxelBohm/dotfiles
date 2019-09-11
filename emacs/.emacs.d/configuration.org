@@ -202,6 +202,7 @@ Set the leader key and some very basic keybindings.
     (evil-leader/set-leader "SPC")
     (evil-leader/set-key
       "b" 'switch-to-buffer
+      "q" 'kill-buffer
       "r" 'reload-init-file
       "s h" 'evil-window-split'
       "s v" 'evil-window-vsplit'
@@ -213,6 +214,12 @@ Most of the time I work with two buffers. I want a really convenient way to swit
 
 #+BEGIN_SRC emacs-lisp
   (evil-leader/set-key "SPC" 'ab/switch-to-previous-buffer)
+#+END_SRC
+
+Whenever I accidentally start a command and want to aboard it I automatically hit ~ESC~, where the correct action would be to press ~\C-g~. So map ~ESC~ to ~\C-g~.
+
+#+BEGIN_SRC emacs-lisp
+  (define-key key-translation-map (kbd "ESC") (kbd "C-g"))
 #+END_SRC
 
 *** evil mode
@@ -241,6 +248,15 @@ The function ~evil-forward-paragraph~ (default bound to ~}~) reuses Emacs' ~forw
            ad-do-it)))
 #+END_SRC
 
+*** evil surround
+
+This is a evil clone of the surround package found in Vim.
+
+#+BEGIN_SRC emacs-lisp
+  (use-package evil-surround
+    :config
+    (global-evil-surround-mode 1))
+#+END_SRC
 *** colemak settings
 
 Evil for colemak keyboard layout.
@@ -479,6 +495,12 @@ By default orgmode displays ellipsis for collapsed bullets. Here's a custom symb
   (setq org-ellipsis " ...")
 #+END_SRC
 
+in nord theme all headings seem to have the same color...
+
+#+BEGIN_SRC emacs-lisp
+  (custom-theme-set-faces 'user
+                        `(org-level-2 ((t (:foreground "yellow")))))
+#+END_SRC
 **** prettify entities
 
 Org can pretty display things like latex symbols. Indices are even nicer than in AucTex as the underscores are removed.

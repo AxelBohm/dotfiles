@@ -33,7 +33,7 @@ remove all junk bars.
 
 ** misc defaults
 
-emacs keeps asking wether to follow symlinks. This has the advantage that emacs' version control features work, but the disadvantage that the current directory is changed to weired location (because of stow).
+Emacs keeps asking wether to follow symlinks. This has the advantage that emacs' version control features work, but the disadvantage that the current directory is changed to weired location (because of stow).
 
 #+BEGIN_SRC emacs-lisp
   (setq vc-follow-symlinks t)
@@ -64,12 +64,22 @@ ain't nobody got time to write entire words..
   (defalias 'yes-or-no-p 'y-or-n-p)
 #+END_SRC
 
-show numbers
+Show line and column number in the bottom bar.
 
 #+BEGIN_SRC emacs-lisp
   (line-number-mode t)
   (column-number-mode t)
 #+END_SRC
+
+Show line numbers to the left for better jumping.
+(consider the ace jump package which shows a letter for every line for more efficient jumping)
+
+#+BEGIN_SRC emacs-lisp
+  (display-line-numbers-mode)
+  (setq display-line-numbers 'relative)
+#+END_SRC
+
+
 
 ** whitespace
 *** strip trailing whitespace when saving
@@ -323,6 +333,10 @@ emacs ships default with =prettify-symbols mode=.
 
 ** org mode                                                           :major:
 
+#+begin_center
+   =Your life in plain text=
+#+end_center
+
 Load orgmode plus some standard keybindings.
 
 #+BEGIN_SRC emacs-lisp
@@ -460,13 +474,42 @@ I think =%i= is active region. Another nice feature is ~%^{Name}~ prompts for na
          "*** TODO %?\n")))
 #+END_SRC
 
+call org-capture from anywhere (system wide). code taken from [[https://www.reddit.com/r/emacs/comments/74gkeq/system_wide_org_capture/][reddit.]]
+
+#+BEGIN_SRC emacs-lisp
+(defadvice org-switch-to-buffer-other-window
+    (after supress-window-splitting activate)
+  "Delete the extra window if we're in a capture frame"
+  (if (equal "capture" (frame-parameter nil 'name))
+      (delete-other-windows)))
+
+(defadvice org-capture-finalize
+    (after delete-capture-frame activate)
+  "Advise capture-finalize to close the frame"
+  (if (equal "capture" (frame-parameter nil 'name))
+      (delete-frame)))
+
+(defun activate-capture-frame ()
+  "run org-capture in capture frame"
+  (select-frame-by-name "capture")
+  (switch-to-buffer (get-buffer-create "*scratch*"))
+  (org-capture))
+#+END_SRC
+
+The above code, together with the follow shell command
+
+#+BEGIN_SRC shell
+  emacsclient -c -F '(quote (name . "capture"))' -e '(activate-capture-frame)'
+#+END_SRC
+
+
 *** appearance
 
 Everything that has to do with how stuff looks / is displayed.
 
 **** fancy bullets
 
-fancy bullets in org mode
+Fancy bullets in org mode. If the bullets get too fancy there is also a mode that just hides the leading stars.
 
 #+BEGIN_SRC emacs-lisp
   (use-package org-bullets
@@ -480,7 +523,7 @@ fancy bullets in org mode
 By default the only difference between org leves is a slightly different symbol (when using =org-bullets=) and an almost invisible indent.
 Different font sizes make much more sense.
 
- #+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp
  (custom-set-faces
    '(org-level-1 ((t (:inherit outline-1 :height 1.9))))
    '(org-level-2 ((t (:inherit outline-2 :height 1.5))))
@@ -488,7 +531,7 @@ Different font sizes make much more sense.
    '(org-level-4 ((t (:inherit outline-4 :height 1.0))))
    '(org-level-5 ((t (:inherit outline-5 :height 1.0))))
  )
- #+END_SRC
+#+END_SRC
 
 By default orgmode displays ellipsis for collapsed bullets. Here's a custom symbol indicating collapsed bullets.
 
@@ -496,12 +539,19 @@ By default orgmode displays ellipsis for collapsed bullets. Here's a custom symb
   (setq org-ellipsis " ...")
 #+END_SRC
 
-in nord theme all headings seem to have the same color...
+In nord theme all headings seem to have the same color...
 
 #+BEGIN_SRC emacs-lisp
-  (custom-theme-set-faces 'user
-                        `(org-level-2 ((t (:foreground "yellow")))))
+  (custom-set-faces
+    '(org-level-1 ((t (:inherit outline-1 :height 1.9))))
+    '(org-level-2 ((t (:inherit outline-2 :foreground "#A3BE8C" ))))
+    '(org-level-3 ((t (:inherit outline-3 :foreground "#81A1C1" ))))
+    '(org-level-4 ((t (:inherit outline-4 :foreground "#8FBCBB" ))))
+    '(org-level-5 ((t (:inherit outline-5 :height 1.0)))))
 #+END_SRC
+
+Next step will be to use my own nord fork as there are a couple bugs and nobody merges the pull requests...
+
 **** prettify entities
 
 Org can pretty display things like latex symbols. Indices are even nicer than in AucTex as the underscores are removed.
@@ -626,24 +676,34 @@ is AucTeX itself a package?
 
     (setq TeX-view-program-selection '((output-pdf "Zathura"))
            TeX-source-correlate-start-server t)
+#+END_SRC
 
+the latex-pretty-symbols package is supposed to contain many more unicode symbols for LaTeX entities that just prettify-symbols-mode (which is what I am currently using). Also it is supposed make subscripts and superscripts even nicer that e.g. AucTeX by not displaying the =_= or =^=.
+However, it's currently not doing anything...
+
+#+BEGIN_SRC emacs-lisp
+  (add-to-list 'load-path "~/.emacs.d/lisp/")
+  (require 'latex-pretty-symbols)
 #+END_SRC
 
 ** auto completion
 
+   company is unfortunately pretty slow...
 #+BEGIN_SRC emacs-lisp
-(use-package company
-  :init
-  (setq company-dabbrev-ignore-case t
-        company-show-numbers t)
-  (add-hook 'after-init-hook 'global-company-mode)
-  :config
-  (add-to-list 'company-backends 'company-math-symbols-unicode)
-  :bind ("C-:" . company-complete)  ; In case I don't want to wait
-  :diminish company-mode)
+  (use-package company
+    :init
+    (setq company-dabbrev-ignore-case t
+          company-show-numbers t)
+    (add-hook 'after-init-hook 'global-company-mode)
+    :config
+    (add-to-list 'company-backends 'company-math-symbols-unicode)
+    :bind ("C-:" . company-complete)              ; In case I don't want to wait
+    :diminish company-mode)
 #+END_SRC
 
 ** snippets
+
+Snippets are everything! still need to figure out how to incorporate snippets into autocompletion (the way deoplete and Ultisnips did it for vim).
 
 #+BEGIN_SRC emacs-lisp
   (use-package yasnippet)
@@ -655,10 +715,11 @@ is AucTeX itself a package?
 
     (yas-global-mode 1)
 
-    (define-key yas-minor-mode-map "C-e" 'yas-expand)
-    (define-key yas-minor-mode-map "\C-c \C-v" 'yas-visit-snippet-file)
+    (global-set-key (kbd "C-e") 'yas-expand)
+    (define-key yas-minor-mode-map "\C-c v" 'yas-visit-snippet-file)
     (define-key yas-minor-mode-map "\C-c n" 'yas-new-snippet)
-    (evil-leader/set-key "n n" 'yas-new-snippet)
+    (evil-leader/set-key "s n" 'yas-new-snippet)                        ;; Snippet New
+    (evil-leader/set-key "s v" 'yas-visit-snippet-file)                 ;; Snippet Visit
 
   ;;   (with-eval-after-load 'yasnippet
   ;;     (require 'warnings)
@@ -681,7 +742,9 @@ see [[https://stackoverflow.com/questions/14066526/unset-tab-binding-for-yasnipp
 
 ** spell checking
 
-as the name suggests. According to [[https://fasciism.com/2017/01/16/spellchecking/][this site]] Aspell is unmaintained and Hunspell is the way to go.
+As the name suggests. According to [[https://fasciism.com/2017/01/16/spellchecking/][this site]] Aspell is unmaintained and Hunspell is the way to go.
+
+Default binding: ~z =~ for suggestions on how to correct the word.
 
 #+BEGIN_SRC emacs-lisp
   (use-package flyspell
@@ -758,14 +821,14 @@ Customize what is displayed on the dashboard
                         (agenda . 5)))
 #+END_SRC
 
-
 ** projectile
 
+currently only used for the dashboard..
+
 #+BEGIN_SRC emacs-lisp
-   (use-package projectile)
-     ;; :config
-     (projectile-mode +1)
-     (define-key projectile-mode-map (kbd "s-p") 'projectile-command-map)
-     (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
+  (use-package projectile)
+    ;; :config
+    (projectile-mode +1)
+    (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
   ;; )
 #+END_SRC

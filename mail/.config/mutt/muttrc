@@ -55,6 +55,10 @@ bind index,pager S sync-mailbox
 bind index,pager R group-reply
 # macro index,pager \Cu |urlview\n
 
+# Forgotten attachment Feature
+set abort_noattach = ask-yes
+set abort_noattach_regex = "\\<(attach(|ed|ments?)|anh(ä|ae)ngen|angeh(ä|ae)ngt|anhang|anh(ä|ae)nge)\\>"
+
 ## View attachments properly.
 bind attach <return> view-mailcap
 set fast_reply                      # skip to compose when replying

@@ -474,29 +474,29 @@ I think =%i= is active region. Another nice feature is ~%^{Name}~ prompts for na
          "*** TODO %?\n")))
 #+END_SRC
 
-call org-capture from anywhere (system wide). code taken from [[https://www.reddit.com/r/emacs/comments/74gkeq/system_wide_org_capture/][reddit.]]
+Call org-capture from anywhere (system wide). Code taken from [[https://www.reddit.com/r/emacs/comments/74gkeq/system_wide_org_capture/][reddit.]]
 
 #+BEGIN_SRC emacs-lisp
-(defadvice org-switch-to-buffer-other-window
-    (after supress-window-splitting activate)
-  "Delete the extra window if we're in a capture frame"
-  (if (equal "capture" (frame-parameter nil 'name))
-      (delete-other-windows)))
+  (defadvice org-switch-to-buffer-other-window
+      (after supress-window-splitting activate)
+    "Delete the extra window if we're in a capture frame"
+    (if (equal "capture" (frame-parameter nil 'name))
+        (delete-other-windows)))
 
-(defadvice org-capture-finalize
-    (after delete-capture-frame activate)
-  "Advise capture-finalize to close the frame"
-  (if (equal "capture" (frame-parameter nil 'name))
-      (delete-frame)))
+  (defadvice org-capture-finalize
+      (after delete-capture-frame activate)
+    "Advise capture-finalize to close the frame"
+    (if (equal "capture" (frame-parameter nil 'name))
+        (delete-frame)))
 
-(defun activate-capture-frame ()
-  "run org-capture in capture frame"
-  (select-frame-by-name "capture")
-  (switch-to-buffer (get-buffer-create "*scratch*"))
-  (org-capture))
+  (defun activate-capture-frame ()
+    "run org-capture in capture frame"
+    (select-frame-by-name "capture")
+    (switch-to-buffer (get-buffer-create "*scratch*"))
+    (org-capture))
 #+END_SRC
 
-The above code, together with the follow shell command
+The above code, together with the follow shell command does the job.
 
 #+BEGIN_SRC shell
   emacsclient -c -F '(quote (name . "capture"))' -e '(activate-capture-frame)'
@@ -831,4 +831,10 @@ currently only used for the dashboard..
     (projectile-mode +1)
     (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
   ;; )
+#+END_SRC
+** python
+
+#+BEGIN_SRC emacs-lisp
+(use-package elpy)
+(elpy-enable)
 #+END_SRC

@@ -1,0 +1,6 @@
+#!/bin/bash
+address=$1;
+# st -e sh -c "echo '$address' | xclip"
+# this does not work...
+
+st -e sh -c "ranger --selectfile='$address'"

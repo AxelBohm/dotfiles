@@ -12,6 +12,8 @@ Why does the default behaviour require you to write =:ensure t= for every single
   (setq use-package-always-ensure t)
 #+END_SRC
 
+Use ~:defer~ more? see [[https://emacs.stackexchange.com/questions/19694/use-package-defer-t-and-autoloads][link]]
+
 ** startup screen
 
 none of these useless messages.
@@ -78,7 +80,6 @@ Show line numbers to the left for better jumping.
   (display-line-numbers-mode)
   (setq display-line-numbers 'relative)
 #+END_SRC
-
 
 
 ** whitespace
@@ -174,6 +175,22 @@ Switch back and forth between the two MRU buffers.
     (interactive)
     (switch-to-buffer (other-buffer (current-buffer) 1)))
 #+END_SRC
+** modeline
+
+#+BEGIN_SRC emacs-lisp
+  (setq mode-line-format
+        (list
+         "  "
+         ;; value of current buffer name
+         "%b "
+         ;; if modified
+         "[%&] "
+         ;; percent of file above current window
+         "%p "
+         ;; value of current line number
+         "(%l,%c)% "
+))
+#+END_SRC
 
 * Packages
 
@@ -243,6 +260,8 @@ load evil-mode + basic config.
     :config
     (evil-mode 1)
     (define-key evil-normal-state-map "\C-u" 'evil-scroll-up)
+    (setq evil-vsplit-window-right t) ;; sane positioning of the split
+    (setq evil-split-window-below t) ;; sane positioning of the split
     (setq evil-ex-search-case 'smart)) ;; case sensitive only if upper case letters are used
 #+END_SRC
 
@@ -634,15 +653,16 @@ is AucTeX itself a package?
     (setq TeX-auto-save t)
     (setq TeX-parse-self t)
     (setq TeX-save-query nil)  ;; save when compiling without asking
-    (setq-default TeX-master nil)
+    (setq-default TeX-master nil) ;; I'm guessing this stops asking for master file
     (add-hook 'LaTeX-mode-hook
               (lambda ()
                 (company-mode)
                 (smartparens-mode)
                 (turn-on-reftex)
+                (reftex-mode)
                 (setq reftex-plug-into-AUCTeX t)
-                (reftex-isearch-minor-mode)
-                (setq TeX-PDF-mode t)
+                ;; (reftex-isearch-minor-mode)
+                (setq TeX-PDF-mode t)  ;; is supposed to call pdflatex instead of latex
                 (setq TeX-source-correlate-method 'synctex)
                 (setq TeX-source-correlate-start-server t))))
 
@@ -678,12 +698,45 @@ is AucTeX itself a package?
            TeX-source-correlate-start-server t)
 #+END_SRC
 
-the latex-pretty-symbols package is supposed to contain many more unicode symbols for LaTeX entities that just prettify-symbols-mode (which is what I am currently using). Also it is supposed make subscripts and superscripts even nicer that e.g. AucTeX by not displaying the =_= or =^=.
+*** even fancier symbols
+
+the =latex-pretty-symbols= package is supposed to contain many more unicode symbols for LaTeX entities than just =prettify-symbols-mode= (which is what I am currently using). Also, it is supposed make subscripts and superscripts even nicer that e.g. AucTeX by not displaying the =_= or =^=.
 However, it's currently not doing anything...
 
 #+BEGIN_SRC emacs-lisp
   (add-to-list 'load-path "~/.emacs.d/lisp/")
   (require 'latex-pretty-symbols)
+#+END_SRC
+
+*** RefTeX
+
+Reftexs completion seems a bit wonky. First one needs to press ~C-[~ and then at least one letter of the reference and then ~<RET>~. This such a hassle (although the minibuffer that opens and let's you select the reference is pretty cool).
+
+For this reason the following package should interact with company to autocomplete references.
+
+#+BEGIN_SRC emacs-lisp
+   (use-package company-reftex)
+#+END_SRC
+
+Non-nil means, create TOC window by splitting window vertically.
+
+#+BEGIN_SRC emacs-lisp
+  (setq reftex-toc-split-windows-horizontally 1)
+  (evil-leader/set-key "s t" 'reftex-toc)
+#+END_SRC
+
+See the [[https://www.gnu.org/software/auctex/manual/reftex/Table-of-Contents.html][manual]] for more TOC options.
+
+
+
+*** matchit
+
+Extend the ~%~ functionality to jump between tags such as LaTeX ~\begin{...}~ and ~\end{...}~. This is sooo important!!!
+
+#+BEGIN_SRC emacs-lisp
+  (use-package evil-matchit
+    :config
+    (global-evil-matchit-mode))
 #+END_SRC
 
 ** auto completion
@@ -719,7 +772,7 @@ Snippets are everything! still need to figure out how to incorporate snippets in
     (define-key yas-minor-mode-map "\C-c v" 'yas-visit-snippet-file)
     (define-key yas-minor-mode-map "\C-c n" 'yas-new-snippet)
     (evil-leader/set-key "s n" 'yas-new-snippet)                        ;; Snippet New
-    (evil-leader/set-key "s v" 'yas-visit-snippet-file)                 ;; Snippet Visit
+    (evil-leader/set-key "s g" 'yas-visit-snippet-file)                 ;; Snippet Go
 
   ;;   (with-eval-after-load 'yasnippet
   ;;     (require 'warnings)

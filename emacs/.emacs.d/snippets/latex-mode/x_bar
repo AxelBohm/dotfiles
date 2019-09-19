@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: x_bar
+# key: xb
+# --
+\bar{x}

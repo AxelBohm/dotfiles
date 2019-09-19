@@ -81,37 +81,38 @@ Show line numbers to the left for better jumping.
   (setq display-line-numbers 'relative)
 #+END_SRC
 
+For some reason this only works after reloading the config file...
 
 ** whitespace
 *** strip trailing whitespace when saving
 
- nobody needs trailing whitespace.
+nobody needs trailing whitespace.
 
- #+BEGIN_SRC emacs-lisp
-   (add-hook 'before-save-hook 'delete-trailing-whitespace)
- #+END_SRC
+#+BEGIN_SRC emacs-lisp
+  (add-hook 'before-save-hook 'delete-trailing-whitespace)
+#+END_SRC
 
 *** tabs vs spaces
 
- Use spaces instead of tabs.
+Use spaces instead of tabs.
 
- #+BEGIN_SRC emacs-lisp
-   (setq-default indent-tabs-mode nil)
- #+END_SRC
+#+BEGIN_SRC emacs-lisp
+  (setq-default indent-tabs-mode nil)
+#+END_SRC
 
- Here I am trying to have spaces inserted when pressing =TAB=, but it seems to mess too much with other thing like org mode..
+Here I am trying to have spaces inserted when pressing =TAB=, but it seems to mess too much with other thing like org mode..
 
- #+BEGIN_SRC emacs-lisp
-   ;; (define-key text-mode-map (kbd "<tab>") 'tab-to-tab-stop)
-   ;; (global-set-key (kbd "TAB") 'tab-to-tab-stop)
-   ;; (setq tab-stop-list (number-sequence 2 20 2))
- #+END_SRC
+#+BEGIN_SRC emacs-lisp
+  ;; (define-key text-mode-map (kbd "<tab>") 'tab-to-tab-stop)
+  ;; (global-set-key (kbd "TAB") 'tab-to-tab-stop)
+  ;; (setq tab-stop-list (number-sequence 2 20 2))
+#+END_SRC
 
- makes actual tabs appear as specified number of spaces.
+makes actual tabs appear as specified number of spaces.
 
- #+BEGIN_SRC emacs-lisp
-   (setq tab-width 2)
- #+END_SRC
+#+BEGIN_SRC emacs-lisp
+  (setq tab-width 2)
+#+END_SRC
 
 ** emacs config
 *** quick access
@@ -150,18 +151,23 @@ such a handy feature!
     (setq undo-tree-history-directory-alist '(("." . "~/.emacs.d/undo")))
 #+END_SRC
 
+Note that undo-tree has many more handy features I am not yet using.
+
 ** custom bindings
 
-Quickly cycle through windows.
+Quickly switch back and forth between windows.
 
 #+BEGIN_SRC emacs-lisp
   (global-set-key (kbd "M-o") 'other-window)
+  (evil-leader/set-key "n" 'other-window)
 #+END_SRC
+
 ** TODO buffers
 
 find a good way to interact with buffers. check out the [[https://www.emacswiki.org/emacs/SwitchingBuffers][emacs wiki]].
 
 This provides a small bar at the bottom with possible suggestions like all the files in the current directory or the open buffers when switching buffer.
+
 #+BEGIN_SRC emacs-lisp
   (setq ido-enable-flex-matching t)
   (setq ido-everywhere t)
@@ -175,7 +181,12 @@ Switch back and forth between the two MRU buffers.
     (interactive)
     (switch-to-buffer (other-buffer (current-buffer) 1)))
 #+END_SRC
+
 ** modeline
+
+The default modeline gets so crammed.. Maybe I am using too many modes?
+
+Either way, here's a custom modeline.
 
 #+BEGIN_SRC emacs-lisp
   (setq mode-line-format
@@ -192,6 +203,8 @@ Switch back and forth between the two MRU buffers.
 ))
 #+END_SRC
 
+Only works after reloading config file??
+
 * Packages
 
 ** colors
@@ -200,6 +213,29 @@ Switch back and forth between the two MRU buffers.
   (use-package nord-theme)
   (add-to-list 'custom-theme-load-path (expand-file-name "~/.emacs.d/themes/"))
   (load-theme 'nord t)
+#+END_SRC
+
+** auto closing of parenthesis
+
+Smart treatment of parenthesis, like auto closing or auto deletion of the matching one.
+
+#+BEGIN_SRC emacs-lisp
+  (use-package smartparens
+    :config
+    (sp-local-pair 'org-mode "_" "_" )
+    (sp-local-pair 'org-mode "*" "*" )
+    (sp-local-pair 'org-mode "~" "~" )
+    (sp-local-pair 'org-mode "$" "$")
+    (sp-local-pair 'latex-mode "$" "$")   ;; omg, I want this so badly
+    (sp-local-pair 'latex-mode "\\langle" "\\rangle" :trigger "\\l(")
+    (sp-local-pair 'latex-mode "\\lVert" "\\rVert" :trigger "\\l(")
+
+    (sp-local-pair 'latex-mode "\\left(" "\\right)" :trigger "\\l(")
+    (sp-local-pair 'latex-mode "\\left[" "\\right]" :trigger "\\l(")
+    (sp-local-pair 'latex-mode "\\left\\{" "\\right\\}" :trigger "\\l(")
+    (sp-local-pair 'latex-mode "\\left\\langle" "\\right\\rangle" :trigger "\\l("))
+
+  (smartparens-global-mode 1) ;; I always want this
 #+END_SRC
 
 ** vi                                                                 :major:
@@ -294,36 +330,70 @@ Evil for colemak keyboard layout.
 #+BEGIN_SRC emacs-lisp
   (with-eval-after-load 'evil-maps
     ; i needs to be unbound first
-    (define-key evil-normal-state-map "i" nil)
-
-    (define-key evil-motion-state-map "n" 'evil-next-line)
-    (define-key evil-motion-state-map "N" 'evil-join)
-    (define-key evil-motion-state-map "gn" 'evil-next-visual-line)
-    (define-key evil-motion-state-map "gN" 'evil-next-visual-line)
-    (define-key evil-motion-state-map "e" 'evil-previous-line)
-    (define-key evil-motion-state-map "ge" 'evil-previous-visual-line)
-    (define-key evil-motion-state-map "E" 'evil-lookup)
-    (define-key evil-motion-state-map "i" 'evil-forward-char)
-    (define-key evil-motion-state-map "j" 'evil-forward-word-end)
-    (define-key evil-motion-state-map "J" 'evil-forward-WORD-end)
-    (define-key evil-motion-state-map "gj" 'evil-backward-word-end)
-    (define-key evil-motion-state-map "gJ" 'evil-backward-WORD-end)
-    (define-key evil-motion-state-map "k" 'evil-search-next)
-    (define-key evil-motion-state-map "K" 'evil-search-previous)
-    (define-key evil-motion-state-map "gk" 'evil-next-match)
-    (define-key evil-motion-state-map "gK" 'evil-previous-match)
-    (define-key evil-motion-state-map "zi" 'evil-scroll-column-right)
-    (define-key evil-motion-state-map "zI" 'evil-scroll-right)
-    (define-key evil-motion-state-map "l" 'evil-insert)
-    (define-key evil-motion-state-map "L" 'evil-insert-line))
-
-    ; =i= in visual mode needs extra remap
-    (define-key evil-visual-state-map "i" 'evil-forward-char)
+;    (define-key evil-normal-state-map "i" nil)
+;
+;    (evil-define-key '(motion)
+;      "n" 'evil-next-line)
+;      "N" 'evil-join
+;      "gn" 'evil-next-visual-line
+;      "gN" 'evil-next-visual-line
+;      "e" 'evil-previous-line
+;      "ge" 'evil-previous-visual-line
+;      "E" 'evil-lookup              ;; even in vim I didn't know what this does..
+;      "i" 'evil-forward-char
+;      "j" 'evil-forward-word-end
+;;      "J" 'evil-forward-WORD-end
+;      "gj" 'evil-backward-word-end
+;      "gJ" 'evil-backward-WORD-end
+;      "k" 'evil-search-next
+;      "K" 'evil-search-previous
+;      "gk" 'evil-next-match
+;      "gK" 'evil-previous-match
+;      "zi" 'evil-scroll-column-right
+;      "zI" 'evil-scroll-right
+;      "l" 'evil-insert
+;      "L" 'evil-insert-line)
 #+END_SRC
 
-Things like ~c i~ (change to the right) are still not working..
+#+BEGIN_SRC emacs-lisp
+(with-eval-after-load 'evil-maps
+ ; i needs to be unbound first
+ (define-key evil-normal-state-map "i" nil)
+ (define-key evil-motion-state-map "n" 'evil-next-line)
+ (define-key evil-motion-state-map "N" 'evil-join)
+ (define-key evil-motion-state-map "gn" 'evil-next-visual-line)
+ (define-key evil-motion-state-map "gN" 'evil-next-visual-line)
+ (define-key evil-motion-state-map "e" 'evil-previous-line)
+ (define-key evil-motion-state-map "ge" 'evil-previous-visual-line)
+ (define-key evil-motion-state-map "E" 'evil-lookup)               ;; even in vim I didn't know what this does..
+ (define-key evil-motion-state-map "i" 'evil-forward-char)
+ (define-key evil-motion-state-map "j" 'evil-forward-word-end)
+ (define-key evil-motion-state-map "J" 'evil-forward-WORD-end)
+ (define-key evil-motion-state-map "gj" 'evil-backward-word-end)
+ (define-key evil-motion-state-map "gJ" 'evil-backward-WORD-end)
+ (define-key evil-motion-state-map "k" 'evil-search-next)
+ (define-key evil-motion-state-map "K" 'evil-search-previous)
+ (define-key evil-motion-state-map "gk" 'evil-next-match)
+ (define-key evil-motion-state-map "gK" 'evil-previous-match)
+ (define-key evil-motion-state-map "zi" 'evil-scroll-column-right)
+ (define-key evil-motion-state-map "zI" 'evil-scroll-right)
+(define-key evil-motion-state-map "l" 'evil-insert)
+(define-key evil-motion-state-map "L" 'evil-insert-line))
+#+END_SRC
 
-Switching windows also relies on the `hjkl` motions.
+Things like ~c i~ (change to the right) or ~v i~ don't work with these and need to be remapped for every mode
+
+#+BEGIN_SRC emacs-lisp
+  (evil-define-key '(visual operator) "i" 'evil-forward-char)
+#+END_SRC
+
+However, things like ~c l w~ (change inner word) don't work...
+
+#+BEGIN_SRC emacs-lisp
+  (evil-define-key '(visual operator) "l" evil-inner-text-objects-map)
+#+END_SRC
+
+Switching windows also relies on the `hjkl` motions. So make it colemak friendly.
 
 #+BEGIN_SRC emacs-lisp
   (with-eval-after-load 'evil-maps
@@ -331,6 +401,39 @@ Switching windows also relies on the `hjkl` motions.
     (define-key evil-window-map "e" 'evil-window-up)
     (define-key evil-window-map "i" 'evil-window-right))
 #+END_SRC
+
+*** matchit
+
+Extend the ~%~ functionality to jump between tags such as LaTeX ~\begin{...}~ and ~\end{...}~. This is sooo important!!!
+
+#+BEGIN_SRC emacs-lisp
+  (use-package evil-matchit
+    :config
+    (global-evil-matchit-mode))
+#+END_SRC
+
+*** commentary
+
+~gc~ comments stuff out.
+
+#+BEGIN_SRC emacs-lisp
+  (use-package evil-commentary)
+  (evil-commentary-mode)
+#+END_SRC
+
+*** evil smart-parens
+
+makes evil play nicely with with [[*auto closing of parenthesis][smartparens]]. But it also slows some commands down by a lot!!
+
+#+BEGIN_SRC emacs-lisp
+  ;; (use-package evil-smartparens
+  ;;   :hook (smartparens-enabled . evil-smartparens-mode) ;; use evil-sp whenever sp is used
+  ;;   :diminish evil-smartparens-mode)
+#+END_SRC
+
+Some of the functionality promised on their github doesn't seem to work. Check [[https://kozikow.com/2016/06/18/smartparens-emacs-package-is-super-awesome/][this]].
+For some reason ~C~ and ~D~ work for me as promised but ~dW~ or ~cW~ doesn't.
+Also it regularly *makes emacs crash*...
 
 ** pretty-mode
 
@@ -403,6 +506,41 @@ By default org-mode does super ugly truncation of long lines (apparently because
 #+END_SRC
 
 *** keybindings
+**** structure editing
+
+Make orgmode integrate nicer with evil mode in a way that relies less on the meta key.
+
+#+BEGIN_SRC emacs-lisp
+  (evil-define-key 'normal org-mode-map
+    (kbd "TAB") 'org-cycle     ;; this should already be the case?
+    ">" 'org-shiftmetaright
+    "<" 'org-shiftmetaleft)
+#+END_SRC
+
+Org structure editing made easy/mnemonic with evil-leader.
+
+#+BEGIN_SRC emacs-lisp
+  (evil-leader/set-key-for-mode 'org-mode
+    "o t" 'org-toggle-heading     ;; toogle wheter heading or not
+    "o w" 'widen                  ;; show everythig
+    "o n" 'org-narrow-to-subtree) ;; show only what's within heading
+#+END_SRC
+
+~org-narrow-subtree~ shows only a single heading (the heading of the current subtree). I need more context!! I want the to see which hierarchy this heading belongs to. taken from [[https://emacs.stackexchange.com/questions/29304/how-to-show-all-contents-of-current-subtree-and-fold-all-the-other-subtrees][stackexchange]].
+
+#+BEGIN_SRC emacs-lisp
+  (defun ab/org-show-just-me (&rest _)
+    "Fold all other trees, then show entire current subtree."
+    (interactive)
+    (org-overview)
+    (org-reveal)
+    (org-show-subtree))
+
+  (evil-leader/set-key-for-mode 'org-mode
+    "o c" 'ab/org-show-just-me)            ;; Mnemonic: Collapse
+#+END_SRC
+
+**** index file
 
 Quickly access the org index file.
 
@@ -421,6 +559,18 @@ Actually, I like vims leader key much better.
 #+BEGIN_SRC emacs-lisp
   (evil-leader/set-key
       "i" 'ab/open-index-file)
+#+END_SRC
+
+**** navigation
+
+Mnemonic navigation.
+
+#+BEGIN_SRC emacs-lisp
+  (evil-leader/set-key-for-mode 'org-mode
+    "g h" 'org-previous                    ;; Go Heading of current seciton
+    "g e" 'org-previous                    ;; Go e (= colemak up)
+    "g u" 'outline-up-heading              ;; Go Up in hirachy
+    "g n" 'org-next-visible-heading)       ;; Go Next heading
 #+END_SRC
 
 *** make RET better
@@ -521,7 +671,6 @@ The above code, together with the follow shell command does the job.
   emacsclient -c -F '(quote (name . "capture"))' -e '(activate-capture-frame)'
 #+END_SRC
 
-
 *** appearance
 
 Everything that has to do with how stuff looks / is displayed.
@@ -537,39 +686,30 @@ Fancy bullets in org mode. If the bullets get too fancy there is also a mode tha
     (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1))))
 #+END_SRC
 
-**** different font sizes for "headings"
+**** "headings"
 
 By default the only difference between org leves is a slightly different symbol (when using =org-bullets=) and an almost invisible indent.
 Different font sizes make much more sense.
 
+Also, in nord theme all headings seem to have the same color...
+
 #+BEGIN_SRC emacs-lisp
  (custom-set-faces
    '(org-level-1 ((t (:inherit outline-1 :height 1.9))))
-   '(org-level-2 ((t (:inherit outline-2 :height 1.5))))
-   '(org-level-3 ((t (:inherit outline-3 :height 1.2))))
-   '(org-level-4 ((t (:inherit outline-4 :height 1.0))))
+   '(org-level-2 ((t (:inherit outline-2 :foreground "#A3BE8C" :height 1.5))))
+   '(org-level-3 ((t (:inherit outline-3 :foreground "#81A1C1" :height 1.2))))
+   '(org-level-4 ((t (:inherit outline-4 :foreground "#8FBCBB" :height 1.0))))
    '(org-level-5 ((t (:inherit outline-5 :height 1.0))))
  )
 #+END_SRC
+
+Next step will be to use my own nord fork as there are a couple bugs and nobody merges the pull requests...
 
 By default orgmode displays ellipsis for collapsed bullets. Here's a custom symbol indicating collapsed bullets.
 
 #+BEGIN_SRC emacs-lisp
   (setq org-ellipsis " ...")
 #+END_SRC
-
-In nord theme all headings seem to have the same color...
-
-#+BEGIN_SRC emacs-lisp
-  (custom-set-faces
-    '(org-level-1 ((t (:inherit outline-1 :height 1.9))))
-    '(org-level-2 ((t (:inherit outline-2 :foreground "#A3BE8C" ))))
-    '(org-level-3 ((t (:inherit outline-3 :foreground "#81A1C1" ))))
-    '(org-level-4 ((t (:inherit outline-4 :foreground "#8FBCBB" ))))
-    '(org-level-5 ((t (:inherit outline-5 :height 1.0)))))
-#+END_SRC
-
-Next step will be to use my own nord fork as there are a couple bugs and nobody merges the pull requests...
 
 **** prettify entities
 
@@ -608,38 +748,6 @@ For some reason one has to tell babel which languages should be executed when ty
      (shell . t)))
 #+END_SRC
 
-** auto closing of parenthesis
-
-Smart treatment of parenthesis, like auto closing or auto deletion of the matching one.
-
-#+BEGIN_SRC emacs-lisp
-  (use-package smartparens
-    :config
-    (sp-local-pair 'org-mode "_" "_" )
-    (sp-local-pair 'org-mode "*" "*" )
-    (sp-local-pair 'org-mode "~" "~" )
-    (sp-local-pair 'org-mode "$" "$")
-    (sp-local-pair 'latex-mode "$" "$")   ;; omg, I want this so badly
-    (sp-local-pair 'latex-mode "\\langle" "\\rangle" :trigger "\\l(")
-    (sp-local-pair 'latex-mode "\\lVert" "\\rVert" :trigger "\\l(")
-
-    (sp-local-pair 'latex-mode "\\left(" "\\right)" :trigger "\\l(")
-    (sp-local-pair 'latex-mode "\\left[" "\\right]" :trigger "\\l(")
-    (sp-local-pair 'latex-mode "\\left\\{" "\\right\\}" :trigger "\\l(")
-    (sp-local-pair 'latex-mode "\\left\\langle" "\\right\\rangle" :trigger "\\l("))
-
-  (smartparens-global-mode 1) ;; I always want this
-#+END_SRC
-
-** commentary
-
-~gc~ comments stuff out.
-
-#+BEGIN_SRC emacs-lisp
-  (use-package evil-commentary)
-  (evil-commentary-mode)
-#+END_SRC
-
 ** LaTeX                                                              :major:
 
 which package to use? =tex-site= or =tex= ?
@@ -661,41 +769,32 @@ is AucTeX itself a package?
                 (turn-on-reftex)
                 (reftex-mode)
                 (setq reftex-plug-into-AUCTeX t)
-                ;; (reftex-isearch-minor-mode)
                 (setq TeX-PDF-mode t)  ;; is supposed to call pdflatex instead of latex
                 (setq TeX-source-correlate-method 'synctex)
                 (setq TeX-source-correlate-start-server t))))
 
-    ;; ;; Update PDF buffers after successful LaTeX runs
-    ;; (add-hook 'TeX-after-TeX-LaTeX-command-finished-hook
-    ;;             #'TeX-revert-document-buffer)
-
-    ;; ;; to use pdfview with auctex
-    ;; (setq TeX-view-program-selection '((output-pdf "Zathura"))
-    ;;        TeX-source-correlate-start-server t)
-    ;; (setq TeX-view-program-list '(("Zathura" "TeX-pdf-tools-sync-view"))))
-
-    ;; ;; (setq TeX-engine 'latex)
-    ;; (setq TeX-command-default "Latexmk")
-  ;; (use-package auctex-latexmk
-  ;;   :ensure auctex
-  ;;   :init
-  ;;   (with-eval-after-load 'tex
-  ;;     (auctex-latexmk-setup))
-  ;;   :config
-
-  ;;   ;; Use Latexmk as the default command.
-  ;;   ;; (We have to use a hook instead of `setq-default' because AUCTeX sets this variable on mode activation.)
-  ;;   (defun my-tex-set-latexmk-as-default ()
-  ;;     (setq TeX-command-default "LatexMk"))
-  ;;   (add-hook 'TeX-mode-hook #'my-tex-set-latexmk-as-default)
-
-  ;;   ;; Compile to PDF when `TeX-PDF-mode' is active.
-  ;;   (setq auctex-latexmk-inherit-TeX-PDF-mode t))
-  ;; (setq TeX-auto-save t)
-
     (setq TeX-view-program-selection '((output-pdf "Zathura"))
            TeX-source-correlate-start-server t)
+#+END_SRC
+
+A different tex setup that uses latexmk
+
+#+BEGIN_SRC emacs-lisp
+  ;; (use-package auctex-latexmk
+  ;;   :after latex
+  ;;   :init
+  ;;   (setq auctex-latexmk-inherit-TeX-PDF-mode t)
+  ;;   :config
+  ;;   (auctex-latexmk-setup))
+
+  ;; (use-package tex-site
+  ;;   ;; Not deferred, since tex-site.el is essentially an autoloads file.
+  ;;   :init
+  ;;   (setq tex-fontify-script nil
+  ;;         font-latex-fontify-script nil
+  ;;         TeX-parse-self nil)
+  ;;   (add-hook 'latex-mode-hook 'TeX-PDF-mode)
+  ;; )
 #+END_SRC
 
 *** even fancier symbols
@@ -715,7 +814,8 @@ Reftexs completion seems a bit wonky. First one needs to press ~C-[~ and then at
 For this reason the following package should interact with company to autocomplete references.
 
 #+BEGIN_SRC emacs-lisp
-   (use-package company-reftex)
+  (use-package company-reftex
+    :defer t)
 #+END_SRC
 
 Non-nil means, create TOC window by splitting window vertically.
@@ -727,32 +827,49 @@ Non-nil means, create TOC window by splitting window vertically.
 
 See the [[https://www.gnu.org/software/auctex/manual/reftex/Table-of-Contents.html][manual]] for more TOC options.
 
+*** keybindings
 
-
-*** matchit
-
-Extend the ~%~ functionality to jump between tags such as LaTeX ~\begin{...}~ and ~\end{...}~. This is sooo important!!!
+There are so many cool feature but the key bindings are horrific..
 
 #+BEGIN_SRC emacs-lisp
-  (use-package evil-matchit
-    :config
-    (global-evil-matchit-mode))
+  ;; (evil-define-key 'normal latex-mode-map
+  ;;   ;; (evil-leader/set-key "l l")
+  ;;   (evil-leader/set-key "l t" 'reftex-toc))
+  (evil-leader/set-key-for-mode 'latex-mode "l t" 'reftex-toc)
 #+END_SRC
 
 ** auto completion
 
-   company is unfortunately pretty slow...
+I used to think =company= is slow, but I just had to turn the ~idle-delay~ down...
+
 #+BEGIN_SRC emacs-lisp
   (use-package company
+    :defer t
     :init
     (setq company-dabbrev-ignore-case t
-          company-show-numbers t)
+          company-idle-delay 0.01
+          company-minimum-prefix-length 1)
     (add-hook 'after-init-hook 'global-company-mode)
     :config
-    (add-to-list 'company-backends 'company-math-symbols-unicode)
-    :bind ("C-:" . company-complete)              ; In case I don't want to wait
+
+    ;; Add yasnippet support for all company backends
+    ;; https://github.com/syl20bnr/spacemacs/pull/179
+    (defvar company-mode/enable-yas t
+    "Enable yasnippet for all backends.")
+
+    (defun company-mode/backend-with-yas (backend)
+    (if (or (not company-mode/enable-yas) (and (listp backend) (member 'company-yasnippet backend)))
+        backend
+        (append (if (consp backend) backend (list backend))
+                '(:with company-yasnippet))))
+
+    (setq company-backends (mapcar #'company-mode/backend-with-yas company-backends))
+
+    :bind ("C-:" . company-complete)
     :diminish company-mode)
 #+END_SRC
+
+The code chunk in the middle which makes yasnippet work with company is taken from [[https://emacs.stackexchange.com/questions/10431/get-company-to-show-suggestions-for-yasnippet-names][stackexchange]]. How can people live without this?? Also for some reason it has to be inside the entire thing even if company is not defered (no idea why).
 
 ** snippets
 
@@ -768,9 +885,9 @@ Snippets are everything! still need to figure out how to incorporate snippets in
 
     (yas-global-mode 1)
 
-    (global-set-key (kbd "C-e") 'yas-expand)
-    (define-key yas-minor-mode-map "\C-c v" 'yas-visit-snippet-file)
-    (define-key yas-minor-mode-map "\C-c n" 'yas-new-snippet)
+    (define-key evil-insert-state-map (kbd "C-e") 'yas-expand)
+    (define-key yas-minor-mode-map "C-cv" 'yas-visit-snippet-file)
+    (define-key yas-minor-mode-map "C-cn" 'yas-new-snippet)
     (evil-leader/set-key "s n" 'yas-new-snippet)                        ;; Snippet New
     (evil-leader/set-key "s g" 'yas-visit-snippet-file)                 ;; Snippet Go
 
@@ -842,16 +959,8 @@ shows possible key combo continuations.
 
 ** dashboard
 
-display most recently used files on startup.
+Display most recently used files and other useful stuff on startup.
 See the [[https://github.com/emacs-dashboard/emacs-dashboard][github]].
-
-This is a dependency.
-
-#+BEGIN_SRC emacs-lisp
-  (use-package page-break-lines)
-#+END_SRC
-
-actual dashboard
 
 #+BEGIN_SRC emacs-lisp
   (use-package dashboard
@@ -885,9 +994,33 @@ currently only used for the dashboard..
     (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
   ;; )
 #+END_SRC
-** python
+** python                                                             :major:
 
 #+BEGIN_SRC emacs-lisp
-(use-package elpy)
-(elpy-enable)
+  (use-package elpy
+    :defer t
+    :config
+    (elpy-enable))
+#+END_SRC
+
+** highlight yanks
+
+when yanking region which was not selected in visual mode (anti pattern) it is hard to be sure what has actually been yanked.
+
+#+BEGIN_SRC emacs-lisp
+  (use-package volatile-highlights
+    :defer t)
+  (volatile-highlights-mode t)
+  (vhl/define-extension 'evil 'evil-paste-after 'evil-paste-before
+                        'evil-paste-pop 'evil-move)
+  (vhl/install-extension 'evil)
+#+END_SRC
+
+Doesn't work yet..
+
+** org everywhere
+
+seems wonky.. only shift-tab works but tab doesn't.. maybe something uses tab already? like yasnippet.
+#+BEGIN_SRC emacs-lisp
+  (use-package outshine)
 #+END_SRC

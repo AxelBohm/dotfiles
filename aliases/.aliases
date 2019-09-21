@@ -14,6 +14,7 @@ alias gca="git commit --amend"
 alias gco="git checkout"
 alias gl="git log --pretty=oneline --abbrev-commit" # show log in more terse format
 alias gsc="git config credential.helper store"      # store credentials
+alias grc="git rm -r --cached ."                    # use this when ignoring commited files
 
 # package management
 alias p="sudo pacman"
@@ -46,6 +47,7 @@ alias brc="vim ~/.bashrc"
 alias ls="ls --color"
 alias la="ls -A"
 alias ls="ls --ignore='*.'{log,aux,fls,synctex.gz,fdb_latexmk,prv} --ignore='\_region\_.tex' --color"
+alias grep="grep --color"
 
 c() { # automatically show content when changin into a directory
 	cd $1;

@@ -3,6 +3,17 @@
 
 * General settings
 
+** speed up startup
+
+By not doing garbage collection right at the start. Taken from [[https://github.com/nilcons/emacs-use-package-fast/blob/master/README.md][here]].
+
+#+BEGIN_SRC emacs-lisp
+  (setq gc-cons-threshold 64000000)
+  (add-hook 'after-init-hook #'(lambda ()
+                               ;; restore after startup
+                               (setq gc-cons-threshold 800000)))
+#+END_SRC
+
 ** use-package
 
 Why does the default behaviour require you to write =:ensure t= for every single package. If I put it there I'm sure I want it!

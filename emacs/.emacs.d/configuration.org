@@ -815,32 +815,24 @@ However, it's currently not doing anything...
 
 Reftexs completion seems a bit wonky. First one needs to press ~C-[~ and then at least one letter of the reference and then ~<RET>~. This such a hassle (although the minibuffer that opens and let's you select the reference is pretty cool).
 
-For this reason the following package should interact with company to autocomplete references.
+For this reason the following package should interact with company to autocomplete references. This works fine for ~\ref~ but doesn't work for ~\cite~. Also, the ~\ref~ autocompletion usually doesn't work right away for newly created labels..
 
 #+BEGIN_SRC emacs-lisp
   (use-package company-reftex
     :defer t)
 #+END_SRC
 
+RefTeX has this really nice table of contents it can display in another buffer that gives a great overview over the document and even lets you navigate and rearrange.
 Non-nil means, create TOC window by splitting window vertically.
 
 #+BEGIN_SRC emacs-lisp
   (setq reftex-toc-split-windows-horizontally 1)
-  (evil-leader/set-key "s t" 'reftex-toc)
+  (evil-leader/set-key "l t" 'reftex-toc)       ;; Mnemonic: Latex Toc
 #+END_SRC
 
 See the [[https://www.gnu.org/software/auctex/manual/reftex/Table-of-Contents.html][manual]] for more TOC options.
 
 *** keybindings
-
-There are so many cool feature but the key bindings are horrific..
-
-#+BEGIN_SRC emacs-lisp
-  ;; (evil-define-key 'normal latex-mode-map
-  ;;   ;; (evil-leader/set-key "l l")
-  ;;   (evil-leader/set-key "l t" 'reftex-toc))
-  (evil-leader/set-key-for-mode 'latex-mode "l t" 'reftex-toc)
-#+END_SRC
 
 ** auto completion
 
@@ -860,16 +852,14 @@ I used to think =company= is slow, but I just had to turn the ~idle-delay~ down.
     ;; https://github.com/syl20bnr/spacemacs/pull/179
     (defvar company-mode/enable-yas t
     "Enable yasnippet for all backends.")
-
     (defun company-mode/backend-with-yas (backend)
     (if (or (not company-mode/enable-yas) (and (listp backend) (member 'company-yasnippet backend)))
         backend
         (append (if (consp backend) backend (list backend))
                 '(:with company-yasnippet))))
-
     (setq company-backends (mapcar #'company-mode/backend-with-yas company-backends))
 
-    :bind ("C-:" . company-complete)
+    :bind ("C-n" . company-complete)
     :diminish company-mode)
 #+END_SRC
 
@@ -881,35 +871,16 @@ Snippets are everything! still need to figure out how to incorporate snippets in
 
 #+BEGIN_SRC emacs-lisp
   (use-package yasnippet)
-      ;; :config
-      ;; (add-to-list 'yas-snippet-dirs ("~/.emacs.d/snippets")))
-
     (setq yas-snippet-dirs
       '("~/.emacs.d/snippets"))
 
     (yas-global-mode 1)
 
     (define-key evil-insert-state-map (kbd "C-e") 'yas-expand)
-    (define-key yas-minor-mode-map "C-cv" 'yas-visit-snippet-file)
+    (define-key yas-minor-mode-map (kbd "C-c v") 'yas-visit-snippet-file)
     (define-key yas-minor-mode-map "C-cn" 'yas-new-snippet)
     (evil-leader/set-key "s n" 'yas-new-snippet)                        ;; Snippet New
     (evil-leader/set-key "s g" 'yas-visit-snippet-file)                 ;; Snippet Go
-
-  ;;   (with-eval-after-load 'yasnippet
-  ;;     (require 'warnings)
-  ;;     (add-to-list 'warning-suppress-types '(yasnippet backquote-change))
-  ;;     (define-key yas-minor-mode-map (kbd "<tab>") nil)
-  ;;     (define-key yas-minor-mode-map (kbd "TAB") nil)
-  ;;     (define-key yas-keymap [(tab)] nil)
-  ;;     (define-key yas-keymap (kbd "TAB") nil))
-
-
-  ;;   (defun snippet-mode-setup ()
-  ;;     (define-key yas-keymap (read-kbd-macro "TAB") 'yas-next-field))
-  ;;   (with-eval-after-load 'yasnippet
-  ;;     (add-hook 'snippet-mode-hook 'snippet-mode-setup))
-
-  ;; (yas-reload-all)
 #+END_SRC
 
 see [[https://stackoverflow.com/questions/14066526/unset-tab-binding-for-yasnippet][stackoverflow]] for some helpful answers.
@@ -1036,6 +1007,7 @@ seems wonky.. only shift-tab works but tab doesn't.. maybe something uses tab al
 #+END_SRC
 ** fuzzy matching
 
+The ivy/counsel/swiper trio. Other option would be =helm=.
 
 #+BEGIN_SRC emacs-lisp
   (use-package counsel
@@ -1052,8 +1024,8 @@ seems wonky.. only shift-tab works but tab doesn't.. maybe something uses tab al
      ;; Deletes current input, resets the candidates list to the currently restricted matches.
      (global-set-key (kbd "S-SPC") 'ivy-restrict-to-matches)
 
-     (define-key minibuffer-local-map (kbd "C-r") 'counsel-minibuffer-history)
-     (global-set-key (kbd "<f1> f") 'counsel-describe-function)
-     (global-set-key (kbd "<f1> v") 'counsel-describe-variable)
+     ;; (define-key minibuffer-local-map (kbd "C-r") 'counsel-minibuffer-history)
+     ;; (global-set-key (kbd "<f1> f") 'counsel-describe-function)
+     ;; (global-set-key (kbd "<f1> v") 'counsel-describe-variable)
   )
 #+END_SRC

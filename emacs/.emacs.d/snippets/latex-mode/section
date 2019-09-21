@@ -1,8 +1,5 @@
 # -*- mode: snippet -*-
-# name: section
-# key: sec
+# name: Section
+# key: Sec
 # --
-\section{${1:name}}
-\label{sec:${2:label}}
-
-$0
+Section~\ref{sec:$0}

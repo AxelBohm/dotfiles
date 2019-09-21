@@ -1,8 +1,5 @@
 # -*- mode: snippet -*-
-# name: theorem
-# key: thm
+# name: Theorem
+# key: Theorem
 # --
-\begin{theorem}
-  \label{thm:$1}
-  $0
-\end{theorem}
+Theorem~\ref{thm:$0}

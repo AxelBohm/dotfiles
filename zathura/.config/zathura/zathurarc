@@ -18,6 +18,10 @@ map <C-o> zoom out
 unmap r # rotate
 unmap d # double page view
 
+
+map <C-c> feedkeys ":exec zathuratoclipboard $FILE<Return>"
+
+
 # Base16 Gruvbox dark, medium
 # Author: Dawid Kurek (dawikur@gmail.com), morhetz (https://github.com/morhetz/gruvbox)
 

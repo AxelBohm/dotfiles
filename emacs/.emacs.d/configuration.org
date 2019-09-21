@@ -325,76 +325,77 @@ This is a evil clone of the surround package found in Vim.
 
 *** colemak settings
 
-Evil for colemak keyboard layout.
+Evil for colemak keyboard layout. Adapted from the [[https://github.com/wbolster/evil-colemak-basics][evil-colemak-basics]] package. For some reason trying to defining everything manually via ~evil-define-key~ or ~define-key evil-motion-state-map~ gave me trouble with ~'inner-text-objects~ and more..
 
 #+BEGIN_SRC emacs-lisp
-  ;; (with-eval-after-load 'evil-maps
-  ;;    ;; i needs to be unbound first
-  ;;   (define-key evil-normal-state-map "i" nil)
+(defgroup evil-colemak nil
+  "Basic key rebindings for evil-mode with the Colemak keyboard layout."
+  :prefix "evil-colemak-"
+  :group 'evil)
 
-  ;;   (evil-define-key '(motion)
-  ;;     "n" 'evil-next-line)
-  ;;     "N" 'evil-join
-  ;;     "gn" 'evil-next-visual-line
-  ;;     "gN" 'evil-next-visual-line
-  ;;     "e" 'evil-previous-line
-  ;;     "ge" 'evil-previous-visual-line
-  ;;     "E" 'evil-lookup              ;; even in vim I didn't know what this does..
-  ;;     "i" 'evil-forward-char
-  ;;     "j" 'evil-forward-word-end
-  ;;     "J" 'evil-forward-WORD-end
-  ;;     "gj" 'evil-backward-word-end
-  ;;     "gJ" 'evil-backward-WORD-end
-  ;;     "k" 'evil-search-next
-  ;;     "K" 'evil-search-previous
-  ;;     "gk" 'evil-next-match
-  ;;     "gK" 'evil-previous-match
-  ;;     "zi" 'evil-scroll-column-right
-  ;;     "zI" 'evil-scroll-right
-  ;;     "l" 'evil-insert
-  ;;     "L" 'evil-insert-line)
-#+END_SRC
+(defcustom evil-colemak-char-jump-commands nil
+  "The set of commands to use for jumping to characters.
+By default, the built-in evil commands evil-find-char (and
+variations) are used"
+  :group 'evil-colemak
+  :type '(choice (const :tag "default" nil)))
 
-#+BEGIN_SRC emacs-lisp
-  (with-eval-after-load 'evil-maps
-    ; i needs to be unbound first
-    (define-key evil-normal-state-map "i" nil)
+(defun evil-colemak--make-keymap ()
+  "Initialise the keymap baset on the current configuration."
+  (let ((keymap (make-sparse-keymap)))
+    (evil-define-key '(motion normal visual) keymap
+      "n" 'evil-next-line
+      "gn" 'evil-next-visual-line
+      "gN" 'evil-next-visual-line
+      "e" 'evil-previous-line
+      "ge" 'evil-previous-visual-line
+      "E" 'evil-lookup
+      "i" 'evil-forward-char
+      "j" 'evil-forward-word-end
+      "J" 'evil-forward-WORD-end
+      "gj" 'evil-backward-word-end
+      "gJ" 'evil-backward-WORD-end
+      "k" 'evil-search-next
+      "K" 'evil-search-previous
+      "gk" 'evil-next-match
+      "gK" 'evil-previous-match
+      "zi" 'evil-scroll-column-right
+      "zI" 'evil-scroll-right)
+    (evil-define-key '(normal visual) keymap
+      "N" 'evil-join
+      "gN" 'evil-join-whitespace)
+    (evil-define-key 'normal keymap
+      "l" 'evil-insert
+      "L" 'evil-insert-line)
+    (evil-define-key 'visual keymap
+      "L" 'evil-insert)
+    (evil-define-key '(visual operator) keymap
+      "l" evil-inner-text-objects-map)
+    (evil-define-key 'operator keymap
+      "i" 'evil-forward-char)
+    keymap))
+    ;; ~I~ is still available
 
-    (define-key evil-motion-state-map "n" 'evil-next-line)
-    (define-key evil-motion-state-map "N" 'evil-join)
-    (define-key evil-motion-state-map "gn" 'evil-next-visual-line)
-    (define-key evil-motion-state-map "gN" 'evil-next-visual-line)
-    (define-key evil-motion-state-map "e" 'evil-previous-line)
-    (define-key evil-motion-state-map "ge" 'evil-previous-visual-line)
-    (define-key evil-motion-state-map "E" 'evil-lookup)
-    (define-key evil-motion-state-map "i" 'evil-forward-char)
-    (define-key evil-motion-state-map "j" 'evil-forward-word-end)
-    (define-key evil-motion-state-map "J" 'evil-forward-WORD-end)
-    (define-key evil-motion-state-map "gj" 'evil-backward-word-end)
-    (define-key evil-motion-state-map "gJ" 'evil-backward-WORD-end)
-    (define-key evil-motion-state-map "k" 'evil-search-next)
-    (define-key evil-motion-state-map "K" 'evil-search-previous)
-    (define-key evil-motion-state-map "gk" 'evil-next-match)
-    (define-key evil-motion-state-map "gK" 'evil-previous-match)
-    (define-key evil-motion-state-map "zi" 'evil-scroll-column-right)
-    (define-key evil-motion-state-map "zI" 'evil-scroll-right)
-    (define-key evil-motion-state-map "l" 'evil-insert)
-    (define-key evil-motion-state-map "L" 'evil-insert-line))
+(defvar evil-colemak-keymap
+  (evil-colemak--make-keymap)
+  "Keymap for evil-colemak-mode.")
 
-    ; =i= in visual mode needs extra remap
-    (define-key evil-visual-state-map "i" 'evil-forward-char)
-#+END_SRC
+(defun evil-colemak-refresh-keymap ()
+  "Refresh the keymap using the current configuration."
+  (setq evil-colemak-keymap (evil-colemak--make-keymap)))
 
-Things like ~c i~ (change to the right) or ~v i~ don't work with these and need to be remapped for every mode
+;;;###autoload
+(define-minor-mode evil-colemak-mode
+  "Minor mode with evil-mode enhancements for the Colemak keyboard layout."
+  :keymap evil-colemak-keymap
+  :lighter " hnei")
 
-#+BEGIN_SRC emacs-lisp
-  ;;(evil-define-key '(visual operator) "i" 'evil-forward-char)
-#+END_SRC
-
-However, things like ~c l w~ (change inner word) don't work...
-
-#+BEGIN_SRC emacs-lisp
- ;;(evil-define-key '(visual operator) "l" evil-inner-text-objects-map)
+;;;###autoload
+(define-globalized-minor-mode global-evil-colemak-mode
+  evil-colemak-mode
+  (lambda () (evil-colemak-mode t))
+  "Global minor mode with evil-mode enhancements for the Colemak keyboard layout.")
+  (global-evil-colemak-mode)
 #+END_SRC
 
 Switching windows also relies on the `hjkl` motions. So make it colemak friendly.

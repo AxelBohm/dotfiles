@@ -1053,8 +1053,8 @@ The ~counsel~ package installs all three of them. ~Swiper~ is just the fancy sea
     ("C-x g" . magit-status)
     :config
     (use-package evil-magit)
-    ;; use emacs as editor properly
-    ;; (use-package with-editor)
+    ;; This library makes it possible to reliably use the Emacsclient as the $EDITOR of child processes.
+   (use-package with-editor)
   )
 
   (evil-leader/set-key "g s" 'magit-status)

@@ -7,6 +7,7 @@ setopt INC_APPEND_HISTORY
 # use z installed from package manager
 [[ -r "/usr/share/z/z.sh" ]] && source /usr/share/z/z.sh
 
+
 ###############################################################
 # => prompt
 ###############################################################
@@ -120,3 +121,5 @@ function _pip_completion {
 compctl -K _pip_completion pip
 # pip zsh completion end
 
+
+bindkey -s '^O' 'ranger\n'

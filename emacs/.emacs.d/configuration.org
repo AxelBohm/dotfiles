@@ -1052,7 +1052,9 @@ The ~counsel~ package installs all three of them. ~Swiper~ is just the fancy sea
     :bind
     ("C-x g" . magit-status)
     :config
-    (evil-leader/set-key "g s" . magit-status)
     (use-package evil-magit)
+    (use-package with-editor)
   )
+
+  (evil-leader/set-key "g s" 'magit-status)
 #+END_SRC

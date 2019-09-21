@@ -242,19 +242,15 @@ Smart treatment of parenthesis, like auto closing or auto deletion of the matchi
 
 No way around vi keybindings!
 
-*** =evil-leader=
-
-more vim functionality. note that I'm loading evil-leader before evil-mode. Someone suggested this as a workaround for ~SPC~ as leader not always working (or in my case it stops working mid session).
-
-But first unbind some keys so they can have different functions. do they really? doesn't seem like it..
-
+But first unbind return so ~org-return-follow-links~ can actually work (at the cost of RET)
 #+BEGIN_SRC emacs-lisp
   (with-eval-after-load 'evil-maps
-    (define-key evil-motion-state-map (kbd "SPC") nil)
     (define-key evil-motion-state-map (kbd "RET") nil)
-    ;; (define-key evil-motion-state-map (kbd "TAB") nil)
   )
 #+END_SRC
+*** =evil-leader=
+
+More vim functionality. Note that I'm loading evil-leader before evil-mode. Someone suggested this as a workaround for ~SPC~ as leader not always working (or in my case it stops working mid session).
 
 Set the leader key and some very basic keybindings.
 
@@ -478,6 +474,7 @@ Load orgmode plus some standard keybindings.
            ("C-c c" . org-capture)))
 #+END_SRC
 
+
 ~org-return-follow-links~ is supposed to give ~RET~ some functionality in evil mode (which it usually doesn't have). However, [[*make RET better][see this section]] for giving the enter key even more functionality.
 
 *** config
@@ -572,10 +569,10 @@ Mnemonic navigation.
 
 #+BEGIN_SRC emacs-lisp
   (evil-leader/set-key-for-mode 'org-mode
-    "g h" 'org-previous                    ;; Go Heading of current seciton
-    "g e" 'org-previous                    ;; Go e (= colemak up)
-    "g u" 'outline-up-heading              ;; Go Up in hirachy
-    "g n" 'org-next-visible-heading)       ;; Go Next heading
+    "g h" 'org-previous-visible-heading     ;; Go Heading of current section
+    "g e" 'org-previous-visible-heading     ;; Go e (= colemak up)
+    "g u" 'outline-up-heading               ;; Go Up in hierarchy
+    "g n" 'org-next-visible-heading)        ;; Go Next heading
 #+END_SRC
 
 *** make RET better
@@ -629,7 +626,7 @@ From [[http://kitchingroup.cheme.cmu.edu/blog/2017/04/09/A-better-return-in-org-
   ;; (define-key org-mode-map (kbd "RET")  #'ab/org-return)
 #+END_SRC
 *** org capture
-
+**** templates
 Templates for capturing. The default keybinding is ~C-c c~ . Also, ~%a~ expands to a link to the file (and position) from which =org-capture= was called.
 I think =%i= is active region. Another nice feature is ~%^{Name}~ prompts for name. This probably makes sense for titles or something because I tend to put too much next to the asterics and too little text underneath..
 
@@ -647,6 +644,8 @@ I think =%i= is active region. Another nice feature is ~%^{Name}~ prompts for na
          (file+headline org-index-file "Inbox")
          "*** TODO %?\n")))
 #+END_SRC
+
+**** capture anywhere
 
 Call org-capture from anywhere (system wide). Code taken from [[https://www.reddit.com/r/emacs/comments/74gkeq/system_wide_org_capture/][reddit.]]
 
@@ -957,6 +956,8 @@ Customize what is displayed on the dashboard
                         (bookmarks . 5)
                         (projects . 5)
                         (agenda . 5)))
+
+(setq dashboard-startup-banner 2)
 #+END_SRC
 
 ** projectile
@@ -1008,7 +1009,9 @@ seems wonky.. only shift-tab works but tab doesn't.. maybe something uses tab al
 #+END_SRC
 ** fuzzy matching
 
-The ivy/counsel/swiper trio. Other option would be =helm=.
+The Ivy/Counsel/Swiper trio. Other option would be =helm=.
+
+The ~counsel~ package installs all three of them. ~Swiper~ is just the fancy search. ~Ivy~ does the narrowing. ~counsel~ adds options to ~Ivy~
 
 #+BEGIN_SRC emacs-lisp
   (use-package counsel
@@ -1023,10 +1026,22 @@ The ivy/counsel/swiper trio. Other option would be =helm=.
      (global-set-key (kbd "C-x C-f") 'counsel-find-file)
      (evil-leader/set-key "f f" 'counsel-find-file)
      ;; Deletes current input, resets the candidates list to the currently restricted matches.
-     (global-set-key (kbd "S-SPC") 'ivy-restrict-to-matches)
+     (define-key minibuffer-local-map (kbd "S-SPC") 'ivy-restrict-to-matches)
 
      ;; (define-key minibuffer-local-map (kbd "C-r") 'counsel-minibuffer-history)
      ;; (global-set-key (kbd "<f1> f") 'counsel-describe-function)
      ;; (global-set-key (kbd "<f1> v") 'counsel-describe-variable)
+  )
+#+END_SRC
+
+** git
+
+#+BEGIN_SRC emacs-lisp
+  (use-package magit
+    :bind
+    ("C-x g" . magit-status)
+    :config
+    (evil-leader/set-key "g s" . magit-status)
+    (use-package evil-magit)
   )
 #+END_SRC

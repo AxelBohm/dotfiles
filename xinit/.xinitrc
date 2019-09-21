@@ -30,7 +30,7 @@ dunst &
 # slstatus &
 
 # set background
-. set_backgpound.sh &
+. set_background.sh &
 
 exec dwm
 # exec startkde

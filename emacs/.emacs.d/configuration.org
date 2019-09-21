@@ -1028,3 +1028,32 @@ seems wonky.. only shift-tab works but tab doesn't.. maybe something uses tab al
 #+BEGIN_SRC emacs-lisp
   (use-package outshine)
 #+END_SRC
+** syntax checking
+
+#+BEGIN_SRC emacs-lisp
+(use-package flycheck
+  :init (global-flycheck-mode))
+#+END_SRC
+** fuzzy matching
+
+
+#+BEGIN_SRC emacs-lisp
+  (use-package counsel
+    :config
+     (ivy-mode 1)
+     ;; Virtual buffers correspond to bookmarks and recent files list
+     (setq ivy-use-virtual-buffers t)
+     (setq enable-recursive-minibuffers t)
+     (global-set-key "\C-s" 'swiper)
+     ;; this works out of the box for some reason
+     ;; (global-set-key (kbd "M-x") 'counsel-M-x)
+     (global-set-key (kbd "C-x C-f") 'counsel-find-file)
+     (evil-leader/set-key "f f" 'counsel-find-file)
+     ;; Deletes current input, resets the candidates list to the currently restricted matches.
+     (global-set-key (kbd "S-SPC") 'ivy-restrict-to-matches)
+
+     (define-key minibuffer-local-map (kbd "C-r") 'counsel-minibuffer-history)
+     (global-set-key (kbd "<f1> f") 'counsel-describe-function)
+     (global-set-key (kbd "<f1> v") 'counsel-describe-variable)
+  )
+#+END_SRC

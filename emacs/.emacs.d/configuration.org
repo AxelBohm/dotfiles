@@ -345,7 +345,11 @@ This is a evil clone of the surround package found in Vim.
 #+BEGIN_SRC emacs-lisp
   (use-package evil-surround
     :config
-    (global-evil-surround-mode 1))
+    (global-evil-surround-mode 1)
+    ;; add $$ as a surrounding pair
+    (setq-default evil-surround-pairs-alist
+                  (push '(?$ . ("$" . "$")) evil-surround-pairs-alist))
+)
 #+END_SRC
 
 *** colemak settings
@@ -544,8 +548,10 @@ Make orgmode integrate nicer with evil mode in a way that relies less on the met
 #+BEGIN_SRC emacs-lisp
   (evil-define-key 'normal org-mode-map
     (kbd "TAB") 'org-cycle     ;; this should already be the case?
-    ">" 'org-shiftmetaright
-    "<" 'org-shiftmetaleft)
+    ">" 'outline-demote
+    "<" 'outline-promote)
+    ;; ">" 'org-shiftmetaright
+    ;; "<" 'org-shiftmetaleft)
 #+END_SRC
 
 Org structure editing made easy/mnemonic with evil-leader.
@@ -1033,9 +1039,15 @@ seems wonky.. only shift-tab works but tab doesn't.. maybe something uses tab al
 ** syntax checking
 
 #+BEGIN_SRC emacs-lisp
-(use-package flycheck
-  :init (global-flycheck-mode))
+  (use-package flycheck
+    :config
+    (global-flycheck-mode)
+    (setq-default flycheck-disabled-checkers '(tex-chktex))
+  )
 #+END_SRC
+
+There is a bug in ~chk-tex~, see [[https://github.com/flycheck/flycheck/issues/1214][issue]]. They also describe possible workarounds.
+
 ** fuzzy matching
 
 The Ivy/Counsel/Swiper trio. Other option would be =helm=.

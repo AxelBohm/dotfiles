@@ -3,17 +3,6 @@
 
 * General settings
 
-** speed up startup
-
-By not doing garbage collection right at the start. Taken from [[https://github.com/nilcons/emacs-use-package-fast/blob/master/README.md][here]].
-
-#+BEGIN_SRC emacs-lisp
-  (setq gc-cons-threshold 64000000)
-  (add-hook 'after-init-hook #'(lambda ()
-                               ;; restore after startup
-                               (setq gc-cons-threshold 800000)))
-#+END_SRC
-
 ** use-package
 
 Why does the default behaviour require you to write =:ensure t= for every single package. If I put it there I'm sure I want it!
@@ -25,38 +14,36 @@ Why does the default behaviour require you to write =:ensure t= for every single
 
 Use ~:defer~ more? see [[https://emacs.stackexchange.com/questions/19694/use-package-defer-t-and-autoloads][link]]
 
-** startup screen
+** speed up startup
 
-none of these useless messages.
-
-#+BEGIN_SRC emacs-lisp
-  (setq inhibit-startup-screen t)
-  (setq initial-scratch-message "") ;; Uh, I know what Scratch is for
-#+END_SRC
-
-** for graphical emacs
-
-remove all junk bars.
+By not doing garbage collection right at the start. Taken from [[https://github.com/nilcons/emacs-use-package-fast/blob/master/README.md][here]].
 
 #+BEGIN_SRC emacs-lisp
-  (menu-bar-mode -1)
-  (tool-bar-mode -1)
-  (scroll-bar-mode 0)
+  (setq gc-cons-threshold 64000000)
+  (add-hook 'after-init-hook #'(lambda ()
+                               ;; restore after startup
+                               (setq gc-cons-threshold 800000)))
 #+END_SRC
 
 ** misc defaults
 
-Emacs keeps asking wether to follow symlinks. This has the advantage that emacs' version control features work, but the disadvantage that the current directory is changed to weired location (because of stow).
+*** follow symlinks
+
+Emacs keeps asking wether to follow symlinks. This has the advantage that emacs' version control features work, but the disadvantage that the current directory is changed to weired location for dotfiles (because of stow).
 
 #+BEGIN_SRC emacs-lisp
   (setq vc-follow-symlinks t)
 #+END_SRC
 
-Matches parentheses and such in every mode
+*** paren-mode
+
+Highlight matching parentheses and such in every mode.
 
 #+BEGIN_SRC emacs-lisp
   (show-paren-mode 1)
 #+END_SRC
+
+*** autosave
 
 Stop creating backup~ and #autosave# files.
 
@@ -65,7 +52,46 @@ Stop creating backup~ and #autosave# files.
   (setq auto-save-default nil)
 #+END_SRC
 
-save position of curser even after closing file.
+*** line number
+
+Show line numbers to the left for better jumping.
+(consider the ace jump package which shows a letter for every line for more efficient jumping)
+
+#+BEGIN_SRC emacs-lisp
+  (setq display-line-numbers 'relative)
+  (display-line-numbers-mode)
+#+END_SRC
+
+For some reason this only works after reloading the config file...
+
+*** startup screen
+
+none of these useless messages.
+
+#+BEGIN_SRC emacs-lisp
+  (setq inhibit-startup-screen t)
+  (setq initial-scratch-message "") ;; Uh, I know what Scratch is for
+#+END_SRC
+
+This is not really necessary anymore as I am using [[*dashboard][dashboard]] now.
+
+*** remove all junk bars.
+
+#+BEGIN_SRC emacs-lisp
+  (menu-bar-mode -1)
+  (tool-bar-mode -1)
+  (scroll-bar-mode 0)
+#+END_SRC
+
+*** fontsize
+
+#+BEGIN_SRC emacs-lisp
+  (set-face-attribute 'default nil :height 100)
+#+END_SRC
+
+*** misc
+
+Save position of curser even after closing file.
 
 #+BEGIN_SRC emacs-lisp
   (save-place-mode t)
@@ -76,23 +102,6 @@ ain't nobody got time to write entire words..
 #+BEGIN_SRC emacs-lisp
   (defalias 'yes-or-no-p 'y-or-n-p)
 #+END_SRC
-
-Show line and column number in the bottom bar.
-
-#+BEGIN_SRC emacs-lisp
-  (line-number-mode t)
-  (column-number-mode t)
-#+END_SRC
-
-Show line numbers to the left for better jumping.
-(consider the ace jump package which shows a letter for every line for more efficient jumping)
-
-#+BEGIN_SRC emacs-lisp
-  (display-line-numbers-mode)
-  (setq display-line-numbers 'relative)
-#+END_SRC
-
-For some reason this only works after reloading the config file...
 
 ** whitespace
 *** strip trailing whitespace when saving
@@ -173,7 +182,7 @@ Quickly switch back and forth between windows.
   (evil-leader/set-key "n" 'other-window)
 #+END_SRC
 
-** TODO buffers
+** buffers
 
 find a good way to interact with buffers. check out the [[https://www.emacswiki.org/emacs/SwitchingBuffers][emacs wiki]].
 
@@ -197,6 +206,7 @@ Switch back and forth between the two MRU buffers.
 
 The default modeline gets so crammed.. Maybe I am using too many modes?
 
+*** custom
 Either way, here's a custom modeline.
 
 #+BEGIN_SRC emacs-lisp
@@ -211,10 +221,18 @@ Either way, here's a custom modeline.
          "%p "
          ;; value of current line number
          "(%l,%c)% "
-))
+  ))
 #+END_SRC
 
 Only works after reloading config file??
+
+*** line number
+Show line and column number in the bottom bar.
+
+#+BEGIN_SRC emacs-lisp
+  (line-number-mode t)
+  (column-number-mode t)
+#+END_SRC
 
 * Packages
 
@@ -273,9 +291,9 @@ Set the leader key and some very basic keybindings.
     (evil-leader/set-key
       "b" 'switch-to-buffer
       "q" 'kill-buffer
-      "r" 'reload-init-file
       "s h" 'evil-window-split'
       "s v" 'evil-window-vsplit'
+      "r" 'reload-init-file         ;; consider switching to "e r"
       "e c" 'ab/visit-emacs-config
       "w" 'save-buffer))
 #+END_SRC

@@ -787,87 +787,93 @@ For some reason one has to tell babel which languages should be executed when ty
      (shell . t)))
 #+END_SRC
 
-** LaTeX                                                              :major:
+*** org everywhere
 
-which package to use? =tex-site= or =tex= ?
-is AucTeX itself a package?
-
+seems wonky.. only shift-tab works but tab doesn't.. maybe something uses tab already? like yasnippet.
 #+BEGIN_SRC emacs-lisp
-  (use-package tex-site
-    :ensure auctex
-    :mode ("\\.tex\\'" . latex-mode)
-    :config
-    (setq TeX-auto-save t)
-    (setq TeX-parse-self t)
-    (setq TeX-save-query nil)  ;; save when compiling without asking
-    (setq-default TeX-master nil) ;; I'm guessing this stops asking for master file
-    (add-hook 'LaTeX-mode-hook
-              (lambda ()
-                (company-mode)
-                (smartparens-mode)
-                (turn-on-reftex)
-                (reftex-mode)
-                (setq reftex-plug-into-AUCTeX t)
-                (setq TeX-PDF-mode t)  ;; is supposed to call pdflatex instead of latex
-                (setq TeX-source-correlate-method 'synctex)
-                (setq TeX-source-correlate-start-server t))))
-
-    (setq TeX-view-program-selection '((output-pdf "Zathura"))
-           TeX-source-correlate-start-server t)
+  (use-package outshine)
 #+END_SRC
+
+** LaTeX                                                              :major:
+*** setup
 
 A different tex setup that uses latexmk
 
 #+BEGIN_SRC emacs-lisp
-  ;; (use-package auctex-latexmk
-  ;;   :after latex
-  ;;   :init
-  ;;   (setq auctex-latexmk-inherit-TeX-PDF-mode t)
-  ;;   :config
-  ;;   (auctex-latexmk-setup))
+  (use-package auctex-latexmk
+    :after latex
+    :init
+    ;; inherits TeX-PDF-mode (forces pdf)
+    (setq auctex-latexmk-inherit-TeX-PDF-mode t)
+    :config
+    (auctex-latexmk-setup))
 
-  ;; (use-package tex-site
-  ;;   ;; Not deferred, since tex-site.el is essentially an autoloads file.
-  ;;   :init
-  ;;   (setq tex-fontify-script nil
-  ;;         font-latex-fontify-script nil
-  ;;         TeX-parse-self nil)
-  ;;   (add-hook 'latex-mode-hook 'TeX-PDF-mode)
-  ;; )
+  (use-package tex-site
+    :ensure auctex
+    ;; Not deferred, since tex-site.el is essentially an autoloads file.
+    :init
+    (add-hook 'LaTeX-mode-hook
+              (lambda ()
+                (turn-on-reftex)
+                (reftex-mode)
+                (setq TeX-PDF-mode t)
+                (setq TeX-command-default "latexmk")))
+
+    :config
+    (setq tex-fontify-script t
+          font-latex-fontify-script 'invisible  ;; don't show ^ or _ for scripts
+          reftex-plug-into-AUCTeX t
+          TeX-save-query nil)                   ;; save when compiling without asking
+
+    ;; use Zathura as pdf viewer
+    (setq TeX-view-program-selection '((output-pdf "Zathura"))
+           TeX-source-correlate-start-server t)
+  )
 #+END_SRC
 
 *** even fancier symbols
 
-the =latex-pretty-symbols= package is supposed to contain many more unicode symbols for LaTeX entities than just =prettify-symbols-mode= (which is what I am currently using). Also, it is supposed make subscripts and superscripts even nicer that e.g. AucTeX by not displaying the =_= or =^=.
-However, it's currently not doing anything...
+ the =latex-pretty-symbols= package is supposed to contain many more unicode symbols for LaTeX entities than just =prettify-symbols-mode= (which is what I am currently using). Also, it is supposed make subscripts and superscripts even nicer that e.g. AucTeX by not displaying the =_= or =^=.
+ However, it's currently not doing anything...
 
-#+BEGIN_SRC emacs-lisp
-  (add-to-list 'load-path "~/.emacs.d/lisp/")
-  (require 'latex-pretty-symbols)
-#+END_SRC
+ #+BEGIN_SRC emacs-lisp
+   (add-to-list 'load-path "~/.emacs.d/lisp/")
+   (require 'latex-pretty-symbols)
+ #+END_SRC
 
 *** RefTeX
 
-Reftexs completion seems a bit wonky. First one needs to press ~C-[~ and then at least one letter of the reference and then ~<RET>~. This such a hassle (although the minibuffer that opens and let's you select the reference is pretty cool).
+ Reftexs completion seems a bit wonky. First one needs to press ~C-[~ and then at least one letter of the reference and then ~<RET>~. This such a hassle (although the minibuffer that opens and let's you select the reference is pretty cool).
 
-For this reason the following package should interact with company to autocomplete references. This works fine for ~\ref~ but doesn't work for ~\cite~. Also, the ~\ref~ autocompletion usually doesn't work right away for newly created labels..
+ For this reason the following package should interact with company to autocomplete references. This works fine for ~\ref~ but doesn't work for ~\cite~. Also, the ~\ref~ autocompletion usually doesn't work right away for newly created labels..
 
-#+BEGIN_SRC emacs-lisp
-  (use-package company-reftex
-    :defer t)
-#+END_SRC
+ #+BEGIN_SRC emacs-lisp
+   (use-package company-reftex
+     :defer t)
+ #+END_SRC
 
-RefTeX has this really nice table of contents it can display in another buffer that gives a great overview over the document and even lets you navigate and rearrange.
-Non-nil means, create TOC window by splitting window vertically.
+ RefTeX has this really nice table of contents it can display in another buffer that gives a great overview over the document and even lets you navigate and rearrange.
+ Non-nil means, create TOC window by splitting window vertically.
 
-#+BEGIN_SRC emacs-lisp
-  (setq reftex-toc-split-windows-horizontally 1)
-  (evil-leader/set-key "l t" 'reftex-toc)       ;; Mnemonic: Latex Toc
-#+END_SRC
+ #+BEGIN_SRC emacs-lisp
+   (setq reftex-toc-split-windows-horizontally 1)
+   (evil-leader/set-key-for-mode 'LaTeX-mode "l t" 'reftex-toc)       ;; Mnemonic: Latex Toc
+ #+END_SRC
 
-See the [[https://www.gnu.org/software/auctex/manual/reftex/Table-of-Contents.html][manual]] for more TOC options.
+ See the [[https://www.gnu.org/software/auctex/manual/reftex/Table-of-Contents.html][manual]] for more TOC options.
+
+ #+BEGIN_SRC emacs-lisp
+   (evil-leader/set-key "l c" 'reftex-citation)
+ #+END_SRC
 
 *** keybindings
+
+ #+BEGIN_SRC emacs-lisp
+   (evil-leader/set-key
+     "l l" 'TeX-command-run-all
+     "l v" 'Tex-view
+     "l n" 'LaTeX-narrow-to-environment)
+ #+END_SRC
 
 ** auto completion
 

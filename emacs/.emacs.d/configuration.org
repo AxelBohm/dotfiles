@@ -58,8 +58,8 @@
     (consider the ace jump package which shows a letter for every line for more efficient jumping)
 
     #+BEGIN_SRC emacs-lisp
-      (setq display-line-numbers 'relative)
       (display-line-numbers-mode)
+      (setq display-line-numbers 'relative)
     #+END_SRC
 
     For some reason this only works after reloading the config file...
@@ -168,8 +168,8 @@
 
    #+BEGIN_SRC emacs-lisp
    (global-undo-tree-mode)
-     (setq undo-tree-auto-save-history t)
-    ( setq undo-tree-history-directory-alist '(("." . "~/.emacs.d/undo")))
+   (setq undo-tree-auto-save-history t)
+   (setq undo-tree-history-directory-alist '(("." . "~/.emacs.d/undo")))
    #+END_SRC
 
    Note that undo-tree has many more handy features I am not yet using.
@@ -236,13 +236,32 @@
 
 * Packages
 
-** colors
+** appearance
+*** colors
 
-   #+BEGIN_SRC emacs-lisp
-   (use-package nord-theme)
-   (add-to-list 'custom-theme-load-path (expand-file-name "~/.emacs.d/themes/"))
-   (load-theme 'nord t)
-   #+END_SRC
+    #+BEGIN_SRC emacs-lisp
+    (use-package nord-theme)
+    (add-to-list 'custom-theme-load-path (expand-file-name "~/.emacs.d/themes/"))
+    (load-theme 'nord t)
+    #+END_SRC
+
+*** pretty-mode
+
+    Re-display parts of the Emacs buffer as pretty Unicode symbols.
+
+    #+BEGIN_SRC emacs-lisp
+    ;; (use-package pretty-mode
+    ;;   :ensure t)
+    ;;   (global-pretty-mode t)
+    ;;   (pretty-activate-groups
+    ;;    '(:sub-and-superscripts :greek :arithmetic-nary))
+    #+END_SRC
+
+    emacs ships default with =prettify-symbols mode=.
+
+    #+BEGIN_SRC emacs-lisp
+    (global-prettify-symbols-mode 1)
+    #+END_SRC
 
 ** auto closing of parenthesis
 
@@ -470,24 +489,6 @@
     For some reason ~C~ and ~D~ work for me as promised but ~dW~ or ~cW~ doesn't.
     Also it regularly *makes emacs crash*...
 
-** pretty-mode
-
-   Re-display parts of the Emacs buffer as pretty Unicode symbols.
-
-   #+BEGIN_SRC emacs-lisp
-   ;; (use-package pretty-mode
-   ;;   :ensure t)
-   ;;   (global-pretty-mode t)
-   ;;   (pretty-activate-groups
-   ;;    '(:sub-and-superscripts :greek :arithmetic-nary))
-   #+END_SRC
-
-   emacs ships default with =prettify-symbols mode=.
-
-   #+BEGIN_SRC emacs-lisp
-   (global-prettify-symbols-mode 1)
-   #+END_SRC
-
 ** org mode                                                           :major:
 
    #+begin_center
@@ -506,8 +507,8 @@
        :bind (("C-c l" . org-store-link)
               ("C-c a" . org-agenda)
               ("C-c c" . org-capture)))
-   #+END_SRC
 
+   #+END_SRC
 
    ~org-return-follow-links~ is supposed to give ~RET~ some functionality in evil mode (which it usually doesn't have). However, [[*make RET better][see this section]] for giving the enter key even more functionality.
 

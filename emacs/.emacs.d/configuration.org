@@ -1012,6 +1012,7 @@ currently only used for the dashboard..
     (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
   ;; )
 #+END_SRC
+
 ** python                                                             :major:
 
 #+BEGIN_SRC emacs-lisp
@@ -1036,12 +1037,6 @@ when yanking region which was not selected in visual mode (anti pattern) it is h
 
 Doesn't work yet..
 
-** org everywhere
-
-seems wonky.. only shift-tab works but tab doesn't.. maybe something uses tab already? like yasnippet.
-#+BEGIN_SRC emacs-lisp
-  (use-package outshine)
-#+END_SRC
 ** syntax checking
 
 #+BEGIN_SRC emacs-lisp

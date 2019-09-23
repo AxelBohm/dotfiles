@@ -27,6 +27,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(org-tags-column 0)
  '(package-selected-packages
    (quote
     (evil-magit magit counsel flycheck outshine volatile-highlights tex-site evil-smartparens evil-matchit company-reftex elpy latex-pretty-symbols projectile dashboard page-break-lines auctex-latexmk which-key smartparens-config yasnippet use-package smartparens pretty-mode org-bullets nord-theme evil-leader evil-commentary company auctex))))

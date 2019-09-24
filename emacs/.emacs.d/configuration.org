@@ -288,7 +288,7 @@
      (smartparens-global-mode 1) ;; I always want this
    #+END_SRC
 
-** vi :major:
+** vi
 
    No way around vi keybindings!
 
@@ -520,7 +520,7 @@
 
 *** config
 
-    Tell org where I store my org stuff.
+    Tell emacs where I store my org stuff.
 
     #+BEGIN_SRC emacs-lisp
       (setq org-directory "~/org")
@@ -529,9 +529,9 @@
         "Return the absolute address of an org file, given its relative name."
         (concat (file-name-as-directory org-directory) filename))
 
-        ;; (setq org-inbox-file "~/org/inbox.org")
-        (setq org-index-file (org-file-path "index.org"))
-        (setq org-archive-location
+      ;; (setq org-inbox-file "~/org/inbox.org")
+      (setq org-index-file (org-file-path "index.org"))
+      (setq org-archive-location
         (concat (org-file-path "archive.org") "::* From %s"))
     #+END_SRC
 
@@ -851,13 +851,16 @@
 
 *** RefTeX
 
-    Reftexs completion seems a bit wonky. First one needs to press ~C-[~ and then at least one letter of the reference and then ~<RET>~. This such a hassle (although the minibuffer that opens and let's you select the reference is pretty cool).
+    RefTeXs completion seems a bit wonky. First one needs to press ~C-c [~ and then at least one letter of the reference and then ~<RET>~. This such a hassle (although the minibuffer that opens and let's you select the reference is pretty cool).
 
-    For this reason the following package should interact with company to autocomplete references. This works fine for ~\ref~ but doesn't work for ~\cite~. Also, the ~\ref~ autocompletion usually doesn't work right away for newly created labels..
+    For this reason the following package should interact with company to autocomplete references. This is so freakin great!
+    What about ~company-bibtex~?
 
     #+BEGIN_SRC emacs-lisp
       (use-package company-reftex
-        :defer t)
+        :init
+        (add-to-list 'company-backends 'company-reftex-citations)
+        (add-to-list 'company-backends 'company-reftex-labels))
     #+END_SRC
 
     RefTeX has this really nice table of contents it can display in another buffer that gives a great overview over the document and even lets you navigate and rearrange.
@@ -874,6 +877,12 @@
       (evil-leader/set-key "l c" 'reftex-citation)
     #+END_SRC
 
+    #+BEGIN_SRC emacs-lisp
+      ;; unset C-z, to be used to make my own C-z prefix
+      (global-unset-key [(control z)])
+      (global-set-key [(control z) (c)] 'reftex-citation)
+    #+END_SRC
+
 *** keybindings
 
     #+BEGIN_SRC emacs-lisp
@@ -883,6 +892,15 @@
         "l n" 'LaTeX-narrow-to-environment)
     #+END_SRC
 
+*** company
+
+    #+BEGIN_SRC emacs-lisp
+      ;; (use-package company-auctex
+      ;;   :init
+      ;;   (company-auctex-init))
+    #+END_SRC
+
+***
 ** auto completion
 
    I used to think =company= is slow, but I just had to turn the ~idle-delay~ down...

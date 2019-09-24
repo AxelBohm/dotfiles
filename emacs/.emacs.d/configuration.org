@@ -799,7 +799,7 @@
 
     seems wonky.. only shift-tab works but tab doesn't.. maybe something uses tab already? like yasnippet.
     #+BEGIN_SRC emacs-lisp
-      (use-package outshine)
+      ;; (use-package outshine)
     #+END_SRC
 ** LaTeX :major:
 *** setup
@@ -858,6 +858,7 @@
 
     #+BEGIN_SRC emacs-lisp
       (use-package company-reftex
+        :after company
         :init
         (add-to-list 'company-backends 'company-reftex-citations)
         (add-to-list 'company-backends 'company-reftex-labels))
@@ -879,8 +880,8 @@
 
     #+BEGIN_SRC emacs-lisp
       ;; unset C-z, to be used to make my own C-z prefix
-      (global-unset-key [(control z)])
-      (global-set-key [(control z) (c)] 'reftex-citation)
+      ;; (global-unset-key [(control z)])
+      ;; (global-set-key [(control z) (c)] 'reftex-citation)
     #+END_SRC
 
 *** keybindings
@@ -896,6 +897,7 @@
 
     #+BEGIN_SRC emacs-lisp
       ;; (use-package company-auctex
+      ;;   :after company
       ;;   :init
       ;;   (company-auctex-init))
     #+END_SRC

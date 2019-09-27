@@ -266,6 +266,52 @@
       (global-prettify-symbols-mode 1)
     #+END_SRC
 
+*** dashboard
+
+    Display most recently used files and other useful stuff on startup.
+    See the [[https://github.com/emacs-dashboard/emacs-dashboard][github]].
+    This has to be loaded before the modeline.
+
+    #+BEGIN_SRC emacs-lisp
+      (use-package dashboard
+        :config
+        (setq dashboard-set-file-icons t)
+        (dashboard-setup-startup-hook))
+    #+END_SRC
+
+    Show agenda for upcoming week and not just today.
+
+    #+BEGIN_SRC emacs-lisp
+      (setq show-week-agenda-p t)
+    #+END_SRC
+
+    Customize what is displayed on the dashboard
+
+    #+BEGIN_SRC emacs-lisp
+      (setq dashboard-items '((recents  . 8)
+                              ;; (bookmarks . 5)
+                              (projects . 5)
+                              (agenda . 5)))
+
+      (setq dashboard-startup-banner 2)
+    #+END_SRC
+
+*** modeline
+
+    Dependency for the modeline. Also spices up the dashboard.
+
+    #+BEGIN_SRC emacs-lisp
+      (use-package all-the-icons)
+    #+END_SRC
+
+    #+BEGIN_SRC emacs-lisp
+      (use-package doom-modeline
+        :hook (after-init . doom-modeline-mode)
+        :config
+        (setq find-file-visit-truename t)
+        (setq doom-modeline-height 15))
+    #+END_SRC
+
 ** auto closing of parenthesis
 
    Smart treatment of parenthesis, like auto closing or auto deletion of the matching one.
@@ -369,6 +415,7 @@
 
     #+BEGIN_SRC emacs-lisp
       (use-package evil-surround
+        :after evil
         :config
         (global-evil-surround-mode 1)
         ;; add $$ as a surrounding pair
@@ -466,6 +513,7 @@
 
     #+BEGIN_SRC emacs-lisp
       (use-package evil-matchit
+        :after evil
         :config
         (global-evil-matchit-mode))
     #+END_SRC
@@ -476,6 +524,7 @@
 
     #+BEGIN_SRC emacs-lisp
       (use-package evil-commentary
+        :after evil
         :config
         (evil-commentary-mode))
     #+END_SRC
@@ -672,19 +721,23 @@
     ;; (define-key org-mode-map (kbd "RET")  #'ab/org-return)
     #+END_SRC
 *** org capture
+
+    Keep everything out of your head! Has to be as convenient as possible. The default keybinding is ~C-c c~.
+
 **** templates
-     Templates for capturing. The default keybinding is ~C-c c~ . Also, ~%a~ expands to a link to the file (and position) from which =org-capture= was called.
+
+     Templates for capturing. Also, ~%a~ expands to a link to the file (and position) from which =org-capture= was called.
      I think =%i= is active region. Another nice feature is ~%^{Name}~ prompts for name. This probably makes sense for titles or something because I tend to put too much next to the asterics and too little text underneath..
 
      #+BEGIN_SRC emacs-lisp
        (setq org-capture-templates
          '(("l" "todo with Link" entry
            (file+headline org-index-file "Inbox")
-           "*** TODO %?\n  %i\n  See: %a")
+           "*** TODO %?\n  %i\n  See: %a\n")
 
           ("n" "Note"  entry
            (file+headline org-index-file "Inbox")
-           "*** %?\n")
+           "*** %?\n\n")
 
           ("t" "Todo" entry
            (file+headline org-index-file "Inbox")
@@ -718,7 +771,7 @@
      The above code, together with the follow shell command does the job.
 
      #+BEGIN_SRC shell
-     emacsclient -c -F '(quote (name . "capture"))' -e '(activate-capture-frame)'
+       emacsclient -c -F '(quote (name . "capture"))' -e '(activate-capture-frame)'
      #+END_SRC
 
 *** appearance
@@ -767,7 +820,7 @@
      Org can pretty display things like latex symbols. Indices are even nicer than in AucTex as the underscores are removed.
 
      #+BEGIN_SRC emacs-lisp
-     (setq org-pretty-entities 1)
+       (setq org-pretty-entities 1)
      #+END_SRC
 
 *** TODO evil org
@@ -805,6 +858,7 @@
     #+BEGIN_SRC emacs-lisp
       ;; (use-package outshine)
     #+END_SRC
+
 ** LaTeX :major:
 *** setup
 
@@ -873,7 +927,7 @@
 
     #+BEGIN_SRC emacs-lisp
       (setq reftex-toc-split-windows-horizontally 1)
-      (evil-leader/set-key-for-mode 'LaTeX-mode "l t" 'reftex-toc)       ;; Mnemonic: Latex Toc
+      (evil-leader/set-key "l t" 'reftex-toc)       ;; Mnemonic: Latex Toc
     #+END_SRC
 
     See the [[https://www.gnu.org/software/auctex/manual/reftex/Table-of-Contents.html][manual]] for more TOC options.
@@ -915,8 +969,8 @@
        :defer t
        :init
        (setq company-dabbrev-ignore-case t
-             company-idle-delay 0.01
-             company-minimum-prefix-length 1)
+             company-idle-delay 0.05
+             company-minimum-prefix-length 2)
        (add-hook 'after-init-hook 'global-company-mode)
        :config
 
@@ -943,7 +997,6 @@
 
    #+BEGIN_SRC emacs-lisp
      (use-package yasnippet
-       :defer t
        :config
        (setq yas-snippet-dirs '("~/.emacs.d/snippets"))
        (yas-global-mode 1)
@@ -998,38 +1051,9 @@
 
    #+BEGIN_SRC emacs-lisp
      (use-package which-key
-       :defer t
        :diminish which-key-mode
        :config
        (which-key-mode +1))
-   #+END_SRC
-
-** dashboard
-
-   Display most recently used files and other useful stuff on startup.
-   See the [[https://github.com/emacs-dashboard/emacs-dashboard][github]].
-
-   #+BEGIN_SRC emacs-lisp
-     (use-package dashboard
-       :config
-       (dashboard-setup-startup-hook))
-   #+END_SRC
-
-   Show agenda for upcoming week and not just today.
-
-   #+BEGIN_SRC emacs-lisp
-     (setq show-week-agenda-p t)
-   #+END_SRC
-
-   Customize what is displayed on the dashboard
-
-   #+BEGIN_SRC emacs-lisp
-     (setq dashboard-items '((recents  . 8)
-                             (bookmarks . 5)
-                             (projects . 5)
-                             (agenda . 5)))
-
-     (setq dashboard-startup-banner 2)
    #+END_SRC
 
 ** projectile
@@ -1038,10 +1062,10 @@
 
    #+BEGIN_SRC emacs-lisp
      (use-package projectile
-       :defer t)
-       ;; :config
+       :defer t
+       :config
        (projectile-mode +1)
-       (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
+       (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map))
      ;; )
    #+END_SRC
 
@@ -1095,7 +1119,6 @@
 
    #+BEGIN_SRC emacs-lisp
      (use-package counsel
-       :defer t
        :config
        (ivy-mode 1)
        ;; Virtual buffers correspond to bookmarks and recent files list

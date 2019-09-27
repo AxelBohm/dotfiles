@@ -23,6 +23,7 @@ alias pr="sudo pacman -Rns"
 alias pu="sudo pacman -Syu"
 
 alias e="emacs -nw"
+alias ec="emacsclient -c"
 alias v="vim"
 alias vim="nvim"
 alias nv="nvim"

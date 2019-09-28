@@ -1,5 +1,5 @@
 #+TITLE: Emacs Configuration
-#+OPTIONS: toc:nil num:nil
+#+OPTIONS: toc:t num:nil
 
 * General settings
 
@@ -347,7 +347,7 @@
       )
    #+END_SRC
 
-*** =evil-leader=
+*** evil leader
 
     More vim functionality. Note that I'm loading evil-leader before evil-mode. Someone suggested this as a workaround for ~SPC~ as leader not always working (or in my case it stops working mid session).
 
@@ -381,6 +381,17 @@
       (define-key key-translation-map (kbd "ESC") (kbd "C-g"))
     #+END_SRC
 
+    Quickly open shell in a split.
+
+    #+BEGIN_SRC emacs-lisp
+      (defun ab/open-shell-in-split ()
+        (interactive)
+        (evil-window-split)
+        (eshell))
+
+      (evil-leader/set-key "s s" 'ab/open-shell-in-split)
+    #+END_SRC
+
 *** evil mode
 
     load evil-mode + basic config.
@@ -392,9 +403,9 @@
         :config
         (evil-mode 1)
         (define-key evil-normal-state-map "\C-u" 'evil-scroll-up)
-        (setq evil-vsplit-window-right t) ;; sane positioning of the split
-        (setq evil-split-window-below t) ;; sane positioning of the split
-        (setq evil-ex-search-case 'smart)) ;; case sensitive only if upper case letters are used
+        (setq evil-vsplit-window-right t   ;; sane positioning of the split
+              evil-split-window-below t    ;; sane positioning of the split
+              evil-ex-search-case 'smart)) ;; case sensitive only if upper case letters are used
     #+END_SRC
 
     By default =C-u= is not bound to srolling up (as it should be).
@@ -610,8 +621,6 @@
          (kbd "TAB") 'org-cycle     ;; this should already be the case?
          ">" 'outline-demote
          "<" 'outline-promote)
-         ;; ">" 'org-shiftmetaright
-         ;; "<" 'org-shiftmetaleft)
      #+END_SRC
 
      Org structure editing made easy/mnemonic with evil-leader.
@@ -669,6 +678,18 @@
          "g u" 'outline-up-heading               ;; Go Up in hierarchy
          "g n" 'org-next-visible-heading)        ;; Go Next heading
      #+END_SRC
+
+     The above motions are easy to remember but feel clunky when trying to go more then one heading up or down (this is probably an antipattern anyways..). Either way, here are some single key mappings.
+     I don't use ~(~ or ~)~ in evil mode anyways.
+
+     #+BEGIN_SRC emacs-lisp
+       (evil-define-key 'normal org-mode-map
+         ")" 'org-next-visible-heading
+         "(" 'org-previous-visible-heading)
+         "g u" 'outline-up-heading               ;; Go Up in hierarchy
+     #+END_SRC
+
+     By default ~g u~ is bound to ~evil-downcase~.
 
 *** make RET better
 
@@ -822,10 +843,6 @@
      #+BEGIN_SRC emacs-lisp
        (setq org-pretty-entities 1)
      #+END_SRC
-
-*** TODO evil org
-
-    better keybindings for org in evil?
 
 *** opening pdfs
 
@@ -1034,8 +1051,7 @@
                                            t ; Many other characters
                                            ("-d" "en_US") nil utf-8))))
 
-
-       (evil-leader/set-key "s s" 'flyspell-mode) ;; toggle spell checking
+       (evil-leader/set-key "s c" 'flyspell-mode) ;; toggle spell checking
    #+END_SRC
 
    Ignore spell checking in source code blocks within org-mode.

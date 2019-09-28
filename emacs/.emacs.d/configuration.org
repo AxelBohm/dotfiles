@@ -209,24 +209,24 @@
 
    The default modeline gets so crammed.. Maybe I am using too many modes?
 
-*** custom
-    Either way, here's a custom modeline.
+# *** custom
+#     Either way, here's a custom modeline.
 
-    #+BEGIN_SRC emacs-lisp
-    (setq mode-line-format
-          (list
-           "  "
-           ;; value of current buffer name
-           "%b "
-           ;; if modified
-           "[%&] "
-           ;; percent of file above current window
-           "%p "
-           ;; value of current line number
-           "(%l,%c)% "))
-    #+END_SRC
+#     #+BEGIN_SRC emacs-lisp
+#     (setq mode-line-format
+#           (list
+#            "  "
+#            ;; value of current buffer name
+#            "%b "
+#            ;; if modified
+#            "[%&] "
+#            ;; percent of file above current window
+#            "%p "
+#            ;; value of current line number
+#            "(%l,%c)% "))
+#     #+END_SRC
 
-    Only works after reloading config file??
+#     Only works after reloading config file??
 
 *** line number
     Show line and column number in the bottom bar.
@@ -318,7 +318,6 @@
 
    #+BEGIN_SRC emacs-lisp
      (use-package smartparens
-       :defer t
        :config
        (sp-local-pair 'org-mode "_" "_" )
        (sp-local-pair 'org-mode "*" "*" )
@@ -331,9 +330,9 @@
        (sp-local-pair 'latex-mode "\\left(" "\\right)" :trigger "\\l(")
        (sp-local-pair 'latex-mode "\\left[" "\\right]" :trigger "\\l(")
        (sp-local-pair 'latex-mode "\\left\\{" "\\right\\}" :trigger "\\l(")
-       (sp-local-pair 'latex-mode "\\left\\langle" "\\right\\rangle" :trigger "\\l("))
+       (sp-local-pair 'latex-mode "\\left\\langle" "\\right\\rangle" :trigger "\\l(")
 
-     (smartparens-global-mode 1) ;; I always want this
+       (smartparens-global-mode 1)) ;; I always want this
    #+END_SRC
 
 ** vi
@@ -977,6 +976,26 @@
       ;;   (company-auctex-init))
     #+END_SRC
 
+*** nifty settings
+    auto compile when saving
+    really nice hook [[https://github.com/c02y/dotemacs.d/blob/81153dcce335b0d2ef4b2416eae6e1ca3c70cd76/init.el#L2955-L3098][here]].
+    #+BEGIN_SRC emacs-lisp
+      (defun ab/LaTeX-save-and-compile ()
+        "Save and compile the tex project using latexmk.
+      If compilation fails, split the current window and open error-buffer
+      then jump to the error line, if errors corrected, close the error-buffer
+      window and close the *TeX help* buffer."
+        (interactive)
+        (TeX-save-document "")
+        (TeX-command "latexmk" 'TeX-master-file))
+
+       ;; (add-hook 'LaTeX-mode-hook
+       ;;   (lambda ()
+       ;;     (add-hook 'after-save-hook 'ab/LaTeX-save-and-compile nil 'make-it-local)))
+    #+END_SRC
+
+    The hook is taken from [[https://stackoverflow.com/questions/6138029/how-to-add-a-hook-to-only-run-in-a-particular-mode][here.]]
+    for some reason I get an error, I suspect it is that ~TeX-master-file~
 ** auto completion
 
    I used to think =company= is slow, but I just had to turn the ~idle-delay~ down...
@@ -1100,13 +1119,22 @@
 
    #+BEGIN_SRC emacs-lisp
      (use-package volatile-highlights
-       :defer t
        :config
        (volatile-highlights-mode t)
-       (vhl/define-extension 'evil 'evil-paste-after 'evil-paste-before
+       (vhl/define-extension 'my-evil-highlights 'evil-yank 'evil-yank-line
+                             'evil-paste-after 'evil-paste-before
                              'evil-paste-pop 'evil-move)
-       (vhl/install-extension 'evil))
+       (vhl/install-extension 'my-evil-highlights)
+       (volatile-highlights-mode t)
+)
 
+     ;; (vhl/define-extension 'undo-tree
+     ;;                       'undo-tree-move
+     ;;                       'undo-tree-yank)
+     ;; (with-eval-after-load 'undo-tree
+     ;;   (vhl/install-extension 'undo-tree)
+     ;;   (vhl/load-extension 'undo-tree))
+     ;;   (volatile-highlights-mode))
    #+END_SRC
 
    Doesn't work yet..

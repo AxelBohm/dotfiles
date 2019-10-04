@@ -8,7 +8,9 @@ externalhdmi=${externalhdmi% connected}
 
 # xrandr --output "LVDS-1" --off --output "VGA-1" --auto --output "HDMI-2" --right-of "VGA-1"
 if xrandr | grep "$externalvga connected"; then
-    xrandr --output $internal --off --output $externalvga --auto --output $externalhdmi --auto --right-of $externalvga
+    xrandr --output $internal --off
+    xrandr --output $externalvga --auto
+    xrandr --output $externalhdmi --auto --right-of $externalvga
 fi
 
 # set wallpaper again

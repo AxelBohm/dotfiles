@@ -39,7 +39,6 @@ Plug 'tpope/vim-surround'       " change surrounding parenthesis/quotes
 Plug 'itchyny/lightline.vim'    " statusline
 Plug 'mengelbrecht/lightline-bufferline'
 Plug 'ctrlpvim/ctrlp.vim'       " fuzzy find
-Plug 'vimwiki/vimwiki'
 
 " Initialize plugin system
 call plug#end()
@@ -124,9 +123,6 @@ let g:lightline#bufferline#filename_modifier = ':t'
 " not yet working
 let g:nord_italic_comments = 1
 
-let g:vimwiki_list = [{'path': '~/vimwiki/',
-                      \ 'syntax': 'markdown', 'ext': '.md'}]
-
 """""""""""""""""""""""""""""""""""""""""""""""""
 " => general config
 """""""""""""""""""""""""""""""""""""""""""""""""
@@ -168,7 +164,7 @@ set relativenumber
 inoremap jk <esc>
 
 " Fast saving
-nnoremap <C-s> :w<cr>
+nnoremap <leader>w :w<cr>
 nnoremap <leader>x :x<cr>
 nnoremap <leader>q :q<cr>
 

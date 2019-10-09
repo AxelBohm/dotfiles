@@ -1,10 +1,39 @@
+###########################################
+# config
+
+[mpd]
 ncmpcpp_directory = ~/.ncmpcpp
-
 mpd_host = "127.0.0.1"
-
-mpd_port 6600
-
+mpd_port = "6600"
 mpd_connection_timeout = 5
+mpd_music_dir = "~/music" 
 
-mpd_music_dir = "/home/xel/music" 
+[header]
+# header_visibility = "no"
+playlist_shorten_total_times = "yes"
+# state_line_color = "black"
 
+[playlist]
+# song_list_format = "{{%a - %t}|{%f}}{$R%l}"
+now_playing_prefix = "$b$5"
+now_playing_suffix = "$/b$9"
+
+[statusbar]
+# progressbar_look = "─╼ "
+progressbar_look = "▒▓░"
+# progressbar_color = "black"
+# statusbar_visibility = "no"
+
+[global]
+main_window_color = "default"
+centered_cursor = "yes"
+external_editor = "vim"
+
+# █▓▒░ Visualizer
+visualizer_look = "▒░"
+
+visualizer_fifo_path = "/tmp/mpd.fifo"
+visualizer_output_name = "my_fifo"
+visualizer_sync_interval = "30" 
+visualizer_in_stereo = "yes"
+visualizer_type = "spectrum"

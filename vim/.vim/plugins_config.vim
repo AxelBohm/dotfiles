@@ -1,7 +1,6 @@
 """"""""""""""""""""""""""""""
 " => R
 """"""""""""""""""""""""""""""
-
 let g:Rout_more_colors = 1
 let g:rout_follow_colorscheme = 1
 
@@ -25,6 +24,11 @@ let g:pandoc#syntax#conceal#use = 0
 
 
 """"""""""""""""""""""""""""""
+" => YCM
+""""""""""""""""""""""""""""""
+let g:ycm_autoclose_preview_window_after_completion = 1
+
+""""""""""""""""""""""""""""""
 " => UltiSnips
 """"""""""""""""""""""""""""""
 let g:UltiSnipsExpandTrigger='<c-j>'
@@ -41,58 +45,6 @@ nmap <c-p> <Plug>yankstack_substitute_older_paste
 nmap <c-n> <Plug>yankstack_substitute_newer_paste
 
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => lightline
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-let g:lightline = {
-      \ 'colorscheme': 'gruvbox',
-      \ 'active': {
-      \   'left': [ ['mode', 'paste'],
-      \             ['fugitive', 'readonly', 'filename', 'modified'] ],
-      \   'right': [ [ 'lineinfo' ], ['percent'] ]
-      \ },
-      \ 'component': {
-      \   'readonly': '%{&filetype=="help"?"":&readonly?"🔒":""}',
-      \   'modified': '%{&filetype=="help"?"":&modified?"+":&modifiable?"":"-"}',
-      \   'fugitive': '%{exists("*fugitive#head")?fugitive#head():""}'
-      \ },
-      \ 'component_visible_condition': {
-      \   'readonly': '(&filetype!="help"&& &readonly)',
-      \   'modified': '(&filetype!="help"&&(&modified||!&modifiable))',
-      \   'fugitive': '(exists("*fugitive#head") && ""!=fugitive#head())'
-      \ },
-      \ 'separator': { 'left': ' ', 'right': ' ' },
-      \ 'subseparator': { 'left': ' ', 'right': ' ' }
-      \ }
-
-let g:lightline.component_expand = {
-      \  'linter_checking': 'lightline#ale#checking',
-      \  'linter_warnings': 'lightline#ale#warnings',
-      \  'linter_errors': 'lightline#ale#errors',
-      \  'linter_ok': 'lightline#ale#ok',
-      \ }
-
-" set color to components
-let g:lightline.component_type = {
-      \     'linter_checking': 'left',
-      \     'linter_warnings': 'warning',
-      \     'linter_errors': 'error',
-      \     'linter_ok': 'left',
-      \ }
-
-let g:lightline.active = { 
-        \   'right': [ 
-        \   ['lineinfo'], ['percent'],
-        \   ['linter_checking', 'linter_errors', 'linter_warnings', 'linter_ok']
-        \   ]
-\}
-
-"" requires nerdfonts and fontawesome
-" let g:lightline#ale#indicator_warnings = "\uf071"
-" let g:lightline#ale#indicator_errors = "\uf05e"
-
-
 """"""""""""""""""""""""""""""
 " => bufExplorer plugin
 """"""""""""""""""""""""""""""
@@ -106,7 +58,7 @@ map <leader>o :BufExplorer<cr>
 """"""""""""""""""""""""""""""
 " => buftabline
 """"""""""""""""""""""""""""""
-let g:buftabline_show=1
+let g:buftabline_show=0
 
 
 """"""""""""""""""""""""""""""
@@ -141,6 +93,7 @@ function! s:goyo_leave()
       qa
     endif
   endif
+  highlight Normal ctermbg=NONE
 endfunction
 
 autocmd! User GoyoEnter call <SID>goyo_enter()
@@ -159,19 +112,24 @@ nmap <silent> <leader>a :ALEToggle<cr>
 let g:ale_lint_on_enter = 0
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Git gutter (Git diff)
+" => vimtex
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:gitgutter_enabled=0
-nnoremap <silent> <leader>d :GitGutterToggle<cr>
-
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Latex live preview
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:livepreview_previewer = 'zathura'
-
+let g:vimtex_view_method = 'zathura'
+nnoremap <leader>lt :VimtexTocToggle<cr>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => sneak
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:sneak#label = 1
+let g:sneak#label = 0
+let g:sneak#use_ic_scs = 1
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => autoclose (breaks iabbrev)
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:AutoCloseExpandSpace = 0 " Make iabbrev work again
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => terminus
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:TerminusInsertCursorShape=2
+let g:TerminusMouse=0

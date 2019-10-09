@@ -1,0 +1,7 @@
+directory: ~/Private/music/music
+
+mpdupdate:
+    host: localhost
+    port: 6600
+
+plugins: chroma

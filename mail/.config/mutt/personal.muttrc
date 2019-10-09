@@ -1,3 +1,0 @@
-macro index,pager i1 '<sync-mailbox><enter-command>source /home/xel/.config/mutt/accounts/uniwien.muttrc<enter><change-folder>!<enter>'
-source /home/xel/.config/mutt/accounts/uniwien.muttrc
-macro index,pager i2 '<sync-mailbox><enter-command>source /home/xel/.config/mutt/accounts/ymail.muttrc<enter><change-folder>!<enter>'

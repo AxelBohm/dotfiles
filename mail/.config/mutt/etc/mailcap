@@ -1,13 +1,12 @@
-#text/html; qutebrowser %s &; test=test -n "$DISPLAY"; needsterminal;
+# how to open attachements in mutt
 
-#text/html; $BROWSER %s 2>/dev/null & disown; copiousoutput;
 text/html; w3m -I %{charset} -T text/html; copiousoutput;
 
-application/pdf; mv %s %s.pdf && i3 exec zathura %s.pdf > /dev/null; needsterminal;
+application/pdf; mkdir -p /tmp/mutt \; cp %s /tmp/mutt \; zathura /tmp/mutt/$(basename %s) &
 
-image/*; ~/.config/mutt/etc/muttimage.sh %s ; copiousoutput
+text/plain; nvim %s ;
 
-#application/pdf; pdftotext '%s' -; copiousoutput; description=PDF Document;
-#nametemplate=%s.pdf
-#
-text/plain; vim %s ;
+image/jpg; mkdir -p /tmp/mutt \; cp %s /tmp/mutt \; feh /tmp/mutt/$(basename %s) &
+image/jpeg; mkdir -p /tmp/mutt \; cp %s /tmp/mutt \; feh /tmp/mutt/$(basename %s) &
+image/png; mkdir -p /tmp/mutt \; cp %s /tmp/mutt \; feh /tmp/mutt/$(basename %s) &
+image/gif; mkdir -p /tmp/mutt \; cp %s /tmp/mutt \; feh /tmp/mutt/$(basename %s) &

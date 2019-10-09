@@ -1,0 +1,109 @@
+###############################################################
+# => Aliases
+###############################################################
+
+# git
+alias g="git"
+alias gc="git commit"
+alias ga="git add"
+alias gap="git add -p"
+alias gs="git status"
+alias gd="git diff"
+alias gp="git push"
+alias gca="git commit --amend"
+alias gco="git checkout"
+alias gl="git log --pretty=oneline --abbrev-commit" # show log in more terse format
+alias gsc="git config credential.helper store"      # store credentials
+alias grc="git rm -r --cached ."                    # use this when ignoring commited files
+
+# package management
+alias p="sudo pacman"
+alias pi="sudo pacman -S"
+alias pr="sudo pacman -Rns"
+alias pu="sudo pacman -Syu"
+
+alias e="emacs -nw"
+alias ec="emacsclient -c"
+alias v="vim"
+alias vim="nvim"
+alias nv="nvim"
+
+alias R="R --quiet --no-save"
+alias t="tmux"
+alias r="ranger"
+alias s="startx"
+
+# quick access to config files
+alias vrc="vim ~/.vim/vimrc"
+alias nvrc="vim ~/.config/nvim/init.vim"
+alias zrc="vim ~/.zshrc"
+alias mrc="vim ~/.config/mutt/muttrc"
+alias arc="vim ~/.config/mutt/etc/aliases"
+alias nrc="vim ~/.newsboat/config"
+alias rrc="vim ~/.config/ranger/rc.conf"
+alias brc="vim ~/.bashrc"
+
+
+# basic stuff
+alias ls="ls --color"
+alias la="ls -A"
+alias ls="ls --ignore='*.'{log,aux,fls,synctex.gz,fdb_latexmk,prv} --ignore='\_region\_.tex' --color"
+alias grep="grep --color"
+
+c() { # automatically show content when changin into a directory
+	cd $1;
+    ls;
+}
+alias cd="c"
+
+zz() { # automatically show content when changin into a directory
+    z $1;
+    ls;
+}
+alias z="zz"
+
+# I want alway everything in the system clipboard. multiple clipboard are to confusing.
+alias xclip="xclip -selection 'clipboard'"
+
+
+## scripts
+
+# command line version of my dmenu-pass script
+# i cant always remember my pass folder structure -> use fuzzy finder
+alias fp="fuzzy_pass.sh -p"
+alias fu="fuzzy_pass.sh -u"
+
+
+## random 
+
+# starwars in ascii
+alias starwars="telnet towel.blinkenlights.nl"
+
+
+###############################################################
+# => colored man pages
+###############################################################
+export LESS_TERMCAP_mb=$'\E[1;31m'     # begin bold
+export LESS_TERMCAP_md=$'\E[1;36m'     # begin blink
+export LESS_TERMCAP_me=$'\E[0m'        # reset bold/blink
+export LESS_TERMCAP_so=$'\E[01;44;33m' # begin reverse video
+export LESS_TERMCAP_se=$'\E[0m'        # reset reverse video
+export LESS_TERMCAP_us=$'\E[1;32m'     # begin underline
+export LESS_TERMCAP_ue=$'\E[0m'        # reset underline
+export GROFF_NO_SGR=1                  # for konsole and gnome-terminal
+
+
+###############################################################
+# => exports
+###############################################################
+
+# put the scripts in the path
+export PATH=~/bin:$PATH
+export PATH=~/bin/xrandr:$PATH
+
+# needed for pythons pip --user
+export PATH=~/.local/bin:$PATH
+
+# set editor
+export VISUAL=nvim
+export EDITOR="$VISUAL"

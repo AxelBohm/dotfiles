@@ -38,8 +38,8 @@ Plugin 'maxbrunsfeld/vim-yankstack'
 Plugin 'SirVer/ultisnips'
 
 " lightline
-Plugin 'itchyny/lightline.vim'
-Plugin 'maximbaz/lightline-ale'
+" Plugin 'itchyny/lightline.vim'
+" Plugin 'maximbaz/lightline-ale'
 
 " buffer explorer
 Plugin 'jlanzarotta/bufexplorer'
@@ -50,28 +50,30 @@ Plugin 'amix/vim-zenroom2'
 
 " change surrounding paranthesis/quotes
 Plugin 'tpope/vim-surround'
-
-" shows git diffs on the side
-Plugin 'airblade/vim-gitgutter'
-
+"
 " consistent navigation between vim and tmux
 Plugin 'christoomey/vim-tmux-navigator'
 
 " buffers as tabs on top
-Plugin 'ap/vim-buftabline'
+" Plugin 'ap/vim-buftabline'
 
 " fancy start screen
 Plugin 'mhinz/vim-startify'
 
 """ LaTeX
-Plugin 'xuhdev/vim-latex-live-preview'
-" Plugin 'lervag/vimtex'
-
-" git wrapper
-Plugin 'tpope/vim-fugitive'
-
+Plugin 'lervag/vimtex'
+"
 " two char "
 Plugin 'justinmk/vim-sneak'
+
+" orgmode
+Plugin 'jceb/vim-orgmode'
+
+" change curser shape when in insert
+Plugin 'wincent/terminus'
+
+" autoclose parenthesis
+Plugin 'Townk/vim-autoclose'
 
 
 " All of your Plugins must be added before the following line

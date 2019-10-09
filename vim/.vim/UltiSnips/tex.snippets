@@ -1,3 +1,28 @@
+global !p
+texMathZones = ['texMathZone'+x for x in ['A', 'AS', 'B', 'BS', 'C',
+'CS', 'D', 'DS', 'E', 'ES', 'F', 'FS', 'G', 'GS', 'H', 'HS', 'I', 'IS',
+'J', 'JS', 'K', 'KS', 'L', 'LS', 'DS', 'V', 'W', 'X', 'Y', 'Z']]
+
+texIgnoreMathZones = ['texMathText']
+
+texMathZoneIds = vim.eval('map('+str(texMathZones)+", 'hlID(v:val)')")
+texIgnoreMathZoneIds = vim.eval('map('+str(texIgnoreMathZones)+", 'hlID(v:val)')")
+
+ignore = texIgnoreMathZoneIds[0]
+
+def math():
+	synstackids = vim.eval("synstack(line('.'), col('.') - (col('.')>=2 ? 1 : 0))")
+	try:
+		first = next(
+            i for i in reversed(synstackids)
+            if i in texIgnoreMathZoneIds or i in texMathZoneIds
+        )
+		return first != ignore
+	except StopIteration:
+		return False
+endglobal
+
+
 priority -50
 
 global !p
@@ -42,7 +67,7 @@ def add_row(snip):
 
 endglobal
 
-snippet "beg(in)?" "begin{} / end{}" br
+snippet beg "begin{} / end{}" bA
 \begin{${1:something}}%
 	${0:${VISUAL}}
 \end{$1}
@@ -80,21 +105,21 @@ snippet table "Table environment" b
 endsnippet
 
 snippet fig "Figure environment" b
-\begin{figure}[${2:htpb}]
+\begin{figure}[${1:htpb}]
 	\centering
-	\includegraphics[width=${3:0.8}\linewidth]{${4:name.ext}}
+	\includegraphics[width=${2:0.8}\linewidth]{${3:name.ext}}
 	\caption{${4/(\w+)\.\w+/\u$1/}$0}
 	\label{fig:${4/(\w+)\.\w+/$1/}}
 \end{figure}
 endsnippet
 
-snippet enum "Enumerate" b
+snippet enum "Enumerate" bA
 \begin{enumerate}
 	\item $0
 \end{enumerate}
 endsnippet
 
-snippet item "Itemize" b
+snippet item "Itemize" bA
 \begin{itemize}
 	\item $0
 \end{itemize}
@@ -181,27 +206,21 @@ $0
 endsnippet
 
 
-##############
-# MATH STUFF #
-##############
+################
+# Environments #
+################
 
-snippet eq "Equation" b
+snippet eq "Equation" bA
 \begin{equation}
 	$0
 \end{equation}
 endsnippet
 
-snippet eql "Equation with label" b
+snippet eql "Equation with label" bA
 \begin{equation}
 	\label{eq:${1}}
 	$0
 \end{equation}
-endsnippet
-
-snippet eqnn "Equation without number" b
-\begin{equation*}
-	$0
-\end{equation*}
 endsnippet
 
 snippet al "Align" b
@@ -210,16 +229,10 @@ snippet al "Align" b
 \end{align}
 endsnippet
 
-snippet ald "Aligned" b
+snippet ald "Aligned" bA
 \begin{aligned}
 	$0
 \end{aligned}
-endsnippet
-
-snippet alnn "Align without numbers" b
-\begin{align*}
-	$0
-\end{align*}
 endsnippet
 
 snippet eqa "Equation array" b
@@ -234,96 +247,168 @@ snippet eqann "Equation array without numbers" b
 \end{eqnarray*}
 endsnippet
 
-snippet fr "fraction" w
+snippet cases "cases" w
+\begin{cases}
+	$0
+\end{cases}
+endsnippet
+
+snippet def "definition" b
+\begin{definition}%
+	\label{def:$1}
+	$0
+\end{definition}
+endsnippet
+
+##############
+# MATH STUFF #
+##############
+
+context "math()"
+snippet fr "fraction" wA
 \frac{${1:${VISUAL}}}{${2}}
 endsnippet
 
+context "math()"
 snippet mat "Smart Matrix"
 \begin{${1:p/b/v/V/B/small}matrix}
 	$0
 \end{$1matrix}
 endsnippet
 
-snippet lr| "left| right|" w
+context "math()"
+snippet lr| "left| right|" wA
 \left| ${1:${VISUAL}} \right|
 endsnippet
 
+context "math()"
 snippet lr{ "left\{ right\}" w
-\left\\{ ${1:${VISUAL}} \right\\}
+\left\\{ ${1:${VISUAL}} \right\\
 endsnippet
 
+context "math()"
 snippet lr[ "left[ right]" w
 \left[ ${1:${VISUAL}} \right]
 endsnippet
 
-# snippet lr( "left( right)" w
-# \left\langle ${1} \right\rangle ${0}
-# endsnippet
-
+context "math()"
 snippet sum "sum" w
 \sum_{${1:i=1}}^{${2:n}} ${0}
 endsnippet
 
+context "math()"
 snippet int "integral" w
-\int_{${1:0}}^{${2:T}} ${3} \diff ${4} ${0}
+\int_{${1:0}}^{${2:T}} ${3} \d ${0}
 endsnippet
 
+context "math()"
 snippet lim "lim" w
 \lim_{${1:n \to \infty}} ${0}
 endsnippet
 
+context "math()"
 snippet sup "sup" w
 \sup_{${1}} ${0}
 endsnippet
 
-snippet frame "frame" w
-\begin{frame}[${1:t}]{${2:title}}
-${0}
-\end{frame}
-endsnippet
-
-snippet lr( "left( right)" w
+context "math()"
+snippet lr( "left( right)" wA
 \left( ${0} \right
 endsnippet
 
-snippet lra "left\angle right\rangle)" w
+context "math()"
+snippet lra "left\angle right\rangle)" wA
 \left\langle ${1} \right\rangle ${0}
 endsnippet
 
+context "math()"
+snippet ri "right" w
+\right
+endsnippet
+
+context "math()"
+snippet le "left" w
+\left
+endsnippet
 
 #################
 # lala #
 #################
 
+context "math()"
 snippet cal "mathcal" w
 \mathcal{${1}}${0}
 endsnippet
 
+context "math()"
 snippet equiv "Leftrightarrow" w
 \Leftrightarrow
 endsnippet
 
+context "math()"
 snippet prox "prox" w
 \prox{${1}}{${2}}${0}
 endsnippet
 
 
 #################
+# presentations #
+#################
+
+snippet frame "frame" b
+\begin{frame}
+	\frametitle{${1:title}}
+	${0}
+\end{frame}
+endsnippet
+
+snippet bl "Block" b
+\begin{block}{${1:title}}
+	${0}
+\end{block}
+endsnippet
+
+snippet vis "visible" b
+\visible<${1}->{${0}}
+endsnippet
+
+snippet only "only" b
+\only<${1}->{${0}}
+endsnippet
+
+
+
+#################
 # My STUFF #
 #################
 
+context "math()"
+snippet abs "absolute value" w
+\lvert ${0} \rvert
+endsnippet
+
+context "math()"
 snippet norm "norm" w
 \lVert ${0} \rVert
 endsnippet
 
+context "math()"
 snippet norms "norm squared" w
 \lVert ${1} \rVert^2${0}
 endsnippet
 
+# i keep mistyping
+context "math()"
+snippet norsm "norm squared" w
+\lVert ${1} \rVert^2${0}
+endsnippet
+
+context "math()"
 snippet lrnorm "left right norm" w
 \left\lVert ${1} \right\rVert${0}
 endsnippet
 
+context "math()"
 snippet lrnorms "left right norm" w
 \left\lVert ${1} \right\rVert^2${0}
 endsnippet
@@ -335,6 +420,11 @@ snippet lem "lemma" w
 \end{lemma}
 endsnippet
 
+snippet Lemma "Lemma ref" w
+Lemma~\ref{lem:${1}}
+endsnippet
+
+context "math()"
 snippet rem "remark" w
 \begin{remark}
 	${0}
@@ -347,25 +437,54 @@ snippet pr "proof" w
 \end{proof}
 endsnippet
 
-snippet th "theorem" w
+snippet thm "theorem" bA
 \begin{theorem}%
 	\label{thm:${1}}
 	${0}
 \end{theorem}
 endsnippet
 
-snippet algo "algorithm" w
+snippet Theorem "Theorem ref" w
+Theorem~\ref{thm:${1}}
+endsnippet
+
+snippet cor "corollary" bA
+\begin{corollary}%
+	\label{cor:${1}}
+	${0}
+\end{corollary}
+endsnippet
+
+snippet Corollary "Corollary ref" w
+Corollary~\ref{cor:${1}}
+endsnippet
+
+snippet algo "algorithm" bA
 \begin{algo}%
 	\label{alg:${1}}
-	${0}
+	For $x_{0} \in \H$, consider
+	\begin{equation*}
+	(\forall k \geq 0) \quad 
+		\left\lfloor \begin{array}{l}
+		x_{k+1} = ${0}
+		\end{array}\right.
+	\end{equation*}
 \end{algo}
 endsnippet
 
-snippet prob "problem" w
+snippet Algorithm "Algorithm ref" w
+Algorithm~\ref{alg:${1}}
+endsnippet
+
+snippet prob "problem" b
 \begin{problem}%
 	\label{prob:${1}}
 	${0}
 \end{problem}
+endsnippet
+
+snippet Problem "Problem ref" w
+Problem~\ref{prob:${1}}
 endsnippet
 
 snippet prop "proposition" w
@@ -373,6 +492,10 @@ snippet prop "proposition" w
 	\label{prop:${1}}
 	${0}
 \end{proposition}
+endsnippet
+
+snippet Proposition "Proposition ref" w
+Proposition~\ref{prop:${1}}
 endsnippet
 
 snippet ref "ref" w
@@ -391,76 +514,150 @@ snippet lab "label" w
 \label{${0}}
 endsnippet
 
+context "math()"
 snippet over "overset" w
 \overset{${1:top}}{${2:=}} ${0}
 endsnippet
 
+context "math()"
 snippet bm "bold math" w
 \bm{${1}}${0}
 endsnippet
 
+context "math()"
 snippet bar "overbar (small)" w
 \bar{${1}}${0}
 endsnippet
 
-snippet i "element" w
-\in ${0}
+context "math()"
+snippet in "element" wA
+\in
 endsnippet
 
 snippet sq "sqrt" w
 \sqrt{${1}}${0}
 endsnippet
 
+context "math()"
+snippet seq "sequence" w
+{(${1}_{k})}_{k\in\N}${0}
+endsnippet
+
+
 
 #################
 # GREEK LETTERS #
 #################
 
+context "math()"
 snippet a "alpha" w
 \alpha
 endsnippet
 
+context "math()"
 snippet b "beta" w
 \beta
 endsnippet
 
+context "math()"
 snippet e "epsilon" w
 \epsilon
 endsnippet
 
+context "math()"
 snippet l "lambda" w
 \lambda
 endsnippet
 
+context "math()"
 snippet t "tau" w
 \tau
 endsnippet
 
+context "math()"
 snippet g "gamma" w
 \gamma
 endsnippet
 
+context "math()"
 snippet n "nabla" w
 \nabla
 endsnippet
 
+context "math()"
 snippet x "xi" w
 \xi
 endsnippet
 
+context "math()"
 snippet m "mu" w
 \mu
 endsnippet
 
+context "math()"
 snippet s "sigma" w
 \sigma
 endsnippet
 
+context "math()"
 snippet d "delta" w
 \delta
 endsnippet
 
+context "math()"
 snippet o "omega" w
 \omega
+endsnippet
+
+context "math()"
+snippet q "quad" w
+\quad
+endsnippet
+
+context "math()"
+snippet p "partial" w
+\partial
+endsnippet
+
+context "math()"
+snippet inf "infinity" wA 
+\infty
+endsnippet
+
+context "math()"
+snippet le "less" wA 
+\le
+endsnippet
+
+snippet newc "newcommand" b
+\newcommand{${1}}{${0}}
+endsnippet
+
+#################
+# temporary
+#################
+
+snippet io "int omega" w
+\int_{\Omega} ${0} \d 
+endsnippet
+
+#################
+# experimental
+#################
+
+snippet xk "x_{k}" iA
+x_k
+endsnippet
+
+snippet xK "x_{k+1}" iA
+x_{k+1}
+endsnippet
+
+snippet yk "y_{k}" iA
+y_k
+endsnippet
+
+snippet yK "y_{k+1}" iA
+y_{k+1}
 endsnippet
 

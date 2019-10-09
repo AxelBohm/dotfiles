@@ -1,25 +1,24 @@
 # vim: filetype=neomuttrc
-# This is the general mutt config which has the settings that all accounts use.
+
 bind index,pager i noop
 bind index,pager g noop
 bind index \Cf noop
 
 source etc/muttcol
-source etc/aliases
-set alias_file= ~/.config/mutt/etc/aliases
+# source etc/aliases
+# source "gpg --decrypt --quiet ~/.config/mutt/etc/aliases.gpg |"
+# set alias_file= ~/.config/mutt/etc/aliases
 
+## general settings
 set sleep_time = 0
 set sort=reverse-threads
 set sort_aux='last-date-received'
-# set sort_aux=reverse-date
 set editor = $EDITOR
 set timeout = "5"
 set mail_check = "10"
 set mailcap_path = ~/.config/mutt/etc/mailcap
-set status_format='-%r- %f [Msgs:%?M?%M/?%m%?n? New:%n?%?o? Old:%o?%?d? Del:%d?%?F? \
-Flag:%F?%?t? Tag:%t?%?p? Post:%p?%?b? Inc:%b?%?l? %l?]---(%s/%S)-%>-(%P)---'
-set date_format="%d/%m %I:%M"
-set index_format="%2C %Z %?X?A& ? %D %-15.15F %s (%-4.4c)"
+set status_format='---%r---%f---%>---'
+set index_format = "%2C %Z %[%b %d %R] %-15.15L %s (%?l?%4l&%4c?)"
 set markers = no
 set mark_old = no
 set smtp_authenticators = 'gssapi:login'
@@ -28,62 +27,144 @@ auto_view text/html
 auto_view application/pdf
 alternative_order text/plain text/enriched text/html
 set rfc2047_parameters = yes
-# flow more??
-set text_flowed = yes
-# show pager even if email is opened
-set pager_index_lines = 6
+set text_flowed = yes               # flow more?? everybody and their grandmother recommends this
+set pager_index_lines = 8           # show pager even if email is opened
+set pager_stop                      # don't go to next message automatically
+# set recall=no                       # Don't ask to recall postponed message when Composing
+set delete=yes                      # don't ask for purge. just do
 
-# General remappings
+## General remappings
 bind editor <space> noop
-bind index G last-entry
-bind index gg first-entry
+bind index,browser,query,compose G last-entry
+bind index,query,compose gg first-entry
 bind pager j next-line
 bind pager k previous-line
-bind pager gg top
+bind pager,browser gg top-page
 bind pager G bottom
-bind index \Cd half-down
-bind index \Cu half-up
+bind index,pager \Cd half-down
+bind index,pager \Cu half-up
+bind browser l select-entry
+# sync mailbox when opening so messages don't remain new for ever
+macro index l <display-message><sync-mailbox>
+macro index <space> <display-message><sync-mailbox>
+bind pager l view-attachments
+bind pager,attach h exit
+bind index h noop
+bind browser h goto-parent
+bind index,pager S sync-mailbox
 bind index,pager R group-reply
-# macro index,pager S '<sync-mailbox><shell-escape>pkill -RTMIN+12 i3blocks<enter>'
-macro index,pager \Cu |urlview\n
+# macro index,pager \Cu |urlview\n
 
-# View attachments properly.
+# Forgotten attachment Feature
+set abort_noattach = ask-yes
+set abort_noattach_regex = "\\<(attach(|ed|ments?)|anh(ä|ae)ngen|angeh(ä|ae)ngt|anhang|anh(ä|ae)nge)\\>"
+
+## View attachments properly.
 bind attach <return> view-mailcap
-set fast_reply           # skip to compose when replying
-set fcc_attach           # save attachments with the body
-set forward_format = "Fwd: %s"       # format of subject when forwarding
-set forward_decode                   # decode when forwarding
-set forward_quote                    # include message in forwards
-set reverse_name                     # reply as whomever it was to
-set include                          # include message in replies
+set fast_reply                      # skip to compose when replying
+set forward_format = "Fwd: %s"      # format of subject when forwarding
+set forward_quote                   # include message in forwards
+set reverse_name                    # reply as whomever it was to
+set include                         # include message in replies
 
-#Ctrl-R to mark all as read
+## Ctrl-R to mark all as read
 macro index \Cr "T~U<enter><tag-prefix><clear-flag>N<untag-pattern>.<enter>" "mark all messages as read"
 
-#sync email
-macro index O "<shell-escape>$HOME/.config/mutt/etc/mailsync.sh<enter>" "run offlineimap to sync all mail"
-macro index o "<shell-escape>$HOME/.config/mutt/etc/mailsync.sh -qf INBOX<enter>" "run offlineimap to sync inbox"
+## notmuch
+macro index \Cf "<enter-command>unset wait_key<enter><shell-escape>read -p 'notmuch query: ' x; echo \$x >~/.cache/mutt_terms<enter><limit>~i \"\`notmuch search --output=messages \$(cat ~/.cache/mutt_terms) | head -n 600 | perl -le '@a=<>;chomp@a;s/\^id:// for@a;$,=\"|\";print@a'\`\"<enter>" "show only messages matching a notmuch pattern"
 
-#copy/move dialogs
+## sync email
+bind index,pager o noop
+bind index,pager O noop
+macro index P "<shell-escape>$HOME/.config/mutt/etc/mailsync.sh<enter>" "run offlineimap to sync all mail"
+macro index p "<shell-escape>$HOME/.config/mutt/etc/mailsync.sh -qf INBOX<enter>" "run offlineimap to sync inbox"
+
+## copy/move dialogs
 macro index C "<copy-message>?<toggle-mailboxes>" "copy a message to a mailbox"
 macro index M "<save-message>?<toggle-mailboxes>" "move a message to a mailbox"
 
-# Notmuch searching
-macro index \Cf "<enter-command>unset wait_key<enter><shell-escape>read -p 'notmuch query: ' x; echo \$x >~/.cache/mutt_terms<enter><limit>~i \"\`notmuch search --output=messages \$(cat ~/.cache/mutt_terms) | head -n 600 | perl -le '@a=<>;chomp@a;s/\^id:// for@a;$,=\"|\";print@a'\`\"<enter>" "show only messages matching a notmuch pattern"
-macro index A "<limit>all\n" "show all messages (undo limit)"
-
-# Sidebar mappings
+## Sidebar mappings
 # set sidebar_visible = yes
 set sidebar_width = 20
 set sidebar_short_path = yes
-set sidebar_next_new_wrap = yes
 set mail_check_stats
 set sidebar_format = '%B%?F? [%F]?%* %?N?%N/? %?S?%S?'
-bind index,pager \Ck sidebar-prev
-bind index,pager \Cj sidebar-next
+bind index,pager \Ce sidebar-prev
+bind index,pager \Cn sidebar-next
 bind index,pager \Co sidebar-open
 bind index,pager \Cp sidebar-prev-new
-bind index,pager \Cn sidebar-next-new
+# bind index,pager \Cn sidebar-next-new
 bind index,pager B sidebar-toggle-visible
 
-source personal.muttrc
+## encryption
+set crypt_use_gpgme=yes
+set pgp_default_key="30ED64E10C65C4A3BAAC07A73A574180808F2FF7"
+set pgp_sign_as="30ED64E10C65C4A3BAAC07A73A574180808F2FF7"
+set pgp_self_encrypt = yes          # when sending encrypted mail save it encrypted (but with my key)
+# set crypt_opportunistic_encrypt
+# set crypt_autosign
+
+
+## switch mailboxes
+macro index,pager o1 '<sync-mailbox><enter-command>source /home/xel/.config/mutt/accounts/uniwien.muttrc<enter><change-folder>!<enter>'
+macro index,pager o2 '<sync-mailbox><enter-command>source /home/xel/.config/mutt/accounts/ymail.muttrc<enter><change-folder>!<enter>'
+
+
+## colemak
+bind pager n next-line
+bind pager e previous-line
+bind index,query,alias,browser,compose,attach n next-entry
+bind index,query,alias,browser,compose,attach e previous-entry
+bind pager i view-attachments
+macro index i <display-message><sync-mailbox>
+bind browser i select-entry
+bind attach i view-attach
+bind index,pager \Cs half-down
+bind index,pager \Cl half-up
+
+
+
+# source powerline/powerline.neomuttrc
+set index_format = "%zs %zc %zt %{!%d %b}  %-15.15L %?M?(%1M)&  ? %?X? &· ? %s"
+set pager_format = " %n %zc  %T %s%*  %[!%d %b · %I:%M %p] %?X?  %X ? %P  "
+set status_format = " %f%?r? %r?    %m %?n?  %n ?  %?d?  %d ?%?t?  %t ?%?F?  %F? %> %?p?   %p ?"
+set vfolder_format = " %N %?n?%3n&   ?  %8m  · %f"
+set attach_format = "%u%D  %T%-75.75d %?T?%&   ? %5s · %m/%M"
+set compose_format = " Compose  Approx. msg size: %l   Atts: %a  %> "
+
+# no addressed to me, to me, group, cc, sent by me, mailing list
+set to_chars=""
+# # unchanged mailbox, changed, read only, attach mode
+# set status_chars = " "
+# ifdef crypt_chars set crypt_chars = " "
+set flag_chars = ""
+
+# set hidden_tags = "unread,draft,flagged,passed,replied,attachment,signed,encrypted"
+tag-transforms "replied" "↻ "  \
+               "encrytpted" "" \
+               "signed" "" \
+               "attachment" "" \
+
+# powerline status bar hack
+color status brightblack blue '(.*)' 1
+color status blue black '.*()' 1
+color status black blue '\s* [0-9]+\s*'
+color status blue black '().*$' 1
+color status yellow black '()\s*\s*[0-9]+\s*' 1
+color status black yellow '\s*\s*[0-9]+\s*'
+color status blue yellow '() ([0-9]+%|all|end) \s*' 1
+color status black blue ' ([0-9]+%|all|end) \s*'
+color status yellow black '()\s*' 1
+color status default black ''
+
+# use abook instead of mutt aliases
+set query_command="abook --mutt-query '%s'" # defauld keybinging for querying is `Q`, add more with `C-t`
+bind pager a noop                           # prevents me from adding contact to mutt instead of abook
+# macro index,pager A |'abook --add-email'\n
+# sometimes abookk cannot handle encoded headers
+# see https://stackoverflow.com/questions/25718979/handling-string-encoding-from-mutt-to-abook
+macro index,pager A "<enter-command>set my_pipe_decode=\$pipe_decode pipe_decode<return><pipe-message>abook --add-email<return><enter-command>set pipe_decode=\$my_pipe_decode; unset my_pipe_decode<return>" "add the sender address to abook"
+# set edit_headers = yes
+# set editor = 'nvim +/^$ +nohlsearch' # Move past headers.
+
+source /home/xel/.config/mutt/accounts/uniwien.muttrc

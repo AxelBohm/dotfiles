@@ -8,8 +8,8 @@ set folder = "~/.mail/ymail"
 set header_cache = ~/.config/mutt/accounts/ymail/cache/headers
 set message_cachedir = ~/.config/mutt/accounts/ymail/cache/bodies
 set certificate_file = ~/.config/mutt/accounts/ymail/certificates
-set smtp_pass=`lpass show --password yahoo.com`
-set imap_pass=`lpass show --password yahoo.com`
+set smtp_pass=`pass show Email/yahoo.com`
+set imap_pass=`pass show Email/yahoo.com`
 
 set mbox_type = Maildir
 set ssl_starttls = yes
@@ -20,11 +20,12 @@ bind index,pager gg noop
 bind index,pager g noop
 bind index gg first-entry
 unmailboxes *
-mailboxes =ymail =------------------- "=Inbox" "=Bulk Mail" "=Drafts" "=Trash" "=Archive.2016" "=Deleted Messages" "=Sent" "=Archive" "=Sent Messages" "=Gesendet" "=Draft"
+mailboxes =ymail =------------------- "=Inbox" "=Bulk Mail" "=Drafts" "=Trash" "=Sent" "=Archive" "=Gesendet"
+macro index,pager gi "<change-folder>=Inbox<enter>" "Go to inbox."
 macro index,pager gs "<change-folder>=Sent<enter>" "Go to sent."
 macro index,pager gd "<change-folder>=Drafts<enter>" "Go to drafts."
 macro index,pager gt "<change-folder>=Trash<enter>" "Go to trash."
-macro index,pager ga "<change-folder>=Archive.2016<enter>" "Go to archive."
+macro index,pager ga "<change-folder>=Archive<enter>" "Go to archive."
 set record = "+Sent"
 set postponed = "+Drafts"
 set trash = "+Trash"

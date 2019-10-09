@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: Theorem
+# key: Theorem
+# --
+Theorem~\ref{thm:$0}

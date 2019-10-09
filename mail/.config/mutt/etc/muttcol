@@ -1,14 +1,14 @@
 # vim: filetype=neomuttrc
 
 # Default index colors:
-color index color238 default '.*'
-color index_author color240 default '.*'
-color index_number color244 default
-color index_subject color247 default '.*'
+color index color4 default '.*'
+color index_author color6 default '.*'
+color index_number color8 default
+color index_subject color4 default '.*'
 
 ## For new mail:
 color index magenta default "~N"
-color index_author brightmagenta default "~N"
+color index_author magenta default "~N"
 color index_subject magenta default "~N"
 
 ## flagged (!)
@@ -19,11 +19,11 @@ color index_subject green default "~F"
 ## Header colors:
 # color header blue default ".*" # this kills the CC line?!?
 # color hdrdefault blue default
-color header brightmagenta default "^(From)"
-color header brightcyan default "^(Subject)"
+color header magenta default "^(From)"
+color header color6 default "^(Subject)"
+color header color7 default "^(To)"
 # color header red default "^(Cc|BCC)"
 color header cyan default "CC: "
-ignore date
 # unignore from subject to cc
 
 mono bold bold
@@ -32,11 +32,11 @@ mono indicator reverse
 mono error bold
 
 color normal default default
-color indicator default color237
-color sidebar_highlight red default
+color indicator default color0
+color sidebar_highlight blue default
 color sidebar_divider color8 black
-color sidebar_flagged red black
-color sidebar_new green black
+# color sidebar_flagged red black
+# color sidebar_new magenta black
 color normal brightyellow default
 color error red default
 color tilde black default
@@ -46,9 +46,7 @@ color attachment white default
 color search brightmagenta default
 
 ## statusline
-# color status color166 default
-color status color239 color239
-color status color0 color0
+color status color4 color0
 
 color hdrdefault brightgreen default
 color quoted green default

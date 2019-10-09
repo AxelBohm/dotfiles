@@ -3,10 +3,8 @@ def_key "f"
 def_key "f"
     find_item_forward
 
-def_key "+"
+def_key "t"
     show_clock
-def_key "="
-    volume_up
 
 def_key "j"
     scroll_down
@@ -20,4 +18,13 @@ def_key "ctrl-d"
 def_key "h"
     previous_column
 def_key "l"
+    next_column
+
+
+
+def_key "n"
+    scroll_down
+def_key "e"
+    scroll_up
+def_key "i"
     next_column

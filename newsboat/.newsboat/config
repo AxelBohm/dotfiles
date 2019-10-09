@@ -2,9 +2,6 @@
 
 auto-reload yes
 
-external-url-viewer "urlview"
-
-
 ########################
 # keys
 ########################
@@ -24,30 +21,35 @@ bind-key d pagedown
 bind-key u pageup
 bind-key a toggle-article-read
 bind-key n next-unread
-bind-key N prev-unread
 bind-key D pb-download
-bind-key U show-urls
 bind-key x pb-delete
+
+# colemak
+bind-key n down
+bind-key e up
+bind-key i open
+bind-key N next-feed articlelist
+bind-key E prev-feed articlelist
+bind-key N next-unread
 
 
 ########################
 # colors
 ########################
 
-color listnormal            color244    default
-color listfocus             color244    color237
-color listnormal_unread     color253    default
-color listfocus_unread      color166     color237
-#color info                  color117    color239    bold
-color info                  color235    color0    bold
-#color article               color247    default
+color listnormal            color4     default
+color listfocus             color7     color0
+color listnormal_unread     color5     default
+color listfocus_unread      color13    color0
+color info                  color4     color0
+#color article              color15    default
 
 ########################
 # highlights
 ########################
 
 # title
-highlight article "^(Title):(.*)" color172 default
+highlight article "^(Title):(.*)" color2 default
 
 # links
 # highlight article "https?://[^\" ]+" red default
@@ -56,10 +58,10 @@ highlight article "^(Title):(.*)" color172 default
 highlight article "\">[^\"]+" red default
 
 # flagged articles
-highlight all "(.*)!(.*)\d(.*)" green default
+# highlight all "(.*)!(.*)\d(.*)" green default
 
 #don't show "arXiv" everywhere
-highlight all "\\(arXiv(.*)\)" color235 default
+highlight all "\\(arXiv(.*)\)" color0 color0
 #highlight feedlist "\(arXiv(.*)" color235 color0
 
 

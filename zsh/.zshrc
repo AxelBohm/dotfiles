@@ -1,130 +1,125 @@
-# See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-# ZSH_THEME="xiong-chiamiov-plus"
-ZSH_THEME="bira"
+bindkey -e
+HISTSIZE=100000
+SAVEHIST=100000
+HISTFILE=~/.zsh_history
+setopt INC_APPEND_HISTORY
 
-# Which plugins would you like to load? 
-# Add wisely, as too many plugins slow down shell startup.
-plugins=(
-  git
-  zsh-syntax-highlighting
-  zsh-autosuggestions 
-  history-substring-search
-)
+# use z installed from package manager
+[[ -r "/usr/share/z/z.sh" ]] && source /usr/share/z/z.sh
+
 
 ###############################################################
-# => exports
+# => prompt
 ###############################################################
+#
+autoload -U colors && colors
 
-# Path to your oh-my-zsh installation.
-export ZSH=~/.oh-my-zsh
-source $ZSH/oh-my-zsh.sh
+# git prompt
+source ~/.zsh/git.zsh
 
-# put the scripts in the path
-export PATH=~/bin:$PATH
+# vi settings for zsh
+source ~/.zsh/vi.zsh
 
-# set editor
-export VISUAL=vim
-export EDITOR="$VISUAL"
+PROMPT='%{$fg[green]%}%n@%m %{$fg[blue]%}%~ $(git_prompt_string)
+%{$reset_color%}\$ '
 
-# add miniconda to path
-# export PATH=/opt/miniconda/bin:$PATH
+# left prompt
+# PROMPT="%F{237}%K{239}█▓░%{$fg_bold[green]%}%K{239}%n@%m%F{237}%K{239}░▓█%{$reset_color%} %F{237}%K{239}█▓░%{$fg_bold[blue]%}%K{239}%~%F{237}%K{239}░▓█%{$reset_color%}
+# \$ "
 
-###############################################################
-# => misc
-###############################################################
-
-# vim mode in CL
-bindkey -v  
-
-e(){
-  evince "$1" & disown && exit
-}
-
-# open the the pdf and exit the terminal
-z(){
-  zathura "$1" & disown && exit
-}
-
-# open the the pdf and Keep the terminal
-zk(){
-  zathura "$1" & disown
-}
+## right prompt
+## RPROMPT="%F{237}%K{239}█▓░%F{248}%K{239}%T%F{237}%K{239}░▓█%{$reset_color%}"
 
 ###############################################################
-# => Aliases
-###############################################################
-alias gc="git commit"
-alias ga="git add"
-alias gap="git add -p"
-alias gs="git status"
-alias gd="git diff"
-alias gp="git push"
-alias gca="git commit --amend"
-alias gco="git checkout"
-# store credentials
-alias gsc="git config credential.helper store"
-
-alias sai="sudo apt install"
-alias pi="sudo pacman -S"
-alias pr="sudo pacman -R"
-
-alias v="vim"
-alias vrc="vim ~/.vim/vimrc"
-alias zrc="vim ~/.zshrc"
-alias mrc="vim ~/.config/mutt/muttrc"
-alias arc="vim ~/.config/mutt/etc/aliases"
-alias nrc="vim ~/.newsboat/config"
-alias rrc="vim ~/.config/ranger/rc.conf"
-alias irc="vim ~/.config/i3/config"
-alias prc="vim ~/.config/polybar/config"
-
-alias R="R --quiet --no-save"
-alias t="tmux"
-alias r="ranger"
-
-alias decryptdropbox="encfs ~/Dropbox/Encrypted/ ~/Private"
-
-# who can remember this command !?
-alias chterm="sudo update-alternatives --config x-terminal-emulator"
-
-# starwars in ascii
-alias starwars="telnet towel.blinkenlights.nl"
-
-# Custom cd
-c() {
-	cd $1;
-    ls;
-}
-alias cd="c"
-
-alias la="ls -A"
-
-###############################################################
-# => plugin config
+# => fancy
 ###############################################################
 
-# autosuggestions
-bindkey '^s' autosuggest-execute
-bindkey '^e' autosuggest-execute
+autoload -Uz compinit
+compinit
+# case insensitive completion
+zstyle ':completion:*' matcher-list 'm:{[:lower:]}={[:upper:]}'
+
+# colored completion suggestions
+zstyle ':completion:*:default' list-colors "${(@s.:.)LS_COLORS}"
+
+## complete also incorrect stuff
+zstyle ':completion:*' completer _complete _correct _approximate
+
+## edit command line in $EDITOR
+autoload -U edit-command-line
+zle -N edit-command-line
+bindkey 'jk' edit-command-line
+
+# search for already written text by pressing up/down
+autoload -U history-search-end
+zle -N history-beginning-search-backward-end history-search-end
+zle -N history-beginning-search-forward-end history-search-end
+bindkey "^P" history-beginning-search-backward-end
+# bindkey "^N" history-beginning-search-forward-end
+bindkey "^[[A" history-beginning-search-backward-end
+bindkey "^[[B" history-beginning-search-forward-end
+
+################################################################
+## => Aliases
+################################################################
+if [ -f ~/.aliases ]; then
+    . ~/.aliases
+fi
+
+################################################################
+## => plugin config
+################################################################
+
+## autosuggestions
+bindkey '^j' autosuggest-execute
 bindkey '^ ' autosuggest-accept
 
-# history substring search
-bindkey "^[[A" history-substring-search-up
-bindkey "^[[B" history-substring-search-down
-bindkey "^P" history-substring-search-up
-bindkey "^N" history-substring-search-down
+## history substring search
+## bindkey "^P" history-substring-search-up
+## bindkey "^N" history-substring-search-down
 
-# ### Other ###
-# # hacky :(
-xset r rate 180 70
-setxkbmap -option ctrl:nocaps
-setxkbmap -option ctrl:ralt_rctrl
-# xmodmap -e "keycode 64 = Escape"
+################################################################
+## => functions
+################################################################
+function mdl {
+    youtube-dl --extract-audio --audio-format mp3 "$1"
+}
 
-
-###############################################################
-# => uni wien only
-###############################################################
-if [[ `whoami` = "boehm" ]]; then
-    export PATH=~/miniconda/bin:$PATH
+################################################################
+## => void only
+################################################################
+if [[ `uname -n` = "void" ]]; then
+    alias vim=vim-huge-python3
+    source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+    source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+else
+    source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.plugin.zsh
+    source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.plugin.zsh
 fi
+
+################################################################
+## => uni wien only
+################################################################
+if [[ `whoami` = "boehm" ]]; then
+    export PATH=~/miniconda3/bin:$PATH
+fi
+
+# colemak remaps
+source ~/.zsh/colemak.zsh
+
+################################################################
+## pip zsh completion start
+################################################################
+function _pip_completion {
+  local words cword
+  read -Ac words
+  read -cn cword
+  reply=( $( COMP_WORDS="$words[*]" \
+             COMP_CWORD=$(( cword-1 )) \
+             PIP_AUTO_COMPLETE=1 $words[1] ) )
+}
+compctl -K _pip_completion pip
+# pip zsh completion end
+
+
+bindkey -s '^O' 'ranger\n'

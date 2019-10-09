@@ -1,6 +1,7 @@
 # vim: filetype=neomuttrc
 # A file for aliases
 
+# uni wien
 alias bot radu.bot@univie.ac.at
 alias michael michael.sedlmayer@univie.ac.at
 alias teresa teresa.scarinci@univie.ac.at
@@ -13,6 +14,7 @@ alias morteza Morteza Kimiaei <morteza.kimiaei@gmail.com>
 alias dennis Dennis Meier <meierd61@univie.ac.at>
 alias paul Paul Stocker <paul.stocker@univie.ac.at>
 alias robert.csetnek Ernö Robert Csetnek <ernoe.robert.csetnek@univie.ac.at>
+alias sebastian.banert Sebastian Banert <banert@kth.se>
 
 # VDS 
 alias vds.student.steering florian.aigner@univie.ac.at, sascha.biberhofer@univie.ac.at, christopher.heng.chiu@univie.ac.at, manjil.saikia@univie.ac.at, daniel.scherl@univie.ac.at, laura.kanzler@univie.ac.at
@@ -25,9 +27,42 @@ alias christopher.chiu Christopher Chiu <christopher.heng.chiu@univie.ac.at>
 alias laura.kanzler Laura Kanzler <laura.kanzler@univie.ac.at>
 alias manjil Manjil Saikia <manjil.saikia@univie.ac.at>
 alias dani.scherl Daniel Scherl <daniel.scherl@univie.ac.at>
+alias thomas.mejstrik Thomas Mejstrik <thomas.mejstrik@univie.ac.at>
+alias hans.hoengesberg Hans Höngesberg <hans.hoengesberg@univie.ac.at>
+alias markus.gabl Markus Gabl <markus@gabl.com>
+alias anna.breger Anna Breger <anna.breger@univie.ac.at>
+
+# uni
+alias aris Aris Daniilidis <arisd@dim.uchile.cl>
+alias sebastian.chile Sebastian Tapia <stapia@dim.uchile.cl>
+alias sebastian_tapia_gmail sebastian tapia <sgtg22@gmail.com>
+alias terry R T Rockafellar <rtr@uw.edu>
 
 # random
 alias spinoff_fellowship1 Sophie Schober <sophie.schober@meduniwien.ac.at>
 alias spinoff_fellowship2 Inmaculada Sanchez Romero <inma.sanchez@univie.ac.at>
 alias spinoff_fellowship3 Reckling Tobias <tobias.reckling@univie.ac.at>
-alias anna.breger Anna Breger <anna.breger@univie.ac.at>
+alias christof.ender Christof Ender <christof.ender@univie.ac.at>
+alias ssc.physic StudienServiceCenter <ssc.physik@univie.ac.at>
+alias leon.neubeck240 Leon Neubeck <leon.neubeck240@gmail.com>
+alias stefan.linag Stefan Fredenhagen <stefan.fredenhagen@univie.ac.at>
+alias vgsco VGSCO <vgsco@univie.ac.at>
+alias gaspard Gaspard Jankowiak <gaspard@oknaj.eu>
+alias mathias.staudigl Mathias Staudigl <m.staudigl@maastrichtuniversity.nl>
+alias manon.roeleveld Manon Roeleveld <manon.roeleveld@univie.ac.at>
+alias katharina.werbach Katharina Werbach <katharina.werbach@univie.ac.at>
+alias Reinhard.Burgholzer Burgholzer Reinhard <Reinhard.Burgholzer@verbund.com>
+alias Thomas.Burchhart Burchhart Thomas <Thomas.Burchhart@verbund.com>
+alias hans.hammerschmied Hans Hammerschmied <hammerschmied@hhp.eu>
+alias clement.royer Clement Royer <croyer2@wisc.edu>
+alias steve.wright Stephen Wright <swright@cs.wisc.edu>
+alias maximilian.bernkopf \"Bernkopf, Maximilian\" <maximilian.bernkopf@tuwien.ac.at>
+alias edelweiss Office Edelweiss <office@alpenverein-edelweiss.at>
+alias georg.pflug georg pflug <georg.pflug@univie.ac.at>
+alias michi.fischer Michael Fischer <michi.fischer@univie.ac.at>
+alias jonas.adler Jonas Adler <jonasadl@kth.se>
+alias axel.ringh Axel Ringh <aringh@kth.se>
+alias bernhard.lamel Bernhard Lamel <bernhard.lamel@univie.ac.at>
+alias lisa.carli Lisa Carli <lisa.carli@univie.ac.at>
+alias fritz Friedrich Reichhart <friedrich.reichhart@sdr.at>
+alias rolf Rolf Böhm <r.r.boehm@aon.at>

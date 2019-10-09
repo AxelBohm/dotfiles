@@ -1,6 +1,7 @@
 " set leader (has to be before any leader command is defined)
 nnoremap <space> <Nop>
 let mapleader = " "
+let maplocalleader = ' '
 
 source ~/.vim/plugins.vim
 source ~/.vim/plugins_config.vim
@@ -12,6 +13,7 @@ set background=dark
 colorscheme gruvbox
 set t_Co=256                "colors in terminal
 syntax enable               "syntax highlighting
+highlight Normal ctermbg=NONE
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Basics
@@ -29,7 +31,7 @@ set encoding=utf8
 set fileformats=unix,dos,mac
 
 " duration vim waits for next key in command chain
-set timeoutlen=500
+set timeoutlen=700
 
 " Turn backup off
 set nobackup
@@ -43,7 +45,7 @@ set mousehide
 set noshowmode
 
 " highlight entire line of curser
-" set cursorline
+set cursorline
 
 " Set 7 lines to the cursor - when moving vertically using j/k
 set scrolloff=7
@@ -73,9 +75,6 @@ set hlsearch
 " Makes search act like search in modern browsers
 set incsearch 
 
-" For regular expressions turn magic on
-set magic
-
 " Show matching brackets when text indicator is over them
 set showmatch 
 
@@ -87,11 +86,17 @@ set splitright
 set splitbelow
 
 " linenumbers
-set number 
+" set number 
 " set relativenumber 
 
 " copy to clipboard
 set clipboard^=unnamed,unnamedplus
+
+" configure statusline
+highlight StatusLine ctermbg=0 cterm=NONE
+
+" don't redraw if not necessary
+set lazyredraw 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => nifty custom mappings
@@ -100,14 +105,9 @@ set clipboard^=unnamed,unnamedplus
 " Make Y behave like other commands
 nnoremap Y y$
 
-" $ is  a pain. use L instead. i never use L anyways..
-nnoremap L $
-vnoremap L $
-nnoremap H ^
-
 " press j and k at the same time to get escape
 inoremap jk <esc>
-inoremap kj <esc>
+" inoremap kj <esc>
 
 " Fast saving
 nnoremap <leader>w :w!<cr>
@@ -119,9 +119,6 @@ nnoremap <leader>x :x<cr>
 " splits
 nnoremap <leader>v :vsplit<CR>:Explore<CR>
 nnoremap <leader>s :split<CR>:Explore<CR>
-
-" colon is annoying
-nnoremap <leader>; :
 
 " :W sudo saves the file 
 " (useful for handling the permission-denied error)
@@ -140,7 +137,7 @@ nnoremap <leader>ss :set spell!<cr>
 set expandtab
 
 " Be smart when using tabs ;)
-set smarttab
+" set smarttab
 
 " 1 tab == 4 spaces
 set shiftwidth=4
@@ -152,32 +149,22 @@ set wrap "Wrap lines
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Brackets
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-" cheap autoclosing for brackets and alike
-inoremap " ""<left>
-" ino ' ''<left> "keeps messing with my apostrophes (maybe i shouldn't use so much slang)
-inoremap ( ()<left>
-inoremap [ []<left>
-inoremap { {}<left>
-
 " wrap words after visual selection
 vnoremap ( <esc>`>a)<esc>`<i(<esc>
 vnoremap [ <esc>`>a]<esc>`<i[<esc>
 vnoremap { <esc>`>a}<esc>`<i{<esc>
 vnoremap " <esc>`>a"<esc>`<i"<esc>
 vnoremap ' <esc>`>a'<esc>`<i'<esc>
-vnoremap $ <esc>`>a$<esc>`<i$<esc>
-
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => windows
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " move between windows
-nmap <C-j> <C-W>j
-map <C-k> <C-W>k
-map <C-h> <C-W>h
-map <C-l> <C-W>l
+nnoremap <C-j> <C-W>j
+nnoremap <C-k> <C-W>k
+nnoremap <C-h> <C-W>h
+nnoremap <C-l> <C-W>l
 
 " Resize splits
 nnoremap <leader>1 <c-w>=
@@ -203,12 +190,6 @@ map <leader>bh :bprevious<cr>
 
 " Disable highlight when <leader><cr> is pressed
 map <silent> <leader><cr> :noh<cr>
-
-" underscore is just so hard to reach
-inoremap <C-u> _
-
-" a little emacs behaviour
-" inoremap <C-F> <Right>
 
 " insert empty line without leaving normal mode
 nnoremap <leader>ij o<esc>
@@ -253,25 +234,38 @@ endtry
 " => Filetype config
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-" neomutt
-autocmd BufRead /tmp/neomutt-* Goyo         "distraction free typing of mail
-autocmd BufRead /tmp/neomutt-* :set spell!  "spellchecking for mail
-" autocmd BufRead setlocal fo+=aw
-
+""" neomutt
+autocmd BufRead /tmp/neomutt-* Goyo             "distraction free typing of mail
+autocmd BufRead /tmp/neomutt-* :set spell!      "spellchecking for mail
+autocmd BufRead /tmp/neomutt-* setlocal nonumber
 " couple of new lines and go to beginning
-autocmd BufRead /tmp/neomutt-* :normal 4O
+autocmd BufRead /tmp/neomutt-* :normal 3O
 autocmd BufRead /tmp/neomutt-* :normal gg
 
 """ R
 autocmd FileType r inoremap ;m %>%
 autocmd FileType r inoremap ;n <-
 
+""" python
+autocmd Filetype py nnoremap <leader>st ipdb.set_trace()<esc>
+autocmd Filetype py nnoremap <leader>in import numpy as np<esc>
+
+""" C
+autocmd FileType c nnoremap <leader>, :w <cr>:AsyncRun sudo make install <cr>
+
+""" Org
+autocmd BufRead *.org Goyo
+
 """ LaTex
 
-" autocmd FileType tex inoremap <F5> <Esc>:w <cr>:!latexmk % <cr><cr>
-autocmd FileType tex nnoremap <leader>, :w <cr>:AsyncRun latexmk % <cr>
-autocmd FileType tex inoremap ;n ^{}<esc>i
-autocmd FileType tex inoremap ;m _{}<esc>i
+" special settings
+autocmd FileType tex setlocal shiftwidth=2 tabstop=2
+autocmd FileType tex inoremap $ $$<left>
+" special commands
+" autocmd FileType tex nnoremap <leader>, :w <cr>:AsyncRun latexmk % <cr>
+autocmd FileType tex nnoremap <leader>p :!zathura <c-r>%<backspace><backspace><backspace>pdf &<CR><CR>
+autocmd FileType tex inoremap ;n ^{}<left>
+autocmd FileType tex inoremap ;m _{}<left>
 autocmd FileType tex inoremap ;r \R
 autocmd FileType tex inoremap ;k _{k}
 autocmd FileType tex inoremap ;j _{k+1}
@@ -279,28 +273,15 @@ autocmd FileType tex inoremap ;l _{k-1}
 autocmd FileType tex inoremap ;i ^{k}
 autocmd FileType tex inoremap ;u ^{k+1}
 autocmd FileType tex inoremap ;s ^*
+autocmd FileType tex inoremap ;t ^2
 
 autocmd FileType tex nnoremap <leader>t o%TODO:
+autocmd Filetype tex nnoremap <leader>b :split bibfile.bib<cr>
 
-autocmd FileType tex inoremap $ $$<left>
+set updatetime=1000
 
-
-" Open corresponding .pdf
-map <leader>p :!zathura <c-r>%<backspace><backspace><backspace>pdf &<CR><CR>
-
-"MARKDOWN
-	autocmd Filetype markdown,rmd inoremap ,n ---<Enter><Enter>
-	autocmd Filetype markdown,rmd inoremap ,b ****<++><Esc>F*hi
-	autocmd Filetype markdown,rmd inoremap ,s ~~~~<++><Esc>F~hi
-	autocmd Filetype markdown,rmd inoremap ,e **<++><Esc>F*i
-	autocmd Filetype markdown,rmd inoremap ,h ====<Space><++><Esc>F=hi
-	autocmd Filetype markdown,rmd inoremap ,i ![](<++>)<++><Esc>F[a
-	autocmd Filetype markdown,rmd inoremap ,a [](<++>)<++><Esc>F[a
-	autocmd Filetype markdown,rmd inoremap ,l --------<Enter>
-	autocmd Filetype rmd inoremap ,r ```{r}<CR>```<CR><CR><esc>2kO
-	autocmd Filetype rmd inoremap ,p ```{python}<CR>```<CR><CR><esc>2kO
-    autocmd Filetype rmd inoremap ,c ```<cr>```<cr><cr><esc>2kO
-    autocmd Filetype rmd nmap <leader>, :AsyncRun render-Rmarkdown.sh %<cr>
+""" MARKDOWN
+autocmd Filetype rmd nmap <leader>, :AsyncRun render-Rmarkdown.sh %<cr>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => General abbreviations
@@ -312,13 +293,6 @@ iab lsc lower semicontinuous
 
 iab oe; ö
 inoremap s; ß
-iab lg; Liebe Grüße<cr>Axel
-iab bg; Beste Grüße<cr>Axel Böhm
-iab br; Best regards<cr>Axel Böhm
-iab sgh; Sehr geehrter Herr 
-iab sgf; Sehr geehrte Frau
-iab sghp; Sehr geehrter Herr Professor
-iab dp; Dear Professor
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -353,23 +327,6 @@ function! CmdLine(str)
 endfunction 
 
 
-" deletes everything until the last slash when browsing on the command line
-func! DeleteTillSlash()
-    let g:cmd = getcmdline()
-
-    let g:cmd_edited = substitute(g:cmd, "\\(.*\[/\]\\).*", "\\1", "")
-
-    if g:cmd == g:cmd_edited
-        let g:cmd_edited = substitute(g:cmd, "\\(.*\[/\]\\).*/", "\\1", "")
-    endif   
-
-    return g:cmd_edited
-endfunc
-
-cno <C-BS> <C-\>eDeleteTillSlash()<cr>
-
-
-
 " Delete trailing white space on save, useful for some filetypes ;)
 fun! CleanExtraSpaces()
     let save_cursor = getpos(".")
@@ -382,22 +339,3 @@ endfun
 if has("autocmd")
     autocmd BufWritePre *.txt,*.js,*.py,*.wiki,*.sh,*.coffee :call CleanExtraSpaces()
 endif
-
-
-" "" fix meta-keys which generate <Esc>a .. <Esc>z
-" let c='k'
-" while c <= 'z'
-"   exec "set <M-".toupper(c).">=\e".c
-"   exec "imap \e".c." <M-".toupper(c).">"
-"   let c = nr2char(1+char2nr(c))
-" endw
-
-" set <M-k>=k
-" inoremap k <M-k>
-" inoremap <M-k> <esc>dd
-
-
-:set guioptions-=m  "remove menu bar
-:set guioptions-=T  "remove toolbar
-:set guioptions-=r  "remove right-hand scroll bar
-:set guioptions-=L  "remove left-hand scroll bar

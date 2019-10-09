@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: section
+# key: sec
+# --
+\section{${0:title}}
+\lab{sec:$0}

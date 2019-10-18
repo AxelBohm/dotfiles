@@ -554,6 +554,7 @@
     Also it regularly *makes emacs crash*...
 
 ** org mode :major:
+
    #+begin_center
      =Your life in plain text=
    #+end_center
@@ -794,6 +795,15 @@
        emacsclient -c -F '(quote (name . "capture"))' -e '(activate-capture-frame)'
      #+END_SRC
 
+     For this to work the emacs server hast to be running.
+
+     #+BEGIN_SRC emacs-lisp
+       (server-start)
+     #+END_SRC
+
+     The other option would be to start emacs as a daemon. can even be started with systemd, see [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Emacs-Server.html][link]]
+
+
 *** appearance
 
     Everything that has to do with how stuff looks / is displayed.
@@ -977,8 +987,9 @@
     #+END_SRC
 
 *** nifty settings
-    auto compile when saving
-    really nice hook [[https://github.com/c02y/dotemacs.d/blob/81153dcce335b0d2ef4b2416eae6e1ca3c70cd76/init.el#L2955-L3098][here]].
+
+    Auto compile when saving. See [[https://github.com/c02y/dotemacs.d/blob/81153dcce335b0d2ef4b2416eae6e1ca3c70cd76/init.el#L2955-L3098][here]].
+
     #+BEGIN_SRC emacs-lisp
       (defun ab/LaTeX-save-and-compile ()
         "Save and compile the tex project using latexmk.
@@ -987,15 +998,17 @@
       window and close the *TeX help* buffer."
         (interactive)
         (TeX-save-document "")
-        (TeX-command "latexmk" 'TeX-master-file))
+        (TeX-run-TeX "LatexMk" "latexmk"))
 
        ;; (add-hook 'LaTeX-mode-hook
        ;;   (lambda ()
        ;;     (add-hook 'after-save-hook 'ab/LaTeX-save-and-compile nil 'make-it-local)))
+
     #+END_SRC
 
     The hook is taken from [[https://stackoverflow.com/questions/6138029/how-to-add-a-hook-to-only-run-in-a-particular-mode][here.]]
     for some reason I get an error, I suspect it is that ~TeX-master-file~
+
 ** auto completion
 
    I used to think =company= is slow, but I just had to turn the ~idle-delay~ down...
@@ -1063,6 +1076,7 @@
 
        :config
        (setq ispell-program-name "hunspell"
+             ispell-silently-savep t            ;; save persal dictionary without asking
              ispell-local-dictionary "en_US"
              ispell-extra-args '("--sug-mode=ultra" "--lang=en_US")
              ispell-list-command "--list"
@@ -1071,6 +1085,21 @@
                                            ("-d" "en_US") nil utf-8))))
 
        (evil-leader/set-key "s c" 'flyspell-mode) ;; toggle spell checking
+       ;; (evil-define-key "z =" 'ispell-word)
+       (define-key evil-normal-state-map "z =" 'ispell-word)
+   #+END_SRC
+
+   vim has a command for directly adding new words to dictionary. I want this.
+
+   #+BEGIN_SRC emacs-lisp
+      (defun ab/save-word ()
+        (interactive)
+        (let ((current-location (point))
+              (word (flyspell-get-word)))
+          (when (consp word)
+            (flyspell-do-correct 'save nil (car word) current-location (cadr word) (caddr word) current-location))))
+
+      (define-key evil-normal-state-map "z g" 'ab/save-word)
    #+END_SRC
 
    Ignore spell checking in source code blocks within org-mode.

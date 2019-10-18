@@ -20,3 +20,5 @@
 	whitespace = red reverse
 [push]
 	default = current
+[credential]
+	helper = read-only

@@ -1,5 +1,5 @@
 # key repeat and delay speed
-xset r rate 180 70
+xset r rate 180 80
 
 # make capslock control
 setxkbmap -option ctrl:nocaps

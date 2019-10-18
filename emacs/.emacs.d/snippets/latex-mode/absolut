@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: absolut
+# key: abs
+# --
+\vert $0 \vert

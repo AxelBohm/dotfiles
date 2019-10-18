@@ -1,2 +1,2 @@
 #!/bin/sh
-tmux new -d -s mail 'neomutt' \; attach \;
+tmux new -A -s mail 'neomutt' \; attach \;

@@ -704,6 +704,21 @@
 
      By default ~g u~ is bound to ~evil-downcase~.
 
+**** archiving
+
+     When I archive something it is usually also done. By default however archiving doesn't change the todo-state.
+     So let's have a command that does both.
+
+     #+BEGIN_SRC emacs-lisp
+       (defun ab/mark-done-and-archive ()
+         "Mark the state of an org-mode item as DONE and archive it."
+         (interactive)
+         (org-todo 'done)
+         (org-archive-subtree))
+
+       (define-key org-mode-map (kbd "C-c C-x C-s") 'ab/mark-done-and-archive)
+     #+END_SRC
+
 *** make RET better
 
     From [[http://kitchingroup.cheme.cmu.edu/blog/2017/04/09/A-better-return-in-org-mode/][this discussion]], I got the code to replace M-RET in lists with just RET, so that Org acts more like other word processors.
@@ -757,6 +772,18 @@
 *** org capture
 
     Keep everything out of your head! Has to be as convenient as possible. The default keybinding is ~C-c c~.
+
+**** config
+
+     Always start in insert mode when capturing.
+     #+BEGIN_SRC emacs-lisp
+       (add-hook 'org-capture-mode-hook 'evil-insert-state)
+     #+END_SRC
+
+     #+BEGIN_SRC emacs-lisp
+       (setq org-refile-use-outline-path t)
+       (setq org-outline-path-complete-in-steps nil)
+     #+END_SRC
 
 **** templates
 
@@ -815,7 +842,6 @@
      #+END_SRC
 
      The other option would be to start emacs as a daemon. can even be started with systemd, see [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Emacs-Server.html][link]]
-
 
 *** appearance
 
@@ -1236,4 +1262,14 @@
        (use-package with-editor))
 
      (evil-leader/set-key "g s" 'magit-status)
+   #+END_SRC
+
+** R
+
+   #+BEGIN_SRC emacs-lisp
+     (use-package ess
+       :defer t
+     )
+     ;; (use-package ess-smart-underscore
+     ;;   :after ess)
    #+END_SRC

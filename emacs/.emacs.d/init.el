@@ -30,7 +30,7 @@
  '(org-tags-column 0)
  '(package-selected-packages
    (quote
-    (doom-modeline evil-magit magit counsel flycheck outshine volatile-highlights tex-site evil-matchit company-reftex elpy latex-pretty-symbols projectile dashboard page-break-lines auctex-latexmk which-key smartparens-config yasnippet use-package smartparens pretty-mode org-bullets nord-theme evil-leader evil-commentary company auctex))))
+    (ess-smart-underscore ess doom-modeline evil-magit magit counsel flycheck outshine volatile-highlights tex-site evil-matchit company-reftex elpy latex-pretty-symbols projectile dashboard page-break-lines auctex-latexmk which-key smartparens-config yasnippet use-package smartparens pretty-mode org-bullets nord-theme evil-leader evil-commentary company auctex))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

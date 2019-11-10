@@ -617,6 +617,13 @@
       (setq org-startup-truncated 'nil)
     #+END_SRC
 
+    By default org-agenda only shows one week starting last monday. I want two weeks starting today.
+    #+BEGIN_SRC emacs-lisp
+      (setq org-agenda-span 14)
+      (setq org-agenda-start-on-weekday nil)
+    #+END_SRC
+
+
 *** keybindings
 **** structure editing
 

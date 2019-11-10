@@ -58,8 +58,8 @@
     (consider the ace jump package which shows a letter for every line for more efficient jumping)
 
     #+BEGIN_SRC emacs-lisp
-      (display-line-numbers-mode)
-      (setq display-line-numbers 'relative)
+      ;; (display-line-numbers-mode)
+      ;; (setq display-line-numbers 'relative)
     #+END_SRC
 
     For some reason this only works after reloading the config file...

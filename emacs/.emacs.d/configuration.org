@@ -59,7 +59,7 @@
 
     #+BEGIN_SRC emacs-lisp
       ;; (display-line-numbers-mode)
-      ;; (setq display-line-numbers 'relative)
+      (setq display-line-numbers 'relative)
     #+END_SRC
 
     For some reason this only works after reloading the config file...
@@ -243,6 +243,16 @@
      (add-to-list 'default-frame-alist '(alpha . (85 . 50)))
    #+END_SRC
 
+** GTD
+
+   Keep everything out of your head, aka building a second brain.
+   #+BEGIN_SRC emacs-lisp
+     (defun ab/visit-references ()
+       "go to my references file"
+       (interactive)
+       (find-file "~/org/Reference.org"))
+    #+END_SRC
+
 * Packages
 
 ** appearance
@@ -368,8 +378,9 @@
           "q" 'kill-buffer
           "s h" 'evil-window-split
           "s v" 'evil-window-vsplit
-          "r" 'reload-init-file              ;; consider switching to "e r"
+          "e r" 'reload-init-file              ;; consider switching to "e r"
           "e c" 'ab/visit-emacs-config
+          "r" 'ab/visit-references
           "n" 'other-window
           "w" 'save-buffer))
     #+END_SRC
@@ -581,7 +592,6 @@
        :bind (("C-c l" . org-store-link)
               ("C-c a" . org-agenda)
               ("C-c c" . org-capture)))
-       :config
        (setq org-tag-faces nil)
    #+END_SRC
 
@@ -622,7 +632,6 @@
       (setq org-agenda-span 14)
       (setq org-agenda-start-on-weekday nil)
     #+END_SRC
-
 
 *** keybindings
 **** structure editing
@@ -922,6 +931,17 @@
     seems wonky.. only shift-tab works but tab doesn't.. maybe something uses tab already? like yasnippet.
     #+BEGIN_SRC emacs-lisp
       ;; (use-package outshine)
+    #+END_SRC
+
+*** org-notify
+
+    I want notifications for scheduled headlines
+    #+BEGIN_SRC emacs-lisp
+    (use-package org-alert
+      :config
+      (setq alert-default-style 'libnotify)
+    )
+    (org-alert-enable)
     #+END_SRC
 
 ** LaTeX :major:

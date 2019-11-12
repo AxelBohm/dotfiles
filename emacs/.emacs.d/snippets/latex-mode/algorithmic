@@ -1,6 +1,6 @@
 # -*- mode: snippet -*-
-# name: alg
-# key: alg
+# name: algorithmic
+# key: algorithmic
 # --
 \begin{algorithmic}
 $0

@@ -3,6 +3,6 @@
 # key: thm
 # --
 \begin{theorem}
-\lab{thm:$1}
+\label{thm:$1}
 $0
 \end{theorem}

@@ -41,3 +41,4 @@
  '(org-level-3 ((t (:inherit outline-3 :foreground "#81A1C1" :height 1.2))))
  '(org-level-4 ((t (:inherit outline-4 :foreground "#8FBCBB" :height 1.0))))
  '(org-level-5 ((t (:inherit outline-5 :height 1.0)))))
+(put 'LaTeX-narrow-to-environment 'disabled nil)

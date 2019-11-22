@@ -626,7 +626,8 @@
     This sets the file from which the agenda is derived. All my todos are in the index file.
 
     #+BEGIN_SRC emacs-lisp
-      (setq org-agenda-files (list org-index-file))
+      (setq org-agenda-files (list org-index-file
+                                   (org-file-path "Reference.org")))
       ;; (setq org-agenda-files (list org-directory))
     #+END_SRC
 
@@ -794,13 +795,19 @@
 **** config
 
      Always start in insert mode when capturing.
+
      #+BEGIN_SRC emacs-lisp
        (add-hook 'org-capture-mode-hook 'evil-insert-state)
      #+END_SRC
 
+     When refiling I want to be able to refile also to a subheading.
+
      #+BEGIN_SRC emacs-lisp
-       (setq org-refile-use-outline-path t)
-       (setq org-outline-path-complete-in-steps nil)
+       (setq org-refile-targets '((nil :maxlevel . 6)
+                           (org-agenda-files :maxlevel . 6)))
+       (setq org-completion-use-ido t)
+       (setq org-outline-path-complete-in-steps nil) ;; has to be nil for ido to work
+       (setq org-refile-use-outline-path 'file)
      #+END_SRC
 
 **** templates
@@ -949,6 +956,7 @@
     (use-package org-alert
       :config
       (setq alert-default-style 'libnotify)
+      (setq org-alert-interval 3600)
     )
     (org-alert-enable)
     #+END_SRC

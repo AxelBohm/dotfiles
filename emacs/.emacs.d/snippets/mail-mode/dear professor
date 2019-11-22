@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: dear professor
+# key: dp
+# --
+Dear Professor ${0},

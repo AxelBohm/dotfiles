@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: Sehr geehrter Herr Professor
+# key: sghp
+# --
+Sehr geehrter Herr Professor ${0},

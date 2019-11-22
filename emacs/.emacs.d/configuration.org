@@ -239,8 +239,8 @@
 ** opacity
    make emacs opaque (when running compton)
    #+BEGIN_SRC emacs-lisp
-     (set-frame-parameter (selected-frame) 'alpha '(85 . 50))
-     (add-to-list 'default-frame-alist '(alpha . (85 . 50)))
+     (set-frame-parameter (selected-frame) 'alpha '(80 . 80))
+     (add-to-list 'default-frame-alist '(alpha . (80 . 80)))
    #+END_SRC
 
 ** GTD
@@ -588,7 +588,7 @@
              ;; org-tag-faces '(("major" :foreground "#81A1C1"))
              ;; org-tag-faces nil
              org-todo-keywords '((sequence "TODO(t)" "Waiting(w)" "|" "DONE(d)")
-                                 (sequence "TODO(t)" "Didn't succeed(s)" "|" "to hard(h)" "DONE(d)")))
+                                 (sequence "TODO(t)" "Didn't succeed(s)" "|" "too hard(h)" "DONE(d)")))
        :bind (("C-c l" . org-store-link)
               ("C-c a" . org-agenda)
               ("C-c c" . org-capture)))

@@ -253,6 +253,15 @@
        (find-file "~/org/Reference.org"))
     #+END_SRC
 
+** email
+
+   currently still using mutt. This tells Emacs to use mail mode when editing emails through mutt.
+
+   #+BEGIN_SRC emacs-lisp
+     (add-to-list 'auto-mode-alist '("/mutt" . mail-mode))
+     (add-to-list 'auto-mode-alist '("/neomutt" . mail-mode))
+   #+END_SRC
+
 * Packages
 
 ** appearance

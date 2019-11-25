@@ -1031,7 +1031,6 @@
       (setq font-latex-fontify-sectioning 1.0)
     #+END_SRC
 
-
 *** even fancier symbols
 
     the =latex-pretty-symbols= package is supposed to contain many more unicode symbols for LaTeX entities than just =prettify-symbols-mode= (which is what I am currently using). Also, it is supposed make subscripts and superscripts even nicer that e.g. AucTeX by not displaying the =_= or =^=.

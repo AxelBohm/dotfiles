@@ -1,5 +1,82 @@
 #+TITLE: config
 
+* general config
+
+** paren-mode
+Highlight matching parentheses and such in every mode.
+
+#+BEGIN_SRC emacs-lisp
+(show-paren-mode 1)
+#+END_SRC
+
+** line number
+
+Show line numbers to the left for better jumping.
+(consider the ace jump package which shows a letter for every line for more efficient jumping)
+
+#+BEGIN_SRC emacs-lisp
+(setq display-line-numbers 'relative)
+#+END_SRC
+** email
+
+currently still using mutt. This tells Emacs to use mail mode when editing emails through mutt.
+
+#+BEGIN_SRC emacs-lisp
+(add-to-list 'auto-mode-alist '("/mutt" . mail-mode))
+(add-to-list 'auto-mode-alist '("/neomutt" . mail-mode))
+#+END_SRC
+
+This is copied from [[https://github.com/NicolasPetton/emacs.d/blob/3945786c31a17ac9caa8894109c231234956102f/hosts/blueberry/init-notmuch.el][github]] who took it from [[http://blog.binchen.org/posts/how-to-use-yasnippets-to-produce-email-templates-in-emacs.html][this blog]].
+
+#+BEGIN_SRC emacs-lisp
+;; Function to return first name of email recipient
+;; Used by yasnippet
+(defun ab/yas-get-first-name-from-to-field ()
+  (let ((rlt "NAME") str rlt2)
+    (save-excursion
+      (goto-char (point-min))
+      ;; first line in email could be some hidden line containing NO to field
+      (setq str (buffer-substring-no-properties (point-min) (point-max))))
+    ;; take name from TO field
+    (when (string-match "^To: \"?\\([^ ,]+\\)" str)
+      (setq rlt (match-string 1 str)))
+    ;;get name in FROM field if available
+    (when (string-match "^\\([^ ,\n]+\\).+writes:$" str)
+      (progn (setq rlt2 (match-string 1 str))
+             ;;prefer name in FROM field if TO field has "@"
+             (when (string-match "@" rlt)
+               (setq rlt rlt2))
+             ))
+    (message "rlt=%s" rlt)
+    rlt))
+#+END_SRC
+
+** GTD
+
+Keep everything out of your head, aka building a second brain.
+
+#+BEGIN_SRC emacs-lisp
+(defun ab/visit-references ()
+  "go to my references file"
+  (interactive)
+  (find-file "~/org/Reference.org"))
+#+END_SRC
+
+** dashboard
+
+Show agenda for upcoming week and not just today.
+
+#+BEGIN_SRC emacs-lisp
+(setq show-week-agenda-p t)
+#+END_SRC
+** pretty symbols
+
+Emacs ships default with =prettify-symbols mode=.
+
+#+BEGIN_SRC emacs-lisp
+(global-prettify-symbols-mode 1)
+#+END_SRC
+
 * config file
 
 ** quick access
@@ -152,76 +229,6 @@ Switch back and forth between the two MRU buffers.
   (switch-to-buffer (other-buffer (current-buffer) 1)))
 
 (map! :leader "SPC" #'ab/switch-to-previous-buffer)
-#+END_SRC
-
-* general config
-
-** paren-mode
-Highlight matching parentheses and such in every mode.
-
-#+BEGIN_SRC emacs-lisp
-(show-paren-mode 1)
-#+END_SRC
-
-** line number
-
-Show line numbers to the left for better jumping.
-(consider the ace jump package which shows a letter for every line for more efficient jumping)
-
-#+BEGIN_SRC emacs-lisp
-(setq display-line-numbers 'relative)
-#+END_SRC
-** email
-
-currently still using mutt. This tells Emacs to use mail mode when editing emails through mutt.
-
-#+BEGIN_SRC emacs-lisp
-(add-to-list 'auto-mode-alist '("/mutt" . mail-mode))
-(add-to-list 'auto-mode-alist '("/neomutt" . mail-mode))
-#+END_SRC
-
-This is copied from [[https://github.com/NicolasPetton/emacs.d/blob/3945786c31a17ac9caa8894109c231234956102f/hosts/blueberry/init-notmuch.el][github]] who took it from [[http://blog.binchen.org/posts/how-to-use-yasnippets-to-produce-email-templates-in-emacs.html][this blog]].
-
-#+BEGIN_SRC emacs-lisp
-;; Function to return first name of email recipient
-;; Used by yasnippet
-(defun ab/yas-get-first-name-from-to-field ()
-  (let ((rlt "NAME") str rlt2)
-    (save-excursion
-      (goto-char (point-min))
-      ;; first line in email could be some hidden line containing NO to field
-      (setq str (buffer-substring-no-properties (point-min) (point-max))))
-    ;; take name from TO field
-    (when (string-match "^To: \"?\\([^ ,]+\\)" str)
-      (setq rlt (match-string 1 str)))
-    ;;get name in FROM field if available
-    (when (string-match "^\\([^ ,\n]+\\).+writes:$" str)
-      (progn (setq rlt2 (match-string 1 str))
-             ;;prefer name in FROM field if TO field has "@"
-             (when (string-match "@" rlt)
-               (setq rlt rlt2))
-             ))
-    (message "rlt=%s" rlt)
-    rlt))
-#+END_SRC
-
-** GTD
-
-Keep everything out of your head, aka building a second brain.
-
-#+BEGIN_SRC emacs-lisp
-(defun ab/visit-references ()
-  "go to my references file"
-  (interactive)
-  (find-file "~/org/Reference.org"))
-#+END_SRC
-
-** dashboard
-
-Show agenda for upcoming week and not just today.
-
-#+BEGIN_SRC emacs-lisp
-(setq show-week-agenda-p t)
 #+END_SRC
 
 * org mode                                                            :major:
@@ -521,6 +528,8 @@ I want notifications for scheduled headlines
 #+END_SRC
 * LaTeX
 
+** general
+
 #+BEGIN_SRC emacs-lisp
 (after! latex
   (setq tex-fontify-script t
@@ -530,7 +539,18 @@ I want notifications for scheduled headlines
   ;; use Zathura as pdf viewer
   (setq TeX-view-program-selection '((output-pdf "Zathura"))
         TeX-source-correlate-start-server t))
-        #+END_SRC
+#+END_SRC
+
+** keybindings
+
+#+BEGIN_SRC emacs-lisp
+(evil-leader/set-key
+ "l l" 'TeX-command-run-all
+ "l v" 'Tex-view
+ "l n" 'LaTeX-narrow-to-environment)
+#+END_SRC
+
+
 * snippets
 
 Snippets are everything! still need to figure out how to incorporate snippets into autocompletion (the way deoplete and Ultisnips did it for vim).
@@ -572,7 +592,7 @@ Fixing would be nice too, but apparently this is open, cf. [[https://github.com/
   ;; This library makes it possible to reliably use the Emacsclient as the $EDITOR of child processes.
   (use-package with-editor))
 
-(map! :leader "g s" 'magit-status)
+(map! :leader "g g" 'magit-status)
 #+END_SRC
 
 * R

@@ -1,3 +1,40 @@
+(show-paren-mode 1)
+
+(setq display-line-numbers 'relative)
+
+(add-to-list 'auto-mode-alist '("/mutt" . mail-mode))
+(add-to-list 'auto-mode-alist '("/neomutt" . mail-mode))
+
+;; Function to return first name of email recipient
+;; Used by yasnippet
+(defun ab/yas-get-first-name-from-to-field ()
+  (let ((rlt "NAME") str rlt2)
+    (save-excursion
+      (goto-char (point-min))
+      ;; first line in email could be some hidden line containing NO to field
+      (setq str (buffer-substring-no-properties (point-min) (point-max))))
+    ;; take name from TO field
+    (when (string-match "^To: \"?\\([^ ,]+\\)" str)
+      (setq rlt (match-string 1 str)))
+    ;;get name in FROM field if available
+    (when (string-match "^\\([^ ,\n]+\\).+writes:$" str)
+      (progn (setq rlt2 (match-string 1 str))
+             ;;prefer name in FROM field if TO field has "@"
+             (when (string-match "@" rlt)
+               (setq rlt rlt2))
+             ))
+    (message "rlt=%s" rlt)
+    rlt))
+
+(defun ab/visit-references ()
+  "go to my references file"
+  (interactive)
+  (find-file "~/org/Reference.org"))
+
+(setq show-week-agenda-p t)
+
+(global-prettify-symbols-mode 1)
+
 (defun ab/visit-emacs-config ()
   "go to emacs config file"
   (interactive)
@@ -109,41 +146,6 @@
   (switch-to-buffer (other-buffer (current-buffer) 1)))
 
 (map! :leader "SPC" #'ab/switch-to-previous-buffer)
-
-(show-paren-mode 1)
-
-(setq display-line-numbers 'relative)
-
-(add-to-list 'auto-mode-alist '("/mutt" . mail-mode))
-(add-to-list 'auto-mode-alist '("/neomutt" . mail-mode))
-
-;; Function to return first name of email recipient
-;; Used by yasnippet
-(defun ab/yas-get-first-name-from-to-field ()
-  (let ((rlt "NAME") str rlt2)
-    (save-excursion
-      (goto-char (point-min))
-      ;; first line in email could be some hidden line containing NO to field
-      (setq str (buffer-substring-no-properties (point-min) (point-max))))
-    ;; take name from TO field
-    (when (string-match "^To: \"?\\([^ ,]+\\)" str)
-      (setq rlt (match-string 1 str)))
-    ;;get name in FROM field if available
-    (when (string-match "^\\([^ ,\n]+\\).+writes:$" str)
-      (progn (setq rlt2 (match-string 1 str))
-             ;;prefer name in FROM field if TO field has "@"
-             (when (string-match "@" rlt)
-               (setq rlt rlt2))
-             ))
-    (message "rlt=%s" rlt)
-    rlt))
-
-(defun ab/visit-references ()
-  "go to my references file"
-  (interactive)
-  (find-file "~/org/Reference.org"))
-
-(setq show-week-agenda-p t)
 
 (after! org
   (setq org-hide-emphasis-markers t
@@ -304,6 +306,11 @@
   (setq TeX-view-program-selection '((output-pdf "Zathura"))
         TeX-source-correlate-start-server t))
 
+(evil-leader/set-key
+ "l l" 'TeX-command-run-all
+ "l v" 'Tex-view
+ "l n" 'LaTeX-narrow-to-environment)
+
 (use-package yasnippet
   :config
   (setq yas-snippet-dirs '("~/.emacs.d/snippets"))
@@ -327,7 +334,7 @@
   ;; This library makes it possible to reliably use the Emacsclient as the $EDITOR of child processes.
   (use-package with-editor))
 
-(map! :leader "g s" 'magit-status)
+(map! :leader "g g" 'magit-status)
 
 (use-package ess
   :defer t

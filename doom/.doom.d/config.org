@@ -1,0 +1,586 @@
+#+TITLE: config
+
+* config file
+
+** quick access
+
+Configuring never stops. keep the config file close.
+
+#+BEGIN_SRC emacs-lisp
+(defun ab/visit-emacs-config ()
+  "go to emacs config file"
+  (interactive)
+  (find-file "~/.doom.d/config.org"))
+
+(map! :leader "e c" #'ab/visit-emacs-config)
+#+END_SRC
+
+** reload
+When regularly changing configs we also want to be able to use them without restarting emacs.
+
+#+BEGIN_SRC emacs-lisp
+(defun ab/reload-init-file ()
+  "reload config file"
+  (interactive)
+  (load-file user-init-file))
+
+(map! :leader "e r" #'ab/reload-init-file)
+#+END_SRC
+
+* vi
+** leader
+
+More vim functionality.
+
+Set the leader key and some very basic keybindings.
+
+#+BEGIN_SRC emacs-lisp
+(map! :leader
+      "b" #'switch-to-buffer
+      "q" #'kill-buffer
+      "s h" #'evil-window-split
+      "s v" #'evil-window-vsplit
+      "e r" #'reload-init-file
+      "e c" #'ab/visit-emacs-config
+      "r" #'ab/visit-references
+      "n" #'other-window
+      "w" #'save-buffer)
+#+END_SRC
+
+
+Quickly open shell in a split.
+
+#+BEGIN_SRC emacs-lisp
+;; (defun ab/open-shell-in-split ()
+;;   (interactive)
+;;   (evil-window-split)
+;;   (eshell))
+
+;; (map! :leader "s s" 'ab/open-shell-in-split)
+#+END_SRC
+
+** colemak settings
+
+Evil for colemak keyboard layout. Adapted from the [[https://github.com/wbolster/evil-colemak-basics][evil-colemak-basics]] package. For some reason trying to defining everything manually via ~evil-define-key~ or ~define-key evil-motion-state-map~ gave me trouble with ~'inner-text-objects~ and more..
+
+#+BEGIN_SRC emacs-lisp
+(defgroup evil-colemak nil
+  "Basic key rebindings for evil-mode with the Colemak keyboard layout."
+  :prefix "evil-colemak-"
+  :group 'evil)
+
+(defcustom evil-colemak-char-jump-commands nil
+  "The set of commands to use for jumping to characters.
+        By default, the built-in evil commands evil-find-char (and
+        variations) are used"
+  :group 'evil-colemak
+  :type '(choice (const :tag "default" nil)))
+
+(defun evil-colemak--make-keymap ()
+  "Initialise the keymap baset on the current configuration."
+  (let ((keymap (make-sparse-keymap)))
+    (evil-define-key '(motion normal visual) keymap
+      "n" 'evil-next-line
+      "gn" 'evil-next-visual-line
+      "gN" 'evil-next-visual-line
+      "e" 'evil-previous-line
+      "ge" 'evil-previous-visual-line
+      "E" 'evil-lookup
+      "i" 'evil-forward-char
+      "j" 'evil-forward-word-end
+      "J" 'evil-forward-WORD-end
+      "gj" 'evil-backward-word-end
+      "gJ" 'evil-backward-WORD-end
+      "k" 'evil-search-next
+      "K" 'evil-search-previous
+      "gk" 'evil-next-match
+      "gK" 'evil-previous-match
+      "zi" 'evil-scroll-column-right
+      "zI" 'evil-scroll-right)
+    (evil-define-key '(normal visual) keymap
+      "N" 'evil-join
+      "gN" 'evil-join-whitespace)
+    (evil-define-key 'normal keymap
+      "l" 'evil-insert
+      "L" 'evil-insert-line)
+    (evil-define-key 'visual keymap
+      "L" 'evil-insert)
+    (evil-define-key '(visual operator) keymap
+      "l" evil-inner-text-objects-map)
+    (evil-define-key 'operator keymap
+      "i" 'evil-forward-char)
+    keymap))
+;; ~I~ is still available
+
+(defvar evil-colemak-keymap
+  (evil-colemak--make-keymap)
+  "Keymap for evil-colemak-mode.")
+
+(defun evil-colemak-refresh-keymap ()
+  "Refresh the keymap using the current configuration."
+  (setq evil-colemak-keymap (evil-colemak--make-keymap)))
+
+      ;;;###autoload
+(define-minor-mode evil-colemak-mode
+  "Minor mode with evil-mode enhancements for the Colemak keyboard layout."
+  :keymap evil-colemak-keymap
+  :lighter " hnei")
+
+      ;;;###autoload
+(define-globalized-minor-mode global-evil-colemak-mode
+  evil-colemak-mode
+  (lambda () (evil-colemak-mode t))
+  "Global minor mode with evil-mode enhancements for the Colemak keyboard layout.")
+(global-evil-colemak-mode)
+#+END_SRC
+
+Switching windows also relies on the `hjkl` motions. So make it colemak friendly.
+
+#+BEGIN_SRC emacs-lisp
+(with-eval-after-load 'evil-maps
+  (define-key evil-window-map "n" 'evil-window-down)
+  (define-key evil-window-map "e" 'evil-window-up)
+  (define-key evil-window-map "i" 'evil-window-right))
+#+END_SRC
+* buffer handling
+
+Switch back and forth between the two MRU buffers.
+
+#+BEGIN_SRC emacs-lisp
+(defun ab/switch-to-previous-buffer ()
+  (interactive)
+  (switch-to-buffer (other-buffer (current-buffer) 1)))
+
+(map! :leader "SPC" #'ab/switch-to-previous-buffer)
+#+END_SRC
+
+* general config
+
+** paren-mode
+Highlight matching parentheses and such in every mode.
+
+#+BEGIN_SRC emacs-lisp
+(show-paren-mode 1)
+#+END_SRC
+
+** line number
+
+Show line numbers to the left for better jumping.
+(consider the ace jump package which shows a letter for every line for more efficient jumping)
+
+#+BEGIN_SRC emacs-lisp
+(setq display-line-numbers 'relative)
+#+END_SRC
+** email
+
+currently still using mutt. This tells Emacs to use mail mode when editing emails through mutt.
+
+#+BEGIN_SRC emacs-lisp
+(add-to-list 'auto-mode-alist '("/mutt" . mail-mode))
+(add-to-list 'auto-mode-alist '("/neomutt" . mail-mode))
+#+END_SRC
+
+This is copied from [[https://github.com/NicolasPetton/emacs.d/blob/3945786c31a17ac9caa8894109c231234956102f/hosts/blueberry/init-notmuch.el][github]] who took it from [[http://blog.binchen.org/posts/how-to-use-yasnippets-to-produce-email-templates-in-emacs.html][this blog]].
+
+#+BEGIN_SRC emacs-lisp
+;; Function to return first name of email recipient
+;; Used by yasnippet
+(defun ab/yas-get-first-name-from-to-field ()
+  (let ((rlt "NAME") str rlt2)
+    (save-excursion
+      (goto-char (point-min))
+      ;; first line in email could be some hidden line containing NO to field
+      (setq str (buffer-substring-no-properties (point-min) (point-max))))
+    ;; take name from TO field
+    (when (string-match "^To: \"?\\([^ ,]+\\)" str)
+      (setq rlt (match-string 1 str)))
+    ;;get name in FROM field if available
+    (when (string-match "^\\([^ ,\n]+\\).+writes:$" str)
+      (progn (setq rlt2 (match-string 1 str))
+             ;;prefer name in FROM field if TO field has "@"
+             (when (string-match "@" rlt)
+               (setq rlt rlt2))
+             ))
+    (message "rlt=%s" rlt)
+    rlt))
+#+END_SRC
+
+** GTD
+
+Keep everything out of your head, aka building a second brain.
+
+#+BEGIN_SRC emacs-lisp
+(defun ab/visit-references ()
+  "go to my references file"
+  (interactive)
+  (find-file "~/org/Reference.org"))
+#+END_SRC
+
+** dashboard
+
+Show agenda for upcoming week and not just today.
+
+#+BEGIN_SRC emacs-lisp
+(setq show-week-agenda-p t)
+#+END_SRC
+
+* org mode                                                            :major:
+
+#+begin_center
+=Your life in plain text=
+#+end_center
+
+Load orgmode plus some standard keybindings.
+
+#+BEGIN_SRC emacs-lisp
+(after! org
+  (setq org-hide-emphasis-markers t
+        org-return-follows-link t
+        org-tags-column 0             ;; position of tags
+        ;; org-tag-faces '(("major" :foreground "#81A1C1"))
+        ;; org-tag-faces nil
+        org-todo-keywords '((sequence "TODO(t)" "WAITING(w)" "|" "DONE(d)")
+                            (sequence "TODO(t)" "DIDN'T SUCCEED(s)" "|" "DOESN'T WORK(x)"  "TOO HARD(h)" "DONE(d)")))
+  (map! :leader
+        "o l" 'org-store-link
+        "o a" 'org-agenda
+        "o c" 'org-capture))
+#+END_SRC
+
+~org-return-follow-links~ is supposed to give ~RET~ some functionality in evil mode (which it usually doesn't have). However, [[*make RET better][see this section]] for giving the enter key even more functionality.
+
+** config
+
+Tell emacs where I store my org stuff.
+
+#+BEGIN_SRC emacs-lisp
+(after! org
+  (setq org-directory "~/org")
+
+  (defun org-file-path (filename)
+    "Return the absolute address of an org file, given its relative name."
+    (concat (file-name-as-directory org-directory) filename))
+
+  ;; (setq org-inbox-file "~/org/inbox.org")
+  (setq org-index-file (org-file-path "index.org"))
+  (setq org-archive-location
+        (concat (org-file-path "archive.org") "::* From %s")))
+#+END_SRC
+
+This sets the file from which the agenda is derived. All my todos are in the index file.
+
+#+BEGIN_SRC emacs-lisp
+(after! org
+  (setq org-agenda-files (list org-index-file
+                               (org-file-path "Reference.org"))))
+;; (setq org-agenda-files (list org-directory))
+#+END_SRC
+
+By default org-mode does super ugly truncation of long lines (apparently because of tables). I want line wrapping, however.
+
+#+BEGIN_SRC emacs-lisp
+(after! org (setq org-startup-truncated 'nil))
+#+END_SRC
+
+By default org-agenda only shows one week starting last monday. I want two weeks starting today.
+
+#+BEGIN_SRC emacs-lisp
+(after! org
+  (setq org-agenda-span 14)
+  (setq org-agenda-start-on-weekday nil)
+  (setq org-agenda-start-day "-0d"))
+#+END_SRC
+
+** keybindings
+*** structure editing
+
+Org structure editing made easy/mnemonic with evil-leader.
+
+#+BEGIN_SRC emacs-lisp
+(map!
+ (:after org
+   :leader
+   "o t" 'org-toggle-heading      ;; toogle wheter heading or not
+   "o w" 'widen                   ;; show everythig
+   "o n" 'org-narrow-to-subtree)) ;; show only what's within heading
+#+END_SRC
+
+~org-narrow-subtree~ shows only a single heading (the heading of the current subtree). I need more context!! I want the to see which hierarchy this heading belongs to. taken from [[https://emacs.stackexchange.com/questions/29304/how-to-show-all-contents-of-current-subtree-and-fold-all-the-other-subtrees][stackexchange]].
+
+#+BEGIN_SRC emacs-lisp
+(defun ab/org-show-just-me (&rest _)
+  "Fold all other trees, then show entire current subtree."
+  (interactive)
+  (org-overview)
+  (org-reveal)
+  (org-show-subtree))
+
+(map! (:after org
+        :leader "o c" 'ab/org-show-just-me))            ;; Mnemonic: Collapse
+#+END_SRC
+
+*** index file
+
+Quickly access the org index file.
+
+#+BEGIN_SRC emacs-lisp
+(defun ab/open-index-file ()
+  "Open the master org TODO list."
+  (interactive)
+  (find-file org-index-file)
+  (end-of-buffer))
+
+(map! :leader "i" #'ab/open-index-file)
+#+END_SRC
+
+*** navigation
+
+Mnemonic navigation.
+
+#+BEGIN_SRC emacs-lisp
+(map! (:after org
+        :leader
+        "g h" 'org-previous-visible-heading      ;; Go Heading of current section
+        "g e" 'org-previous-visible-heading      ;; Go e (= colemak up)
+        "g u" 'outline-up-heading                ;; Go Up in hierarchy
+        "g n" 'org-next-visible-heading))        ;; Go Next heading
+#+END_SRC
+
+The above motions are easy to remember but feel clunky when trying to go more then one heading up or down (this is probably an antipattern anyways..). Either way, here are some single key mappings.
+I don't use ~(~ or ~)~ in evil mode anyways.
+
+#+BEGIN_SRC emacs-lisp
+;; (map! (:after org
+;;   ")" 'org-next-visible-heading
+;;   "(" 'org-previous-visible-heading
+;;   :leader "g u" 'outline-up-heading))               ;; Go Up in hierarchy
+#+END_SRC
+
+By default ~g u~ is bound to ~evil-downcase~.
+
+*** archiving
+
+When I archive something it is usually also done. By default however archiving doesn't change the todo-state.
+So let's have a command that does both.
+
+#+BEGIN_SRC emacs-lisp
+(defun ab/mark-done-and-archive ()
+  "Mark the state of an org-mode item as DONE and archive it."
+  (interactive)
+  (org-todo 'done)
+  (org-archive-subtree))
+
+;; (define-key org-mode-map (kbd "C-c C-x C-s") 'ab/mark-done-and-archive)
+(map! :leader "o d" 'ab/mark-done-and-archive)
+#+END_SRC
+
+** org capture
+
+Keep everything out of your head! Has to be as convenient as possible. The default keybinding is ~C-c c~.
+
+*** config
+
+Always start in insert mode when capturing.
+
+#+BEGIN_SRC emacs-lisp
+(add-hook 'org-capture-mode-hook 'evil-insert-state)
+#+END_SRC
+
+When refiling I want to be able to refile also to a subheading.
+
+#+BEGIN_SRC emacs-lisp
+(setq org-refile-targets '((nil :maxlevel . 6)
+                           (org-agenda-files :maxlevel . 6)))
+(setq org-completion-use-ido t)
+(setq org-outline-path-complete-in-steps nil) ;; has to be nil for ido to work
+(setq org-refile-use-outline-path 'file)
+#+END_SRC
+
+*** templates
+
+Templates for capturing. Also, ~%a~ expands to a link to the file (and position) from which =org-capture= was called.
+I think =%i= is active region. Another nice feature is ~%^{Name}~ prompts for name. This probably makes sense for titles or something because I tend to put too much next to the asterics and too little text underneath..
+
+#+BEGIN_SRC emacs-lisp
+(setq org-capture-templates
+      '(("l" "todo with Link" entry
+         (file+headline org-index-file "Inbox")
+         "*** TODO %?\n  %i\n  See: %a\n")
+
+        ("n" "Note"  entry
+         (file+headline org-index-file "Inbox")
+         "*** %?\n\n")
+
+        ("t" "Todo" entry
+         (file+headline org-index-file "Inbox")
+         "*** TODO %?\n")))
+#+END_SRC
+
+*** capture anywhere
+
+Call org-capture from anywhere (system wide). Code taken from [[https://www.reddit.com/r/emacs/comments/74gkeq/system_wide_org_capture/][reddit.]]
+
+#+BEGIN_SRC emacs-lisp
+(defadvice org-switch-to-buffer-other-window
+    (after supress-window-splitting activate)
+  "Delete the extra window if we're in a capture frame"
+  (if (equal "capture" (frame-parameter nil 'name))
+      (delete-other-windows)))
+
+(defadvice org-capture-finalize
+    (after delete-capture-frame activate)
+  "Advise capture-finalize to close the frame"
+  (if (equal "capture" (frame-parameter nil 'name))
+      (delete-frame)))
+
+(defun activate-capture-frame ()
+  "run org-capture in capture frame"
+  (select-frame-by-name "capture")
+  (switch-to-buffer (get-buffer-create "*scratch*"))
+  (org-capture))
+#+END_SRC
+
+The above code, together with the follow shell command does the job.
+
+# #+BEGIN_SRC shell
+# emacsclient -c -F '(quote (name . "capture"))' -e '(activate-capture-frame)'
+# #+END_SRC
+
+For this to work the emacs server hast to be running.
+
+#+BEGIN_SRC emacs-lisp
+(server-start)
+#+END_SRC
+
+The other option would be to start emacs as a daemon. can even be started with systemd, see [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Emacs-Server.html][link]]
+
+** appearance
+
+Everything that has to do with how stuff looks / is displayed.
+
+*** "headings"
+
+By default the only difference between org leves is a slightly different symbol (when using =org-bullets=) and an almost invisible indent.
+Different font sizes make much more sense.
+
+Also, in nord theme all headings seem to have the same color...
+
+#+BEGIN_SRC emacs-lisp
+(custom-set-faces
+ '(org-level-1 ((t (:inherit outline-1 :height 1.5))))
+ '(org-level-2 ((t (:inherit outline-2 :foreground "#A3BE8C" :height 1.3))))
+ '(org-level-3 ((t (:inherit outline-3 :foreground "#81A1C1" :height 1.2))))
+ '(org-level-4 ((t (:inherit outline-4 :foreground "#8FBCBB" :height 1.0))))
+ '(org-level-5 ((t (:inherit outline-5 :height 1.0))))
+ )
+#+END_SRC
+
+By default orgmode displays ellipsis for collapsed bullets. Here's a custom symbol indicating collapsed bullets.
+
+#+BEGIN_SRC emacs-lisp
+(setq org-ellipsis " ...")
+#+END_SRC
+
+*** prettify entities
+
+Org can pretty display things like latex symbols. Indices are even nicer than in AucTex as the underscores are removed.
+
+#+BEGIN_SRC emacs-lisp
+(setq org-pretty-entities 1)
+#+END_SRC
+
+** opening pdfs
+
+I want pdfs to be opened in an external pdf viewer.
+
+#+BEGIN_SRC emacs-lisp
+(add-hook 'org-mode-hook
+          '(lambda ()
+             (delete '("\\.pdf\\'" . default) org-file-apps)
+             (add-to-list 'org-file-apps '("\\.pdf\\'" . "zathura %s"))))
+#+END_SRC
+
+** org everywhere
+
+seems wonky.. only shift-tab works but tab doesn't.. maybe something uses tab already? like yasnippet.
+#+BEGIN_SRC emacs-lisp
+;; (use-package outshine)
+#+END_SRC
+
+** org-notify
+
+I want notifications for scheduled headlines
+
+#+BEGIN_SRC emacs-lisp
+(def-package! org-alert
+  :init
+  (setq alert-default-style 'libnotify)
+  (setq org-alert-interval 3600)
+  :config
+  (org-alert-enable))
+#+END_SRC
+* LaTeX
+
+#+BEGIN_SRC emacs-lisp
+(after! latex
+  (setq tex-fontify-script t
+        ;; don't show ^ or _ for scripts
+        font-latex-fontify-script 'invisible)
+
+  ;; use Zathura as pdf viewer
+  (setq TeX-view-program-selection '((output-pdf "Zathura"))
+        TeX-source-correlate-start-server t))
+        #+END_SRC
+* snippets
+
+Snippets are everything! still need to figure out how to incorporate snippets into autocompletion (the way deoplete and Ultisnips did it for vim).
+
+#+BEGIN_SRC emacs-lisp
+(use-package yasnippet
+  :config
+  (setq yas-snippet-dirs '("~/.emacs.d/snippets"))
+  (yas-global-mode 1)
+  (define-key evil-insert-state-map (kbd "C-e") 'yas-expand)
+  (map! :leader "s n" 'yas-new-snippet)              ;; Snippet New
+  (map! :leader "s g" 'yas-visit-snippet-file))      ;; Snippet Go
+#+END_SRC
+
+see [[https://stackoverflow.com/questions/14066526/unset-tab-binding-for-yasnippet][stackoverflow]] for some helpful answers.
+* syntax checking
+
+#+BEGIN_SRC emacs-lisp
+(use-package flycheck
+  :defer t
+  :diminish
+  :config
+  (global-flycheck-mode)
+  ;; (flycheck-display-errors-delay .3)
+  (setq-default flycheck-disabled-checkers '(tex-chktex)))
+#+END_SRC
+
+There is a bug in ~chk-tex~, see [[https://github.com/flycheck/flycheck/issues/1214][issue]]. They also describe possible workarounds.
+
+Fixing would be nice too, but apparently this is open, cf. [[https://github.com/flycheck/flycheck/issues/530][issue]].
+
+* git
+
+#+BEGIN_SRC emacs-lisp
+(use-package magit
+  :defer t
+  :config
+  (use-package evil-magit)
+  ;; This library makes it possible to reliably use the Emacsclient as the $EDITOR of child processes.
+  (use-package with-editor))
+
+(map! :leader "g s" 'magit-status)
+#+END_SRC
+
+* R
+
+#+BEGIN_SRC emacs-lisp
+(use-package ess
+  :defer t
+  )
+;; (use-package ess-smart-underscore
+;;   :after ess)
+#+END_SRC

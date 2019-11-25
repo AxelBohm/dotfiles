@@ -154,12 +154,12 @@
     When regularly changing configs we also want to be able to use them without restarting emacs.
 
     #+BEGIN_SRC emacs-lisp
-      (defun reload-init-file ()
+      (defun ab/reload-init-file ()
         "reload config file"
         (interactive)
         (load-file user-init-file))
 
-      (global-set-key (kbd "C-c r") 'reload-init-file)
+      (global-set-key (kbd "C-c r") 'ab/reload-init-file)
     #+END_SRC
 
 ** persistent undo
@@ -262,6 +262,32 @@
      (add-to-list 'auto-mode-alist '("/neomutt" . mail-mode))
    #+END_SRC
 
+   This is copied from [[https://github.com/NicolasPetton/emacs.d/blob/3945786c31a17ac9caa8894109c231234956102f/hosts/blueberry/init-notmuch.el][github]] who took it from [[http://blog.binchen.org/posts/how-to-use-yasnippets-to-produce-email-templates-in-emacs.html][this blog]].
+
+   #+BEGIN_SRC emacs-lisp
+     ;; Function to return first name of email recipient
+     ;; Used by yasnippet
+     (defun ab/yas-get-first-name-from-to-field ()
+       (let ((rlt "NAME") str rlt2)
+         (save-excursion
+           (goto-char (point-min))
+           ;; first line in email could be some hidden line containing NO to field
+           (setq str (buffer-substring-no-properties (point-min) (point-max))))
+         ;; take name from TO field
+         (when (string-match "^To: \"?\\([^ ,]+\\)" str)
+           (setq rlt (match-string 1 str)))
+         ;;get name in FROM field if available
+         (when (string-match "^\\([^ ,\n]+\\).+writes:$" str)
+           (progn (setq rlt2 (match-string 1 str))
+                  ;;prefer name in FROM field if TO field has "@"
+                  (when (string-match "@" rlt)
+                    (setq rlt rlt2))
+                  ))
+         (message "rlt=%s" rlt)
+         rlt))
+   #+END_SRC
+
+
 * Packages
 
 ** appearance
@@ -344,8 +370,6 @@
    #+BEGIN_SRC emacs-lisp
      (use-package smartparens
        :config
-       (sp-local-pair 'org-mode "_" "_" )
-       (sp-local-pair 'org-mode "*" "*" )
        (sp-local-pair 'org-mode "~" "~" )
        (sp-local-pair 'org-mode "$" "$")
        (sp-local-pair 'latex-mode "$" "$")   ;; omg, I want this so badly
@@ -387,7 +411,7 @@
           "q" 'kill-buffer
           "s h" 'evil-window-split
           "s v" 'evil-window-vsplit
-          "e r" 'reload-init-file              ;; consider switching to "e r"
+          "e r" 'ab/reload-init-file
           "e c" 'ab/visit-emacs-config
           "r" 'ab/visit-references
           "n" 'other-window
@@ -596,8 +620,8 @@
              org-tags-column 0             ;; position of tags
              ;; org-tag-faces '(("major" :foreground "#81A1C1"))
              ;; org-tag-faces nil
-             org-todo-keywords '((sequence "TODO(t)" "Waiting(w)" "|" "DONE(d)")
-                                 (sequence "TODO(t)" "Didn't succeed(s)" "|" "too hard(h)" "DONE(d)")))
+             org-todo-keywords '((sequence "TODO(t)" "WAITING(w)" "|" "DONE(d)")
+                                 (sequence "TODO(t)" "DIDN'T SUCCEED(s)" "|" "DOESN'T WORK(x)"  "TOO HARD(h)" "DONE(d)")))
        :bind (("C-c l" . org-store-link)
               ("C-c a" . org-agenda)
               ("C-c c" . org-capture)))
@@ -637,10 +661,11 @@
       (setq org-startup-truncated 'nil)
     #+END_SRC
 
-    By default org-agenda only shows one week starting last monday. I want two weeks starting today.
+    # By default org-agenda only shows one week starting last monday. I want two weeks starting today.
     #+BEGIN_SRC emacs-lisp
       (setq org-agenda-span 14)
       (setq org-agenda-start-on-weekday nil)
+      (setq org-agenda-start-day "-0d")
     #+END_SRC
 
 *** keybindings
@@ -998,6 +1023,14 @@
       (setq TeX-view-program-selection '((output-pdf "Zathura"))
              TeX-source-correlate-start-server t))
     #+END_SRC
+
+    I thought different sizes for headings are default. For some reason not for me..
+
+    #+BEGIN_SRC emacs-lisp
+      (setq font-latex-fontify-sectioning 'color)
+      (setq font-latex-fontify-sectioning 1.0)
+    #+END_SRC
+
 
 *** even fancier symbols
 

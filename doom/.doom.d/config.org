@@ -99,7 +99,7 @@ When regularly changing configs we also want to be able to use them without rest
 (defun ab/reload-init-file ()
   "reload config file"
   (interactive)
-  (load-file user-init-file))
+  (load-file "~/.doom.d/config.el"))
 
 (map! :leader "e r" #'ab/reload-init-file)
 #+END_SRC

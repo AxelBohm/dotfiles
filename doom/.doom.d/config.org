@@ -76,6 +76,13 @@ Emacs ships default with =prettify-symbols mode=.
 #+BEGIN_SRC emacs-lisp
 (global-prettify-symbols-mode 1)
 #+END_SRC
+** general nifty mappings
+
+Most of the time I only have two windows open. Switching between should be easy.
+
+#+BEGIN_SRC emacs-lisp
+(global-set-key (kbd "M-o") 'other-window)
+#+END_SRC
 
 * config file
 

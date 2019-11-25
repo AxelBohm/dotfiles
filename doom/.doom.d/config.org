@@ -320,6 +320,7 @@ Org structure editing made easy/mnemonic with evil-leader.
 #+END_SRC
 
 ~org-narrow-subtree~ shows only a single heading (the heading of the current subtree). I need more context!! I want the to see which hierarchy this heading belongs to. taken from [[https://emacs.stackexchange.com/questions/29304/how-to-show-all-contents-of-current-subtree-and-fold-all-the-other-subtrees][stackexchange]].
+But this also shows all heading of level 1 and all headings of the same level as current heading
 
 #+BEGIN_SRC emacs-lisp
 (defun ab/org-show-just-me (&rest _)
@@ -330,7 +331,14 @@ Org structure editing made easy/mnemonic with evil-leader.
   (org-show-subtree))
 
 (map! (:after org
-        :leader "o c" 'ab/org-show-just-me))            ;; Mnemonic: Collapse
+        :leader "o r" 'ab/org-show-just-me))            ;; Mnemonic: restrict
+#+END_SRC
+
+Use vim instead of arrows.
+#+BEGIN_SRC emacs-lisp
+(map! :map org-mode-map
+      "M-e" #'org-metaup
+      "M-n" #'org-metadown)
 #+END_SRC
 
 *** index file

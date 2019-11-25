@@ -640,3 +640,65 @@ I used to think =company= is slow, but I just had to turn the ~idle-delay~ down.
 #+END_SRC
 
 The code chunk in the middle which makes yasnippet work with company is taken from [[https://emacs.stackexchange.com/questions/10431/get-company-to-show-suggestions-for-yasnippet-names][stackexchange]]. How can people live without this?? Also for some reason it has to be inside the entire thing even if company is not defered (no idea why).
+
+* spell checking
+
+As the name suggests. According to [[https://fasciism.com/2017/01/16/spellchecking/][this site]] Aspell is unmaintained and Hunspell is the way to go.
+
+Default binding: ~z =~ for suggestions on how to correct the word.
+
+#+BEGIN_SRC emacs-lisp
+(use-package! flyspell
+  :defer t
+  :init
+  (add-hook 'prog-mode-hook 'flyspell-prog-mode)
+
+  (dolist (hook '(text-mode-hook org-mode-hook))
+    (add-hook hook (lambda () (flyspell-mode 1))))
+
+  :config
+  (setq ispell-program-name "hunspell"
+        ispell-silently-savep t            ;; save persal dictionary without asking
+        ispell-local-dictionary "en_US"
+        ispell-extra-args '("--sug-mode=ultra" "--lang=en_US")
+        ispell-list-command "--list"
+        ispell-local-dictionary-alist '(("en_US" "[[:alpha:]]" "[^[:alpha:]]" "['‘’]"
+                                         t ; Many other characters
+                                         ("-d" "en_US") nil utf-8))))
+
+(map! :leader "s c" 'flyspell-mode) ;; toggle spell checking
+(map! :n "z=" 'ispell-word)
+#+END_SRC
+
+vim has a command for directly adding new words to dictionary. I want this.
+
+#+BEGIN_SRC emacs-lisp
+(defun ab/save-word ()
+  (interactive)
+  (let ((current-location (point))
+        (word (flyspell-get-word)))
+    (when (consp word)
+      (flyspell-do-correct 'save nil (car word) current-location (cadr word) (caddr word) current-location))))
+
+(map! :n "z g" 'ab/save-word)
+#+END_SRC
+* fuzzy matching
+
+The ~counsel~ package installs all three of them. ~Swiper~ is just the fancy search. ~Ivy~ does the narrowing. ~counsel~ adds options to ~Ivy~
+
+#+BEGIN_SRC emacs-lisp
+(use-package! counsel
+  :config
+  (ivy-mode 1)
+  ;; Virtual buffers correspond to bookmarks and recent files list
+  (setq ivy-use-virtual-buffers t)
+  (setq enable-recursive-minibuffers t)
+  (global-set-key "\C-s" 'swiper)
+
+  (map! :leader "f f" 'counsel-find-file)
+  ;; make projectile use ivy as completion system
+  ;; (setq projectile-completion-system 'ivy)
+
+  ;; Deletes current input, resets the candidates list to the currently restricted matches.
+  (define-key minibuffer-local-map (kbd "S-SPC") 'ivy-restrict-to-matches))
+#+END_SRC

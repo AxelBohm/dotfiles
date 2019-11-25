@@ -604,3 +604,32 @@ Fixing would be nice too, but apparently this is open, cf. [[https://github.com/
 ;; (use-package ess-smart-underscore
 ;;   :after ess)
 #+END_SRC
+* autocompletion
+
+I used to think =company= is slow, but I just had to turn the ~idle-delay~ down...
+
+#+BEGIN_SRC emacs-lisp
+(use-package company
+  :defer t
+  :init
+  (setq company-dabbrev-ignore-case t
+        company-idle-delay 0.05
+        company-minimum-prefix-length 2)
+  (add-hook 'after-init-hook 'global-company-mode)
+  :config
+  ;; Add yasnippet support for all company backends
+  ;; https://github.com/syl20bnr/spacemacs/pull/179
+  (defvar company-mode/enable-yas t
+    "Enable yasnippet for all backends.")
+  (defun company-mode/backend-with-yas (backend)
+    (if (or (not company-mode/enable-yas) (and (listp backend) (member 'company-yasnippet backend)))
+        backend
+      (append (if (consp backend) backend (list backend))
+              '(:with company-yasnippet))))
+  (setq company-backends (mapcar #'company-mode/backend-with-yas company-backends))
+
+  :bind ("C-n" . company-complete)
+  :diminish company-mode)
+#+END_SRC
+
+The code chunk in the middle which makes yasnippet work with company is taken from [[https://emacs.stackexchange.com/questions/10431/get-company-to-show-suggestions-for-yasnippet-names][stackexchange]]. How can people live without this?? Also for some reason it has to be inside the entire thing even if company is not defered (no idea why).

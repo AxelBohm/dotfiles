@@ -215,7 +215,8 @@ Evil for colemak keyboard layout. Adapted from the [[https://github.com/wbolster
   evil-colemak-mode
   (lambda () (evil-colemak-mode t))
   "Global minor mode with evil-mode enhancements for the Colemak keyboard layout.")
-(global-evil-colemak-mode)
+
+  (global-evil-colemak-mode)
 #+END_SRC
 
 Switching windows also relies on the `hjkl` motions. So make it colemak friendly.
@@ -226,6 +227,7 @@ Switching windows also relies on the `hjkl` motions. So make it colemak friendly
   (define-key evil-window-map "e" 'evil-window-up)
   (define-key evil-window-map "i" 'evil-window-right))
 #+END_SRC
+
 * buffer handling
 
 Switch back and forth between the two MRU buffers.

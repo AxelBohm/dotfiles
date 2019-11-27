@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: kappa
+# key: k
+# condition: t
+# --
+\kappa

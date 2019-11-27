@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: colonequal
+# uuid:
+# key: ce
+# condition: t
+# --
+\coloneq

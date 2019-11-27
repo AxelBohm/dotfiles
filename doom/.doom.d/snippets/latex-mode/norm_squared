@@ -2,4 +2,4 @@
 # name: norm_squared
 # key: norms
 # --
-\Vert $1 \Vert^2$0
+\Vert $0 \Vert^2

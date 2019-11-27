@@ -15,8 +15,10 @@ Show line numbers to the left for better jumping.
 (consider the ace jump package which shows a letter for every line for more efficient jumping)
 
 #+BEGIN_SRC emacs-lisp
-(setq display-line-numbers 'relative)
+(setq display-line-numbers-type 'relative)
+;; (setq doom-line-numbers-style 'relative)
 #+END_SRC
+
 ** email
 
 currently still using mutt. This tells Emacs to use mail mode when editing emails through mutt.
@@ -83,6 +85,12 @@ Most of the time I only have two windows open. Switching between should be easy.
 #+BEGIN_SRC emacs-lisp
 (global-set-key (kbd "M-o") 'other-window)
 #+END_SRC
+** line truncation
+
+#+BEGIN_SRC emacs-lisp
+(setq truncate-lines nil)
+#+END_SRC
+
 
 * config file
 
@@ -108,7 +116,7 @@ When regularly changing configs we also want to be able to use them without rest
   (interactive)
   (load-file "~/.doom.d/config.el"))
 
-(map! :leader "e r" #'ab/reload-init-file)
+(map! :leader "e r" 'ab/reload-init-file)
 #+END_SRC
 
 * vi
@@ -124,7 +132,6 @@ Set the leader key and some very basic keybindings.
       "q" #'kill-buffer
       "s h" #'evil-window-split
       "s v" #'evil-window-vsplit
-      "e r" #'reload-init-file
       "e c" #'ab/visit-emacs-config
       "r" #'ab/visit-references
       "n" #'other-window
@@ -135,12 +142,13 @@ Set the leader key and some very basic keybindings.
 Quickly open shell in a split.
 
 #+BEGIN_SRC emacs-lisp
-;; (defun ab/open-shell-in-split ()
-;;   (interactive)
-;;   (evil-window-split)
-;;   (eshell))
+(defun ab/open-shell-in-split ()
+  ;; open eshell
+  (interactive)
+  ;; (evil-window-split)
+  (eshell))
 
-;; (map! :leader "s s" 'ab/open-shell-in-split)
+(map! :leader "s s" 'ab/open-shell-in-split)
 #+END_SRC
 
 ** colemak settings
@@ -228,6 +236,17 @@ Switching windows also relies on the `hjkl` motions. So make it colemak friendly
   (define-key evil-window-map "i" 'evil-window-right))
 #+END_SRC
 
+** matchit
+
+Extend the ~%~ functionality to jump between tags such as LaTeX ~\begin{...}~ and ~\end{...}~. This is sooo important!!!
+
+#+BEGIN_SRC emacs-lisp
+(after! evil
+  (use-package! evil-matchit
+    :config
+    (global-evil-matchit-mode)))
+#+END_SRC
+
 * buffer handling
 
 Switch back and forth between the two MRU buffers.
@@ -240,7 +259,7 @@ Switch back and forth between the two MRU buffers.
 (map! :leader "SPC" #'ab/switch-to-previous-buffer)
 #+END_SRC
 
-* org mode                                                            :major:
+* org mode                                                               :major:
 
 #+begin_center
 =Your life in plain text=
@@ -252,13 +271,15 @@ Load orgmode plus some standard keybindings.
 (after! org
   (setq org-hide-emphasis-markers t
         org-return-follows-link t
-        org-tags-column 0             ;; position of tags
+        ;; org-tags-column -80            ;; position of tags
         ;; org-tag-faces '(("major" :foreground "#81A1C1"))
         ;; org-tag-faces nil
         org-todo-keywords '((sequence "TODO(t)" "WAITING(w)" "|" "DONE(d)")
                             (sequence "TODO(t)" "DIDN'T SUCCEED(s)" "|" "DOESN'T WORK(x)"  "TOO HARD(h)" "DONE(d)")))
+  org-todo-keyword-faces
+  '(("WAITING" :foreground "#8FBCBB" :weight normal))
   (map! :leader
-        "o l" 'org-store-link
+        "o s l" 'org-store-link
         "o a" 'org-agenda
         "o c" 'org-capture))
 #+END_SRC
@@ -310,15 +331,15 @@ By default org-agenda only shows one week starting last monday. I want two weeks
 ** keybindings
 *** structure editing
 
-Org structure editing made easy/mnemonic with evil-leader.
+Org structure editing made easy/mnemonic with leader.
 
 #+BEGIN_SRC emacs-lisp
 (map!
- (:after org
-   :leader
-   "o t" 'org-toggle-heading      ;; toogle wheter heading or not
-   "o w" 'widen                   ;; show everythig
-   "o n" 'org-narrow-to-subtree)) ;; show only what's within heading
+ :map org-mode-map
+ :leader
+ "o t" 'org-toggle-heading      ;; toogle wheter heading or not
+ "o w" 'widen                   ;; show everythig
+ "o n" 'org-narrow-to-subtree)  ;; show only what's within heading
 #+END_SRC
 
 ~org-narrow-subtree~ shows only a single heading (the heading of the current subtree). I need more context!! I want the to see which hierarchy this heading belongs to. taken from [[https://emacs.stackexchange.com/questions/29304/how-to-show-all-contents-of-current-subtree-and-fold-all-the-other-subtrees][stackexchange]].
@@ -332,8 +353,8 @@ But this also shows all heading of level 1 and all headings of the same level as
   (org-reveal)
   (org-show-subtree))
 
-(map! (:after org
-        :leader "o r" 'ab/org-show-just-me))            ;; Mnemonic: restrict
+(map! :map org-mode-map
+      :leader "o r" 'ab/org-show-just-me)            ;; Mnemonic: restrict
 #+END_SRC
 
 Use vim instead of arrows.
@@ -374,10 +395,11 @@ The above motions are easy to remember but feel clunky when trying to go more th
 I don't use ~(~ or ~)~ in evil mode anyways.
 
 #+BEGIN_SRC emacs-lisp
-;; (map! (:after org
-;;   ")" 'org-next-visible-heading
-;;   "(" 'org-previous-visible-heading
-;;   :leader "g u" 'outline-up-heading))               ;; Go Up in hierarchy
+(map!
+ (:after org
+   :n ")" 'org-next-visible-heading
+   :n "(" 'org-previous-visible-heading
+   :leader "g u" 'outline-up-heading))               ;; Go Up in hierarchy
 #+END_SRC
 
 By default ~g u~ is bound to ~evil-downcase~.
@@ -407,17 +429,18 @@ Keep everything out of your head! Has to be as convenient as possible. The defau
 Always start in insert mode when capturing.
 
 #+BEGIN_SRC emacs-lisp
-(add-hook 'org-capture-mode-hook 'evil-insert-state)
+(after! org
+  (add-hook 'org-capture-mode-hook 'evil-insert-state))
 #+END_SRC
 
 When refiling I want to be able to refile also to a subheading.
 
 #+BEGIN_SRC emacs-lisp
-(setq org-refile-targets '((nil :maxlevel . 6)
-                           (org-agenda-files :maxlevel . 6)))
-(setq org-completion-use-ido t)
-(setq org-outline-path-complete-in-steps nil) ;; has to be nil for ido to work
-(setq org-refile-use-outline-path 'file)
+;; (setq org-refile-targets '((nil :maxlevel . 6)
+;;                            (org-agenda-files :maxlevel . 6)))
+;; (setq org-completion-use-ido t)
+;; (setq org-outline-path-complete-in-steps nil) ;; has to be nil for ido to work
+;; (setq org-refile-use-outline-path 'file)
 #+END_SRC
 
 *** templates
@@ -426,18 +449,19 @@ Templates for capturing. Also, ~%a~ expands to a link to the file (and position)
 I think =%i= is active region. Another nice feature is ~%^{Name}~ prompts for name. This probably makes sense for titles or something because I tend to put too much next to the asterics and too little text underneath..
 
 #+BEGIN_SRC emacs-lisp
-(setq org-capture-templates
-      '(("l" "todo with Link" entry
-         (file+headline org-index-file "Inbox")
-         "*** TODO %?\n  %i\n  See: %a\n")
+(after! org
+  (setq org-capture-templates
+        '(("l" "todo with Link" entry
+           (file+headline org-index-file "Inbox")
+           "*** TODO %?\n  %i\n  See: %a\n")
 
-        ("n" "Note"  entry
-         (file+headline org-index-file "Inbox")
-         "*** %?\n\n")
+          ("n" "Note"  entry
+           (file+headline org-index-file "Inbox")
+           "*** %?\n\n")
 
-        ("t" "Todo" entry
-         (file+headline org-index-file "Inbox")
-         "*** TODO %?\n")))
+          ("t" "Todo" entry
+           (file+headline org-index-file "Inbox")
+           "*** TODO %?\n"))))
 #+END_SRC
 
 *** capture anywhere
@@ -466,7 +490,7 @@ Call org-capture from anywhere (system wide). Code taken from [[https://www.redd
 
 The above code, together with the follow shell command does the job.
 
-# #+BEGIN_SRC shell
+# #+BEGIN_SRC shell :eval no
 # emacsclient -c -F '(quote (name . "capture"))' -e '(activate-capture-frame)'
 # #+END_SRC
 
@@ -536,22 +560,23 @@ seems wonky.. only shift-tab works but tab doesn't.. maybe something uses tab al
 I want notifications for scheduled headlines
 
 #+BEGIN_SRC emacs-lisp
-(def-package! org-alert
+(use-package! org-alert
   :init
   (setq alert-default-style 'libnotify)
   (setq org-alert-interval 3600)
   :config
   (org-alert-enable))
 #+END_SRC
-* LaTeX
-
+* LaTeX                                                                  :major:
 ** general
 
 #+BEGIN_SRC emacs-lisp
 (after! latex
   (setq tex-fontify-script t
+        TeX-save-query nil
         ;; don't show ^ or _ for scripts
         font-latex-fontify-script 'invisible)
+  ;; (add-to-list 'TeX-command-list '("LatexMk" "latexmk -pdflatex='pdflatex -file-line-error -synctex=1' -pdf %t" TeX-run-TeX nil))
 
   ;; use Zathura as pdf viewer
   (setq TeX-view-program-selection '((output-pdf "Zathura"))
@@ -561,23 +586,23 @@ I want notifications for scheduled headlines
 ** keybindings
 
 #+BEGIN_SRC emacs-lisp
-(evil-leader/set-key
- "l l" 'TeX-command-run-all
- "l v" 'Tex-view
- "l n" 'LaTeX-narrow-to-environment)
+(map! :map LaTeX-mode-map
+      :leader
+      "m l" 'TeX-command-run-all
+      "m v" 'Tex-view
+      "m f" 'Tex-fold-env
+      "m n" 'LaTeX-narrow-to-environment)
 #+END_SRC
-
 
 * snippets
 
 Snippets are everything! still need to figure out how to incorporate snippets into autocompletion (the way deoplete and Ultisnips did it for vim).
 
 #+BEGIN_SRC emacs-lisp
-(use-package yasnippet
+(use-package! yasnippet
   :config
-  (setq yas-snippet-dirs '("~/.emacs.d/snippets"))
-  (yas-global-mode 1)
-  (define-key evil-insert-state-map (kbd "C-e") 'yas-expand)
+  (setq yas-snippet-dirs '("~/.doom.d/snippets"))
+  (map! :i "C-e" 'yas-expand)
   (map! :leader "s n" 'yas-new-snippet)              ;; Snippet New
   (map! :leader "s g" 'yas-visit-snippet-file))      ;; Snippet Go
 #+END_SRC
@@ -586,9 +611,7 @@ see [[https://stackoverflow.com/questions/14066526/unset-tab-binding-for-yasnipp
 * syntax checking
 
 #+BEGIN_SRC emacs-lisp
-(use-package flycheck
-  :defer t
-  :diminish
+(use-package! flycheck
   :config
   (global-flycheck-mode)
   ;; (flycheck-display-errors-delay .3)
@@ -621,16 +644,18 @@ Fixing would be nice too, but apparently this is open, cf. [[https://github.com/
 ;; (use-package ess-smart-underscore
 ;;   :after ess)
 #+END_SRC
-* autocompletion
+* auto completion
 
 I used to think =company= is slow, but I just had to turn the ~idle-delay~ down...
 
 #+BEGIN_SRC emacs-lisp
-(use-package company
-  :defer t
+(use-package! company
+  :bind (("C-n" . company-complete))
   :init
   (setq company-dabbrev-ignore-case t
-        company-idle-delay 0.05
+        company-idle-delay 0.1
+        company-tooltip-limit 5
+        company-tooltip-minimum-width 40
         company-minimum-prefix-length 2)
   (add-hook 'after-init-hook 'global-company-mode)
   :config
@@ -645,8 +670,11 @@ I used to think =company= is slow, but I just had to turn the ~idle-delay~ down.
               '(:with company-yasnippet))))
   (setq company-backends (mapcar #'company-mode/backend-with-yas company-backends))
 
-  :bind ("C-n" . company-complete)
-  :diminish company-mode)
+  (map! :i "C-n" 'company-complete)) ;; doesn't work
+
+(map! (:when (featurep! :completion company)
+        :i "C-n"      #'+company/complete
+        :i "C-SPC"    #'+company/complete))
 #+END_SRC
 
 The code chunk in the middle which makes yasnippet work with company is taken from [[https://emacs.stackexchange.com/questions/10431/get-company-to-show-suggestions-for-yasnippet-names][stackexchange]]. How can people live without this?? Also for some reason it has to be inside the entire thing even if company is not defered (no idea why).
@@ -658,15 +686,11 @@ As the name suggests. According to [[https://fasciism.com/2017/01/16/spellchecki
 Default binding: ~z =~ for suggestions on how to correct the word.
 
 #+BEGIN_SRC emacs-lisp
-(use-package! flyspell
-  :defer t
-  :init
-  (add-hook 'prog-mode-hook 'flyspell-prog-mode)
-
-  (dolist (hook '(text-mode-hook org-mode-hook))
-    (add-hook hook (lambda () (flyspell-mode 1))))
-
+(after! flyspell
   :config
+  (map! :leader "s c" 'flyspell-mode) ;; toggle spell checking
+  (map! :n "z=" 'ispell-word)
+
   (setq ispell-program-name "hunspell"
         ispell-silently-savep t            ;; save persal dictionary without asking
         ispell-local-dictionary "en_US"
@@ -675,9 +699,6 @@ Default binding: ~z =~ for suggestions on how to correct the word.
         ispell-local-dictionary-alist '(("en_US" "[[:alpha:]]" "[^[:alpha:]]" "['‘’]"
                                          t ; Many other characters
                                          ("-d" "en_US") nil utf-8))))
-
-(map! :leader "s c" 'flyspell-mode) ;; toggle spell checking
-(map! :n "z=" 'ispell-word)
 #+END_SRC
 
 vim has a command for directly adding new words to dictionary. I want this.
@@ -711,4 +732,23 @@ The ~counsel~ package installs all three of them. ~Swiper~ is just the fancy sea
 
   ;; Deletes current input, resets the candidates list to the currently restricted matches.
   (define-key minibuffer-local-map (kbd "S-SPC") 'ivy-restrict-to-matches))
+#+END_SRC
+* auto closing of parenthesis
+
+Smart treatment of parenthesis, like auto closing or auto deletion of the matching one.
+
+#+BEGIN_SRC emacs-lisp
+(use-package! smartparens
+  :config
+  (sp-local-pair 'org-mode "$" "$")
+  (sp-local-pair 'latex-mode "$" "$")   ;; omg, I want this so badly
+  (sp-local-pair 'latex-mode "\\langle" "\\rangle" :trigger "\\l(")
+  (sp-local-pair 'latex-mode "\\lVert" "\\rVert" :trigger "\\l(")
+
+  (sp-local-pair 'latex-mode "\\left(" "\\right)" :trigger "\\l(")
+  (sp-local-pair 'latex-mode "\\left[" "\\right]" :trigger "\\l(")
+  (sp-local-pair 'latex-mode "\\left\\{" "\\right\\}" :trigger "\\l(")
+  (sp-local-pair 'latex-mode "\\left\\langle" "\\right\\rangle" :trigger "\\l(")
+
+  (smartparens-global-mode 1)) ;; I always want this
 #+END_SRC

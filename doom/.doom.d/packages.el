@@ -7,3 +7,5 @@
 ;; (package! builtin-package :disable t)
 
 (package! org-alert)
+
+(package! evil-matchit)

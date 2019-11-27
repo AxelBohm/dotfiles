@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: Lemma
+# key: Lem
+# --
+Lemma~\ref{lem:$0}

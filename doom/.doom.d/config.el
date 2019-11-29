@@ -1,31 +1,12 @@
 (show-paren-mode 1)
 
 (setq display-line-numbers-type 'relative)
-;; (setq doom-line-numbers-style 'relative)
 
 (add-to-list 'auto-mode-alist '("/mutt" . mail-mode))
 (add-to-list 'auto-mode-alist '("/neomutt" . mail-mode))
 
 ;; Function to return first name of email recipient
 ;; Used by yasnippet
-(defun ab/yas-get-first-name-from-to-field ()
-  (let ((rlt "NAME") str rlt2)
-    (save-excursion
-      (goto-char (point-min))
-      ;; first line in email could be some hidden line containing NO to field
-      (setq str (buffer-substring-no-properties (point-min) (point-max))))
-    ;; take name from TO field
-    (when (string-match "^To: \"?\\([^ ,]+\\)" str)
-      (setq rlt (match-string 1 str)))
-    ;;get name in FROM field if available
-    (when (string-match "^\\([^ ,\n]+\\).+writes:$" str)
-      (progn (setq rlt2 (match-string 1 str))
-             ;;prefer name in FROM field if TO field has "@"
-             (when (string-match "@" rlt)
-               (setq rlt rlt2))
-             ))
-    (message "rlt=%s" rlt)
-    rlt))
 
 (defun ab/visit-references ()
   "go to my references file"
@@ -36,10 +17,9 @@
 
 (global-prettify-symbols-mode 1)
 
-(global-set-key (kbd "M-o") 'other-window)
+(map! "M-o" 'other-window)
 
 (setq truncate-lines nil)
-(setq-default fill-column nil)
 
 (defun ab/visit-emacs-config ()
   "go to emacs config file"
@@ -163,14 +143,14 @@
   (add-hook 'org-mode-hook 'turn-off-auto-fill)
   (setq org-hide-emphasis-markers nil
         org-return-follows-link t
-        fill-column nil                          ;; doom tries to hard wrap all the time which I don't like
-        org-highlight-latex-and-related '(latex) ;; highlight latex fragments
-  ;; org-tags-column -80                   ;; position of tags
-  ;; org-tag-faces '(("major" :foreground "#81A1C1"))
-  ;; org-tag-faces nil
-  org-todo-keywords '((sequence "TODO(t)" "WAITING(w)" "|" "DONE(d)")
-                      (sequence "TODO(t)" "DIDN'T SUCCEED(s)" "|" "DOESN'T WORK(x)"  "TOO HARD(h)" "DONE(d)"))
-  org-todo-keyword-faces '(("WAITING" :foreground "#8FBCBB" :weight bold))))
+        ;; fill-column nil                          ;; doom tries to hard wrap all the time which I don't like
+        ;; org-highlight-latex-and-related '(latex) ;; highlight latex fragments
+        ;; org-tags-column -80                   ;; position of tags
+        ;; org-tag-faces '(("major" :foreground "#81A1C1"))
+        ;; org-tag-faces nil
+        org-todo-keywords '((sequence "TODO(t)" "WAITING(w)" "|" "DONE(d)")
+                            (sequence "TODO(t)" "DIDN'T SUCCEED(s)" "|" "DOESN'T WORK(x)"  "TOO HARD(h)" "DONE(d)"))
+        org-todo-keyword-faces '(("WAITING" :foreground "#8FBCBB" :weight bold))))
 
 
 (map! :leader
@@ -190,14 +170,13 @@
   (setq org-archive-location
         (concat (org-file-path "archive.org") "::* From %s")))
 
-(after! org-mode
+(after! org
   (setq org-agenda-files (list org-index-file
                                (org-file-path "Reference.org"))))
-;; (setq org-agenda-files (list org-directory))
 
 (after! org (setq org-startup-truncated 'nil))
 
-(after! org-mode
+(after! org
   (setq org-agenda-span 14)
   (setq org-agenda-start-on-weekday nil)
   (setq org-agenda-start-day "-0d"))
@@ -217,12 +196,11 @@
           :desc "next block"            "n" #'org-babel-next-src-block
           :desc "execute block"         "e" #'org-babel-execute-src-block)))
 
-(map!
- :map org-mode-map
- :leader
- "o t" 'org-toggle-heading      ;; toogle wheter heading or not
- "o w" 'widen                   ;; show everythig
- "o n" 'org-narrow-to-subtree)  ;; show only what's within heading
+(map! :map org-mode-map
+      :leader
+      "o t" 'org-toggle-heading      ;; toogle wheter heading or not
+      "o w" 'widen                   ;; show everythig
+      "o n" 'org-narrow-to-subtree)  ;; show only what's within heading
 
 (defun ab/org-show-just-me (&rest _)
   "Fold all other trees, then show entire current subtree."
@@ -254,11 +232,10 @@
         "g n" 'org-next-visible-heading          ;; Go Next heading
         )
 
-(map!
- (:after org
+(map! :map org-mode-map
    :n ")" 'org-next-visible-heading
    :n "(" 'org-previous-visible-heading
-   :leader "g u" 'outline-up-heading))               ;; Go Up in hierarchy
+   :leader "g u" 'outline-up-heading)               ;; Go Up in hierarchy
 
 (defun ab/mark-done-and-archive ()
   "Mark the state of an org-mode item as DONE and archive it."
@@ -291,7 +268,7 @@
            (file+headline org-index-file "Inbox")
            "*** TODO %?\n"))))
 
-(after! org-mode
+(after! org
   (defadvice org-switch-to-buffer-other-window
       (after supress-window-splitting activate)
     "Delete the extra window if we're in a capture frame"

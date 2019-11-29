@@ -16,7 +16,6 @@ Show line numbers to the left for better jumping.
 
 #+BEGIN_SRC emacs-lisp
 (setq display-line-numbers-type 'relative)
-;; (setq doom-line-numbers-style 'relative)
 #+END_SRC
 
 ** email
@@ -33,24 +32,6 @@ This is copied from [[https://github.com/NicolasPetton/emacs.d/blob/3945786c31a1
 #+BEGIN_SRC emacs-lisp
 ;; Function to return first name of email recipient
 ;; Used by yasnippet
-(defun ab/yas-get-first-name-from-to-field ()
-  (let ((rlt "NAME") str rlt2)
-    (save-excursion
-      (goto-char (point-min))
-      ;; first line in email could be some hidden line containing NO to field
-      (setq str (buffer-substring-no-properties (point-min) (point-max))))
-    ;; take name from TO field
-    (when (string-match "^To: \"?\\([^ ,]+\\)" str)
-      (setq rlt (match-string 1 str)))
-    ;;get name in FROM field if available
-    (when (string-match "^\\([^ ,\n]+\\).+writes:$" str)
-      (progn (setq rlt2 (match-string 1 str))
-             ;;prefer name in FROM field if TO field has "@"
-             (when (string-match "@" rlt)
-               (setq rlt rlt2))
-             ))
-    (message "rlt=%s" rlt)
-    rlt))
 #+END_SRC
 
 ** GTD
@@ -83,7 +64,7 @@ Emacs ships default with =prettify-symbols mode=.
 Most of the time I only have two windows open. Switching between should be easy.
 
 #+BEGIN_SRC emacs-lisp
-(global-set-key (kbd "M-o") 'other-window)
+(map! "M-o" 'other-window)
 #+END_SRC
 ** line truncation
 
@@ -91,7 +72,6 @@ stupid doom tries to hard wrap all the time which I don't like
 
 #+BEGIN_SRC emacs-lisp
 (setq truncate-lines nil)
-(setq-default fill-column nil)
 #+END_SRC
 
 * config file
@@ -274,14 +254,14 @@ Load orgmode plus some standard keybindings.
   (add-hook 'org-mode-hook 'turn-off-auto-fill)
   (setq org-hide-emphasis-markers nil
         org-return-follows-link t
-        fill-column nil                          ;; doom tries to hard wrap all the time which I don't like
-        org-highlight-latex-and-related '(latex) ;; highlight latex fragments
-  ;; org-tags-column -80                   ;; position of tags
-  ;; org-tag-faces '(("major" :foreground "#81A1C1"))
-  ;; org-tag-faces nil
-  org-todo-keywords '((sequence "TODO(t)" "WAITING(w)" "|" "DONE(d)")
-                      (sequence "TODO(t)" "DIDN'T SUCCEED(s)" "|" "DOESN'T WORK(x)"  "TOO HARD(h)" "DONE(d)"))
-  org-todo-keyword-faces '(("WAITING" :foreground "#8FBCBB" :weight bold))))
+        ;; fill-column nil                          ;; doom tries to hard wrap all the time which I don't like
+        ;; org-highlight-latex-and-related '(latex) ;; highlight latex fragments
+        ;; org-tags-column -80                   ;; position of tags
+        ;; org-tag-faces '(("major" :foreground "#81A1C1"))
+        ;; org-tag-faces nil
+        org-todo-keywords '((sequence "TODO(t)" "WAITING(w)" "|" "DONE(d)")
+                            (sequence "TODO(t)" "DIDN'T SUCCEED(s)" "|" "DOESN'T WORK(x)"  "TOO HARD(h)" "DONE(d)"))
+        org-todo-keyword-faces '(("WAITING" :foreground "#8FBCBB" :weight bold))))
 
 
 (map! :leader
@@ -313,10 +293,9 @@ Tell emacs where I store my org stuff.
 This sets the file from which the agenda is derived. All my todos are in the index file.
 
 #+BEGIN_SRC emacs-lisp
-(after! org-mode
+(after! org
   (setq org-agenda-files (list org-index-file
                                (org-file-path "Reference.org"))))
-;; (setq org-agenda-files (list org-directory))
 #+END_SRC
 
 By default org-mode does super ugly truncation of long lines (apparently because of tables). I want line wrapping, however.
@@ -328,7 +307,7 @@ By default org-mode does super ugly truncation of long lines (apparently because
 By default org-agenda only shows one week starting last monday. I want two weeks starting today.
 
 #+BEGIN_SRC emacs-lisp
-(after! org-mode
+(after! org
   (setq org-agenda-span 14)
   (setq org-agenda-start-on-weekday nil)
   (setq org-agenda-start-day "-0d"))
@@ -358,12 +337,11 @@ By default org-agenda only shows one week starting last monday. I want two weeks
 Org structure editing made easy/mnemonic with leader.
 
 #+BEGIN_SRC emacs-lisp
-(map!
- :map org-mode-map
- :leader
- "o t" 'org-toggle-heading      ;; toogle wheter heading or not
- "o w" 'widen                   ;; show everythig
- "o n" 'org-narrow-to-subtree)  ;; show only what's within heading
+(map! :map org-mode-map
+      :leader
+      "o t" 'org-toggle-heading      ;; toogle wheter heading or not
+      "o w" 'widen                   ;; show everythig
+      "o n" 'org-narrow-to-subtree)  ;; show only what's within heading
 #+END_SRC
 
 ~org-narrow-subtree~ shows only a single heading (the heading of the current subtree). I need more context!! I want the to see which hierarchy this heading belongs to. taken from [[https://emacs.stackexchange.com/questions/29304/how-to-show-all-contents-of-current-subtree-and-fold-all-the-other-subtrees][stackexchange]].
@@ -420,11 +398,10 @@ The above motions are easy to remember but feel clunky when trying to go more th
 I don't use ~(~ or ~)~ in evil mode anyways.
 
 #+BEGIN_SRC emacs-lisp
-(map!
- (:after org
+(map! :map org-mode-map
    :n ")" 'org-next-visible-heading
    :n "(" 'org-previous-visible-heading
-   :leader "g u" 'outline-up-heading))               ;; Go Up in hierarchy
+   :leader "g u" 'outline-up-heading)               ;; Go Up in hierarchy
 #+END_SRC
 
 By default ~g u~ is bound to ~evil-downcase~.
@@ -493,7 +470,7 @@ I think =%i= is active region. Another nice feature is ~%^{Name}~ prompts for na
 Call org-capture from anywhere (system wide). Code taken from [[https://www.reddit.com/r/emacs/comments/74gkeq/system_wide_org_capture/][reddit.]]
 
 #+BEGIN_SRC emacs-lisp
-(after! org-mode
+(after! org
   (defadvice org-switch-to-buffer-other-window
       (after supress-window-splitting activate)
     "Delete the extra window if we're in a capture frame"

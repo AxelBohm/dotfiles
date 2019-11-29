@@ -160,26 +160,25 @@
 (map! :leader "SPC" #'ab/switch-to-previous-buffer)
 
 (after! org
+  (add-hook 'org-mode-hook 'turn-off-auto-fill)
   (setq org-hide-emphasis-markers nil
         org-return-follows-link t
         fill-column nil                          ;; doom tries to hard wrap all the time which I don't like
         org-highlight-latex-and-related '(latex) ;; highlight latex fragments
-        ;; org-tags-column -80                   ;; position of tags
-        ;; org-tag-faces '(("major" :foreground "#81A1C1"))
-        ;; org-tag-faces nil
-        org-todo-keywords '((sequence "TODO(t)" "WAITING(w)" "|" "DONE(d)")
-                            (sequence "TODO(t)" "DIDN'T SUCCEED(s)" "|" "DOESN'T WORK(x)"  "TOO HARD(h)" "DONE(d)"))
-        ;; org-todo-keyword-faces '(("WAITING" :foreground "#8FBCBB" :weight normal)))
-        org-todo-keyword-faces '(("WAITING" :foreground "#8FBCBB" :weight bold)))
+  ;; org-tags-column -80                   ;; position of tags
+  ;; org-tag-faces '(("major" :foreground "#81A1C1"))
+  ;; org-tag-faces nil
+  org-todo-keywords '((sequence "TODO(t)" "WAITING(w)" "|" "DONE(d)")
+                      (sequence "TODO(t)" "DIDN'T SUCCEED(s)" "|" "DOESN'T WORK(x)"  "TOO HARD(h)" "DONE(d)"))
+  org-todo-keyword-faces '(("WAITING" :foreground "#8FBCBB" :weight bold))))
 
-  (add-hook 'org-mode-hook 'turn-off-auto-fill)
 
-  (map! :leader
-        "o s l" 'org-store-link
-        "o a" 'org-agenda
-        "o c" 'org-capture))
+(map! :leader
+      "o s l" 'org-store-link
+      "o a" 'org-agenda
+      "o c" 'org-capture)
 
-(after! org-mode
+(after! org
   (setq org-directory "~/org")
 
   (defun org-file-path (filename)
@@ -191,17 +190,32 @@
   (setq org-archive-location
         (concat (org-file-path "archive.org") "::* From %s")))
 
-(after! org
+(after! org-mode
   (setq org-agenda-files (list org-index-file
                                (org-file-path "Reference.org"))))
 ;; (setq org-agenda-files (list org-directory))
 
 (after! org (setq org-startup-truncated 'nil))
 
-(after! org
+(after! org-mode
   (setq org-agenda-span 14)
   (setq org-agenda-start-on-weekday nil)
   (setq org-agenda-start-day "-0d"))
+
+(after! org-mode
+  (setq org-export-babel-evaluate is t)
+  (map! :map org-mode-map
+        :leader
+        (:prefix "e"
+          (:prefix ("p" . "latex")
+            :desc "to latex" "l" #'org-pandoc-export-to-latex
+            :desc "to latex & open" "L" #'org-pandoc-export-to-latex-and-open
+            :desc "to latex pdf" "p" #'org-pandoc-export-to-latex-pdf
+            :desc "to latex pdf & open" "P" #'org-pandoc-export-to-latex-pdf-and-open))
+        (:prefix ("o" . "src")
+          :desc "previous block" "p" #'org-babel-previous-src-block
+          :desc "next block" "n" #'org-babel-next-src-block
+          :desc "execute block" "e" #'org-babel-execute-src-block)))
 
 (map!
  :map org-mode-map
@@ -263,7 +277,7 @@
 ;; (setq org-outline-path-complete-in-steps nil) ;; has to be nil for ido to work
 ;; (setq org-refile-use-outline-path 'file)
 
-(after! org
+(after! org-mode
   (setq org-capture-templates
         '(("l" "todo with Link" entry
            (file+headline org-index-file "Inbox")
@@ -358,8 +372,7 @@
   ;; (flycheck-display-errors-delay .3)
   (setq-default flycheck-disabled-checkers '(tex-chktex)))
 
-(use-package magit
-  :defer t
+(after! magit
   :config
   (use-package evil-magit)
   ;; This library makes it possible to reliably use the Emacsclient as the $EDITOR of child processes.
@@ -398,7 +411,7 @@
         :i "C-n"      #'+company/complete
         :i "C-SPC"    #'+company/complete))
 
-(after! flyspell
+(use-package! flyspell
   :config
   (map! :leader "s c" 'flyspell-mode) ;; toggle spell checking
   (map! :n "z=" 'ispell-word)

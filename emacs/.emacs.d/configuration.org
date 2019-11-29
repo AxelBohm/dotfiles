@@ -1330,7 +1330,7 @@
        ;; This library makes it possible to reliably use the Emacsclient as the $EDITOR of child processes.
        (use-package with-editor))
 
-     (evil-leader/set-key "g s" 'magit-status)
+     (evil-leader/set-key "g g" 'magit-status)
    #+END_SRC
 
 ** R

@@ -87,8 +87,11 @@ Most of the time I only have two windows open. Switching between should be easy.
 #+END_SRC
 ** line truncation
 
+stupid doom tries to hard wrap all the time which I don't like
+
 #+BEGIN_SRC emacs-lisp
 (setq truncate-lines nil)
+(setq-default fill-column nil)
 #+END_SRC
 
 
@@ -269,19 +272,23 @@ Load orgmode plus some standard keybindings.
 
 #+BEGIN_SRC emacs-lisp
 (after! org
-  (setq org-hide-emphasis-markers t
+  (add-hook 'org-mode-hook 'turn-off-auto-fill)
+  (setq org-hide-emphasis-markers nil
         org-return-follows-link t
-        ;; org-tags-column -80            ;; position of tags
-        ;; org-tag-faces '(("major" :foreground "#81A1C1"))
-        ;; org-tag-faces nil
-        org-todo-keywords '((sequence "TODO(t)" "WAITING(w)" "|" "DONE(d)")
-                            (sequence "TODO(t)" "DIDN'T SUCCEED(s)" "|" "DOESN'T WORK(x)"  "TOO HARD(h)" "DONE(d)")))
-  org-todo-keyword-faces
-  '(("WAITING" :foreground "#8FBCBB" :weight normal))
-  (map! :leader
-        "o s l" 'org-store-link
-        "o a" 'org-agenda
-        "o c" 'org-capture))
+        fill-column nil                          ;; doom tries to hard wrap all the time which I don't like
+        org-highlight-latex-and-related '(latex) ;; highlight latex fragments
+  ;; org-tags-column -80                   ;; position of tags
+  ;; org-tag-faces '(("major" :foreground "#81A1C1"))
+  ;; org-tag-faces nil
+  org-todo-keywords '((sequence "TODO(t)" "WAITING(w)" "|" "DONE(d)")
+                      (sequence "TODO(t)" "DIDN'T SUCCEED(s)" "|" "DOESN'T WORK(x)"  "TOO HARD(h)" "DONE(d)"))
+  org-todo-keyword-faces '(("WAITING" :foreground "#8FBCBB" :weight bold))))
+
+
+(map! :leader
+      "o s l" 'org-store-link
+      "o a" 'org-agenda
+      "o c" 'org-capture)
 #+END_SRC
 
 ~org-return-follow-links~ is supposed to give ~RET~ some functionality in evil mode (which it usually doesn't have). However, [[*make RET better][see this section]] for giving the enter key even more functionality.
@@ -307,7 +314,7 @@ Tell emacs where I store my org stuff.
 This sets the file from which the agenda is derived. All my todos are in the index file.
 
 #+BEGIN_SRC emacs-lisp
-(after! org
+(after! org-mode
   (setq org-agenda-files (list org-index-file
                                (org-file-path "Reference.org"))))
 ;; (setq org-agenda-files (list org-directory))
@@ -322,10 +329,28 @@ By default org-mode does super ugly truncation of long lines (apparently because
 By default org-agenda only shows one week starting last monday. I want two weeks starting today.
 
 #+BEGIN_SRC emacs-lisp
-(after! org
+(after! org-mode
   (setq org-agenda-span 14)
   (setq org-agenda-start-on-weekday nil)
   (setq org-agenda-start-day "-0d"))
+#+END_SRC
+** export
+
+#+BEGIN_SRC emacs-lisp
+(after! org-mode
+  (setq org-export-babel-evaluate is t)
+  (map! :map org-mode-map
+        :leader
+        (:prefix "e"
+          (:prefix ("p" . "latex")
+            :desc "to latex" "l" #'org-pandoc-export-to-latex
+            :desc "to latex & open" "L" #'org-pandoc-export-to-latex-and-open
+            :desc "to latex pdf" "p" #'org-pandoc-export-to-latex-pdf
+            :desc "to latex pdf & open" "P" #'org-pandoc-export-to-latex-pdf-and-open))
+        (:prefix ("o" . "src")
+          :desc "previous block" "p" #'org-babel-previous-src-block
+          :desc "next block" "n" #'org-babel-next-src-block
+          :desc "execute block" "e" #'org-babel-execute-src-block)))
 #+END_SRC
 
 ** keybindings
@@ -383,12 +408,13 @@ Quickly access the org index file.
 Mnemonic navigation.
 
 #+BEGIN_SRC emacs-lisp
-(map! (:after org
+(map! :map org-mode-map
         :leader
         "g h" 'org-previous-visible-heading      ;; Go Heading of current section
         "g e" 'org-previous-visible-heading      ;; Go e (= colemak up)
         "g u" 'outline-up-heading                ;; Go Up in hierarchy
-        "g n" 'org-next-visible-heading))        ;; Go Next heading
+        "g n" 'org-next-visible-heading          ;; Go Next heading
+        )
 #+END_SRC
 
 The above motions are easy to remember but feel clunky when trying to go more then one heading up or down (this is probably an antipattern anyways..). Either way, here are some single key mappings.
@@ -416,8 +442,7 @@ So let's have a command that does both.
   (org-todo 'done)
   (org-archive-subtree))
 
-;; (define-key org-mode-map (kbd "C-c C-x C-s") 'ab/mark-done-and-archive)
-(map! :leader "o d" 'ab/mark-done-and-archive)
+(map! :map org-mode-map :leader "o d" 'ab/mark-done-and-archive)
 #+END_SRC
 
 ** org capture
@@ -429,7 +454,7 @@ Keep everything out of your head! Has to be as convenient as possible. The defau
 Always start in insert mode when capturing.
 
 #+BEGIN_SRC emacs-lisp
-(after! org
+(after! org-mode
   (add-hook 'org-capture-mode-hook 'evil-insert-state))
 #+END_SRC
 
@@ -449,7 +474,7 @@ Templates for capturing. Also, ~%a~ expands to a link to the file (and position)
 I think =%i= is active region. Another nice feature is ~%^{Name}~ prompts for name. This probably makes sense for titles or something because I tend to put too much next to the asterics and too little text underneath..
 
 #+BEGIN_SRC emacs-lisp
-(after! org
+(after! org-mode
   (setq org-capture-templates
         '(("l" "todo with Link" entry
            (file+headline org-index-file "Inbox")
@@ -469,23 +494,24 @@ I think =%i= is active region. Another nice feature is ~%^{Name}~ prompts for na
 Call org-capture from anywhere (system wide). Code taken from [[https://www.reddit.com/r/emacs/comments/74gkeq/system_wide_org_capture/][reddit.]]
 
 #+BEGIN_SRC emacs-lisp
-(defadvice org-switch-to-buffer-other-window
-    (after supress-window-splitting activate)
-  "Delete the extra window if we're in a capture frame"
-  (if (equal "capture" (frame-parameter nil 'name))
-      (delete-other-windows)))
+(after! org-mode
+  (defadvice org-switch-to-buffer-other-window
+      (after supress-window-splitting activate)
+    "Delete the extra window if we're in a capture frame"
+    (if (equal "capture" (frame-parameter nil 'name))
+        (delete-other-windows)))
 
-(defadvice org-capture-finalize
-    (after delete-capture-frame activate)
-  "Advise capture-finalize to close the frame"
-  (if (equal "capture" (frame-parameter nil 'name))
-      (delete-frame)))
+  (defadvice org-capture-finalize
+      (after delete-capture-frame activate)
+    "Advise capture-finalize to close the frame"
+    (if (equal "capture" (frame-parameter nil 'name))
+        (delete-frame)))
 
-(defun activate-capture-frame ()
-  "run org-capture in capture frame"
-  (select-frame-by-name "capture")
-  (switch-to-buffer (get-buffer-create "*scratch*"))
-  (org-capture))
+  (defun activate-capture-frame ()
+    "run org-capture in capture frame"
+    (select-frame-by-name "capture")
+    (switch-to-buffer (get-buffer-create "*scratch*"))
+    (org-capture)))
 #+END_SRC
 
 The above code, together with the follow shell command does the job.
@@ -508,25 +534,27 @@ Everything that has to do with how stuff looks / is displayed.
 
 *** "headings"
 
-By default the only difference between org leves is a slightly different symbol (when using =org-bullets=) and an almost invisible indent.
+By default the only difference between org levels is a slightly different symbol (when using =org-bullets=).
 Different font sizes make much more sense.
 
 Also, in nord theme all headings seem to have the same color...
 
 #+BEGIN_SRC emacs-lisp
-(custom-set-faces
- '(org-level-1 ((t (:inherit outline-1 :height 1.5))))
- '(org-level-2 ((t (:inherit outline-2 :foreground "#A3BE8C" :height 1.3))))
- '(org-level-3 ((t (:inherit outline-3 :foreground "#81A1C1" :height 1.2))))
- '(org-level-4 ((t (:inherit outline-4 :foreground "#8FBCBB" :height 1.0))))
- '(org-level-5 ((t (:inherit outline-5 :height 1.0))))
- )
+(after! org-mode
+  (custom-set-faces
+   '(org-level-1 ((t (:inherit outline-1 :height 1.5))))
+   '(org-level-2 ((t (:inherit outline-2 :foreground "#A3BE8C" :height 1.3))))
+   '(org-level-3 ((t (:inherit outline-3 :foreground "#81A1C1" :height 1.2))))
+   '(org-level-4 ((t (:inherit outline-4 :foreground "#8FBCBB" :height 1.0))))
+   '(org-level-5 ((t (:inherit outline-5 :height 1.0))))
+   ))
 #+END_SRC
 
 By default orgmode displays ellipsis for collapsed bullets. Here's a custom symbol indicating collapsed bullets.
 
 #+BEGIN_SRC emacs-lisp
-(setq org-ellipsis " ...")
+(after! org-mode
+  (setq org-ellipsis " ..."))
 #+END_SRC
 
 *** prettify entities
@@ -534,7 +562,8 @@ By default orgmode displays ellipsis for collapsed bullets. Here's a custom symb
 Org can pretty display things like latex symbols. Indices are even nicer than in AucTex as the underscores are removed.
 
 #+BEGIN_SRC emacs-lisp
-(setq org-pretty-entities 1)
+(after! org-mode
+  (setq org-pretty-entities 1))
 #+END_SRC
 
 ** opening pdfs
@@ -542,22 +571,16 @@ Org can pretty display things like latex symbols. Indices are even nicer than in
 I want pdfs to be opened in an external pdf viewer.
 
 #+BEGIN_SRC emacs-lisp
-(add-hook 'org-mode-hook
-          '(lambda ()
-             (delete '("\\.pdf\\'" . default) org-file-apps)
-             (add-to-list 'org-file-apps '("\\.pdf\\'" . "zathura %s"))))
-#+END_SRC
-
-** org everywhere
-
-seems wonky.. only shift-tab works but tab doesn't.. maybe something uses tab already? like yasnippet.
-#+BEGIN_SRC emacs-lisp
-;; (use-package outshine)
+(after! org-mode
+  (add-hook 'org-mode-hook
+            '(lambda ()
+               (delete '("\\.pdf\\'" . default) org-file-apps)
+               (add-to-list 'org-file-apps '("\\.pdf\\'" . "zathura %s")))))
 #+END_SRC
 
 ** org-notify
 
-I want notifications for scheduled headlines
+I want notifications for scheduled headlines.
 
 #+BEGIN_SRC emacs-lisp
 (use-package! org-alert
@@ -603,8 +626,9 @@ Snippets are everything! still need to figure out how to incorporate snippets in
   :config
   (setq yas-snippet-dirs '("~/.doom.d/snippets"))
   (map! :i "C-e" 'yas-expand)
-  (map! :leader "s n" 'yas-new-snippet)              ;; Snippet New
-  (map! :leader "s g" 'yas-visit-snippet-file))      ;; Snippet Go
+  (map!
+   :leader "s n" 'yas-new-snippet              ;; Snippet New
+   :leader "s g" 'yas-visit-snippet-file)      ;; Snippet Go
 #+END_SRC
 
 see [[https://stackoverflow.com/questions/14066526/unset-tab-binding-for-yasnippet][stackoverflow]] for some helpful answers.
@@ -625,8 +649,7 @@ Fixing would be nice too, but apparently this is open, cf. [[https://github.com/
 * git
 
 #+BEGIN_SRC emacs-lisp
-(use-package magit
-  :defer t
+(after! magit
   :config
   (use-package evil-magit)
   ;; This library makes it possible to reliably use the Emacsclient as the $EDITOR of child processes.
@@ -638,9 +661,7 @@ Fixing would be nice too, but apparently this is open, cf. [[https://github.com/
 * R
 
 #+BEGIN_SRC emacs-lisp
-(use-package ess
-  :defer t
-  )
+;; (after! ess)
 ;; (use-package ess-smart-underscore
 ;;   :after ess)
 #+END_SRC
@@ -686,7 +707,7 @@ As the name suggests. According to [[https://fasciism.com/2017/01/16/spellchecki
 Default binding: ~z =~ for suggestions on how to correct the word.
 
 #+BEGIN_SRC emacs-lisp
-(after! flyspell
+(use-package! flyspell
   :config
   (map! :leader "s c" 'flyspell-mode) ;; toggle spell checking
   (map! :n "z=" 'ispell-word)
@@ -751,4 +772,38 @@ Smart treatment of parenthesis, like auto closing or auto deletion of the matchi
   (sp-local-pair 'latex-mode "\\left\\langle" "\\right\\rangle" :trigger "\\l(")
 
   (smartparens-global-mode 1)) ;; I always want this
+#+END_SRC
+* mail
+
+finally I found a config using offlineimap.
+
+#+BEGIN_SRC emacs-lisp
+;; (after! mu4e
+;;   (setq +mu4e-backend 'offlineimap)
+;;   ;; (set-email-account! "EduPolitech"
+;;   ;;   `((mu4e-sent-folder       . "/edu-politech/Sent Mail")
+;;   ;;     (mu4e-drafts-folder     . "/edu-politech/Drafts")
+;;   ;;     (mu4e-trash-folder      . "/edu-politech/Trash")
+;;   ;;     (mu4e-refile-folder     . "/edu-politech/All Mail")
+;;   ;;     (smtpmail-smtp-user     . ,(password-store-get "mail/edu-politech"))
+;;   ;;     (user-mail-address      . ,(password-store-get "mail/edu-politech"))
+;;   ;;     (mu4e-compose-signature . "---\nEdu Politech"))
+;;   ;;   t)
+;;   (set-email-account! "MainMail"
+;;     `((mu4e-sent-folder       . "~/.mail/uniwien/Sent")
+;;       (mu4e-drafts-folder     . "~/.mail/uniwien/Drafts")
+;;       (mu4e-trash-folder      . "~/.mail/uniwien/Trash")
+;;       (mu4e-refile-folder     . "/All Mail")
+;;       (smtpmail-smtp-user     . ,(auth-source-pass-get "user" "mail/mainmail"))
+;;       (user-mail-address      . ,(auth-source-pass-get "user" "mail/mainmail"))
+;;       (mu4e-compose-signature . "---\nMain Mail")))
+;;   (set-email-account! "Paradox"
+;;     `((mu4e-sent-folder       . "/paradox/Sent Mail")
+;;       (mu4e-drafts-folder     . "/paradox/Drafts")
+;;       (mu4e-trash-folder      . "/paradox/Trash")
+;;       (mu4e-refile-folder     . "/paradox/All Mail")
+;;       (smtpmail-smtp-user     . ,(auth-source-pass-get "user" "mail/paradox"))
+;;       (user-mail-address      . ,(auth-source-pass-get "user" "mail/paradox"))
+;;       (mu4e-compose-signature . "---\nParadox"))
+;;     t))
 #+END_SRC

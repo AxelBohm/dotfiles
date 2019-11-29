@@ -39,6 +39,7 @@
 (global-set-key (kbd "M-o") 'other-window)
 
 (setq truncate-lines nil)
+(setq-default fill-column nil)
 
 (defun ab/visit-emacs-config ()
   "go to emacs config file"

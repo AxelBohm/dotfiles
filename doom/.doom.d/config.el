@@ -202,20 +202,20 @@
   (setq org-agenda-start-on-weekday nil)
   (setq org-agenda-start-day "-0d"))
 
-(after! org-mode
-  (setq org-export-babel-evaluate is t)
+(after! org
+  (setq org-export-use-babel t)
   (map! :map org-mode-map
         :leader
         (:prefix "e"
           (:prefix ("p" . "latex")
-            :desc "to latex" "l" #'org-pandoc-export-to-latex
-            :desc "to latex & open" "L" #'org-pandoc-export-to-latex-and-open
-            :desc "to latex pdf" "p" #'org-pandoc-export-to-latex-pdf
+            :desc "to latex"            "l" #'org-pandoc-export-to-latex
+            :desc "to latex & open"     "L" #'org-pandoc-export-to-latex-and-open
+            :desc "to latex pdf"        "p" #'org-pandoc-export-to-latex-pdf
             :desc "to latex pdf & open" "P" #'org-pandoc-export-to-latex-pdf-and-open))
         (:prefix ("o" . "src")
-          :desc "previous block" "p" #'org-babel-previous-src-block
-          :desc "next block" "n" #'org-babel-next-src-block
-          :desc "execute block" "e" #'org-babel-execute-src-block)))
+          :desc "previous block"        "p" #'org-babel-previous-src-block
+          :desc "next block"            "n" #'org-babel-next-src-block
+          :desc "execute block"         "e" #'org-babel-execute-src-block)))
 
 (map!
  :map org-mode-map
@@ -268,7 +268,7 @@
 
 (map! :map org-mode-map :leader "o d" 'ab/mark-done-and-archive)
 
-(after! org-mode
+(after! org
   (add-hook 'org-capture-mode-hook 'evil-insert-state))
 
 ;; (setq org-refile-targets '((nil :maxlevel . 6)
@@ -277,7 +277,7 @@
 ;; (setq org-outline-path-complete-in-steps nil) ;; has to be nil for ido to work
 ;; (setq org-refile-use-outline-path 'file)
 
-(after! org-mode
+(after! org
   (setq org-capture-templates
         '(("l" "todo with Link" entry
            (file+headline org-index-file "Inbox")
@@ -312,7 +312,7 @@
 
 (server-start)
 
-(after! org-mode
+(after! org
   (custom-set-faces
    '(org-level-1 ((t (:inherit outline-1 :height 1.5))))
    '(org-level-2 ((t (:inherit outline-2 :foreground "#A3BE8C" :height 1.3))))
@@ -321,13 +321,13 @@
    '(org-level-5 ((t (:inherit outline-5 :height 1.0))))
    ))
 
-(after! org-mode
+(after! org
   (setq org-ellipsis " ..."))
 
-(after! org-mode
+(after! org
   (setq org-pretty-entities 1))
 
-(after! org-mode
+(after! org
   (add-hook 'org-mode-hook
             '(lambda ()
                (delete '("\\.pdf\\'" . default) org-file-apps)
@@ -364,7 +364,7 @@
   (map! :i "C-e" 'yas-expand)
   (map!
    :leader "s n" 'yas-new-snippet              ;; Snippet New
-   :leader "s g" 'yas-visit-snippet-file)      ;; Snippet Go
+   :leader "s g" 'yas-visit-snippet-file))      ;; Snippet Go
 
 (use-package! flycheck
   :config
@@ -411,15 +411,15 @@
         :i "C-n"      #'+company/complete
         :i "C-SPC"    #'+company/complete))
 
-(use-package! flyspell
+(after! flyspell
   :config
-  (map! :leader "s c" 'flyspell-mode) ;; toggle spell checking
+  (map! :leader "s c" 'flyspell-mode)      ;; toggle spell checking
   (map! :n "z=" 'ispell-word)
 
   (setq ispell-program-name "hunspell"
         ispell-silently-savep t            ;; save persal dictionary without asking
         ispell-local-dictionary "en_US"
-        ispell-extra-args '("--sug-mode=ultra" "--lang=en_US")
+        ;; ispell-extra-args '("--sug-mode=ultra" "--lang=en_US")
         ispell-list-command "--list"
         ispell-local-dictionary-alist '(("en_US" "[[:alpha:]]" "[^[:alpha:]]" "['‘’]"
                                          t ; Many other characters

@@ -94,7 +94,6 @@ stupid doom tries to hard wrap all the time which I don't like
 (setq-default fill-column nil)
 #+END_SRC
 
-
 * config file
 
 ** quick access
@@ -337,20 +336,20 @@ By default org-agenda only shows one week starting last monday. I want two weeks
 ** export
 
 #+BEGIN_SRC emacs-lisp
-(after! org-mode
-  (setq org-export-babel-evaluate is t)
+(after! org
+  (setq org-export-use-babel t)
   (map! :map org-mode-map
         :leader
         (:prefix "e"
           (:prefix ("p" . "latex")
-            :desc "to latex" "l" #'org-pandoc-export-to-latex
-            :desc "to latex & open" "L" #'org-pandoc-export-to-latex-and-open
-            :desc "to latex pdf" "p" #'org-pandoc-export-to-latex-pdf
+            :desc "to latex"            "l" #'org-pandoc-export-to-latex
+            :desc "to latex & open"     "L" #'org-pandoc-export-to-latex-and-open
+            :desc "to latex pdf"        "p" #'org-pandoc-export-to-latex-pdf
             :desc "to latex pdf & open" "P" #'org-pandoc-export-to-latex-pdf-and-open))
         (:prefix ("o" . "src")
-          :desc "previous block" "p" #'org-babel-previous-src-block
-          :desc "next block" "n" #'org-babel-next-src-block
-          :desc "execute block" "e" #'org-babel-execute-src-block)))
+          :desc "previous block"        "p" #'org-babel-previous-src-block
+          :desc "next block"            "n" #'org-babel-next-src-block
+          :desc "execute block"         "e" #'org-babel-execute-src-block)))
 #+END_SRC
 
 ** keybindings
@@ -454,7 +453,7 @@ Keep everything out of your head! Has to be as convenient as possible. The defau
 Always start in insert mode when capturing.
 
 #+BEGIN_SRC emacs-lisp
-(after! org-mode
+(after! org
   (add-hook 'org-capture-mode-hook 'evil-insert-state))
 #+END_SRC
 
@@ -474,7 +473,7 @@ Templates for capturing. Also, ~%a~ expands to a link to the file (and position)
 I think =%i= is active region. Another nice feature is ~%^{Name}~ prompts for name. This probably makes sense for titles or something because I tend to put too much next to the asterics and too little text underneath..
 
 #+BEGIN_SRC emacs-lisp
-(after! org-mode
+(after! org
   (setq org-capture-templates
         '(("l" "todo with Link" entry
            (file+headline org-index-file "Inbox")
@@ -540,7 +539,7 @@ Different font sizes make much more sense.
 Also, in nord theme all headings seem to have the same color...
 
 #+BEGIN_SRC emacs-lisp
-(after! org-mode
+(after! org
   (custom-set-faces
    '(org-level-1 ((t (:inherit outline-1 :height 1.5))))
    '(org-level-2 ((t (:inherit outline-2 :foreground "#A3BE8C" :height 1.3))))
@@ -553,7 +552,7 @@ Also, in nord theme all headings seem to have the same color...
 By default orgmode displays ellipsis for collapsed bullets. Here's a custom symbol indicating collapsed bullets.
 
 #+BEGIN_SRC emacs-lisp
-(after! org-mode
+(after! org
   (setq org-ellipsis " ..."))
 #+END_SRC
 
@@ -562,7 +561,7 @@ By default orgmode displays ellipsis for collapsed bullets. Here's a custom symb
 Org can pretty display things like latex symbols. Indices are even nicer than in AucTex as the underscores are removed.
 
 #+BEGIN_SRC emacs-lisp
-(after! org-mode
+(after! org
   (setq org-pretty-entities 1))
 #+END_SRC
 
@@ -571,7 +570,7 @@ Org can pretty display things like latex symbols. Indices are even nicer than in
 I want pdfs to be opened in an external pdf viewer.
 
 #+BEGIN_SRC emacs-lisp
-(after! org-mode
+(after! org
   (add-hook 'org-mode-hook
             '(lambda ()
                (delete '("\\.pdf\\'" . default) org-file-apps)
@@ -628,7 +627,7 @@ Snippets are everything! still need to figure out how to incorporate snippets in
   (map! :i "C-e" 'yas-expand)
   (map!
    :leader "s n" 'yas-new-snippet              ;; Snippet New
-   :leader "s g" 'yas-visit-snippet-file)      ;; Snippet Go
+   :leader "s g" 'yas-visit-snippet-file))      ;; Snippet Go
 #+END_SRC
 
 see [[https://stackoverflow.com/questions/14066526/unset-tab-binding-for-yasnippet][stackoverflow]] for some helpful answers.
@@ -707,15 +706,15 @@ As the name suggests. According to [[https://fasciism.com/2017/01/16/spellchecki
 Default binding: ~z =~ for suggestions on how to correct the word.
 
 #+BEGIN_SRC emacs-lisp
-(use-package! flyspell
+(after! flyspell
   :config
-  (map! :leader "s c" 'flyspell-mode) ;; toggle spell checking
+  (map! :leader "s c" 'flyspell-mode)      ;; toggle spell checking
   (map! :n "z=" 'ispell-word)
 
   (setq ispell-program-name "hunspell"
         ispell-silently-savep t            ;; save persal dictionary without asking
         ispell-local-dictionary "en_US"
-        ispell-extra-args '("--sug-mode=ultra" "--lang=en_US")
+        ;; ispell-extra-args '("--sug-mode=ultra" "--lang=en_US")
         ispell-list-command "--list"
         ispell-local-dictionary-alist '(("en_US" "[[:alpha:]]" "[^[:alpha:]]" "['‘’]"
                                          t ; Many other characters
@@ -734,6 +733,7 @@ vim has a command for directly adding new words to dictionary. I want this.
 
 (map! :n "z g" 'ab/save-word)
 #+END_SRC
+
 * fuzzy matching
 
 The ~counsel~ package installs all three of them. ~Swiper~ is just the fancy search. ~Ivy~ does the narrowing. ~counsel~ adds options to ~Ivy~

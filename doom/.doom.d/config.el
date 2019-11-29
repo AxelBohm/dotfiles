@@ -160,21 +160,26 @@
 (map! :leader "SPC" #'ab/switch-to-previous-buffer)
 
 (after! org
-  (setq org-hide-emphasis-markers t
+  (setq org-hide-emphasis-markers nil
         org-return-follows-link t
-        ;; org-tags-column -80            ;; position of tags
+        fill-column nil                          ;; doom tries to hard wrap all the time which I don't like
+        org-highlight-latex-and-related '(latex) ;; highlight latex fragments
+        ;; org-tags-column -80                   ;; position of tags
         ;; org-tag-faces '(("major" :foreground "#81A1C1"))
         ;; org-tag-faces nil
         org-todo-keywords '((sequence "TODO(t)" "WAITING(w)" "|" "DONE(d)")
-                            (sequence "TODO(t)" "DIDN'T SUCCEED(s)" "|" "DOESN'T WORK(x)"  "TOO HARD(h)" "DONE(d)")))
-  org-todo-keyword-faces
-  '(("WAITING" :foreground "#8FBCBB" :weight normal))
+                            (sequence "TODO(t)" "DIDN'T SUCCEED(s)" "|" "DOESN'T WORK(x)"  "TOO HARD(h)" "DONE(d)"))
+        ;; org-todo-keyword-faces '(("WAITING" :foreground "#8FBCBB" :weight normal)))
+        org-todo-keyword-faces '(("WAITING" :foreground "#8FBCBB" :weight bold)))
+
+  (add-hook 'org-mode-hook 'turn-off-auto-fill)
+
   (map! :leader
         "o s l" 'org-store-link
         "o a" 'org-agenda
         "o c" 'org-capture))
 
-(after! org
+(after! org-mode
   (setq org-directory "~/org")
 
   (defun org-file-path (filename)
@@ -227,12 +232,13 @@
 
 (map! :leader "i" #'ab/open-index-file)
 
-(map! (:after org
+(map! :map org-mode-map
         :leader
         "g h" 'org-previous-visible-heading      ;; Go Heading of current section
         "g e" 'org-previous-visible-heading      ;; Go e (= colemak up)
         "g u" 'outline-up-heading                ;; Go Up in hierarchy
-        "g n" 'org-next-visible-heading))        ;; Go Next heading
+        "g n" 'org-next-visible-heading          ;; Go Next heading
+        )
 
 (map!
  (:after org
@@ -246,10 +252,9 @@
   (org-todo 'done)
   (org-archive-subtree))
 
-;; (define-key org-mode-map (kbd "C-c C-x C-s") 'ab/mark-done-and-archive)
-(map! :leader "o d" 'ab/mark-done-and-archive)
+(map! :map org-mode-map :leader "o d" 'ab/mark-done-and-archive)
 
-(after! org
+(after! org-mode
   (add-hook 'org-capture-mode-hook 'evil-insert-state))
 
 ;; (setq org-refile-targets '((nil :maxlevel . 6)
@@ -272,44 +277,47 @@
            (file+headline org-index-file "Inbox")
            "*** TODO %?\n"))))
 
-(defadvice org-switch-to-buffer-other-window
-    (after supress-window-splitting activate)
-  "Delete the extra window if we're in a capture frame"
-  (if (equal "capture" (frame-parameter nil 'name))
-      (delete-other-windows)))
+(after! org-mode
+  (defadvice org-switch-to-buffer-other-window
+      (after supress-window-splitting activate)
+    "Delete the extra window if we're in a capture frame"
+    (if (equal "capture" (frame-parameter nil 'name))
+        (delete-other-windows)))
 
-(defadvice org-capture-finalize
-    (after delete-capture-frame activate)
-  "Advise capture-finalize to close the frame"
-  (if (equal "capture" (frame-parameter nil 'name))
-      (delete-frame)))
+  (defadvice org-capture-finalize
+      (after delete-capture-frame activate)
+    "Advise capture-finalize to close the frame"
+    (if (equal "capture" (frame-parameter nil 'name))
+        (delete-frame)))
 
-(defun activate-capture-frame ()
-  "run org-capture in capture frame"
-  (select-frame-by-name "capture")
-  (switch-to-buffer (get-buffer-create "*scratch*"))
-  (org-capture))
+  (defun activate-capture-frame ()
+    "run org-capture in capture frame"
+    (select-frame-by-name "capture")
+    (switch-to-buffer (get-buffer-create "*scratch*"))
+    (org-capture)))
 
 (server-start)
 
-(custom-set-faces
- '(org-level-1 ((t (:inherit outline-1 :height 1.5))))
- '(org-level-2 ((t (:inherit outline-2 :foreground "#A3BE8C" :height 1.3))))
- '(org-level-3 ((t (:inherit outline-3 :foreground "#81A1C1" :height 1.2))))
- '(org-level-4 ((t (:inherit outline-4 :foreground "#8FBCBB" :height 1.0))))
- '(org-level-5 ((t (:inherit outline-5 :height 1.0))))
- )
+(after! org-mode
+  (custom-set-faces
+   '(org-level-1 ((t (:inherit outline-1 :height 1.5))))
+   '(org-level-2 ((t (:inherit outline-2 :foreground "#A3BE8C" :height 1.3))))
+   '(org-level-3 ((t (:inherit outline-3 :foreground "#81A1C1" :height 1.2))))
+   '(org-level-4 ((t (:inherit outline-4 :foreground "#8FBCBB" :height 1.0))))
+   '(org-level-5 ((t (:inherit outline-5 :height 1.0))))
+   ))
 
-(setq org-ellipsis " ...")
+(after! org-mode
+  (setq org-ellipsis " ..."))
 
-(setq org-pretty-entities 1)
+(after! org-mode
+  (setq org-pretty-entities 1))
 
-(add-hook 'org-mode-hook
-          '(lambda ()
-             (delete '("\\.pdf\\'" . default) org-file-apps)
-             (add-to-list 'org-file-apps '("\\.pdf\\'" . "zathura %s"))))
-
-;; (use-package outshine)
+(after! org-mode
+  (add-hook 'org-mode-hook
+            '(lambda ()
+               (delete '("\\.pdf\\'" . default) org-file-apps)
+               (add-to-list 'org-file-apps '("\\.pdf\\'" . "zathura %s")))))
 
 (use-package! org-alert
   :init
@@ -340,8 +348,9 @@
   :config
   (setq yas-snippet-dirs '("~/.doom.d/snippets"))
   (map! :i "C-e" 'yas-expand)
-  (map! :leader "s n" 'yas-new-snippet)              ;; Snippet New
-  (map! :leader "s g" 'yas-visit-snippet-file))      ;; Snippet Go
+  (map!
+   :leader "s n" 'yas-new-snippet              ;; Snippet New
+   :leader "s g" 'yas-visit-snippet-file)      ;; Snippet Go
 
 (use-package! flycheck
   :config
@@ -358,9 +367,7 @@
 
 (map! :leader "g g" 'magit-status)
 
-(use-package ess
-  :defer t
-  )
+;; (after! ess)
 ;; (use-package ess-smart-underscore
 ;;   :after ess)
 
@@ -442,3 +449,32 @@
   (sp-local-pair 'latex-mode "\\left\\langle" "\\right\\rangle" :trigger "\\l(")
 
   (smartparens-global-mode 1)) ;; I always want this
+
+;; (after! mu4e
+;;   (setq +mu4e-backend 'offlineimap)
+;;   ;; (set-email-account! "EduPolitech"
+;;   ;;   `((mu4e-sent-folder       . "/edu-politech/Sent Mail")
+;;   ;;     (mu4e-drafts-folder     . "/edu-politech/Drafts")
+;;   ;;     (mu4e-trash-folder      . "/edu-politech/Trash")
+;;   ;;     (mu4e-refile-folder     . "/edu-politech/All Mail")
+;;   ;;     (smtpmail-smtp-user     . ,(password-store-get "mail/edu-politech"))
+;;   ;;     (user-mail-address      . ,(password-store-get "mail/edu-politech"))
+;;   ;;     (mu4e-compose-signature . "---\nEdu Politech"))
+;;   ;;   t)
+;;   (set-email-account! "MainMail"
+;;     `((mu4e-sent-folder       . "~/.mail/uniwien/Sent")
+;;       (mu4e-drafts-folder     . "~/.mail/uniwien/Drafts")
+;;       (mu4e-trash-folder      . "~/.mail/uniwien/Trash")
+;;       (mu4e-refile-folder     . "/All Mail")
+;;       (smtpmail-smtp-user     . ,(auth-source-pass-get "user" "mail/mainmail"))
+;;       (user-mail-address      . ,(auth-source-pass-get "user" "mail/mainmail"))
+;;       (mu4e-compose-signature . "---\nMain Mail")))
+;;   (set-email-account! "Paradox"
+;;     `((mu4e-sent-folder       . "/paradox/Sent Mail")
+;;       (mu4e-drafts-folder     . "/paradox/Drafts")
+;;       (mu4e-trash-folder      . "/paradox/Trash")
+;;       (mu4e-refile-folder     . "/paradox/All Mail")
+;;       (smtpmail-smtp-user     . ,(auth-source-pass-get "user" "mail/paradox"))
+;;       (user-mail-address      . ,(auth-source-pass-get "user" "mail/paradox"))
+;;       (mu4e-compose-signature . "---\nParadox"))
+;;     t))

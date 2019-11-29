@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: Rcode
+# key: <r
+# --
+#+BEGIN_SRC R
+$0
+#+END_SRC

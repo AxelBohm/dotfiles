@@ -315,20 +315,20 @@ By default org-agenda only shows one week starting last monday. I want two weeks
 ** export
 
 #+BEGIN_SRC emacs-lisp
-(after! org
-  (setq org-export-use-babel t)
-  (map! :map org-mode-map
-        :leader
-        (:prefix "e"
-          (:prefix ("p" . "latex")
-            :desc "to latex"            "l" #'org-pandoc-export-to-latex
-            :desc "to latex & open"     "L" #'org-pandoc-export-to-latex-and-open
-            :desc "to latex pdf"        "p" #'org-pandoc-export-to-latex-pdf
-            :desc "to latex pdf & open" "P" #'org-pandoc-export-to-latex-pdf-and-open))
-        (:prefix ("o" . "src")
-          :desc "previous block"        "p" #'org-babel-previous-src-block
-          :desc "next block"            "n" #'org-babel-next-src-block
-          :desc "execute block"         "e" #'org-babel-execute-src-block)))
+;; (after! org
+;;   (setq org-export-use-babel t)
+;;   (map! :map org-mode-map
+;;         :leader
+;;         (:prefix "e"
+;;           (:prefix ("p" . "latex")
+;;             :desc "to latex"            "l" #'org-pandoc-export-to-latex
+;;             :desc "to latex & open"     "L" #'org-pandoc-export-to-latex-and-open
+;;             :desc "to latex pdf"        "p" #'org-pandoc-export-to-latex-pdf
+;;             :desc "to latex pdf & open" "P" #'org-pandoc-export-to-latex-pdf-and-open))
+;;         (:prefix ("o" . "src")
+;;           :desc "previous block"        "p" #'org-babel-previous-src-block
+;;           :desc "next block"            "n" #'org-babel-next-src-block
+;;           :desc "execute block"         "e" #'org-babel-execute-src-block)))
 #+END_SRC
 
 ** keybindings

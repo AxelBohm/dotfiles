@@ -323,15 +323,14 @@
   (org-alert-enable))
 
 (after! latex
-  ;; (add-to-list 'TeX-command-list '("Latexmk" "latexmk -f -pdflatex='pdflatex -file-line-error -synctex=1' -pdf %t" TeX-run-TeX nil))
-  (add-to-list 'TeX-view-program-selection '((output-pdf "zathura")))
   (setq tex-fontify-script t
         TeX-save-query nil
         ;; don't show ^ or _ for scripts
-        font-latex-fontify-script 'invisible
+        font-latex-fontify-script 'invisible)
+  ;; (add-to-list 'TeX-command-list '("LatexMk" "latexmk -pdflatex='pdflatex -file-line-error -synctex=1' -pdf %t" TeX-run-TeX nil))
 
-        ;; use Zathura as pdf viewer
-        TeX-view-program-selection '((output-pdf "zathura"))
+  ;; use Zathura as pdf viewer
+  (setq TeX-view-program-selection '((output-pdf "Zathura"))
         TeX-source-correlate-start-server t))
 
 (map! :map LaTeX-mode-map

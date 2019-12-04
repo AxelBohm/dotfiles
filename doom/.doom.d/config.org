@@ -749,13 +749,13 @@ Smart treatment of parenthesis, like auto closing or auto deletion of the matchi
   :config
   (sp-local-pair 'org-mode "$" "$")
   (sp-local-pair 'latex-mode "$" "$")   ;; omg, I want this so badly
-  (sp-local-pair 'latex-mode "\\langle" "\\rangle" :trigger "\\l(")
-  (sp-local-pair 'latex-mode "\\lVert" "\\rVert" :trigger "\\l(")
+  (sp-local-pair 'latex-mode "\\langle" "\\rangle" :trigger "\\lan")
+  (sp-local-pair 'latex-mode "\\lVert" "\\rVert" :trigger "\\lVe")
 
   (sp-local-pair 'latex-mode "\\left(" "\\right)" :trigger "\\l(")
-  (sp-local-pair 'latex-mode "\\left[" "\\right]" :trigger "\\l(")
-  (sp-local-pair 'latex-mode "\\left\\{" "\\right\\}" :trigger "\\l(")
-  (sp-local-pair 'latex-mode "\\left\\langle" "\\right\\rangle" :trigger "\\l(")
+  (sp-local-pair 'latex-mode "\\left[" "\\right]" :trigger "\\l[")
+  (sp-local-pair 'latex-mode "\\left\\{" "\\right\\}" :trigger "\\l{")
+  (sp-local-pair 'latex-mode "\\left\\langle" "\\right\\rangle" :trigger "\\left\\la(")
 
   (smartparens-global-mode 1)) ;; I always want this
 #+END_SRC

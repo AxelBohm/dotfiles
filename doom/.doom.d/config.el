@@ -323,14 +323,15 @@
   (org-alert-enable))
 
 (after! latex
+  ;; (add-to-list 'TeX-command-list '("Latexmk" "latexmk -f -pdflatex='pdflatex -file-line-error -synctex=1' -pdf %t" TeX-run-TeX nil))
+  (add-to-list 'TeX-view-program-selection '((output-pdf "zathura")))
   (setq tex-fontify-script t
         TeX-save-query nil
         ;; don't show ^ or _ for scripts
-        font-latex-fontify-script 'invisible)
-  ;; (add-to-list 'TeX-command-list '("LatexMk" "latexmk -pdflatex='pdflatex -file-line-error -synctex=1' -pdf %t" TeX-run-TeX nil))
+        font-latex-fontify-script 'invisible
 
-  ;; use Zathura as pdf viewer
-  (setq TeX-view-program-selection '((output-pdf "Zathura"))
+        ;; use Zathura as pdf viewer
+        TeX-view-program-selection '((output-pdf "zathura"))
         TeX-source-correlate-start-server t))
 
 (map! :map LaTeX-mode-map
@@ -435,13 +436,13 @@
   :config
   (sp-local-pair 'org-mode "$" "$")
   (sp-local-pair 'latex-mode "$" "$")   ;; omg, I want this so badly
-  (sp-local-pair 'latex-mode "\\langle" "\\rangle" :trigger "\\l(")
-  (sp-local-pair 'latex-mode "\\lVert" "\\rVert" :trigger "\\l(")
+  (sp-local-pair 'latex-mode "\\langle" "\\rangle" :trigger "\\lan")
+  (sp-local-pair 'latex-mode "\\lVert" "\\rVert" :trigger "\\lVe")
 
   (sp-local-pair 'latex-mode "\\left(" "\\right)" :trigger "\\l(")
-  (sp-local-pair 'latex-mode "\\left[" "\\right]" :trigger "\\l(")
-  (sp-local-pair 'latex-mode "\\left\\{" "\\right\\}" :trigger "\\l(")
-  (sp-local-pair 'latex-mode "\\left\\langle" "\\right\\rangle" :trigger "\\l(")
+  (sp-local-pair 'latex-mode "\\left[" "\\right]" :trigger "\\l[")
+  (sp-local-pair 'latex-mode "\\left\\{" "\\right\\}" :trigger "\\l{")
+  (sp-local-pair 'latex-mode "\\left\\langle" "\\right\\rangle" :trigger "\\left\\la(")
 
   (smartparens-global-mode 1)) ;; I always want this
 

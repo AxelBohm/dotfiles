@@ -453,6 +453,8 @@ When refiling I want to be able to refile also to a subheading.
 ;; (setq org-refile-use-outline-path 'file)
 #+END_SRC
 
+This seems to work in doom out of the box.
+
 *** templates
 
 Templates for capturing. Also, ~%a~ expands to a link to the file (and position) from which =org-capture= was called.

@@ -363,8 +363,17 @@ Use vim instead of arrows.
 #+BEGIN_SRC emacs-lisp
 (map! :map org-mode-map
       "M-e" #'org-metaup
+      "M-i" #'org-metaright
       "M-n" #'org-metadown)
 #+END_SRC
+
+Use ~o~ instead of ~RET~ for new headings/list-items.
+#+BEGIN_SRC emacs-lisp
+(map! :map org-mode-map
+      "M-o" #'org/insert-item-below
+      "M-S-o" #'org/insert-item-above)
+#+END_SRC
+
 
 *** index file
 

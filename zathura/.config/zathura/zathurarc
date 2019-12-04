@@ -98,5 +98,5 @@ map i scroll right
 map k search forward
 # map K search backward
 
-abort-clear-search false
-search-hadjust false
+set abort-clear-search false
+set search-hadjust false

@@ -181,20 +181,20 @@
   (setq org-agenda-start-on-weekday nil)
   (setq org-agenda-start-day "-0d"))
 
-(after! org
-  (setq org-export-use-babel t)
-  (map! :map org-mode-map
-        :leader
-        (:prefix "e"
-          (:prefix ("p" . "latex")
-            :desc "to latex"            "l" #'org-pandoc-export-to-latex
-            :desc "to latex & open"     "L" #'org-pandoc-export-to-latex-and-open
-            :desc "to latex pdf"        "p" #'org-pandoc-export-to-latex-pdf
-            :desc "to latex pdf & open" "P" #'org-pandoc-export-to-latex-pdf-and-open))
-        (:prefix ("o" . "src")
-          :desc "previous block"        "p" #'org-babel-previous-src-block
-          :desc "next block"            "n" #'org-babel-next-src-block
-          :desc "execute block"         "e" #'org-babel-execute-src-block)))
+;; (after! org
+;;   (setq org-export-use-babel t)
+;;   (map! :map org-mode-map
+;;         :leader
+;;         (:prefix "e"
+;;           (:prefix ("p" . "latex")
+;;             :desc "to latex"            "l" #'org-pandoc-export-to-latex
+;;             :desc "to latex & open"     "L" #'org-pandoc-export-to-latex-and-open
+;;             :desc "to latex pdf"        "p" #'org-pandoc-export-to-latex-pdf
+;;             :desc "to latex pdf & open" "P" #'org-pandoc-export-to-latex-pdf-and-open))
+;;         (:prefix ("o" . "src")
+;;           :desc "previous block"        "p" #'org-babel-previous-src-block
+;;           :desc "next block"            "n" #'org-babel-next-src-block
+;;           :desc "execute block"         "e" #'org-babel-execute-src-block)))
 
 (map! :map org-mode-map
       :leader
@@ -214,7 +214,12 @@
 
 (map! :map org-mode-map
       "M-e" #'org-metaup
+      "M-i" #'org-metaright
       "M-n" #'org-metadown)
+
+(map! :map org-mode-map
+      "M-o" #'org/insert-item-below
+      "M-S-o" #'org/insert-item-above)
 
 (defun ab/open-index-file ()
   "Open the master org TODO list."

@@ -64,7 +64,7 @@ Emacs ships default with =prettify-symbols mode=.
 Most of the time I only have two windows open. Switching between should be easy.
 
 #+BEGIN_SRC emacs-lisp
-(map! "M-o" 'other-window)
+(map! "M-w" 'other-window)
 #+END_SRC
 ** line truncation
 

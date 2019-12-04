@@ -17,7 +17,7 @@
 
 (global-prettify-symbols-mode 1)
 
-(map! "M-o" 'other-window)
+(map! "M-w" 'other-window)
 
 (setq truncate-lines nil)
 

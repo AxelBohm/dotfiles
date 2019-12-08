@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+# workaround for https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=851276&archived=False&mbox=no as explained in https://github.com/flycheck/flycheck/issues/1214
+
+set -o nounset -o errexit
+
+# which --all not always supported
+bin_filename="$(which -a chktex | grep -F -v "$0" | head -n 1)"
+
+! "${bin_filename}" "$@" | command grep .

@@ -1,21 +1,59 @@
 #+TITLE: config
 
 * general config
+** ui
+*** theme
 
-** paren-mode
+#+BEGIN_SRC emacs-lisp
+(setq doom-theme 'doom-nord)
+#+END_SRC
+
+*** paren-mode
 Highlight matching parentheses and such in every mode.
 
 #+BEGIN_SRC emacs-lisp
 (show-paren-mode 1)
 #+END_SRC
-
-** line number
+*** line number
 
 Show line numbers to the left for better jumping.
 (consider the ace jump package which shows a letter for every line for more efficient jumping)
 
 #+BEGIN_SRC emacs-lisp
 (setq display-line-numbers-type 'relative)
+#+END_SRC
+
+*** line truncation
+
+stupid doom tries to hard wrap all the time which I don't like
+
+#+BEGIN_SRC emacs-lisp
+(setq truncate-lines nil)
+#+END_SRC
+
+*** pretty symbols
+
+Emacs ships default with =prettify-symbols mode=.
+
+#+BEGIN_SRC emacs-lisp
+(global-prettify-symbols-mode 1)
+#+END_SRC
+doesn't seem to do anything in doom
+*** hl-line
+
+Highlighting the current line is all nice and stuff but it looks off in org mode due to different sizes of headings.
+Similarly in LaTeX due to sub/super -scripts.
+
+#+BEGIN_SRC emacs-lisp
+(hl-line-mode -1)
+#+END_SRC
+
+doesn't work...
+*** opacity
+make emacs opaque (when running compton).
+#+BEGIN_SRC emacs-lisp
+(set-frame-parameter (selected-frame) 'alpha '(80 . 80))
+(add-to-list 'default-frame-alist '(alpha . (80 . 80)))
 #+END_SRC
 
 ** email
@@ -34,6 +72,13 @@ This is copied from [[https://github.com/NicolasPetton/emacs.d/blob/3945786c31a1
 ;; Used by yasnippet
 #+END_SRC
 
+** dashboard
+
+Show agenda for upcoming week and not just today.
+
+#+BEGIN_SRC emacs-lisp
+(setq show-week-agenda-p t)
+#+END_SRC
 ** GTD
 
 Keep everything out of your head, aka building a second brain.
@@ -45,20 +90,6 @@ Keep everything out of your head, aka building a second brain.
   (find-file "~/org/Reference.org"))
 #+END_SRC
 
-** dashboard
-
-Show agenda for upcoming week and not just today.
-
-#+BEGIN_SRC emacs-lisp
-(setq show-week-agenda-p t)
-#+END_SRC
-** pretty symbols
-
-Emacs ships default with =prettify-symbols mode=.
-
-#+BEGIN_SRC emacs-lisp
-(global-prettify-symbols-mode 1)
-#+END_SRC
 ** general nifty mappings
 
 Most of the time I only have two windows open. Switching between should be easy.
@@ -66,14 +97,6 @@ Most of the time I only have two windows open. Switching between should be easy.
 #+BEGIN_SRC emacs-lisp
 (map! "M-w" 'other-window)
 #+END_SRC
-** line truncation
-
-stupid doom tries to hard wrap all the time which I don't like
-
-#+BEGIN_SRC emacs-lisp
-(setq truncate-lines nil)
-#+END_SRC
-
 * config file
 
 ** quick access

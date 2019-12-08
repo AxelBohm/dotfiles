@@ -188,8 +188,8 @@ Evil for colemak keyboard layout. Adapted from the [[https://github.com/wbolster
       "J" 'evil-forward-WORD-end
       "gj" 'evil-backward-word-end
       "gJ" 'evil-backward-WORD-end
-      "k" 'evil-search-next
-      "K" 'evil-search-previous
+      "k" 'evil-ex-search-next       ;; doom needs an "ex"
+      "K" 'evil-ex-search-previous   ;; doom needs an "ex"
       "gk" 'evil-next-match
       "gK" 'evil-previous-match
       "zi" 'evil-scroll-column-right

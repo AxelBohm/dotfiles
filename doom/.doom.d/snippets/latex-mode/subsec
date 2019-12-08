@@ -2,5 +2,5 @@
 # name: subsec
 # key: sub
 # --
-\subsection{${0:name}}
+\subsection{${0:name}}%
 \label{sub:$0}

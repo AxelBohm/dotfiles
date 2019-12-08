@@ -229,8 +229,12 @@ Evil for colemak keyboard layout. Adapted from the [[https://github.com/wbolster
   (lambda () (evil-colemak-mode t))
   "Global minor mode with evil-mode enhancements for the Colemak keyboard layout.")
 
-  (global-evil-colemak-mode)
+(after! evil
+  (global-evil-colemak-mode))
 #+END_SRC
+
+#+RESULTS:
+: t
 
 Switching windows also relies on the `hjkl` motions. So make it colemak friendly.
 
@@ -264,7 +268,7 @@ Switch back and forth between the two MRU buffers.
 (map! :leader "SPC" #'ab/switch-to-previous-buffer)
 #+END_SRC
 
-* org mode                                                               :major:
+* org mode
 
 #+begin_center
 =Your life in plain text=
@@ -274,10 +278,11 @@ Load orgmode plus some standard keybindings.
 
 #+BEGIN_SRC emacs-lisp
 (after! org
-  (add-hook 'org-mode-hook 'turn-off-auto-fill)
+  ;; (add-hook 'org-mode-hook 'turn-off-auto-fill)
   (setq org-hide-emphasis-markers nil
         org-return-follows-link t
-        ;; fill-column nil                          ;; doom tries to hard wrap all the time which I don't like
+        ;; doom tries to hard wrap all the time which I don't like
+        ;; fill-column nil
         ;; org-highlight-latex-and-related '(latex) ;; highlight latex fragments
         ;; org-tags-column -80                   ;; position of tags
         ;; org-tag-faces '(("major" :foreground "#81A1C1"))
@@ -393,10 +398,9 @@ Use vim instead of arrows.
 Use ~o~ instead of ~RET~ for new headings/list-items.
 #+BEGIN_SRC emacs-lisp
 (map! :map org-mode-map
-      "M-o" #'org/insert-item-below
-      "M-S-o" #'org/insert-item-above)
+      "M-o" '+org/insert-item-below
+      "M-S-o" '+org/insert-item-above)
 #+END_SRC
-
 
 *** index file
 
@@ -480,8 +484,11 @@ This seems to work in doom out of the box.
 
 *** templates
 
-Templates for capturing. Also, ~%a~ expands to a link to the file (and position) from which =org-capture= was called.
-I think =%i= is active region. Another nice feature is ~%^{Name}~ prompts for name. This probably makes sense for titles or something because I tend to put too much next to the asterics and too little text underneath..
+Templates for capturing. Also, ~%a~ expands to a link to the file (and position)
+from which =org-capture= was called. I think =%i= is active region. Another nice
+feature is ~%^{Name}~ prompts for name. This probably makes sense for titles or
+something because I tend to put too much next to the asterics and too little
+text underneath..
 
 #+BEGIN_SRC emacs-lisp
 (after! org
@@ -600,7 +607,7 @@ I want notifications for scheduled headlines.
   :config
   (org-alert-enable))
 #+END_SRC
-* LaTeX                                                                  :major:
+* LaTeX
 ** general
 
 #+BEGIN_SRC emacs-lisp
@@ -645,11 +652,11 @@ see [[https://stackoverflow.com/questions/14066526/unset-tab-binding-for-yasnipp
 * syntax checking
 
 #+BEGIN_SRC emacs-lisp
-(use-package! flycheck
-  :config
-  (global-flycheck-mode)
-  ;; (flycheck-display-errors-delay .3)
-  (setq-default flycheck-disabled-checkers '(tex-chktex)))
+;; (use-package! flycheck
+;;   :config
+;;   (global-flycheck-mode)
+;;   ;; (flycheck-display-errors-delay .3)
+;;   (setq-default flycheck-disabled-checkers '(tex-chktex)))
 #+END_SRC
 
 There is a bug in ~chk-tex~, see [[https://github.com/flycheck/flycheck/issues/1214][issue]]. They also describe possible workarounds.
@@ -747,7 +754,8 @@ vim has a command for directly adding new words to dictionary. I want this.
 
 * fuzzy matching
 
-The ~counsel~ package installs all three of them. ~Swiper~ is just the fancy search. ~Ivy~ does the narrowing. ~counsel~ adds options to ~Ivy~
+The ~counsel~ package installs all three of them. ~Swiper~ is just the fancy
+search. ~Ivy~ does the narrowing. ~counsel~ adds options to ~Ivy~
 
 #+BEGIN_SRC emacs-lisp
 (use-package! counsel

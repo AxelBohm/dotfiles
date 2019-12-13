@@ -274,23 +274,19 @@ Switch back and forth between the two MRU buffers.
 =Your life in plain text=
 #+end_center
 
+** config
+
 Load orgmode plus some standard keybindings.
 
 #+BEGIN_SRC emacs-lisp
 (after! org
-  ;; (add-hook 'org-mode-hook 'turn-off-auto-fill)
   (setq org-hide-emphasis-markers nil
         org-return-follows-link t
-        ;; doom tries to hard wrap all the time which I don't like
-        ;; fill-column nil
-        ;; org-highlight-latex-and-related '(latex) ;; highlight latex fragments
-        ;; org-tags-column -80                   ;; position of tags
-        ;; org-tag-faces '(("major" :foreground "#81A1C1"))
-        ;; org-tag-faces nil
+        org-tags-column 0                   ;; position of tags
         org-todo-keywords '((sequence "TODO(t)" "WAITING(w)" "|" "DONE(d)")
-                            (sequence "TODO(t)" "DIDN'T SUCCEED(s)" "|" "DOESN'T WORK(x)"  "TOO HARD(h)" "DONE(d)"))
+                            (sequence "TODO(t)" "DIDN'T SUCCEED(s)" "|" "DOESN'T WORK(x)"
+                                      "TOO HARD(h)" "DONE(d)"))
         org-todo-keyword-faces '(("WAITING" :foreground "#8FBCBB" :weight bold))))
-
 
 (map! :leader
       "o s l" 'org-store-link
@@ -298,9 +294,17 @@ Load orgmode plus some standard keybindings.
       "o c" 'org-capture)
 #+END_SRC
 
-~org-return-follow-links~ is supposed to give ~RET~ some functionality in evil mode (which it usually doesn't have). However, [[*make RET better][see this section]] for giving the enter key even more functionality.
+Line numbers in org mode are useless
 
-** config
+#+BEGIN_SRC emacs-lisp
+(defun ab/disable-line-numbers ()
+  (interactive)
+  (display-line-numbers-mode -1))
+
+(add-hook 'org-mode-hook #'ab/disable-line-numbers)
+#+END_SRC
+
+** structure and files
 
 Tell emacs where I store my org stuff.
 

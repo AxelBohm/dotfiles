@@ -105,6 +105,8 @@ fi
 ################################################################
 if [[ `whoami` = "boehm" ]]; then
     export PATH=~/miniconda3/bin:$PATH
+    source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
+    source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 fi
 
 # colemak remaps

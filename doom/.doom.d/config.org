@@ -7,6 +7,11 @@
 #+BEGIN_SRC emacs-lisp
 (setq doom-theme 'doom-nord)
 #+END_SRC
+*** curser theme
+
+#+BEGIN_SRC emacs-lisp
+(set-cursor-color "#ffb6c1")
+#+END_SRC
 
 *** paren-mode
 Highlight matching parentheses and such in every mode.
@@ -231,10 +236,10 @@ Evil for colemak keyboard layout. Adapted from the [[https://github.com/wbolster
 
 (after! evil
   (global-evil-colemak-mode))
-#+END_SRC
 
-#+RESULTS:
-: t
+;; (map! "I" 'evil-org-end-of-line)
+;; (map! "H" 'evil-first-non-blank)
+#+END_SRC
 
 Switching windows also relies on the `hjkl` motions. So make it colemak friendly.
 
@@ -369,11 +374,13 @@ By default org-agenda only shows one week starting last monday. I want two weeks
 Org structure editing made easy/mnemonic with leader.
 
 #+BEGIN_SRC emacs-lisp
-(map! :map org-mode-map
-      :leader
-      "o t" 'org-toggle-heading      ;; toogle wheter heading or not
-      "o w" 'widen                   ;; show everythig
-      "o n" 'org-narrow-to-subtree)  ;; show only what's within heading
+(after! org
+  (map! :map org-mode-map
+        :leader
+        "o t" 'org-toggle-heading      ;; toogle wheter heading or not
+        "o w" 'widen                   ;; show everythig
+        "o n" 'org-narrow-to-subtree)  ;; show only what's within heading
+)
 #+END_SRC
 
 ~org-narrow-subtree~ shows only a single heading (the heading of the current subtree). I need more context!! I want the to see which hierarchy this heading belongs to. taken from [[https://emacs.stackexchange.com/questions/29304/how-to-show-all-contents-of-current-subtree-and-fold-all-the-other-subtrees][stackexchange]].
@@ -463,7 +470,7 @@ So let's have a command that does both.
 
 ** org capture
 
-Keep everything out of your head! Has to be as convenient as possible. The default keybinding is ~C-c c~.
+Keep everything out of your head! Has to be as convenient as possible.
 
 *** config
 
@@ -564,9 +571,9 @@ Also, in nord theme all headings seem to have the same color...
 (after! org
   (custom-set-faces
    '(org-level-1 ((t (:inherit outline-1 :height 1.5))))
-   '(org-level-2 ((t (:inherit outline-2 :foreground "#A3BE8C" :height 1.3))))
-   '(org-level-3 ((t (:inherit outline-3 :foreground "#81A1C1" :height 1.2))))
-   '(org-level-4 ((t (:inherit outline-4 :foreground "#8FBCBB" :height 1.0))))
+   '(org-level-2 ((t (:inherit outline-2 :height 1.3))))
+   '(org-level-3 ((t (:inherit outline-3 :height 1.2))))
+   '(org-level-4 ((t (:inherit outline-4 :height 1.0))))
    '(org-level-5 ((t (:inherit outline-5 :height 1.0))))
    ))
 #+END_SRC
@@ -606,6 +613,7 @@ I want notifications for scheduled headlines.
 #+BEGIN_SRC emacs-lisp
 (use-package! org-alert
   :init
+  ;; use dunst for system wide notifications
   (setq alert-default-style 'libnotify)
   (setq org-alert-interval 3600)
   :config
@@ -691,8 +699,7 @@ Fixing would be nice too, but apparently this is open, cf. [[https://github.com/
 I used to think =company= is slow, but I just had to turn the ~idle-delay~ down...
 
 #+BEGIN_SRC emacs-lisp
-(use-package! company
-  :bind (("C-n" . company-complete))
+(after! company
   :init
   (setq company-dabbrev-ignore-case t
         company-idle-delay 0.1
@@ -829,4 +836,29 @@ finally I found a config using offlineimap.
 ;;       (user-mail-address      . ,(auth-source-pass-get "user" "mail/paradox"))
 ;;       (mu4e-compose-signature . "---\nParadox"))
 ;;     t))
+
+;; (add-to-list 'load-path "/usr/share/emacs/site-lisp")
+
+(after! mu4e
+  (setq +mu4e-backend 'offlineimap)
+  (setq mu4e-maildir "~/.mail")
+
+;; Each path is relative to `+mu4e-mu4e-mail-path', which is ~/.mail by default
+(set-email-account! "uniwien"
+  '((mu4e-sent-folder       . "/uniwien/INBOX.Sent/")
+    (mu4e-drafts-folder     . "/uniwien/INBOX.Drafts")
+    (mu4e-trash-folder      . "/uniwien/INBOX.Trash")
+    (mu4e-refile-folder     . "/uniwien/INBOX.Archive")
+    (smtpmail-smtp-user     . "axel.boehm@univie.ac.at")
+    (user-mail-address      . "axel.boehm@univie.ac.at")
+    (mu4e-compose-signature . "---\nAxel Boehm"))
+  t)
+
+  ;; use mu4e for e-mail in emacs
+  (setq mail-user-agent 'mu4e-user-agent)
+  ;; (Setq mu4e-sent-messages-behavior 'delete)
+
+  ;; allow for updating mail using 'U' in the main view:
+  ;; (setq mu4e-get-mail-command "offlineimap") )
+  )
 #+END_SRC

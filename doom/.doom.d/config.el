@@ -1,6 +1,19 @@
+(setq doom-theme 'doom-nord)
+
+(set-cursor-color "#ffb6c1")
+
 (show-paren-mode 1)
 
 (setq display-line-numbers-type 'relative)
+
+(setq truncate-lines nil)
+
+(global-prettify-symbols-mode 1)
+
+(hl-line-mode -1)
+
+(set-frame-parameter (selected-frame) 'alpha '(80 . 80))
+(add-to-list 'default-frame-alist '(alpha . (80 . 80)))
 
 (add-to-list 'auto-mode-alist '("/mutt" . mail-mode))
 (add-to-list 'auto-mode-alist '("/neomutt" . mail-mode))
@@ -8,18 +21,14 @@
 ;; Function to return first name of email recipient
 ;; Used by yasnippet
 
+(setq show-week-agenda-p t)
+
 (defun ab/visit-references ()
   "go to my references file"
   (interactive)
   (find-file "~/org/Reference.org"))
 
-(setq show-week-agenda-p t)
-
-(global-prettify-symbols-mode 1)
-
 (map! "M-w" 'other-window)
-
-(setq truncate-lines nil)
 
 (defun ab/visit-emacs-config ()
   "go to emacs config file"
@@ -80,8 +89,8 @@
       "J" 'evil-forward-WORD-end
       "gj" 'evil-backward-word-end
       "gJ" 'evil-backward-WORD-end
-      "k" 'evil-search-next
-      "K" 'evil-search-previous
+      "k" 'evil-ex-search-next       ;; doom needs an "ex"
+      "K" 'evil-ex-search-previous   ;; doom needs an "ex"
       "gk" 'evil-next-match
       "gK" 'evil-previous-match
       "zi" 'evil-scroll-column-right
@@ -121,7 +130,11 @@
   (lambda () (evil-colemak-mode t))
   "Global minor mode with evil-mode enhancements for the Colemak keyboard layout.")
 
-  (global-evil-colemak-mode)
+(after! evil
+  (global-evil-colemak-mode))
+
+;; (map! "I" 'evil-org-end-of-line)
+;; (map! "H" 'evil-first-non-blank)
 
 (with-eval-after-load 'evil-maps
   (define-key evil-window-map "n" 'evil-window-down)
@@ -140,23 +153,24 @@
 (map! :leader "SPC" #'ab/switch-to-previous-buffer)
 
 (after! org
-  (add-hook 'org-mode-hook 'turn-off-auto-fill)
   (setq org-hide-emphasis-markers nil
         org-return-follows-link t
-        ;; fill-column nil                          ;; doom tries to hard wrap all the time which I don't like
-        ;; org-highlight-latex-and-related '(latex) ;; highlight latex fragments
-        ;; org-tags-column -80                   ;; position of tags
-        ;; org-tag-faces '(("major" :foreground "#81A1C1"))
-        ;; org-tag-faces nil
+        org-tags-column 0                   ;; position of tags
         org-todo-keywords '((sequence "TODO(t)" "WAITING(w)" "|" "DONE(d)")
-                            (sequence "TODO(t)" "DIDN'T SUCCEED(s)" "|" "DOESN'T WORK(x)"  "TOO HARD(h)" "DONE(d)"))
+                            (sequence "TODO(t)" "DIDN'T SUCCEED(s)" "|" "DOESN'T WORK(x)"
+                                      "TOO HARD(h)" "DONE(d)"))
         org-todo-keyword-faces '(("WAITING" :foreground "#8FBCBB" :weight bold))))
-
 
 (map! :leader
       "o s l" 'org-store-link
       "o a" 'org-agenda
       "o c" 'org-capture)
+
+(defun ab/disable-line-numbers ()
+  (interactive)
+  (display-line-numbers-mode -1))
+
+(add-hook 'org-mode-hook #'ab/disable-line-numbers)
 
 (after! org
   (setq org-directory "~/org")
@@ -196,11 +210,13 @@
 ;;           :desc "next block"            "n" #'org-babel-next-src-block
 ;;           :desc "execute block"         "e" #'org-babel-execute-src-block)))
 
-(map! :map org-mode-map
-      :leader
-      "o t" 'org-toggle-heading      ;; toogle wheter heading or not
-      "o w" 'widen                   ;; show everythig
-      "o n" 'org-narrow-to-subtree)  ;; show only what's within heading
+(after! org
+  (map! :map org-mode-map
+        :leader
+        "o t" 'org-toggle-heading      ;; toogle wheter heading or not
+        "o w" 'widen                   ;; show everythig
+        "o n" 'org-narrow-to-subtree)  ;; show only what's within heading
+)
 
 (defun ab/org-show-just-me (&rest _)
   "Fold all other trees, then show entire current subtree."
@@ -218,8 +234,8 @@
       "M-n" #'org-metadown)
 
 (map! :map org-mode-map
-      "M-o" #'org/insert-item-below
-      "M-S-o" #'org/insert-item-above)
+      "M-o" '+org/insert-item-below
+      "M-S-o" '+org/insert-item-above)
 
 (defun ab/open-index-file ()
   "Open the master org TODO list."
@@ -297,9 +313,9 @@
 (after! org
   (custom-set-faces
    '(org-level-1 ((t (:inherit outline-1 :height 1.5))))
-   '(org-level-2 ((t (:inherit outline-2 :foreground "#A3BE8C" :height 1.3))))
-   '(org-level-3 ((t (:inherit outline-3 :foreground "#81A1C1" :height 1.2))))
-   '(org-level-4 ((t (:inherit outline-4 :foreground "#8FBCBB" :height 1.0))))
+   '(org-level-2 ((t (:inherit outline-2 :height 1.3))))
+   '(org-level-3 ((t (:inherit outline-3 :height 1.2))))
+   '(org-level-4 ((t (:inherit outline-4 :height 1.0))))
    '(org-level-5 ((t (:inherit outline-5 :height 1.0))))
    ))
 
@@ -317,6 +333,7 @@
 
 (use-package! org-alert
   :init
+  ;; use dunst for system wide notifications
   (setq alert-default-style 'libnotify)
   (setq org-alert-interval 3600)
   :config
@@ -348,11 +365,11 @@
    :leader "s n" 'yas-new-snippet              ;; Snippet New
    :leader "s g" 'yas-visit-snippet-file))      ;; Snippet Go
 
-(use-package! flycheck
-  :config
-  (global-flycheck-mode)
-  ;; (flycheck-display-errors-delay .3)
-  (setq-default flycheck-disabled-checkers '(tex-chktex)))
+;; (use-package! flycheck
+;;   :config
+;;   (global-flycheck-mode)
+;;   ;; (flycheck-display-errors-delay .3)
+;;   (setq-default flycheck-disabled-checkers '(tex-chktex)))
 
 (after! magit
   :config
@@ -366,8 +383,7 @@
 ;; (use-package ess-smart-underscore
 ;;   :after ess)
 
-(use-package! company
-  :bind (("C-n" . company-complete))
+(after! company
   :init
   (setq company-dabbrev-ignore-case t
         company-idle-delay 0.1
@@ -473,3 +489,28 @@
 ;;       (user-mail-address      . ,(auth-source-pass-get "user" "mail/paradox"))
 ;;       (mu4e-compose-signature . "---\nParadox"))
 ;;     t))
+
+;; (add-to-list 'load-path "/usr/share/emacs/site-lisp")
+
+(after! mu4e
+  (setq +mu4e-backend 'offlineimap)
+  (setq mu4e-maildir "~/.mail")
+
+;; Each path is relative to `+mu4e-mu4e-mail-path', which is ~/.mail by default
+(set-email-account! "uniwien"
+  '((mu4e-sent-folder       . "/uniwien/INBOX.Sent/")
+    (mu4e-drafts-folder     . "/uniwien/INBOX.Drafts")
+    (mu4e-trash-folder      . "/uniwien/INBOX.Trash")
+    (mu4e-refile-folder     . "/uniwien/INBOX.Archive")
+    (smtpmail-smtp-user     . "axel.boehm@univie.ac.at")
+    (user-mail-address      . "axel.boehm@univie.ac.at")
+    (mu4e-compose-signature . "---\nAxel Boehm"))
+  t)
+
+  ;; use mu4e for e-mail in emacs
+  (setq mail-user-agent 'mu4e-user-agent)
+  ;; (Setq mu4e-sent-messages-behavior 'delete)
+
+  ;; allow for updating mail using 'U' in the main view:
+  ;; (setq mu4e-get-mail-command "offlineimap") )
+  )

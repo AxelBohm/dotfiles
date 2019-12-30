@@ -95,6 +95,9 @@ if [[ `uname -n` = "void" ]]; then
 elif [[ `uname -n` = "raspberrypi" ]]; then
     source /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh
     source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+elif [[ `uname -n` = "login.mat.univie.ac.at" ]]; then
+    source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
+    source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 else
     source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.plugin.zsh
     source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.plugin.zsh
@@ -105,8 +108,6 @@ fi
 ################################################################
 if [[ `whoami` = "boehm" ]]; then
     export PATH=~/miniconda3/bin:$PATH
-    source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
-    source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 fi
 
 # colemak remaps

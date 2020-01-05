@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: visible
+# key: vis
+# --
+\visible<${1:onwards}->{%
+  $0
+}

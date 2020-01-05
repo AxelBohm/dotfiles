@@ -3,6 +3,6 @@
 # key: ali
 # --
 \begin{align}
-\label{$0}
-$1
+  \label{$0}
+  $1
 \end{align}

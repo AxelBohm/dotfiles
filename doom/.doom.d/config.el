@@ -10,7 +10,7 @@
 
 (global-prettify-symbols-mode 1)
 
-(hl-line-mode -1)
+(remove-hook 'text-mode-hook #'hl-line-mode)
 
 (set-frame-parameter (selected-frame) 'alpha '(80 . 80))
 (add-to-list 'default-frame-alist '(alpha . (80 . 80)))
@@ -85,6 +85,7 @@
       "ge" 'evil-previous-visual-line
       "E" 'evil-lookup
       "i" 'evil-forward-char
+      "I" 'evil-end-of-line
       "j" 'evil-forward-word-end
       "J" 'evil-forward-WORD-end
       "gj" 'evil-backward-word-end
@@ -145,6 +146,16 @@
   (use-package! evil-matchit
     :config
     (global-evil-matchit-mode)))
+
+(with-eval-after-load 'evil
+  (defadvice forward-evil-paragraph (around default-values activate)
+    (let ((paragraph-start (default-value 'paragraph-start))
+          (paragraph-separate (default-value 'paragraph-separate)))
+      ad-do-it)))
+
+(map! :n "H" #'evil-first-non-blank)
+(map! :n "I" #'evil-end-of-line)
+(map! :n "E" #'+lookup/definition)
 
 (defun ab/switch-to-previous-buffer ()
   (interactive)
@@ -387,7 +398,7 @@
   :init
   (setq company-dabbrev-ignore-case t
         company-idle-delay 0.1
-        company-tooltip-limit 5
+        company-tooltip-limit 8
         company-tooltip-minimum-width 40
         company-minimum-prefix-length 2)
   (add-hook 'after-init-hook 'global-company-mode)

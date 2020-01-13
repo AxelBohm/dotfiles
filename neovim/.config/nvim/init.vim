@@ -36,9 +36,9 @@ Plug 'lervag/vimtex'
 Plug 'Townk/vim-autoclose'      " autoclose parenthesis
 Plug 'justinmk/vim-sneak'       " two char find
 Plug 'tpope/vim-surround'       " change surrounding parenthesis/quotes
-Plug 'itchyny/lightline.vim'    " statusline
-Plug 'mengelbrecht/lightline-bufferline'
 Plug 'ctrlpvim/ctrlp.vim'       " fuzzy find
+
+Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }
 
 " Initialize plugin system
 call plug#end()
@@ -47,6 +47,16 @@ call plug#end()
 """""""""""""""""""""""""""""""""""""""""""""""""""
 " => plugin config
 """""""""""""""""""""""""""""""""""""""""""""""""""
+
+if exists('g:started_by_firenvim') && g:started_by_firenvim
+    " general options
+    set laststatus=0 nonumber noruler noshowcmd
+
+    augroup firenvim
+        autocmd!
+        autocmd BufEnter *.txt setlocal filetype=markdown.pandoc
+    augroup END
+endif
 
 " deoplete autocomplete
 let g:deoplete#enable_at_startup = 1
@@ -82,40 +92,40 @@ map <leader>n :UltiSnipsEdit<CR> " fast snippet configuring
 let g:AutoCloseExpandSpace = 0 " Make iabbrev work again
 
 " statusline configuration
-let g:lightline = {
-    \ 'colorscheme': 'nord',
-    \ 'separator': { 'left': '▓▒░', 'right': '░▒▓' },
-    \ 'subseparator': { 'left': '', 'right': '░' },
-    \ 'active': {
-    \   'right': [ [ 'lineinfo' ], ['percent'] ]
-    \ },
-    \ 'tabline': {
-    \   'left': [['buffers']],
-    \   'right': [['']]
-    \},
-    \ 'component_expand': {
-    \ 'buffers': 'lightline#bufferline#buffers'
-    \},
-    \ 'component_type': {'buffers': 'tabsel'},
-    \ }
+" let g:lightline = {
+"     \ 'colorscheme': 'nord',
+"     \ 'separator': { 'left': '▓▒░', 'right': '░▒▓' },
+"     \ 'subseparator': { 'left': '', 'right': '░' },
+"     \ 'active': {
+"     \   'right': [ [ 'lineinfo' ], ['percent'] ]
+"     \ },
+"     \ 'tabline': {
+"     \   'left': [['buffers']],
+"     \   'right': [['']]
+"     \},
+"     \ 'component_expand': {
+"     \ 'buffers': 'lightline#bufferline#buffers'
+"     \},
+"     \ 'component_type': {'buffers': 'tabsel'},
+"     \ }
 
-let g:lightline.mode_map = {
-        \ 'n' : 'N',
-        \ 'i' : 'I',
-        \ 'R' : 'R',
-        \ 'v' : 'V',
-        \ 'V' : 'V',
-        \ "\<C-v>": 'V',
-        \ 's' : 'S',
-        \ 'S' : 'S',
-        \ "\<C-s>": 'S'
-        \ }
+" let g:lightline.mode_map = {
+"         \ 'n' : 'N',
+"         \ 'i' : 'I',
+"         \ 'R' : 'R',
+"         \ 'v' : 'V',
+"         \ 'V' : 'V',
+"         \ "\<C-v>": 'V',
+"         \ 's' : 'S',
+"         \ 'S' : 'S',
+"         \ "\<C-s>": 'S'
+"         \ }
 
-" show lightline-bufferline
-set showtabline=2
+" " show lightline-bufferline
+" set showtabline=2
 
-let g:lightline#bufferline#unnamed      = '[No Name]'
-let g:lightline#bufferline#filename_modifier = ':t'
+" let g:lightline#bufferline#unnamed      = '[No Name]'
+" let g:lightline#bufferline#filename_modifier = ':t'
 
 " ctrlP
 " let g:ctrlp_cmd = 'CtrlPMixed'      " what to show when pressing ^-P
@@ -128,6 +138,9 @@ let g:nord_italic_comments = 1
 """""""""""""""""""""""""""""""""""""""""""""""""
 colorscheme nord
 highlight Normal ctermbg=NONE
+
+" no statusline
+set laststatus=0
 
 " highlight entire line of curser
 set cursorline
@@ -163,6 +176,9 @@ set relativenumber
 " avoid escape
 inoremap jk <esc>
 
+" save and quit from insert mode
+inoremap <C-c> <Esc>:wq<CR>
+
 " Fast saving
 nnoremap <leader>w :w<cr>
 nnoremap <leader>x :x<cr>
@@ -177,12 +193,6 @@ nnoremap <leader>f gggqG<C-o><C-o>
  " :W sudo saves the file 
 command! W w !sudo tee % > /dev/null
  
-" move between windows
-nnoremap <M-j> <C-W>j
-nnoremap <M-k> <C-W>k
-nnoremap <M-h> <C-W>h
-nnoremap <M-l> <C-W>l
-
 " resize
 nnoremap <Left> :vertical resize +5<CR>
 nnoremap <Right> :vertical resize -5<CR>

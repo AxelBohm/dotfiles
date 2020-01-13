@@ -23,4 +23,13 @@ noremap E K
 noremap j e
 noremap J E
 
+noremap I $
+noremap H ^
+
+" move between windows
+nnoremap <M-n> <C-W>j
+nnoremap <M-e> <C-W>k
+nnoremap <M-h> <C-W>h
+nnoremap <M-i> <C-W>l
+
 let g:UltiSnipsExpandTrigger='<c-e>'

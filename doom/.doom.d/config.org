@@ -260,6 +260,30 @@ Extend the ~%~ functionality to jump between tags such as LaTeX ~\begin{...}~ an
     :config
     (global-evil-matchit-mode)))
 #+END_SRC
+** paragraph
+
+The function ~evil-forward-paragraph~ (default bound to ~}~) reuses Emacs'
+~forward-paragraph~ which is different in every major mode. I've gotten used to
+vim's behaviour of just going to the next empty line. This chunk makes evil use
+the default paragraph. This makes so much more sense considering commands like
+~y a p~ (read "yank around paragraph") treats paragraphs always the the way I
+want them. Got this from [[https://emacs.stackexchange.com/questions/38596/make-evil-paragraphs-behave-like-vim-paragraphs][here]].
+
+#+BEGIN_SRC emacs-lisp
+(with-eval-after-load 'evil
+  (defadvice forward-evil-paragraph (around default-values activate)
+    (let ((paragraph-start (default-value 'paragraph-start))
+          (paragraph-separate (default-value 'paragraph-separate)))
+      ad-do-it)))
+#+END_SRC
+** custom
+
+#+BEGIN_SRC emacs-lisp
+(map! :n "H" #'evil-first-non-blank)
+(map! :n "I" #'evil-end-of-line)
+(map! :n "E" #'+lookup/definition)
+#+END_SRC
+
 
 * buffer handling
 

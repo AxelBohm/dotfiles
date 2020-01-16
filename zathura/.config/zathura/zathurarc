@@ -18,6 +18,8 @@ map <C-o> zoom out
 unmap r # rotate
 unmap d # double page view
 
+map R rotate
+
 
 map <C-c> feedkeys ":exec zathuratoclipboard $FILE<Return>"
 

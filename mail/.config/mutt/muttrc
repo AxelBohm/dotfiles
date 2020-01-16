@@ -157,7 +157,8 @@ color status black blue ' ([0-9]+%|all|end) \s*'
 color status yellow black '()\s*' 1
 color status default black ''
 
-# use abook instead of mutt aliases
+
+## use abook instead of mutt aliases
 set query_command="abook --mutt-query '%s'" # defauld keybinging for querying is `Q`, add more with `C-t`
 bind pager a noop                           # prevents me from adding contact to mutt instead of abook
 # macro index,pager A |'abook --add-email'\n
@@ -167,4 +168,13 @@ macro index,pager A "<enter-command>set my_pipe_decode=\$pipe_decode pipe_decode
 # set edit_headers = yes
 # set editor = 'nvim +/^$ +nohlsearch' # Move past headers.
 
+
+## set signature
+send-hook . set signature="~/.config/mutt/etc/sig"
+# different signature for different receipient
+# send-hook "~t @domain.com" set signature=~/.mutt/branded.sig
+
+
+
+# sets the default mailbox
 source /home/xel/.config/mutt/accounts/uniwien.muttrc

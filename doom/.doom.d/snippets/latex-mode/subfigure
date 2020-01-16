@@ -1,13 +1,17 @@
 # -*- mode: snippet -*-
 # name: subfigure
-# key: subfig
+# key: subfig                                     
 # --
 \begin{figure}[ht]
+    \begin{subfigure}[c]{.40\textwidth}
+      \includegraphics[width=\linewidth]{figures/$1}
+      % \subcaption{Caption.}
+    \end{subfigure}
+    \hspace{.5cm}
+    \begin{subfigure}[c]{.40\textwidth}
+      \includegraphics[width=\linewidth]{figures/$2}
+      % \subcaption{Caption.}
+    \end{subfigure}
   \centering
-  \subfigure[$1]
-  {\label{fig:${2:label}} 
-    \includegraphics[width=.${3:5}\textwidth]{${4:path}}}
-
-  \caption{${5:caption}}
-\label{fig:${6:label}}
+  % \caption{\label{fig:label} }
 \end{figure}

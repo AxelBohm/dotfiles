@@ -109,14 +109,11 @@ else
     source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.plugin.zsh
 fi
 
-################################################################
-## => uni wien only
-################################################################
-if [[ `whoami` = "boehm" ]]; then
-    export PATH=~/miniconda3/bin:$PATH
-fi
 
-# colemak remaps
+
+################################################################
+##  colemak remaps
+################################################################
 source ~/.zsh/colemak.zsh
 
 ################################################################

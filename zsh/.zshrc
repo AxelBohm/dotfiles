@@ -7,7 +7,9 @@ setopt INC_APPEND_HISTORY
 # use z installed from package manager
 [[ -r "/usr/share/z/z.sh" ]] && source /usr/share/z/z.sh
 
-export PATH=~/miniconda3/bin:$PATH
+## conda 
+# tab completion for conda
+fpath+=~/.zsh/conda-zsh-completion
 
 ###############################################################
 # => prompt
@@ -131,5 +133,20 @@ function _pip_completion {
 compctl -K _pip_completion pip
 # pip zsh completion end
 
-
 bindkey -s '^O' 'ranger\n'
+
+
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/home/xel/miniconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/home/xel/miniconda3/etc/profile.d/conda.sh" ]; then
+        . "/home/xel/miniconda3/etc/profile.d/conda.sh"
+    else
+        export PATH="/home/xel/miniconda3/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+# <<< conda initialize <<<

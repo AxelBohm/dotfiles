@@ -144,6 +144,15 @@ When regularly changing configs we also want to be able to use them without rest
 #+END_SRC
 
 * vi
+** config
+
+not quite sure what this does but it seems to fix some weird behavior with
+visual lines
+
+#+BEGIN_SRC emacs-lisp
+(setq evil-respect-visual-line-mode nil)
+#+END_SRC
+
 ** leader
 
 More vim functionality.

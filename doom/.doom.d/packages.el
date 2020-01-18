@@ -6,6 +6,6 @@
 ;; (package! another-package :recipe (:host github :repo "username/repo"))
 ;; (package! builtin-package :disable t)
 
-(package! org-alert)
+(package! org-wild-notifier)
 
 (package! evil-matchit)

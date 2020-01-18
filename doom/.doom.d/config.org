@@ -782,6 +782,29 @@ I used to think =company= is slow, but I just had to turn the ~idle-delay~ down.
 
 The code chunk in the middle which makes yasnippet work with company is taken from [[https://emacs.stackexchange.com/questions/10431/get-company-to-show-suggestions-for-yasnippet-names][stackexchange]]. How can people live without this?? Also for some reason it has to be inside the entire thing even if company is not defered (no idea why).
 
+** company- backends
+For some reason it is super hard to get ~company-backends~ right...
+This is copied from [[https://www.gtrun.org/post/init/#org-mode][here]].
+
+#+BEGIN_SRC emacs-lisp
+;; (set-company-backend! '(c-mode
+;;                         ess-mode
+;;                         haskell-mode
+;;                         ;;emacs-lisp-mode
+;;                         latex-mode
+;;                         LaTeX
+;;                         tex-mode
+;;                         lisp-mode
+;;                         sh-mode
+;;                         python-mode
+;;                         )
+;;   '(:separate  company-tabnine
+;;                company-files
+;;                company-yasnippet))
+
+;; (setq +lsp-company-backend '(company-lsp :with company-tabnine :separate))
+#+END_SRC
+
 * spell checking
 
 As the name suggests. According to [[https://fasciism.com/2017/01/16/spellchecking/][this site]] Aspell is unmaintained and Hunspell is the way to go.

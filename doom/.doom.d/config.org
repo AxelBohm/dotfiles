@@ -30,10 +30,12 @@ Show line numbers to the left for better jumping.
 
 *** line truncation
 
-stupid doom tries to hard wrap all the time which I don't like
+stupid doom tries to truncate lines all the time which I don't like. This means
+that long lines go past the window end. When this is turned off they appear
+soft wrapped.
 
 #+BEGIN_SRC emacs-lisp
-(setq truncate-lines nil)
+(setq-default truncate-lines nil)
 #+END_SRC
 
 *** pretty symbols

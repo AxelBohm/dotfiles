@@ -88,6 +88,7 @@ Show agenda for upcoming week and not just today.
 #+BEGIN_SRC emacs-lisp
 (setq show-week-agenda-p t)
 #+END_SRC
+
 ** GTD
 
 Keep everything out of your head, aka building a second brain.
@@ -164,7 +165,6 @@ Quickly open shell in a split.
 
 (map! :leader "s s" 'ab/open-shell-in-split)
 #+END_SRC
-
 ** colemak settings
 
 Evil for colemak keyboard layout. Adapted from the [[https://github.com/wbolster/evil-colemak-basics][evil-colemak-basics]] package. For some reason trying to defining everything manually via ~evil-define-key~ or ~define-key evil-motion-state-map~ gave me trouble with ~'inner-text-objects~ and more..
@@ -265,6 +265,7 @@ Extend the ~%~ functionality to jump between tags such as LaTeX ~\begin{...}~ an
     :config
     (global-evil-matchit-mode)))
 #+END_SRC
+
 ** paragraph
 
 The function ~evil-forward-paragraph~ (default bound to ~}~) reuses Emacs'
@@ -288,7 +289,6 @@ want them. Got this from [[https://emacs.stackexchange.com/questions/38596/make-
 (map! :n "I" #'evil-end-of-line)
 (map! :n "E" #'+lookup/definition)
 #+END_SRC
-
 
 * buffer handling
 

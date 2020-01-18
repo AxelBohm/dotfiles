@@ -646,17 +646,22 @@ I want pdfs to be opened in an external pdf viewer.
 
 ** org-notify
 
-I want notifications for scheduled headlines.
+I want notifications for scheduled headlines. Unfortunately ~org-alert~ only has the capability to notify every N minutes and doesn't consider the time an item is scheduled for
+
+This package sends a notification x minutes before schedule and even allows for
+multiple notifications per TODO.
 
 #+BEGIN_SRC emacs-lisp
-(use-package! org-alert
+(use-package! org-wild-notifier
+  :defer t
   :init
-  ;; use dunst for system wide notifications
-  (setq alert-default-style 'libnotify)
-  (setq org-alert-interval 3600)
+  (add-hook 'doom-after-init-modules-hook #'org-wild-notifier-mode t)
   :config
-  (org-alert-enable))
+  (setq org-wild-notifier-alert-time 15
+        ;; use dunst for system wide notifications
+        alert-default-style 'libnotify))
 #+END_SRC
+
 * LaTeX
 ** general
 

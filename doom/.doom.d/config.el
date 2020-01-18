@@ -345,13 +345,14 @@
                (delete '("\\.pdf\\'" . default) org-file-apps)
                (add-to-list 'org-file-apps '("\\.pdf\\'" . "zathura %s")))))
 
-(use-package! org-alert
+(use-package! org-wild-notifier
+  :defer t
   :init
-  ;; use dunst for system wide notifications
-  (setq alert-default-style 'libnotify)
-  (setq org-alert-interval 3600)
+  (add-hook 'doom-after-init-modules-hook #'org-wild-notifier-mode t)
   :config
-  (org-alert-enable))
+  (setq org-wild-notifier-alert-time 15
+        ;; use dunst for system wide notifications
+        alert-default-style 'libnotify))
 
 (after! latex
   (setq tex-fontify-script t

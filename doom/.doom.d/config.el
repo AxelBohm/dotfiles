@@ -6,14 +6,17 @@
 
 (setq display-line-numbers-type 'relative)
 
-(setq truncate-lines nil)
+(setq-default truncate-lines nil)
 
 (global-prettify-symbols-mode 1)
 
 (remove-hook 'text-mode-hook #'hl-line-mode)
 
-(set-frame-parameter (selected-frame) 'alpha '(80 . 80))
-(add-to-list 'default-frame-alist '(alpha . (80 . 80)))
+(set-frame-parameter (selected-frame) 'alpha '(90 . 90))
+(add-to-list 'default-frame-alist '(alpha . (90 . 90)))
+
+(setq evil-split-window-below t
+      evil-vsplit-window-right t)
 
 (add-to-list 'auto-mode-alist '("/mutt" . mail-mode))
 (add-to-list 'auto-mode-alist '("/neomutt" . mail-mode))

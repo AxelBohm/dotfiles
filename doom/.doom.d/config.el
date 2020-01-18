@@ -47,6 +47,8 @@
 
 (map! :leader "e r" 'ab/reload-init-file)
 
+(setq evil-respect-visual-line-mode nil)
+
 (map! :leader
       "b" #'switch-to-buffer
       "q" #'kill-buffer
@@ -402,6 +404,8 @@
   :init
   (setq company-dabbrev-ignore-case t
         company-idle-delay 0.1
+        ;; Number the candidates (use M-1, M-2 etc to select completions).
+        company-show-numbers t
         company-tooltip-limit 8
         company-tooltip-minimum-width 40
         company-minimum-prefix-length 2)
@@ -423,6 +427,23 @@
 (map! (:when (featurep! :completion company)
         :i "C-n"      #'+company/complete
         :i "C-SPC"    #'+company/complete))
+
+;; (set-company-backend! '(c-mode
+;;                         ess-mode
+;;                         haskell-mode
+;;                         ;;emacs-lisp-mode
+;;                         latex-mode
+;;                         LaTeX
+;;                         tex-mode
+;;                         lisp-mode
+;;                         sh-mode
+;;                         python-mode
+;;                         )
+;;   '(:separate  company-tabnine
+;;                company-files
+;;                company-yasnippet))
+
+;; (setq +lsp-company-backend '(company-lsp :with company-tabnine :separate))
 
 (after! flyspell
   :config

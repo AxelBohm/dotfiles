@@ -1,5 +1,0 @@
-# -*- mode: snippet -*-
-# name: rate
-# key: rate
-# --
-\mathcal{O}(k^{-$0})

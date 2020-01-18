@@ -1,5 +1,0 @@
-# -*- mode: snippet -*-
-# name: sequence
-# key: seq
-# --
-{($0_k)}_{k\in \N}

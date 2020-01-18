@@ -1,8 +1,0 @@
-# -*- mode: snippet -*-
-# name: multline
-# key: ml
-# --
-\begin{multline}
-\label{eq:$0}
-$1
-\end{multline}

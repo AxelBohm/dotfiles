@@ -1,5 +1,0 @@
-# -*- mode: snippet -*-
-# name: Algorithm
-# key: Alg
-# --
-Algorithm~\ref{alg:$0}

@@ -13,6 +13,7 @@ alias gp="git push"
 alias gca="git commit --amend"
 alias gco="git checkout"
 alias gl="git log --pretty=oneline --abbrev-commit" # show log in more terse format
+alias glh="gl -10"
 alias gsc="git config credential.helper store"      # store credentials
 alias grc="git rm -r --cached ."                    # use this when ignoring commited files
 

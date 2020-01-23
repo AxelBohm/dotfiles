@@ -1,6 +1,0 @@
-# -*- mode: snippet -*-
-# name: hallo
-# key: h 
-# --
-Hallo ${1:`(ab/yas-get-first-name-from-to-field)`},
-$0

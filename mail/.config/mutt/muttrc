@@ -170,7 +170,7 @@ macro index,pager A "<enter-command>set my_pipe_decode=\$pipe_decode pipe_decode
 
 
 ## set signature
-send-hook . set signature="~/.config/mutt/etc/sig"
+# send-hook . set signature="~/.config/mutt/etc/sig"
 # different signature for different receipient
 # send-hook "~t @domain.com" set signature=~/.mutt/branded.sig
 

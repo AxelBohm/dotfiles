@@ -25,6 +25,9 @@ alias pu="sudo pacman -Syu"
 alias pfi="yay -Slq | fzf -m --preview 'yay -Si {1}' | yay -S -"
 alias pfr="yay -Qq | fzf -m --preview 'yay -Si {1}' | xargs -ro sudo pacman -Rns"
 
+# ubuntu
+alias sai="sudo apt-get install"
+
 alias e="emacs -nw"
 alias ec="emacsclient -c"
 alias v="vim"

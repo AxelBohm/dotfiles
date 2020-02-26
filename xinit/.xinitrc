@@ -19,6 +19,15 @@
 # DWM
 ########################################
 
+# start clipmenu daemon to record clipboard
+clipmenud &
+
+# lock on suspend, etc
+xss-lock slock &
+
+# start redshitf
+redshift &
+
 # compositor
 # compton &
 

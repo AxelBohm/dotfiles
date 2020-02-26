@@ -1,3 +1,6 @@
 [submodule "doom/.doom.d"]
 	path = doom/.doom.d
 	url = https://github.com/AxelBohm/doom.d.git
+[submodule "zsh/.zsh/zsh-autopair"]
+	path = zsh/.zsh/zsh-autopair
+	url = https://github.com/hlissner/zsh-autopair.git

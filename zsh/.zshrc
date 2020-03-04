@@ -62,6 +62,12 @@ bindkey "^P" history-beginning-search-backward-end
 bindkey "^[[A" history-beginning-search-backward-end
 bindkey "^[[B" history-beginning-search-forward-end
 
+# pair delimiters
+if [[ -d ~/.zsh/zsh-autopair ]]; then
+    source ~/.zsh/zsh-autopair/autopair.zsh
+    autopair-init
+fi
+
 ################################################################
 ## => Aliases
 ################################################################

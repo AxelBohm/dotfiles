@@ -68,7 +68,7 @@ let g:deoplete#sources#jedi#show_docstring = 0
 let g:deoplete#sources#jedi#ignore_errors = 1
 
 " ale
-nmap <silent> <leader>a :ALEToggle<cr>
+nmap <silent> <leader>ta :ALEToggle<cr>
 let g:ale_lint_on_enter = 0
 nmap <silent> <leader>an :ALENext<cr>
 nmap <silent> <leader>ap :ALEPrevious<cr>
@@ -129,6 +129,7 @@ let g:AutoCloseExpandSpace = 0 " Make iabbrev work again
 
 " ctrlP
 " let g:ctrlp_cmd = 'CtrlPMixed'      " what to show when pressing ^-P
+nnoremap <leader>bb :CtrlPBuffer<CR>
 
 " not yet working
 let g:nord_italic_comments = 1
@@ -200,12 +201,10 @@ nnoremap <Up> :resize +5<CR>
 nnoremap <Down> :resize -5<CR>
 
 " switch buffer
-nnoremap <leader>bn :bnext<CR>
-nnoremap <leader>bp :bprev<CR>
 nnoremap <leader>bd :bp \| bd #<CR>     
 
 " activate spell checking
-nnoremap <leader>ss :set spell!<cr>
+nnoremap <leader>ts :set spell!<cr>   "toggle spell
 set spellfile=~/.vim/spell/en.utf-8.add
 " accept first correction suggestion
 nnoremap <leader>sc 1z=

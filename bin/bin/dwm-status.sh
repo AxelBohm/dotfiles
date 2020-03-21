@@ -63,7 +63,7 @@ memory(){
 }
 
 get_weather(){
-    wttr=$(curl wttr.in?format='%t+%p')
+    wttr=$(curl -s wttr.in?format='%t+%p')
     temp=$(echo $wttr | awk '{print $1;}')
     rain=$(echo $wttr | awk '{print $2;}')
 

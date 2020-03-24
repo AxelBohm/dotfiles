@@ -27,7 +27,8 @@ else
     Plug 'roxma/vim-hug-neovim-rpc'
 endif
 Plug 'deoplete-plugins/deoplete-jedi' " python autocompletion
-
+" Plug 'junegunn/fzf', { 'do': './install --bin' }
+" Plug 'junegunn/fzf.vim'
 Plug 'w0rp/ale'                 " linting 
 Plug 'SirVer/ultisnips'
 Plug 'tpope/vim-commentary'     " commentary (gc(c))
@@ -64,7 +65,7 @@ let g:deoplete#enable_at_startup = 1
 inoremap <silent><expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
 
 autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
-let g:deoplete#sources#jedi#show_docstring = 0
+" let g:deoplete#sources#jedi#show_docstring = 0
 let g:deoplete#sources#jedi#ignore_errors = 1
 
 " ale

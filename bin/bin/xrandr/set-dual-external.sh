@@ -15,3 +15,4 @@ fi
 
 # set wallpaper again
 set_background.sh &
+set_background.sh &

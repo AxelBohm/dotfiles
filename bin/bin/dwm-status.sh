@@ -12,25 +12,25 @@ music() {
      else
          icon=""
      fi
-     printf "$icon$cur"
+     echo "$icon$cur"
 }
 
 email(){
     maildirs="$HOME/.mail/*/*/new/"
-    mail="$(find $maildirs -type f | grep -i "Inbox/new" | wc -l)"
-    printf " $mail"
+    mail="$(find $maildirs -type f | grep -c "Inbox/new")"
+    echo " $mail"
 }
 
 wifi(){
     ssid="$(iw dev | grep ssid | awk '{print $2}')"
     # ssid="$(iwgetid --raw)"
-    printf " $ssid"
+    echo " $ssid"
 }
 
 temp(){
     f=$(cat /sys/class/thermal/thermal_zone0/temp)
-    temp=$(echo $f | cut -b -2)°C
-    printf "$temp"
+    temp=$(echo "$f" | cut -b -2)°C
+    echo "$temp"
 }
 
 volume(){
@@ -64,12 +64,12 @@ memory(){
 
 get_weather(){
     wttr=$(curl -s wttr.in?format='%t+%p')
-    temp=$(echo $wttr | awk '{print $1;}')
-    rain=$(echo $wttr | awk '{print $2;}')
+    temp=$(echo "$wttr" | awk '{print $1;}')
+    rain=$(echo "$wttr" | awk '{print $2;}')
 
     rain_icon=" "
     temp_icon=" "
-    printf "$rain_icon$rain, $temp_icon$temp"
+    echo "$rain_icon$rain, $temp_icon$temp"
 }
 
 while true;

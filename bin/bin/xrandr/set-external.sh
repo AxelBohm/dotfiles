@@ -1,11 +1,16 @@
 #!/bin/bash
 
-external=$(xrandr | grep -o "VGA[\w'-]*\w*")
-internal=$(xrandr | grep -o "LVDS[\w'-]*\w*")
+internal="LVDS1"
 
-if xrandr | grep "$external connected"; then
-    xrandr --output $internal --off --output $external --auto
-fi
+monitors=$(xrandr -q)
+declare -a ports=("HDMI" "DP" "VGA")
+# loop over connectors and break if one of them is connected
+for port in "${ports[@]}"
+do
+    external=$(echo "$monitors" | grep "$port. con" | awk '{print $1}')
+    xrandr --output $internal --off --output "$external" --auto && break
+done
+
 
 # set wallpaper again
 set_background.sh

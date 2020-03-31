@@ -1,0 +1,1 @@
+find ~/Dropbox/papers/* -type f | cut -d"/" -f6- | dmenu | xargs -r (zathura &)

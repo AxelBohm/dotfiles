@@ -1,4 +1,4 @@
 #!/bin/sh
 
 # fuzzy select from by scripts
-find ~/bin/* -type f | fzf | xargs -r $EDITOR
+find ~/bin/* -type f | fzf --preview="bat --color=always {} | head -100" | xargs -r $EDITOR

@@ -35,7 +35,8 @@ redshift &
 dunst &
 
 # Statusbar
-. dwm-status.sh &
+# . dwm-status.sh &
+dwmblocks &
 # slstatus &
 
 # set background

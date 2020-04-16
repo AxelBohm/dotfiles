@@ -36,19 +36,19 @@ temp(){
 volume(){
     vol=$(amixer get Master | awk -F'[][]' 'END{ print $2 }')
     mute=$(amixer get Master | awk -F'[][]' 'END{ print $4 }')
-	if [[ "$mute" == "off" ]]; then
-		icon= #mute icon
-	else
-		# if [[ "$vol" -lt "40" ]]; then
-		# 	icon= #low volume icon
-		# elif [[ "$vol" -gt "40" && "$vol" -lt "70" ]]; then
-		# 	icon= #medium volume icon
-		# elif [[ "$vol" -gt "70" ]]; then
+    if [[ "$mute" == "off" ]]; then
+        icon= #mute icon
+    else
+        # if [[ "$vol" -lt "40" ]]; then
+        #   icon= #low volume icon
+        # elif [[ "$vol" -gt "40" && "$vol" -lt "70" ]]; then
+        #   icon= #medium volume icon
+        # elif [[ "$vol" -gt "70" ]]; then
         icon= #high volume icon
-		# fi
-	fi
+        # fi
+    fi
 
-	echo "$icon $vol"
+    echo "$icon $vol"
 }
 
 battery(){
@@ -63,7 +63,7 @@ memory(){
 }
 
 get_weather(){
-    wttr=$(curl -s wttr.in?format='%t+%p')
+    wttr=$(curl -sf wttr.in?format='%t+%p')
     temp=$(echo "$wttr" | awk '{print $1;}')
     rain=$(echo "$wttr" | awk '{print $2;}')
 

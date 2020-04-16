@@ -59,6 +59,7 @@ alias brc="vim ~/.bashrc"
 # basic stuff
 alias ls="ls --color"
 alias la="ls -A"
+alias ll="ls -l"
 alias ls="ls --ignore='*.'{log,aux,fls,synctex.gz,fdb_latexmk,prv} --ignore='\_region\_.tex' --color"
 alias grep="grep --color"
 

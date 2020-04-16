@@ -1,0 +1,16 @@
+#!/bin/bash
+
+vol=$(amixer get Master | awk -F'[][]' 'END{ print $2 }')
+vol=${vol::-1}
+mute=$(amixer get Master | awk -F'[][]' 'END{ print $4 }')
+if [[ "$mute" == "off" ]]; then
+    icon= #mute icon
+else
+    if [[ "$vol" -lt "40" ]]; then
+        icon= #medium volume icon
+    else
+        icon= #high volume icon
+    fi
+fi
+
+echo "$icon $vol "

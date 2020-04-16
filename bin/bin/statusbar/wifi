@@ -1,0 +1,3 @@
+ssid="$(iw dev | grep ssid | awk '{print $2}')"
+# ssid="$(iwgetid --raw)"
+echo " $ssid "

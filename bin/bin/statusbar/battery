@@ -1,0 +1,24 @@
+#!/bin/bash
+
+# batt=$(acpi | cut -d ',' -f 2 | cut -d " " -f 2)
+charge=$(cat /sys/class/power_supply/BAT0/capacity)
+status=$(cat /sys/class/power_supply/BAT0/status)
+
+icon=""
+if [[ "$status" == "Charging" ]]; then
+    icon=""
+fi
+
+if [[ "$status" == "Full" ]]; then
+    echo "$icon FULL "
+elif [[ $charge -gt 90 ]]; then
+    echo "$icon $charge% "
+elif [[ $charge -gt 70 ]]; then
+    echo "$icon $charge% "
+elif [[ $charge -gt 40 ]]; then
+    echo "$icon $charge% "
+elif [[ $charge -gt 20 ]]; then
+    echo "$icon $charge% "
+else
+    echo "$icon $charge% "
+fi

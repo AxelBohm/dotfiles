@@ -1,0 +1,6 @@
+#!/bin/bash
+
+BYND=$(NO_COLOR=1 ticker.sh BYND)
+price=$(echo "$BYND" | awk '{print $2}')
+change_percentage=$(echo "$BYND" | awk '{print $4}')
+echo " $price $change_percentage "

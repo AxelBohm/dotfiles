@@ -1,0 +1,15 @@
+#!/bin/bash
+
+
+cur="$(mpc current)"
+if [[ $cur ]]; then
+playing="$(mpc | grep playing)"
+if [[ $playing  ]]; then
+icon=" "
+else
+icon=" "
+fi
+else
+icon=""
+fi
+echo "$icon$cur"

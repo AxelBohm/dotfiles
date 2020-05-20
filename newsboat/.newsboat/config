@@ -37,10 +37,10 @@ bind-key N next-unread
 # colors
 ########################
 
-color listnormal            color4     default
-color listfocus             color7     color0
-color listnormal_unread     color5     default
-color listfocus_unread      color13    color0
+color listnormal            color15    color0
+color listfocus             color7     color8
+color listnormal_unread     color5     color0
+color listfocus_unread      color13    color8
 color info                  color4     color0
 #color article              color15    default
 

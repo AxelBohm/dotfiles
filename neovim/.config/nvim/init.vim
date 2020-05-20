@@ -16,7 +16,7 @@ endif
 call plug#begin('~/.config/nvim/autoload/plug.vim')
 
 " colorscheme
-Plug 'arcticicestudio/nord-vim'
+Plug 'xero/sourcerer.vim'
 
 " auto completion
 if has('nvim')

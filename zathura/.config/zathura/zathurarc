@@ -23,6 +23,8 @@ map R rotate
 
 map <C-c> feedkeys ":exec zathuratoclipboard $FILE<Return>"
 
+set recolor                     "true"
+set recolor-keephue             "false"
 
 # Base16 Gruvbox dark, medium
 # Author: Dawid Kurek (dawikur@gmail.com), morhetz (https://github.com/morhetz/gruvbox)
@@ -57,25 +59,54 @@ map <C-c> feedkeys ":exec zathuratoclipboard $FILE<Return>"
 # set recolor-lightcolor          "#282828"
 # set recolor-darkcolor           "#ebdbb2"
 
-set recolor                     "true"
-set recolor-keephue             "false"
+## nord theme
+# set default-bg                  "#2E3440"
+# set default-fg                  "#3B4252"
 
-set default-bg                  "#2E3440"
-set default-fg                  "#3B4252"
+# set statusbar-fg                "#D8DEE9"
+# set statusbar-bg                "#434C5E"
+
+# set inputbar-bg                 "#2E3440"
+# set inputbar-fg                 "#8FBCBB"
+
+# set notification-bg             "#2E3440"
+# set notification-fg             "#8FBCBB"
+
+# set notification-error-bg       "#2E3440"
+# set notification-error-fg       "#88C0D0"
+
+# set notification-warning-bg     "#2E3440"
+# set notification-warning-fg     "#88C0D0"
+
+# set highlight-color             "#5E81AC"
+# set highlight-active-color      "#EBCB8B"
+
+# set completion-bg               "#3B4252"
+# set completion-fg               "#EBCB8B"
+
+# set completion-highlight-fg     "#8FBCBB"
+# set completion-highlight-bg     "#EBCB8B"
+
+# set recolor-lightcolor          "#2E3440"
+# set recolor-darkcolor           "#ECEFF4"
+
+## sourcerer theme
+set default-bg                  "#222222"
+set default-fg                  "#c2c2b0"
 
 set statusbar-fg                "#D8DEE9"
-set statusbar-bg                "#434C5E"
+set statusbar-bg                "#171717"
 
-set inputbar-bg                 "#2E3440"
+set inputbar-bg                 "#222222"
 set inputbar-fg                 "#8FBCBB"
 
-set notification-bg             "#2E3440"
+set notification-bg             "#222222"
 set notification-fg             "#8FBCBB"
 
-set notification-error-bg       "#2E3440"
+set notification-error-bg       "#222222"
 set notification-error-fg       "#88C0D0"
 
-set notification-warning-bg     "#2E3440"
+set notification-warning-bg     "#222222"
 set notification-warning-fg     "#88C0D0"
 
 set highlight-color             "#5E81AC"
@@ -87,9 +118,8 @@ set completion-fg               "#EBCB8B"
 set completion-highlight-fg     "#8FBCBB"
 set completion-highlight-bg     "#EBCB8B"
 
-set recolor-lightcolor          "#2E3440"
-set recolor-darkcolor           "#ECEFF4"
-
+set recolor-lightcolor          "#222222"
+set recolor-darkcolor           "#c2c2b0"
 
 map <C-r> recolor
 

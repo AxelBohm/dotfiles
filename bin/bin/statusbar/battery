@@ -10,15 +10,15 @@ if [[ "$status" == "Charging" ]]; then
 fi
 
 if [[ "$status" == "Full" ]]; then
-    echo "$icon FULL "
+    echo " FULL "
 elif [[ $charge -gt 90 ]]; then
-    echo "$icon $charge% "
+    echo " $charge%$icon "
 elif [[ $charge -gt 70 ]]; then
-    echo "$icon $charge% "
+    echo " $charge%$icon "
 elif [[ $charge -gt 40 ]]; then
-    echo "$icon $charge% "
+    echo " $charge%$icon "
 elif [[ $charge -gt 20 ]]; then
-    echo "$icon $charge% "
+    echo " $charge%$icon "
 else
-    echo "$icon $charge% "
+    echo " $charge%$icon "
 fi

@@ -2,14 +2,13 @@
 
 
 cur="$(mpc current)"
-if [[ $cur ]]; then
-playing="$(mpc | grep playing)"
-if [[ $playing  ]]; then
-icon=" "
-else
-icon=" "
-fi
-else
 icon=""
+if [[ $cur ]]; then
+    playing="$(mpc | grep playing)"
+    if [[ $playing  ]]; then
+        icon=" "
+    else
+        icon=" "
+    fi
 fi
-echo "$icon$cur"
+echo "$icon$cur "

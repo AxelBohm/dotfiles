@@ -1,0 +1,5 @@
+#!/bin/bash
+
+f=$(cat /sys/class/thermal/thermal_zone0/temp)
+temp=$(echo "$f" | cut -b -2)°C
+echo "$temp "

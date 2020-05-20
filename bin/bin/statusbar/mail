@@ -1,5 +1,5 @@
 #!/bin/bash
 
 maildirs="$HOME/.mail/*/*/new/"
-mail="$(find $maildirs -type f | grep -c "Inbox/new")"
+mail="$(find $maildirs -type f | grep -ic "Inbox/new")"
 echo " $mail "

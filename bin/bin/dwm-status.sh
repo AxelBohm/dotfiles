@@ -72,20 +72,36 @@ get_weather(){
     echo "$rain_icon$rain, $temp_icon$temp"
 }
 
+get_stocks(){
+    BYND=$(NO_COLOR=1 ticker.sh BYND)
+    price=$(echo "$BYND" | awk '{print $2}')
+    change_percentage=$(echo "$BYND" | awk '{print $4}')
+    echo " $price $change_percentage"
+}
+
 while true;
 do
     if [[ $weather ]]; then
         minute="$(date +'%M')"
-        if [[ $minute == "00" ]]; then
+        if (( minute % 30 == 0 )); then
             weather=$(get_weather)
         fi
     else
         weather=$(get_weather)
     fi
 
+    if [[ $stock ]]; then
+        second="$(date +'%S')"
+        if [[ $second == "00" ]]; then
+            stock=$(get_stocks)
+        fi
+    else
+        stock=$(get_stocks)
+    fi
+
     date=$(date +'%a %b %d, %R')
 
-    xsetroot -name "$(music)  $weather  $(volume)  $(email)  $(wifi)  $(battery)  $(memory)  $(temp)  $date"
+    xsetroot -name "$(music)  $stock  $weather  $(volume)  $(email)  $(wifi)  $(battery)  $(memory)  $(temp)  $date"
 
     sleep 1;
 done;

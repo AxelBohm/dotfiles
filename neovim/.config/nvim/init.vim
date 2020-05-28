@@ -138,7 +138,7 @@ let g:nord_italic_comments = 1
 """""""""""""""""""""""""""""""""""""""""""""""""
 " => general config
 """""""""""""""""""""""""""""""""""""""""""""""""
-colorscheme nord
+colorscheme sourcerer
 highlight Normal ctermbg=NONE
 
 " no statusline

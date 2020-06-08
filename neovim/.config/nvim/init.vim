@@ -19,25 +19,25 @@ call plug#begin('~/.config/nvim/autoload/plug.vim')
 Plug 'xero/sourcerer.vim'
 
 " auto completion
-if has('nvim')
-    Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-else
-    Plug 'Shougo/deoplete.nvim'
-    Plug 'roxma/nvim-yarp'
-    Plug 'roxma/vim-hug-neovim-rpc'
-endif
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+" Plug 'Shougo/deoplete-lsp'
+" Plug 'neovim/nvim-lsp'
+
 Plug 'deoplete-plugins/deoplete-jedi' " python autocompletion
+
 " Plug 'junegunn/fzf', { 'do': './install --bin' }
 " Plug 'junegunn/fzf.vim'
 Plug 'w0rp/ale'                 " linting 
 Plug 'SirVer/ultisnips'
 Plug 'tpope/vim-commentary'     " commentary (gc(c))
 Plug 'christoomey/vim-tmux-navigator'
-Plug 'lervag/vimtex'
+Plug 'lervag/vimtex'            " LaTeX
 Plug 'Townk/vim-autoclose'      " autoclose parenthesis
 Plug 'justinmk/vim-sneak'       " two char find
 Plug 'tpope/vim-surround'       " change surrounding parenthesis/quotes
 Plug 'ctrlpvim/ctrlp.vim'       " fuzzy find
+Plug 'airblade/vim-gitgutter'       " git integration
+Plug 'isa/vim-matchit'          " extend % functionality
 
 Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }
 

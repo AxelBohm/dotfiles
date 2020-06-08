@@ -25,6 +25,7 @@ bindkey -v
 bindkey "^R" history-incremental-search-backward
 bindkey "\eq" quote-line
 bindkey "^K" backward-kill-line
+bindkey "^u"  kill-whole-line
 
 bindkey '^a' beginning-of-line
 bindkey '^e' end-of-line

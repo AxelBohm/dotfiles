@@ -97,3 +97,11 @@ cmd zip ${{
     zip -r $1.zip $1
     rm -rf $1
 }}
+
+# custom
+map n down
+map e up
+map i open
+map search-next k
+map search-prev K
+

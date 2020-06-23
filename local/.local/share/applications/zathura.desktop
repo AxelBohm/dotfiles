@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Name=zathura
+Comment=Launches the zathura pdf viewer
+Icon=utilities-terminal
+Terminal=false
+Exec=zathura
+Categories=Office
+MimeType=application/pdf;

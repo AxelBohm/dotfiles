@@ -1,10 +1,11 @@
 # vim: filetype=neomuttrc
 
 # Default index colors:
-color index color15 default '.*'
+color index color13 default '.*'
 color index_author color6 default '.*'
+color index_author color3 default 'Bot' # special color mails from Bot
 color index_number color8 default
-color index_subject color15 default '.*'
+color index_subject color11 default '.*'
 
 ## For new mail:
 color index red default "~N"

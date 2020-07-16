@@ -68,6 +68,15 @@ if [[ -d ~/.zsh/zsh-autopair ]]; then
     autopair-init
 fi
 
+### lf - file browser
+# needs to come before aliases
+LFCD=".config/lf/lfcd.sh"
+if [ -f "$LFCD" ]; then
+    source "$LFCD"
+fi
+ # You may also like to assign a key to this command:
+ bindkey -s '^o' 'lfcd\n'  # zsh
+
 ################################################################
 ## => Aliases
 ################################################################

@@ -38,6 +38,7 @@ Plug 'tpope/vim-surround'       " change surrounding parenthesis/quotes
 Plug 'ctrlpvim/ctrlp.vim'       " fuzzy find
 Plug 'airblade/vim-gitgutter'       " git integration
 Plug 'isa/vim-matchit'          " extend % functionality
+Plug 'norcalli/nvim-colorizer.lua' "color highlight
 
 Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }
 
@@ -49,6 +50,11 @@ call plug#end()
 " => plugin config
 """""""""""""""""""""""""""""""""""""""""""""""""""
 
+" colorizer
+ set termguicolors
+lua require'colorizer'.setup()
+
+" vim inside web browser
 if exists('g:started_by_firenvim') && g:started_by_firenvim
     " general options
     set laststatus=0 nonumber noruler noshowcmd

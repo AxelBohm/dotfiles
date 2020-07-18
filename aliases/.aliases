@@ -32,6 +32,10 @@ alias sai="sudo apt-get install"
 alias zzz="sudo zzz"
 alias ZZZ="sudo ZZZ"
 alias vr="xbps-remove -R"
+alias vi="sudo xbps-install -S" # install
+alias vu="sudo xbps-install -Su" # system update
+alias list-processes="sudo sv status /var/service/*"
+alias vh="xbps-pkgdb -m hold" # don't update specified package
 
 # editor
 alias e="emacs -nw"

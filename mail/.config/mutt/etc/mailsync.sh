@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/bash
 # This script will run offlineimap and check
 # for new email if there is an internet connection.
 #

@@ -104,8 +104,10 @@ map e up
 map i open
 map search-next k
 map search-prev K
-
 map x delete
+
+# print stuff at uni
+map P $~/bin/mail2print.sh $f
 
 # preview
 set previewer ~/.config/lf/preview.sh

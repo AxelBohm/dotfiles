@@ -27,7 +27,7 @@ Plug 'deoplete-plugins/deoplete-jedi' " python autocompletion
 
 " Plug 'junegunn/fzf', { 'do': './install --bin' }
 " Plug 'junegunn/fzf.vim'
-Plug 'w0rp/ale'                 " linting 
+Plug 'dense-analysis/ale'                 " linting 
 Plug 'SirVer/ultisnips'
 Plug 'tpope/vim-commentary'     " commentary (gc(c))
 Plug 'christoomey/vim-tmux-navigator'
@@ -82,6 +82,7 @@ nmap <silent> <leader>ap :ALEPrevious<cr>
 
 " vimtex
 let g:vimtex_view_method = 'zathura'
+let g:tex_flavor = "latexmk"
 set conceallevel=1
 let g:tex_conceal='abdmg'
 
@@ -138,14 +139,12 @@ let g:AutoCloseExpandSpace = 0 " Make iabbrev work again
 " let g:ctrlp_cmd = 'CtrlPMixed'      " what to show when pressing ^-P
 nnoremap <leader>bb :CtrlPBuffer<CR>
 
-" not yet working
-let g:nord_italic_comments = 1
-
 """""""""""""""""""""""""""""""""""""""""""""""""
 " => general config
 """""""""""""""""""""""""""""""""""""""""""""""""
 colorscheme sourcerer
-highlight Normal ctermbg=NONE
+" make transparency work
+highlight Normal guibg=NONE ctermbg=NONE
 
 " no statusline
 set laststatus=0

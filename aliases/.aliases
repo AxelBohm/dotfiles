@@ -67,7 +67,7 @@ alias ls="ls --color"
 alias la="ls -A"
 alias ll="ls -l"
 alias ls="ls --ignore='*.'{log,aux,fls,synctex.gz,fdb_latexmk,prv} --ignore='\_region\_.tex' --color"
-alias grep="grep --color"
+alias grep="grep --color -i"
 
 c() { # automatically show content when changin into a directory
 	cd $1;

@@ -1,7 +1,7 @@
 " set leader (has to be before any leader command is defined)
 nnoremap <space> <Nop>
 let mapleader = ' '
-let maplocalleader = ' '
+let maplocalleader = ','
 
 
 """"""""""""""""""""""""""

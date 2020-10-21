@@ -43,9 +43,9 @@ bind pager,browser gg top-page
 bind pager G bottom
 bind index,pager \Cd half-down
 bind index,pager \Cu half-up
-bind browser l select-entry
+# bind browser l select-entry
 # sync mailbox when opening so messages don't remain new for ever
-macro index l <display-message><sync-mailbox>
+# macro index l <display-message><sync-mailbox> # qwerty
 macro index <space> <display-message><sync-mailbox>
 bind pager l view-attachments
 bind pager,attach h exit

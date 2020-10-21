@@ -3,7 +3,7 @@
 internal="LVDS1"
 
 monitors=$(xrandr -q)
-declare -a ports=("HDMI" "DP" "VGA")
+declare -a ports=("DP" "HDMI" "VGA")
 # loop over connectors and break if one of them is connected
 for port in "${ports[@]}"
 do

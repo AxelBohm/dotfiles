@@ -10,7 +10,7 @@ externalhdmi=${externalhdmi% connected}
 # echo "$externalhdmi"
 
 
-xrandr --output $internal --auto --output $externalvga --off --output HDMI1 --off --output HDMI2 --off --output HDMI3 --off
+xrandr --output $internal --auto --output $externalvga --off --output HDMI1 --off --output HDMI2 --off --output HDMI3 --off --output DP2 --off
 
 # set wallpaper again
 set_background.sh

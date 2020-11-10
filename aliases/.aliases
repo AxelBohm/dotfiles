@@ -57,7 +57,7 @@ alias nvrc="vim ~/.config/nvim/init.vim"
 alias zrc="vim ~/.zshrc"
 alias mrc="vim ~/.config/mutt/muttrc"
 alias arc="vim ~/.config/mutt/etc/aliases"
-alias nrc="vim ~/.newsboat/config"
+alias nrc="vim ~/.config/newsboat/config"
 alias rrc="vim ~/.config/ranger/rc.conf"
 alias brc="vim ~/.bashrc"
 

@@ -24,7 +24,7 @@ set scrolloff 10
 map <enter> shell
 
 # execute current file (must be executable)
-map x $$f
+# map x $$f
 map X !$f
 
 # dedicated keys for file opener actions
@@ -98,13 +98,22 @@ cmd zip ${{
     rm -rf $1
 }}
 
-# custom
+# custom basic
 map n down
 map e up
 map i open
-map search-next k
-map search-prev K
+map k search-next
+map K search-prev
 map x delete
+
+# advanced
+map y
+map yy copy
+map yp echo -n $f | xclip -selection clipboard           # yank path
+map m
+map mm mark-save
+map mk push %mkdir<space>
+
 
 # print stuff at uni
 map P $~/bin/mail2print.sh $f

@@ -85,6 +85,7 @@ let g:vimtex_view_method = 'zathura'
 let g:tex_flavor = "latexmk"
 set conceallevel=1
 let g:tex_conceal='abdmg'
+" autocmd Filetype latex nnoremp <buffer> <localleader>v :VimtexView<cr> " not quite working
 
 hi clear Conceal
 hi Conceal cterm=NONE ctermbg=NONE ctermfg=darkblue

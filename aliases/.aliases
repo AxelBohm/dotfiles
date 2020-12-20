@@ -39,7 +39,7 @@ alias vh="xbps-pkgdb -m hold" # don't update specified package
 
 # editor
 alias e="emacs -nw"
-alias ec="emacsclient -c"
+# alias ec="emacsclient -c"
 alias v="vim"
 alias vim="nvim"
 alias nv="nvim"
@@ -57,7 +57,7 @@ alias nvrc="vim ~/.config/nvim/init.vim"
 alias zrc="vim ~/.zshrc"
 alias mrc="vim ~/.config/mutt/muttrc"
 alias arc="vim ~/.config/mutt/etc/aliases"
-alias nrc="vim ~/.newsboat/config"
+alias nrc="vim ~/.config/newsboat/config"
 alias rrc="vim ~/.config/ranger/rc.conf"
 alias brc="vim ~/.bashrc"
 
@@ -67,7 +67,7 @@ alias ls="ls --color"
 alias la="ls -A"
 alias ll="ls -l"
 alias ls="ls --ignore='*.'{log,aux,fls,synctex.gz,fdb_latexmk,prv} --ignore='\_region\_.tex' --color"
-alias grep="grep --color"
+alias grep="grep --color -i"
 
 c() { # automatically show content when changin into a directory
 	cd $1;

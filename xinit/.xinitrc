@@ -42,7 +42,8 @@ dwmblocks &
 # set background
 . set_background.sh &
 
-exec dwm
+# exec dwm
+while type dwm >/dev/null ; do dwm && continue || break ; done
 # exec startkde
 # export XDG_CURRENT_DESKTOP=GNOME-Classic:GNOME
 # export GNOME_SHELL_SESSION_MODE=classic

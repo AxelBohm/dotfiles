@@ -49,13 +49,19 @@ color info                  color4     color0
 ########################
 
 # title
-highlight article "^(Title):(.*)" color2 default
+highlight article "^(Title):(.*)" color6 default
 
 # links
 # highlight article "https?://[^\" ]+" red default
 
 # names of authors in arxiv
-highlight article "\">[^\"]+" red default
+highlight article "\">[^<]+" green default
+
+# names of authors I am particularly interested
+highlight article "(Lacoste-Julien|Peter Richt&#xe1;rik|Michael I. Jordan|Yura Malitsky|Khoa|Radu|Dima Drus|Courtney Paquette|Duchi)" color3 default
+
+# keywords I am particularly interested
+highlight article "(stochastic|smoothing|Moreau|GAN|generative adversarial network|min\-max|minimax|nonsmooth|non-smooth)" color3 default
 
 # flagged articles
 # highlight all "(.*)!(.*)\d(.*)" green default
@@ -64,6 +70,7 @@ highlight article "\">[^\"]+" red default
 highlight all "\\(arXiv(.*)\)" color0 color0
 #highlight feedlist "\(arXiv(.*)" color235 color0
 
+highlight all "UPDATED" color3 default
 
 ########################
 # browser

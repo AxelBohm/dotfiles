@@ -175,6 +175,8 @@ macro index,pager A "<enter-command>set my_pipe_decode=\$pipe_decode pipe_decode
 # send-hook "~t @domain.com" set signature=~/.mutt/branded.sig
 
 
+# Add calendar events to calcurse
+macro index,pager \ck <pipe-entry>'mutt2calcurse'<enter> 'Add ical events to calcurse'
 
 # sets the default mailbox
 source /home/xel/.config/mutt/accounts/uniwien.muttrc

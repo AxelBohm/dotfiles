@@ -3,7 +3,7 @@ appearance.compactpanels=no
 appearance.defaultpanel=calendar
 appearance.layout=1
 appearance.notifybar=yes
-appearance.sidebarwidth=0
+appearance.sidebarwidth=3
 appearance.theme=blue on default
 appearance.todoview=show-completed
 appearance.headingpos=right-justified
@@ -22,10 +22,10 @@ general.firstdayofweek=monday
 general.periodicsave=10
 general.progressbar=yes
 general.systemdialogs=yes
-notification.command=printf '\a'
-notification.notifyall=flagged-only
+notification.notifyall=all
 
-notification.command=printf '\a'
+notification.command= calcurse -n | sed '1d; s/^.*\]/Upcoming:/' | xargs -0 notify-send "Calcurse"
+
 daemon.enable=no
 
 notification.warning=300

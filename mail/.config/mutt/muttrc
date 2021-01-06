@@ -165,6 +165,7 @@ bind pager a noop                           # prevents me from adding contact to
 # sometimes abookk cannot handle encoded headers
 # see https://stackoverflow.com/questions/25718979/handling-string-encoding-from-mutt-to-abook
 macro index,pager A "<enter-command>set my_pipe_decode=\$pipe_decode pipe_decode<return><pipe-message>abook --add-email<return><enter-command>set pipe_decode=\$my_pipe_decode; unset my_pipe_decode<return>" "add the sender address to abook"
+bind editor <Tab> complete-query
 # set edit_headers = yes
 # set editor = 'nvim +/^$ +nohlsearch' # Move past headers.
 
@@ -175,6 +176,8 @@ macro index,pager A "<enter-command>set my_pipe_decode=\$pipe_decode pipe_decode
 # send-hook "~t @domain.com" set signature=~/.mutt/branded.sig
 
 
+# Add calendar events to calcurse
+macro index,pager \ck <pipe-entry>'mutt2calcurse'<enter> 'Add ical events to calcurse'
 
 # sets the default mailbox
 source /home/xel/.config/mutt/accounts/uniwien.muttrc

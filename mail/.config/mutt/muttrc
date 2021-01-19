@@ -52,7 +52,9 @@ bind pager,attach h exit
 bind index h noop
 bind browser h goto-parent
 bind index,pager S sync-mailbox
-bind index,pager R group-reply
+# do group-reply by default
+bind index,pager r group-reply
+bind index,pager R reply
 # macro index,pager \Cu |urlview\n
 
 # Forgotten attachment Feature

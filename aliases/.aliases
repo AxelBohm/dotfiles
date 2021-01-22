@@ -31,7 +31,7 @@ alias sai="sudo apt-get install"
 # void
 alias zzz="sudo zzz"
 alias ZZZ="sudo ZZZ"
-alias vr="xbps-remove -R"
+alias vr="sudo xbps-remove -R"
 alias vi="sudo xbps-install -S" # install
 alias vu="sudo xbps-install -Su" # system update
 alias list-processes="sudo sv status /var/service/*"

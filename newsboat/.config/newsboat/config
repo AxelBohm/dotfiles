@@ -58,7 +58,7 @@ highlight article "^(Title):(.*)" color6 default
 highlight article "\">[^<]+" green default
 
 # names of authors I am particularly interested
-highlight article "(Lacoste-Julien|Peter Richt&#xe1;rik|Michael I. Jordan|Yura Malitsky|Khoa|Radu|Dmitriy Drusvyatskiy|Courtney Paquette|John C. Duchi|Constantinos Daskalakis)" color3 color8
+highlight article "(Lacoste-Julien|Peter Richt&#xe1;rik|Michael I. Jordan|Yura Malitsky|Khoa|Radu Ioan Bot|Dmitriy Drusvyatskiy|Courtney Paquette|John C. Duchi|Constantinos Daskalakis)" color3 color8
 
 # keywords I am particularly interested
 highlight article "(stochastic|smoothing|Moreau|GAN|generative adversarial network|min\-max|minimax|nonsmooth|non-smooth)" color3 default

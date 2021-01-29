@@ -15,8 +15,7 @@ endif
 
 call plug#begin('~/.config/nvim/autoload/plug.vim')
 
-" colorscheme
-Plug 'xero/sourcerer.vim'
+
 
 " auto completion
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
@@ -29,17 +28,26 @@ Plug 'deoplete-plugins/deoplete-jedi' " python autocompletion
 " Plug 'junegunn/fzf.vim'
 Plug 'dense-analysis/ale'                 " linting 
 Plug 'SirVer/ultisnips'
-Plug 'tpope/vim-commentary'     " commentary (gc(c))
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'lervag/vimtex'            " LaTeX
-Plug 'Townk/vim-autoclose'      " autoclose parenthesis
-Plug 'justinmk/vim-sneak'       " two char find
-Plug 'tpope/vim-surround'       " change surrounding parenthesis/quotes
-Plug 'ctrlpvim/ctrlp.vim'       " fuzzy find
 Plug 'airblade/vim-gitgutter'       " git integration
-Plug 'isa/vim-matchit'          " extend % functionality
-Plug 'norcalli/nvim-colorizer.lua' "color highlight
 
+" Editor
+Plug 'jiangmiao/auto-pairs'     " autoclose parenthesis
+Plug 'tpope/vim-surround'       " change surrounding parenthesis/quotes
+Plug 'isa/vim-matchit'          " extend % functionality
+Plug 'tpope/vim-commentary'     " commentary (gc(c))
+Plug 'justinmk/vim-sneak'       " two char find
+Plug 'ctrlpvim/ctrlp.vim'       " fuzzy find
+
+" UI
+Plug 'xero/sourcerer.vim'               " colorscheme
+Plug 'norcalli/nvim-colorizer.lua'      " color highlight
+Plug 'machakann/vim-highlightedyank'    " blink yanks
+Plug 'itchyny/lightline.vim'            " status line
+
+" misc
+Plug 'jiangmiao/auto-pairs'     " autoclose parenthesis
 Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }
 
 " Initialize plugin system
@@ -53,6 +61,13 @@ call plug#end()
 " colorizer
  set termguicolors
 lua require'colorizer'.setup()
+
+" colorsheme
+colorscheme sourcerer
+
+" highlightedyank
+let g:highlightedyank_highlight_duration = 250
+highlight HighlightedyankRegion ctermbg=white ctermfg=red guibg=#686858
 
 " vim inside web browser
 if exists('g:started_by_firenvim') && g:started_by_firenvim
@@ -97,44 +112,41 @@ let g:UltiSnipsJumpForwardTrigger='<c-f>'
 
 map <leader>n :UltiSnipsEdit<CR> " fast snippet configuring
 
-" autoclose
-let g:AutoCloseExpandSpace = 0 " Make iabbrev work again
-
 " statusline configuration
-" let g:lightline = {
-"     \ 'colorscheme': 'nord',
-"     \ 'separator': { 'left': '▓▒░', 'right': '░▒▓' },
-"     \ 'subseparator': { 'left': '', 'right': '░' },
-"     \ 'active': {
-"     \   'right': [ [ 'lineinfo' ], ['percent'] ]
-"     \ },
-"     \ 'tabline': {
-"     \   'left': [['buffers']],
-"     \   'right': [['']]
-"     \},
-"     \ 'component_expand': {
-"     \ 'buffers': 'lightline#bufferline#buffers'
-"     \},
-"     \ 'component_type': {'buffers': 'tabsel'},
-"     \ }
+let g:lightline = {
+    \ 'colorscheme': 'wombat',
+    \ 'separator': { 'left': '▓▒░', 'right': '░▒▓' },
+    \ 'subseparator': { 'left': '', 'right': '░' },
+    \ 'active': {
+    \   'right': [ [ 'lineinfo' ], ['percent'] ]
+    \ },
+    \ 'tabline': {
+    \   'left': [['buffers']],
+    \   'right': [['']]
+    \},
+    \ 'component_expand': {
+    \ 'buffers': 'lightline#bufferline#buffers'
+    \},
+    \ 'component_type': {'buffers': 'tabsel'},
+    \ }
 
-" let g:lightline.mode_map = {
-"         \ 'n' : 'N',
-"         \ 'i' : 'I',
-"         \ 'R' : 'R',
-"         \ 'v' : 'V',
-"         \ 'V' : 'V',
-"         \ "\<C-v>": 'V',
-"         \ 's' : 'S',
-"         \ 'S' : 'S',
-"         \ "\<C-s>": 'S'
-"         \ }
+let g:lightline.mode_map = {
+        \ 'n' : 'N',
+        \ 'i' : 'I',
+        \ 'R' : 'R',
+        \ 'v' : 'V',
+        \ 'V' : 'V',
+        \ "\<C-v>": 'V',
+        \ 's' : 'S',
+        \ 'S' : 'S',
+        \ "\<C-s>": 'S'
+        \ }
 
-" " show lightline-bufferline
+" show lightline-bufferline
 " set showtabline=2
 
-" let g:lightline#bufferline#unnamed      = '[No Name]'
-" let g:lightline#bufferline#filename_modifier = ':t'
+let g:lightline#bufferline#unnamed      = '[No Name]'
+let g:lightline#bufferline#filename_modifier = ':t'
 
 " ctrlP
 " let g:ctrlp_cmd = 'CtrlPMixed'      " what to show when pressing ^-P
@@ -143,12 +155,11 @@ nnoremap <leader>bb :CtrlPBuffer<CR>
 """""""""""""""""""""""""""""""""""""""""""""""""
 " => general config
 """""""""""""""""""""""""""""""""""""""""""""""""
-colorscheme sourcerer
 " make transparency work
 highlight Normal guibg=NONE ctermbg=NONE
 
 " no statusline
-set laststatus=0
+set laststatus=2
 
 " highlight entire line of curser
 set cursorline

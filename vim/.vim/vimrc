@@ -5,6 +5,7 @@ let maplocalleader = ' '
 
 source ~/.vim/plugins.vim
 source ~/.vim/plugins_config.vim
+source ~/.config/nvim/colemak.vim
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Colors

@@ -149,8 +149,10 @@ let g:lightline#bufferline#unnamed      = '[No Name]'
 let g:lightline#bufferline#filename_modifier = ':t'
 
 " ctrlP
-" let g:ctrlp_cmd = 'CtrlPMixed'      " what to show when pressing ^-P
-nnoremap <leader>bb :CtrlPBuffer<CR>
+let g:ctrlp_cmd = 'CtrlP'        " what to show when pressing ^-P
+nnoremap <leader>, :CtrlPMixed<CR>    " as in Doom Emacs
+nnoremap <leader>. :CtrlP<CR>         " as in Doom Emacs
+nnoremap <leader>bb :CtrlPBuffer<CR>  " as in Doom Emacs
 
 """""""""""""""""""""""""""""""""""""""""""""""""
 " => general config

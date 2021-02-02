@@ -30,10 +30,11 @@ remoterepository = ymail-remote
 auth_mechanisms = LOGIN
 type = IMAP
 remoteuser = axel.boehm@ymail.com
-remotepasseval = get_pass("yahoo.com")
+remotepasseval = get_otp()
 remotehost = imap.mail.yahoo.com
 remoteport = 993
 sslcacertfile = /etc/ssl/certs/ca-certificates.crt
+folderfilter = lambda foldername: foldername in ["Inbox", "Sent", "Drafts", "Trash", "Archive"]
 
 [Repository ymail-local]
 type = Maildir

@@ -17,6 +17,10 @@ alias glh="gl -10"
 alias gsc="git config credential.helper store"      # store credentials
 alias grc="git rm -r --cached ."                    # use this when ignoring commited files
 
+# conda
+alias ca="conda activate"
+alias ci="conda install"
+
 # package management
 alias p="sudo pacman"
 alias pi="sudo pacman -S"

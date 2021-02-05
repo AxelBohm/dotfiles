@@ -111,6 +111,7 @@ let g:UltiSnipsExpandTrigger='<c-j>'
 let g:UltiSnipsJumpForwardTrigger='<c-f>'
 
 map <leader>n :UltiSnipsEdit<CR> " fast snippet configuring
+map <leader>sn :UltiSnipsEdit<CR> " fast snippet configuring
 
 " statusline configuration
 let g:lightline = {
@@ -291,6 +292,9 @@ augroup latex
     autocmd FileType tex inoremap ;l ^{k+1}
     autocmd FileType tex inoremap ;s ^*
     autocmd FileType tex inoremap ;t ^2
+
+    autocmd FileType tex inoremap xkk x_k
+    autocmd FileType tex inoremap ykk y_k
 
     hi clear Conceal
     hi Conceal cterm=NONE ctermbg=NONE ctermfg=darkblue

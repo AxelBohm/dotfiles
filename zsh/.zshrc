@@ -93,7 +93,7 @@ bindkey '^j' autosuggest-execute
 bindkey '^ ' autosuggest-accept
 
 zle -N autosuggest-forward-word
-bindkey '^i' forward-word
+bindkey '^o' forward-word
 
 ## history substring search
 ## bindkey "^P" history-substring-search-up
@@ -146,8 +146,6 @@ function _pip_completion {
 }
 compctl -K _pip_completion pip
 # pip zsh completion end
-
-bindkey -s '^O' 'ranger\n'
 
 
 # >>> conda initialize >>>

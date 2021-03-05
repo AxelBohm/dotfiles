@@ -92,6 +92,9 @@ fi
 bindkey '^j' autosuggest-execute
 bindkey '^ ' autosuggest-accept
 
+zle -N autosuggest-forward-word
+bindkey '^i' forward-word
+
 ## history substring search
 ## bindkey "^P" history-substring-search-up
 ## bindkey "^N" history-substring-search-down

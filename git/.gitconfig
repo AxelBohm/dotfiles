@@ -23,3 +23,5 @@
 	default = current
 [credential]
 	helper = read-only
+[pull]
+	rebase = true

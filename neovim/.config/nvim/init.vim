@@ -39,6 +39,9 @@ Plug 'isa/vim-matchit'          " extend % functionality
 Plug 'tpope/vim-commentary'     " commentary (gc(c))
 Plug 'justinmk/vim-sneak'       " two char find
 Plug 'ctrlpvim/ctrlp.vim'       " fuzzy find
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
+Plug 'jceb/vim-orgmode'         " orgmode
 
 " UI
 Plug 'xero/sourcerer.vim'               " colorscheme

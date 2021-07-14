@@ -86,3 +86,9 @@ softmax
 GDmax
 multistep
 Wasserstein
+nonmonotone
+comonotone
+cocoercivity
+comonotonicity
+Stampacchia
+Stampacchia

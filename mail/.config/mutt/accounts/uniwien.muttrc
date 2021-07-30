@@ -8,8 +8,8 @@ set folder = "~/.mail/uniwien"
 set header_cache = ~/.config/mutt/accounts/uniwien/cache/headers
 set message_cachedir = ~/.config/mutt/accounts/uniwien/cache/bodies
 set certificate_file = ~/.config/mutt/accounts/uniwien/certificates
-set smtp_pass=`pass show Email/univie-employee`
-set imap_pass=`pass show Email/univie-employee`
+set smtp_pass=`pass show Uni/univie-employee`
+set imap_pass=`pass show Uni/univie-employee`
 
 set mbox_type = Maildir
 set ssl_starttls = yes

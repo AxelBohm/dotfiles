@@ -61,7 +61,7 @@ highlight article "\">[^<]+" green default
 highlight article "(Lacoste-Julien|Peter Richt&#xe1;rik|Michael I. Jordan|Yura Malitsky|Khoa|Radu Ioan Bot|Dmitriy Drusvyatskiy|Courtney Paquette|John C. Duchi|Constantinos Daskalakis|Ernest Ryu)" color3 color8
 
 # keywords I am particularly interested
-highlight article "(stochastic|smoothing|Moreau|GAN|generative adversarial network|min\-max|minimax|nonsmooth|non-smooth)" color3 default
+highlight article "(stochastic|smoothing|Moreau|GAN|generative adversarial network|min\-max|minimax|nonsmooth|non-smooth|Minty)" color3 default
 
 # flagged articles
 # highlight all "(.*)!(.*)\d(.*)" green default

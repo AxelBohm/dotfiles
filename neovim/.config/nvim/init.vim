@@ -20,8 +20,9 @@ call plug#begin('~/.config/nvim/autoload/plug.vim')
 " auto completion
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 " Plug 'Shougo/deoplete-lsp'
-" Plug 'neovim/nvim-lsp'
+Plug 'neovim/nvim-lspconfig'     " collection of common configurations for LSP client
 Plug 'prabirshrestha/vim-lsp'
+Plug 'JuliaEditorSupport/julia-vim'   " Julia support (syntax highligthing,...)
 Plug 'deoplete-plugins/deoplete-jedi' " python autocompletion
 
 " Plug 'junegunn/fzf', { 'do': './install --bin' }
@@ -60,6 +61,17 @@ call plug#end()
 """""""""""""""""""""""""""""""""""""""""""""""""""
 " => plugin config
 """""""""""""""""""""""""""""""""""""""""""""""""""
+
+" lsp config for julia
+lua << EOF
+    require'lspconfig'.julials.setup{}
+EOF
+nnoremap <silent> <leader>ld    <cmd>lua vim.lsp.buf.declaration()<CR>
+nnoremap <silent> <leader>lh    <cmd>lua vim.lsp.buf.hover()<CR>
+nnoremap <silent> <leader>ld    <cmd>lua vim.lsp.util.show_line_diagnostics()<CR>
+nnoremap <silent> <leader>lk    <cmd>lua vim.lsp.buf.signature_help()<CR>
+nnoremap <silent> <leader>lr    <cmd>lua vim.lsp.buf.references()<CR>
+
 
 " colorizer
  set termguicolors

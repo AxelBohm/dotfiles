@@ -101,6 +101,6 @@ SVRG
 section
 Hoeffding's
 Azuma
-Azuma
 Nesterov
 Nemirovski
+Bregman

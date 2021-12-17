@@ -114,3 +114,7 @@ Greenstadt
 BFGS
 orthant
 Katyusha
+cocoercive
+minmax
+Cournot
+linesearch

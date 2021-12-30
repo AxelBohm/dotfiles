@@ -7,14 +7,19 @@ let maplocalleader = ','
 """"""""""""""""""""""""""
 " => load plugins
 """"""""""""""""""""""""""
-if empty(glob('~/.local/share/nvim/site/autoload/plug.vim'))
-    silent !curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs
-        \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-    autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+set runtimepath+=~/.vim/
+
+if empty(glob('~/.vim/autoload/plug.vim'))
+  silent call system('mkdir -p ~/.vim/{autoload,bundle,cache,undo,backups,swaps}')
+  silent call system('curl -fLo ~/.vim/autoload/plug.vim https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim')
+  execute 'source  ~/.vim/autoload/plug.vim'
+  augroup plugsetup
+    au!
+    autocmd VimEnter * PlugInstall
+  augroup end
 endif
 
-call plug#begin('~/.config/nvim/autoload/plug.vim')
-
+call plug#begin('~/.vim/plugged')
 
 
 " auto completion
@@ -32,6 +37,7 @@ Plug 'SirVer/ultisnips'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'lervag/vimtex'            " LaTeX
 Plug 'airblade/vim-gitgutter'       " git integration
+Plug 'sheerun/vim-polyglot'
 
 " Editor
 Plug 'jiangmiao/auto-pairs'     " autoclose parenthesis

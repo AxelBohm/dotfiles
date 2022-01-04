@@ -30,14 +30,12 @@ Plug 'prabirshrestha/vim-lsp'
 Plug 'JuliaEditorSupport/julia-vim'   " Julia support (syntax highligthing,...)
 Plug 'deoplete-plugins/deoplete-jedi' " python autocompletion
 
-" Plug 'junegunn/fzf', { 'do': './install --bin' }
-" Plug 'junegunn/fzf.vim'
 Plug 'dense-analysis/ale'                 " linting 
 Plug 'SirVer/ultisnips'
 Plug 'christoomey/vim-tmux-navigator'
-Plug 'lervag/vimtex'            " LaTeX
+Plug 'lervag/vimtex'                " LaTeX
 Plug 'airblade/vim-gitgutter'       " git integration
-Plug 'sheerun/vim-polyglot'
+Plug 'sheerun/vim-polyglot'         " syntax highligthing for many languages
 
 " Editor
 Plug 'jiangmiao/auto-pairs'     " autoclose parenthesis
@@ -45,7 +43,6 @@ Plug 'tpope/vim-surround'       " change surrounding parenthesis/quotes
 Plug 'isa/vim-matchit'          " extend % functionality
 Plug 'tpope/vim-commentary'     " commentary (gc(c))
 Plug 'justinmk/vim-sneak'       " two char find
-Plug 'ctrlpvim/ctrlp.vim'       " fuzzy find
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'jceb/vim-orgmode'         " orgmode
@@ -57,7 +54,6 @@ Plug 'machakann/vim-highlightedyank'    " blink yanks
 Plug 'itchyny/lightline.vim'            " status line
 
 " misc
-Plug 'jiangmiao/auto-pairs'     " autoclose parenthesis
 Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }
 
 " Initialize plugin system
@@ -67,6 +63,13 @@ call plug#end()
 """""""""""""""""""""""""""""""""""""""""""""""""""
 " => plugin config
 """""""""""""""""""""""""""""""""""""""""""""""""""
+
+" fzf
+let g:fzf_command_prefix = 'Fzf'
+nnoremap <silent> <leader>.    :FZF<cr>
+nnoremap <silent> <leader>,    :FzfHistory<cr>
+nnoremap <silent> <leader>bb   :FzfBuffers<cr>
+
 
 " lsp config for julia
 lua << EOF
@@ -200,12 +203,6 @@ let g:lightline.mode_map = {
 
 let g:lightline#bufferline#unnamed      = '[No Name]'
 let g:lightline#bufferline#filename_modifier = ':t'
-
-" ctrlP
-let g:ctrlp_cmd = 'CtrlP'        " what to show when pressing ^-P
-nnoremap <leader>, :CtrlPMixed<CR>    " as in Doom Emacs
-nnoremap <leader>. :CtrlP<CR>         " as in Doom Emacs
-nnoremap <leader>bb :CtrlPBuffer<CR>  " as in Doom Emacs
 
 """""""""""""""""""""""""""""""""""""""""""""""""
 " => general config

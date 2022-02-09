@@ -118,3 +118,9 @@ cocoercive
 minmax
 Cournot
 linesearch
+Schwarz
+nonincreasing
+neglectable
+extragradient
+VGSCO
+Daniilidis

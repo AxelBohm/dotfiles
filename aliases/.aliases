@@ -95,6 +95,7 @@ alias xclip="xclip -selection 'clipboard'"
 # i cant always remember my pass folder structure -> use fuzzy finder
 alias fp="fuzzy_pass.sh -p"
 alias fu="fuzzy_pass.sh -u"
+alias fs="fuzzy_pass.sh -s"
 
 
 ## random 

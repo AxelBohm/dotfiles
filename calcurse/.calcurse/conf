@@ -1,9 +1,9 @@
-appearance.calendarview=weekly
-appearance.compactpanels=no
+appearance.calendarview=monthly
+appearance.compactpanels=yes
 appearance.defaultpanel=calendar
 appearance.layout=1
 appearance.notifybar=yes
-appearance.sidebarwidth=3
+appearance.sidebarwidth=4
 appearance.theme=green on default
 appearance.todoview=show-completed
 appearance.headingpos=right-justified
@@ -27,10 +27,5 @@ notification.command= calcurse -n | sed '1d; s/^.*\]/Upcoming:/' | xargs -0 noti
 daemon.enable=no
 
 notification.warning=300
-appearance.headerline=yes
-appearance.eventseparator=yes
-appearance.dayseparator=yes
-appearance.emptyline=yes
-appearance.emptyday=--
-general.multipledays=no
-general.systemevents=yes
+general.progressbar=yes
+general.systemdialogs=yes

@@ -128,3 +128,12 @@ SGD
 SVM
 sigmoid
 hyperparameter
+discretization
+Opial
+GRAAL
+Popov
+Nesterov
+Bregman
+nonanchored
+sublinear
+fOGDA

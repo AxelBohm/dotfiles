@@ -1,0 +1,614 @@
+# abook addressbook file
+
+[format]
+program=abook
+version=0.6.1
+
+
+[0]
+name=Radu Ioan Bot
+email=radu.bot@univie.ac.at
+nick=bot
+
+[1]
+name=Michael Sedlmayer
+email=michael.sedlmayer@univie.ac.at
+nick=michael
+
+[2]
+name=Teresa Scarinci
+email=teresa.scarinci@univie.ac.at
+nick=teresa
+
+[3]
+name=mobile-print.mathematik@univie.ac.at
+email=mobile-print.mathematik@univie.ac.at
+nick=print
+
+[4]
+name=Dang-Khoa Nguyen
+email=dang-khoa.nguyen@univie.ac.at
+nick=khoa
+
+[5]
+name=vuong.phan@univie.ac.at
+email=vuong.phan@univie.ac.at
+nick=vuong
+
+[6]
+name=Caroline Geiersbach
+email=caroline.geiersbach@univie.ac.at
+nick=caroline
+
+[7]
+name=Axel
+email=axel.boehm@univie.ac.at
+nick=axel
+
+[8]
+name=Morteza Kimiaei
+email=morteza.kimiaei@gmail.com
+nick=morteza
+
+[9]
+name=Dennis Meier
+email=dennis.meier@posteo.de
+nick=dennis
+
+[10]
+name=Paul Stocker
+email=paul.stocker@univie.ac.at
+nick=paul
+
+[11]
+name=Ernö Robert Csetnek
+email=robert.csetnek@univie.ac.at
+nick=robert.csetnek
+
+[12]
+name=Sebastian Banert
+email=banert@kth.se
+nick=sebastian.banert
+
+[13]
+name=florian.aigner@univie.ac.at
+email=florian.aigner@univie.ac.at
+nick=vds.student.steering
+
+[14]
+name=vds-mathematics@lists.univie.ac.at
+email=vds-mathematics@lists.univie.ac.at
+nick=vds.mailinglist
+
+[15]
+name=Bettina Hiebl
+email=bettina.hiebl@univie.ac.at
+nick=bettina.hiebl
+
+[16]
+name=Florian Aigner
+email=florian.aigner@univie.ac.at
+nick=florian.aigner
+
+[17]
+name=VDS Mathematik
+email=vds.mathematik@univie.ac.at
+nick=vds.mathematik
+
+[18]
+name=Sascha Biberhofer
+email=sascha.biberhofer@univie.ac.at
+nick=sascha.biberhofer
+
+[19]
+name=Christopher Chiu
+email=christopher.heng.chiu@univie.ac.at
+nick=christopher.chiu
+
+[20]
+name=Laura Kanzler
+email=laura.kanzler@univie.ac.at
+nick=laura.kanzler
+
+[21]
+name=Manjil Saikia
+email=manjil.saikia@univie.ac.at
+nick=manjil
+
+[22]
+name=Daniel Scherl
+email=daniel.scherl@univie.ac.at
+nick=dani.scherl
+
+[23]
+name=Thomas Mejstrik
+email=thomas.mejstrik@univie.ac.at
+nick=thomsch
+
+[24]
+name=Hans Höngesberg
+email=hans.hoengesberg@univie.ac.at
+nick=hans.hoengesberg
+
+[25]
+name=Markus Gabl
+email=markus@gabl.com
+nick=markus.gabl
+
+[26]
+name=Anna Breger
+email=anna.breger@univie.ac.at
+nick=anna.breger
+
+[27]
+name=Aris Daniilidis
+email=aris.daniilidis@tuwien.ac.at
+nick=aris
+
+[28]
+name=Sebastian Tapia
+email=stapia@dim.uchile.cl
+nick=sebastian.chile
+
+[29]
+name=Sebastian Tapia
+email=sgtg22@gmail.com
+nick=sebastian_tapia_gmail
+
+[30]
+name=R T Rockafellar
+email=rtr@uw.edu
+nick=terry
+
+[31]
+name=Sophie Schober
+email=sophie.schober@meduniwien.ac.at
+nick=spinoff_fellowship1
+
+[32]
+name=Inmaculada Sanchez Romero
+email=inma.sanchez@univie.ac.at
+nick=spinoff_fellowship2
+
+[33]
+name=Reckling Tobias
+email=tobias.reckling@univie.ac.at
+nick=spinoff_fellowship3
+
+[34]
+name=Christof Ender
+email=christof.ender@univie.ac.at
+nick=christof.ender
+
+[35]
+name=SSC Physik
+email=ssc.physik@univie.ac.at
+nick=ssc.physic
+
+[36]
+name=Leon Neubeck
+email=leon.neubeck240@gmail.com
+nick=leon.neubeck240
+
+[37]
+name=Stefan Fredenhagen
+email=stefan.fredenhagen@univie.ac.at
+nick=stefan.linag
+
+[38]
+name=VGSCO
+email=vgsco@univie.ac.at
+nick=vgsco
+
+[39]
+name=Gaspard Jankowiak
+email=gaspard@oknaj.eu
+nick=gaspard
+
+[40]
+name=Mathias Staudigl
+email=m.staudigl@maastrichtuniversity.nl
+nick=mathias.staudigl
+
+[41]
+name=Manon Roeleveld
+email=manon.roeleveld@univie.ac.at
+nick=manon.roeleveld
+
+[42]
+name=Katharina Werbach
+email=katharina.werbach@univie.ac.at
+nick=katharina.werbach
+
+[43]
+name=Burgholzer Reinhard
+email=Reinhard.Burgholzer@verbund.com
+nick=Reinhard.Burgholzer
+
+[44]
+name=Burchhart Thomas
+email=Thomas.Burchhart@verbund.com
+nick=Thomas.Burchhart
+
+[45]
+name=Hans Hammerschmied
+email=hammerschmied@hhp.eu
+nick=hans.hammerschmied
+
+[46]
+name=Clement Royer
+email=croyer2@wisc.edu
+nick=clement.royer
+
+[47]
+name=Stephen Wright
+email=swright@cs.wisc.edu
+nick=steve.wright
+
+[48]
+name=Maximilian Bernkopf
+email=maximilian.bernkopf@tuwien.ac.at
+nick=maximilian.bernkopf
+
+[49]
+name=Office Edelweiss
+email=office@alpenverein-edelweiss.at
+nick=edelweiss
+
+[50]
+name=Georg Pflug
+email=georg.pflug@univie.ac.at
+nick=georg.pflug
+
+[51]
+name=Michael Fischer
+email=michi.fischer@univie.ac.at
+nick=michi.fischer
+
+[52]
+name=Jonas Adler
+email=jonasadl@kth.se
+nick=jonas.adler
+
+[53]
+name=Axel Ringh
+email=aringh@kth.se
+nick=axel.ringh
+
+[54]
+name=Bernhard Lamel
+email=bernhard.lamel@univie.ac.at
+nick=bernhard.lamel
+
+[55]
+name=Lisa Carli
+email=lisa.carli@univie.ac.at
+nick=lisa.carli
+
+[56]
+name=Friedrich Reichhart
+email=friedrich.reichhart@sdr.at
+nick=fritz
+
+[57]
+name=Rolf Böhm
+email=r.r.boehm@aon.at
+nick=rolf
+
+[58]
+name=Rahmi Ilkilic
+email=rahmi@dii.uchile.cl
+nick=rahmi
+
+[59]
+name=Eva Ergoth
+email=eva.ergoth@gmx.at
+nick=eva.ergoth
+
+[60]
+name=Stefan Ergoth
+email=stefan.ergoth@gmail.com
+nick=stefan.ergoth
+
+[61]
+name=team3.personal@univie.ac.at
+email=team3.personal@univie.ac.at
+nick=team3.personal
+
+[62]
+name=Min Hadler
+email=min.hadler@univie.ac.at
+nick=min.hadler
+
+[63]
+name=Ilse Böhm
+email=ilse.boehm@aon.at
+birthday=27.11.1958
+nick=ilse privat
+
+[64]
+name=Roberto Cortez
+email=rcortez@dim.uchile.cl
+nick=roberto.chile
+
+[65]
+name=Gerold Petritsch
+email=gerold.petritsch@evn.at
+nick=gerold.petritsch
+
+[66]
+name=Christian Krattenthaler
+email=christian.krattenthaler@univie.ac.at
+
+[67]
+name=BLAKE J MASON
+email=bmason3@wisc.edu
+nick=blake
+
+[68]
+name=Blake Mason
+email=blakejmas@gmail.com
+note=madison
+nick=blake
+
+[69]
+name=Vincent Roulet
+email=vroulet@uw.edu
+
+[70]
+name=YUE XIE
+email=xie86@wisc.edu
+nick=yue
+
+[71]
+name=Ilse Böhm
+email=Ilse.Boehm@evn.at
+
+[72]
+name=Ardhendu S. Tripathy
+email=astripathy@wisc.edu
+note=madison
+nick=ardhendu
+
+[73]
+name=Mateusz Piorkowski
+email=mateusz.piorkowski@univie.ac.at
+
+[74]
+name=Hermann Schichl
+email=hermann.schichl@univie.ac.at
+nick=hermann
+
+[75]
+name=Leopold Veselka 
+email=leopold.veselka@univie.ac.at
+nick=leo
+
+[76]
+name=Hannah Noske
+email=hannah.noske98@gmail.com
+
+[77]
+name=Sorin Grad
+email=sorin-mihai.grad@univie.ac.at
+nick=sorin
+
+[78]
+name=Vera Stelzer
+email=vera.stelzer@univie.ac.at
+
+[79]
+name=Chiara Novarini
+email=chiara.novarini@univie.ac.at
+
+[80]
+name=Clemens Becsi
+email=clemens.becsi@univie.ac.at
+
+[81]
+name=Philip Meier
+email=p.meier@imagebiopsy.com
+
+[82]
+name=Harold Steinacker
+email=harold.steinacker@univie.ac.at
+
+[83]
+name=Julia Delacour
+email=julia.delacour@inria.fr
+
+[84]
+name=Pfannerer, Stephan Heinz
+email=stephan.pfannerer@tuwien.ac.at
+nick=pfanni
+
+[85]
+name=Vienna School of Mathematics
+email=office@vsmath.at
+nick=vsm
+
+[86]
+name=AV Austria - Klettern
+email=klettern@alpenverein-austria.at
+
+[87]
+name=Gianluca Favre
+email=gianluca.favre@univie.ac.at
+
+[88]
+name=Giulia Pilli
+email=giulia.pilli@univie.ac.at
+
+[89]
+name=Josef Hofbauer
+email=josef.hofbauer@univie.ac.at
+
+[90]
+name=Alexandra Kilian
+email=alexandra.kilian@univie.ac.at
+
+[91]
+name=UNIQA
+email=info@uniqa.at
+
+[92]
+name=Barbara Seiss
+email=Barbara.Seiss@univie.ac.at
+
+[93]
+name=Bo Peng
+email=bo.peng@univie.ac.at
+
+[94]
+name=Mikhail Karapetyants
+email=mikhail.karapetyants@univie.ac.at
+nick=misha
+
+[95]
+name=Simon Lacoste-Julien
+email=slacoste@iro.umontreal.ca
+
+[96]
+name=VGSCO Faculty Members
+email=faculty.vgsco@lists.univie.ac.at
+nick=prof
+
+[97]
+name=VGSCO Studierende inkl. Associated
+email=students.vgsco@lists.univie.ac.at
+
+[98]
+name=VGSCO Alumni inkl. Associated
+email=alumni.vgsco@lists.univie.ac.at
+
+[99]
+name=Gabriela Kovacova 
+email=gabriela.kovacova@wu.ac.at
+
+[100]
+name=Andreas Cap
+email=andreas.cap@univie.ac.at
+
+[101]
+name=David Hulett
+email=david.alexander.hulett@univie.ac.at
+
+[102]
+name=Thomas Leitner
+email=thomas.leitner@univie.ac.at
+nick=mathit
+
+[103]
+name=Kerstin Ammann
+email=kerstin.ammann@univie.ac.at
+nick=mathit
+
+[104]
+name=Maksim Smirnov
+email=smirnov.maksim@yahoo.com
+
+[105]
+name=Niklas Hey
+email=niklas.hey@wu.ac.at
+
+[106]
+name=Jeferson ZAPATA
+email=jeferson.zapata@ist.ac.at
+
+[107]
+name=Daniel Weitzel
+email=daniel.weitzel@univie.ac.at
+
+[108]
+name=Sylvia Kritzinger 
+email=sylvia.kritzinger@univie.ac.at
+
+[109]
+name=Marc Huber
+email=mhuber@ac.tuwien.ac.at
+
+[110]
+name=Francesco Rinaldi
+email=rinaldi@math.unipd.it
+
+[111]
+name=Vladimir Kolmogorov
+email=vnk@ist.ac.at
+
+[112]
+name=Dan Alistarh
+email=dan.alistarh@ist.ac.at
+
+[113]
+name=Lukas Liehr
+email=lukas.liehr@univie.ac.at
+
+[114]
+name=Yura Malitsky
+email=y.malitsky@gmail.com
+
+[115]
+name=Buris Tongnoi
+email=book_buris@hotmail.com
+
+[116]
+name=Katharina Götsch 
+email=katharina.goetsch@univie.ac.at
+
+[117]
+name=Julia Stranzl
+email=julia.stranzl@univie.ac.at
+
+[118]
+name=Immanuel Bomze
+email=immanuel.bomze@univie.ac.at
+
+[119]
+name=Nadine Haider
+email=nadine.haider@univie.ac.at
+
+[120]
+name=Informatik SPL
+email=informatik.spl@univie.ac.at
+
+[121]
+name=Nadine Haider
+email=nadine.haider@univie.ac.at
+
+[122]
+name=Anne Marie Faisst
+email=anne.marie.faisst@univie.ac.at
+
+[123]
+name=SSC Informatik
+email=ssc.informatik@univie.ac.at
+
+[124]
+name=Steffen Plunder
+email=steffen.plunder@univie.ac.at
+
+[125]
+name=Infrastruktur
+email=infrastruktur.mathematik@univie.ac.at
+nick=raum-reservieren
+
+[126]
+name=Peter Balazs
+email=peter.balazs@oeaw.ac.at
+
+[127]
+name=Miro Mifkovic
+email=Miro.Mifkovic@EDV-Design.at
+
+[128]
+name=Simon Rittel
+email=simon.rittel@univie.ac.at
+
+[129]
+name=Daniel Wagner
+email=klettern@alpenverein-austria.at
+
+[130]
+name=Claus Aichinger
+email=claus.aichinger@gmail.com
+

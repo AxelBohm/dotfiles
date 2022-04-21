@@ -12,8 +12,8 @@
 ~/bin/xrandr/set-dual-external.sh &
 
 # dropbox
-~/.dropbox-dist/dropboxd &
-. decrypt-dropbox.sh &
+# owncloud &
+. decrypt-owncloud.sh &
 
 ########################################
 # DWM

@@ -25,3 +25,5 @@
 	helper = read-only
 [pull]
 	rebase = true
+[rebase]
+	autoStash = true

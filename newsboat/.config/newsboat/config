@@ -55,13 +55,19 @@ highlight article "^(Title):(.*)" color6 default
 # highlight article "https?://[^\" ]+" red default
 
 # names of authors in arxiv
-highlight article "\">[^<]+" green default
+#highlight article "\">[^<]+" green default
+highlight article "\">(.*)" red default
+highlight article "\">[\w](.*)" blue default
 
 # names of authors I am particularly interested
 highlight article "(Lacoste-Julien|Peter Richt&#xe1;rik|Michael I. Jordan|Yura Malitsky|Khoa|Radu Ioan Bot|Dmitriy Drusvyatskiy|Courtney Paquette|John C. Duchi|Constantinos Daskalakis|Ernest Ryu|Konstantin Mishchenko)" color3 color8
 
 # keywords I am particularly interested
-highlight article "(stochastic|smoothing|Moreau|GAN|generative adversarial network|min\-max|minimax|nonsmooth|non-smooth|Minty)" color3 default
+highlight article "(stochastic|smoothing|Moreau|GAN|generative adversarial network|min\-max|minimax|nonsmooth|non-smooth|Minty|accelerate|prox|alternating|gradient-descent-ascent)" color3 default
+
+# needs to match entire word
+#highlight article "(convex)" color4 default
+#highlight article "(nonconvex)" color5 default
 
 # flagged articles
 # highlight all "(.*)!(.*)\d(.*)" green default

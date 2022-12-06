@@ -119,6 +119,9 @@ elif [[ `uname -n` = "raspberrypi" ]]; then
 elif [[ `uname -n` = "dlrig02" ]]; then
     source /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh
     source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+elif [[ `uname -n` = "tux" ]]; then
+    source /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+    source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 elif [[ `uname -n` = "login.mat.univie.ac.at" ]]; then
     source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
     source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh

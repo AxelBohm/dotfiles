@@ -64,6 +64,12 @@ call plug#end()
 " => plugin config
 """""""""""""""""""""""""""""""""""""""""""""""""""
 
+if exists('g:vscode')
+    " VSCode extension
+else
+    " ordinary Neovim
+endif
+
 " fzf
 let g:fzf_command_prefix = 'Fzf'
 nnoremap <silent> <leader>.    :FZF<cr>

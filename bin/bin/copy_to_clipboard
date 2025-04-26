@@ -1,0 +1,27 @@
+#!/bin/bash
+
+# Function to copy to clipboard, auto-detecting the environment
+
+if [[ -n "$1" ]]; then
+  content="$1"
+else
+  while IFS= read -r line; do
+    if [[ -z "$content" ]]; then
+      content="$line"
+    else
+      content="$content"$'\n'"$line"
+    fi
+  done
+fi
+
+if [[ -n "$(command -v wl-copy)" ]]; then
+    # Wayland environment
+    printf "%s" "$content" | wl-copy
+    echo "Copied to clipboard using wl-copy."
+elif [[ -n "$(command -v xclip)" ]]; then
+    # X11 environment
+    printf "%s" "$content" | xclip -selection clipboard
+    echo "Copied to clipboard using xclip."
+else
+    echo "Warning: Neither wl-copy nor xclip found. Clipboard operation failed."
+fi

@@ -16,5 +16,5 @@ password=$(pass git ls-files '*.gpg' | sed 's/.gpg$//' |
 case $info in 
     (password) [ -n "$password" ] && pass show -c "$password" ;;
     (show) [ -n "$password" ] && pass show "$password" ;;
-    (username) [ -n "$password" ] && pass_get_username $password | xclip -selection c;;
+    (username) [ -n "$password" ] && pass_get_username $password | copy_to_clipboard;;
 esac

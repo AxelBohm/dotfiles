@@ -1,2 +1,2 @@
-amixer sset Master 5%-
+pamixer -d 5
 pkill -RTMIN+10 dwmblocks

@@ -1,1 +1,7 @@
-find ~/Dropbox/papers/* -type f | cut -d"/" -f6- | dmenu | xargs -r (zathura &)
+#!/bin/bash
+
+papers_dir=~/ucloud/my_stuff/papers
+
+selection=$(find "$papers_dir" -type f | sed "s|^$papers_dir/||" | dmenu)
+
+[ -n "$selection" ] && zathura "$papers_dir/$selection" &

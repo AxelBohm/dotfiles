@@ -45,12 +45,6 @@
 *.colorUL:      #528b8b
 
 
-!! urxvt stuff
-Urxvt*font:     xft:Terminus:size=12:antialias=false
-Urxvt*boldFont: xft:Terminus:size=12:antialias=false
-
-Urxvt*scrollBar: false
-
 !! void linux, see
 ! https://blog.brunomiguel.net/geekices/how-to-get-good-font-rendering-in-void-linux/
 Xft.autohint: 1
@@ -59,3 +53,7 @@ Xft.hinting: true
 Xft.hintstyle: hintslight
 Xft.rgba: rgb
 Xft.lcdfilter: lcddefault
+
+
+!! scaling
+Xft.dpi: 144

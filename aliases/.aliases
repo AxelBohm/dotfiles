@@ -53,7 +53,7 @@ alias R="R --quiet --no-save"
 alias t="tmux"
 alias r="ranger"
 alias s="startx"
-alias lf="lfcd" # use modified lf that exits in pwd
+# alias lf="lfcd" # use modified lf that exits in pwd
 alias l=lf
 
 # quick access to config files

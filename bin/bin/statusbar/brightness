@@ -1,3 +1,6 @@
 #!/bin/bash
 
-echo "💡$(brightnessctl g)"
+# echo "💡$(brightnessctl g)"
+echo "💡$(brightnessctl | grep "Current" | awk '{print $4}' | tr -d '()%')%"
+
+# kill -35 $(pidof dwmblocks)  # because 35 = 34 (SIGRTMIN) + signal number (1)

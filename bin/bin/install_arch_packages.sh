@@ -6,11 +6,13 @@ sudo pacman -S emacs nvim python-pip python-pynvim hunspell-en_us hunspell-de
 
 sudo pacman -S calibre zathura lf less diff-so-fancy fuse signal-desktop evince neomutt bluez bluez-utils xorg-xev redshift geoclue dunst hsetroot
 
-audio
-
+# audio
 sudo pacman -S amixer pulsemixer pulseaudio wireplumber pipewire-pulse pulsemixer pamixer
 
 
-sudo pacman -S texlive-core texlab texlive-bin texlive-latexextra texlive-latex texlive-latexrecommended texlive-xetex texlive-bibtexextra biber texlive-mathscience
+sudo pacman -S texlive-core texlab texlive-bin texlive-latexextra texlive-latex texlive-latexrecommended texlive-xetex texlive-bibtexextra biber texlive-mathscience 
+
+# latexmk
+sudo pacman -S texlive-binextra 
 
 yay -S bluetuith

@@ -12,7 +12,10 @@ sudo pacman -S amixer pulsemixer pulseaudio wireplumber pipewire-pulse pulsemixe
 
 sudo pacman -S texlive-core texlab texlive-bin texlive-latexextra texlive-latex texlive-latexrecommended texlive-xetex texlive-bibtexextra biber texlive-mathscience 
 
-# latexmk
-sudo pacman -S texlive-binextra 
+
+sudo pacman -S \
+    texlive-binextra # latexmk
+    texlive-fontextra # awesome_cv and fontawesome
+
 
 yay -S bluetuith

@@ -1,5 +1,5 @@
 #!/bin/bash
 
-brightnessctl s 15+ 
+brightnessctl s +10%
 
 kill -35 $(pidof dwmblocks)

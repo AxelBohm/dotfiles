@@ -4,9 +4,15 @@
 # so ucloud will remember my credentials
 gnome-keyring-daemon --start
 
+# somehow I still need to start it like this..
+signal-desktop --password-store="gnome-libsecret" &
+
 # downloaded ucloud appimage and moved it to this location
 ~/.local/bin/ucloud-Linux64-3.13.0-build-22805.AppImage &
-#
+
+# screen color at night
+redshift-gtk &
+
 # notifications
 dunst &
 
@@ -26,6 +32,11 @@ clipmenud &
 # lock on suspend, etc
 xss-lock slock &
 
+# no sounds
+xset -b
+
+# set path so dmenu will have my scripts
+export PATH="$HOME/bin:$PATH"
 
 while type dwm >/dev/null ; do dwm && continue || break ; done
 

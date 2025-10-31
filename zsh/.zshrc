@@ -163,7 +163,7 @@ if [ $? -eq 0 ]; then
     eval "$__conda_setup"
 else
     if [ -f "/home/xel/.miniconda3/etc/profile.d/conda.sh" ]; then
-        . "/home/xel/miniconda3/etc/profile.d/conda.sh"
+        . "/home/xel/.miniconda3/etc/profile.d/conda.sh"
     else
         export PATH="/home/xel/.miniconda3/bin:$PATH"
     fi

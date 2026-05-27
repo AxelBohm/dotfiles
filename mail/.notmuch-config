@@ -12,7 +12,7 @@
 #
 
 [database]
-path=/home/xel/.mail/
+path=.mail/
 
 # User configuration
 #

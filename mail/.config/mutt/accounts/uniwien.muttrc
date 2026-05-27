@@ -23,7 +23,7 @@ bind index gg first-entry
 # set imap_check_subscribed # this should work in mutt according to https://wiki.archlinux.org/title/mutt
 # this here works - huray - bit gives a random sorting which I don't like
 # mailboxes `find ~/.mail/uniwien -type d -name cur | xargs dirname | xargs`
-mailboxes "=INBOX.Trash" "=INBOX" "=INBOX.Sent" "=INBOX.Drafts" "=INBOX.Junk" "=INBOX.GRAAL" "=INBOX.hessian-vector" "=INBOX.Privat" "=INBOX.Puya-collab" "=INBOX.tuxedo" "=INBOX.VGSCO"  "=INBOX.Archive" "=INBOX.Archive.2022" "=INBOX.Archive.abrechnungen" 
+source "sh ~/.config/mutt/etc/mailboxes-existing.sh ~/.mail/uniwien '=INBOX.Trash' '=INBOX' '=INBOX.Sent' '=INBOX.Drafts' '=INBOX.Junk' '=INBOX.GRAAL' '=INBOX.hessian-vector' '=INBOX.Privat' '=INBOX.Puya-collab' '=INBOX.tuxedo' '=INBOX.VGSCO' '=INBOX.Archive' '=INBOX.Archive.2022' '=INBOX.Archive.abrechnungen'|"
 macro index,pager gi "<change-folder>=INBOX<enter>" "Go to inbox."
 macro index,pager gs "<change-folder>=INBOX.Sent<enter>" "Go to sent."
 macro index,pager gd "<change-folder>=INBOX.Drafts<enter>" "Go to drafts."

@@ -60,7 +60,7 @@ bind index,pager R reply
 
 # Forgotten attachment Feature
 set abort_noattach = ask-yes
-set abort_noattach_regex = "\\<(attach(|ed|ments?)|anh(ä|ae)ngen|angeh(ä|ae)ngt|anhang|anh(ä|ae)nge)\\>"
+set abort_noattach_regex = "\\<(attach(ed|ments?)?|anh(ä|ae)ngen|angeh(ä|ae)ngt|anhang|anh(ä|ae)nge)\\>"
 
 ## View attachments properly.
 bind attach <return> view-mailcap
@@ -109,8 +109,8 @@ set pgp_self_encrypt = yes          # when sending encrypted mail save it encryp
 
 
 ## switch mailboxes
-macro index,pager o1 '<sync-mailbox><enter-command>source /home/xel/.config/mutt/accounts/uniwien.muttrc<enter><change-folder>!<enter>'
-macro index,pager o2 '<sync-mailbox><enter-command>source /home/xel/.config/mutt/accounts/ymail.muttrc<enter><change-folder>!<enter>'
+macro index,pager o1 '<sync-mailbox><enter-command>source ~/.config/mutt/accounts/uniwien.muttrc<enter><change-folder>!<enter>'
+macro index,pager o2 '<sync-mailbox><enter-command>source ~/.config/mutt/accounts/ymail.muttrc<enter><change-folder>!<enter>'
 
 
 ## colemak
@@ -130,8 +130,8 @@ bind index,pager \Cl half-up
 set index_format = "%3C %zs %zc%zt %{!%d %b %R}  %-20.20L %?M?(%1M)& ?%?X? &· ? %s"
 set pager_format = " %n %zc  %T %s%*  %[!%d %b · %I:%M %p] %?X?  %X ? %P  "
 set status_format = " %f%?r? %r?    %m %?n?  %n ?  %?d?  %d ?%?t?  %t ?%?F?  %F? %> %?p?   %p ?"
-set vfolder_format = " %N %?n?%3n&   ?  %8m  · %f"
-set attach_format = "%u%D  %T%-75.75d %?T?%&   ? %5s · %m/%M"
+set folder_format = " %N %?n?%3n&   ?  %8m  · %f"
+set attach_format = "%u%D  %T%-75.75d %>  %5s · %m/%M"
 set compose_format = " Compose  Approx. msg size: %l   Atts: %a  %> "
 
 # no addressed to me, to me, group, cc, sent by me, mailing list
@@ -182,4 +182,4 @@ bind editor <Tab> complete-query
 macro index,pager \ck <pipe-entry>'mutt2calcurse'<enter> 'Add ical events to calcurse'
 
 # sets the default mailbox
-source /home/xel/.config/mutt/accounts/uniwien.muttrc
+source ~/.config/mutt/accounts/uniwien.muttrc

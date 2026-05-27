@@ -23,12 +23,8 @@ call plug#begin('~/.vim/plugged')
 
 
 " auto completion
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-" Plug 'Shougo/deoplete-lsp'
-Plug 'neovim/nvim-lspconfig'     " collection of common configurations for LSP client
-Plug 'prabirshrestha/vim-lsp'
+Plug 'neovim/nvim-lspconfig', { 'tag': 'v2.4.0' }  " collection of common configurations for LSP client
 Plug 'JuliaEditorSupport/julia-vim'   " Julia support (syntax highligthing,...)
-Plug 'deoplete-plugins/deoplete-jedi' " python autocompletion
 
 Plug 'dense-analysis/ale'                 " linting 
 Plug 'SirVer/ultisnips'
@@ -49,7 +45,7 @@ Plug 'jceb/vim-orgmode'         " orgmode
 
 " UI
 Plug 'xero/sourcerer.vim'               " colorscheme
-Plug 'norcalli/nvim-colorizer.lua'      " color highlight
+Plug 'NvChad/nvim-colorizer.lua'        " color highlight
 Plug 'machakann/vim-highlightedyank'    " blink yanks
 Plug 'itchyny/lightline.vim'            " status line
 
@@ -108,25 +104,6 @@ if exists('g:started_by_firenvim') && g:started_by_firenvim
         autocmd!
         autocmd BufEnter *.txt setlocal filetype=markdown.pandoc
     augroup END
-endif
-
-" deoplete autocomplete
-let g:deoplete#enable_at_startup = 1
-" use tab to forward cycle
-inoremap <silent><expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
-
-autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
-" let g:deoplete#sources#jedi#show_docstring = 0
-let g:deoplete#sources#jedi#ignore_errors = 1
-
-" register language server
-if executable('pyls')
-    " pip install python-language-server
-    au User lsp_setup call lsp#register_server({
-        \ 'name': 'pyls',
-        \ 'cmd': {server_info->['pyls']},
-        \ 'allowlist': ['python'],
-        \ })
 endif
 
 function! s:on_lsp_buffer_enabled() abort

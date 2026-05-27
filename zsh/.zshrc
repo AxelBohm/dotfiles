@@ -63,7 +63,9 @@ bindkey "^[[A" history-beginning-search-backward-end
 bindkey "^[[B" history-beginning-search-forward-end
 
 # pair delimiters
-if [[ -d ~/.zsh/zsh-autopair ]]; then
+if [[ `uname` == "Darwin" ]]; then
+    source /opt/homebrew/share/zsh-autopair/autopair.zsh 
+elif [[ -d ~/.zsh/zsh-autopair ]]; then
     source ~/.zsh/zsh-autopair/autopair.zsh
     autopair-init
 fi
@@ -129,6 +131,7 @@ elif [[ `uname` = "Darwin" ]]; then
     source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
     source /opt/homebrew/share/zsh-autocomplete/zsh-autocomplete.plugin.zsh
     source /opt/homebrew/share/zsh-autopair/autopair.zsh
+    source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 else
     source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.plugin.zsh
     source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.plugin.zsh

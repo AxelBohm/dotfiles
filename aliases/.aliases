@@ -68,10 +68,36 @@ alias brc="vim ~/.bashrc"
 
 
 # basic stuff
-alias ls="ls --color"
+_ls_cmd="ls"
+_ls_color_args=()
+_ls_ignore_args=()
+if command -v gls >/dev/null 2>&1; then
+    _ls_cmd="gls"
+fi
+
+if command "$_ls_cmd" --ignore='*.log' --color=auto -d . >/dev/null 2>&1; then
+    _ls_color_args=(--color=auto)
+    _ls_ignore_args=(
+        --ignore='*.log'
+        --ignore='*.aux'
+        --ignore='*.fls'
+        --ignore='*.synctex.gz'
+        --ignore='*.fdb_latexmk'
+        --ignore='*.prv'
+        --ignore='*.xdv'
+        --ignore='*.out'
+        --ignore='*.run.xml'
+        --ignore='_region_.tex'
+    )
+elif command "$_ls_cmd" -G -d . >/dev/null 2>&1; then
+    _ls_color_args=(-G)
+fi
+
+ls() {
+    command "$_ls_cmd" "${_ls_color_args[@]}" "${_ls_ignore_args[@]}" "$@"
+}
 alias la="ls -A"
 alias ll="ls -l"
-alias ls="ls --ignore='*.'{log,aux,fls,synctex.gz,fdb_latexmk,prv,xdv,out,run.xml} --ignore='\_region\_.tex' --color"
 alias grep="grep --color -i"
 
 c() { # automatically show content when changin into a directory

@@ -1,0 +1,27 @@
+#!/bin/sh
+set -eu
+
+if [ "$#" -eq 0 ]; then
+    exit 0
+fi
+
+if ! command -v firefox >/dev/null 2>&1; then
+    if [ -x /usr/bin/open ]; then
+        /usr/bin/open "$@"
+    elif command -v xdg-open >/dev/null 2>&1; then
+        for file do
+            xdg-open "$file" >/dev/null 2>&1 &
+        done
+    else
+        echo "open-html-tab: firefox not found" >&2
+        exit 1
+    fi
+    exit 0
+fi
+
+for file do
+    url=$(
+        python3 -c 'from pathlib import Path; import sys; print(Path(sys.argv[1]).resolve().as_uri())' "$file"
+    )
+    firefox --new-tab "$url" >/dev/null 2>&1 &
+done

@@ -4,8 +4,9 @@ cnoremap <c-j> <c-n>
 noremap <c-l> <c-u>
 
 " " rotate some keys about to get qwerty "hjkl" back for movement
-noremap n j
-noremap e k
+" Move by visual rows so wrapped lines remain easy to navigate.
+noremap n gj
+noremap e gk
 noremap i l
 
 noremap gn gj

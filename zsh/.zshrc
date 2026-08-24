@@ -38,7 +38,13 @@ PROMPT='%{$fg[green]%}%n@%m %{$fg[blue]%}%~ $(git_prompt_string)
 ###############################################################
 
 autoload -Uz compinit
-compinit
+zcompdump_old=(~/.zcompdump(N.mh+24))
+if [[ ! -e ~/.zcompdump ]] || (( ${#zcompdump_old} )); then
+    compinit
+else
+    compinit -C
+fi
+unset zcompdump_old
 # case insensitive completion
 zstyle ':completion:*' matcher-list 'm:{[:lower:]}={[:upper:]}'
 

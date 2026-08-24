@@ -23,8 +23,19 @@ source ~/.zsh/git.zsh
 # vi settings for zsh
 source ~/.zsh/vi.zsh
 
-PROMPT='%{$fg[green]%}%n@%m %{$fg[blue]%}%~ $(git_prompt_string)
+prompt_host='%m'
+if [[ "$OSTYPE" == darwin* ]]; then
+    local_hostname="$(scutil --get LocalHostName 2>/dev/null)"
+    case "$local_hostname" in
+        *MacBook*) prompt_host='macbook' ;;
+        *Mac-Mini*|*Mac-mini*) prompt_host='mac-mini' ;;
+        *) prompt_host="${local_hostname:l}" ;;
+    esac
+fi
+
+PROMPT='%{$fg[green]%}%n@'"$prompt_host"' %{$fg[blue]%}%~ $(git_prompt_string)
 %{$reset_color%}\$ '
+unset prompt_host local_hostname
 
 # left prompt
 # PROMPT="%F{237}%K{239}█▓░%{$fg_bold[green]%}%K{239}%n@%m%F{237}%K{239}░▓█%{$reset_color%} %F{237}%K{239}█▓░%{$fg_bold[blue]%}%K{239}%~%F{237}%K{239}░▓█%{$reset_color%}

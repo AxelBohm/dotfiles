@@ -69,7 +69,7 @@ bindkey "^[[A" history-beginning-search-backward-end
 bindkey "^[[B" history-beginning-search-forward-end
 
 # pair delimiters
-if [[ `uname` == "Darwin" ]]; then
+if [[ "$OSTYPE" == darwin* ]]; then
     source /opt/homebrew/share/zsh-autopair/autopair.zsh 
 elif [[ -d ~/.zsh/zsh-autopair ]]; then
     source ~/.zsh/zsh-autopair/autopair.zsh
@@ -116,35 +116,6 @@ function mdl {
 }
 
 ################################################################
-## => void only
-################################################################
-if [[ `uname -n` = "void" ]]; then
-    source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
-    source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-elif [[ `uname -n` = "raspberrypi" ]]; then
-    source /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-    source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-elif [[ `uname -n` = "dlrig02" ]]; then
-    source /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-    source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-elif [[ `uname -n` = "tux" ]]; then
-    source /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-    source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-elif [[ `uname -n` = "login.mat.univie.ac.at" ]]; then
-    source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
-    source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-elif [[ `uname` = "Darwin" ]]; then
-    source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-    source /opt/homebrew/share/zsh-autocomplete/zsh-autocomplete.plugin.zsh
-    source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-else
-    source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.plugin.zsh
-    source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.plugin.zsh
-fi
-
-
-
-################################################################
 ##  colemak remaps
 ################################################################
 source ~/.zsh/colemak.zsh
@@ -166,17 +137,39 @@ compctl -K _pip_completion pip
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/home/xel/.miniconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
-if [ $? -eq 0 ]; then
-    eval "$__conda_setup"
-else
-    if [ -f "/home/xel/.miniconda3/etc/profile.d/conda.sh" ]; then
-        . "/home/xel/.miniconda3/etc/profile.d/conda.sh"
+if [[ -x /home/xel/.miniconda3/bin/conda || -f /home/xel/.miniconda3/etc/profile.d/conda.sh ]]; then
+    __conda_setup="$('/home/xel/.miniconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
+    if [ $? -eq 0 ]; then
+        eval "$__conda_setup"
     else
-        export PATH="/home/xel/.miniconda3/bin:$PATH"
+        if [ -f "/home/xel/.miniconda3/etc/profile.d/conda.sh" ]; then
+            . "/home/xel/.miniconda3/etc/profile.d/conda.sh"
+        else
+            export PATH="/home/xel/.miniconda3/bin:$PATH"
+        fi
     fi
+    unset __conda_setup
 fi
-unset __conda_setup
 # <<< conda initialize <<<
 # use `conda config --set auto_activate_base false` to have base activated by
 # default
+
+################################################################
+## => plugins (syntax highlighting must be last)
+################################################################
+ZSH_AUTOSUGGEST_USE_ASYNC=1
+
+if [[ "$HOST" == "void" || "$HOST" == "raspberrypi" || "$HOST" == "dlrig02" || "$HOST" == "tux" ]]; then
+    source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+    source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+elif [[ "$HOST" == "login.mat.univie.ac.at" ]]; then
+    source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
+    source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+elif [[ "$OSTYPE" == darwin* ]]; then
+    source /opt/homebrew/share/zsh-autocomplete/zsh-autocomplete.plugin.zsh
+    source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+    source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+else
+    source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.plugin.zsh
+    source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.plugin.zsh
+fi

@@ -130,7 +130,6 @@ elif [[ `uname -n` = "login.mat.univie.ac.at" ]]; then
 elif [[ `uname` = "Darwin" ]]; then
     source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
     source /opt/homebrew/share/zsh-autocomplete/zsh-autocomplete.plugin.zsh
-    source /opt/homebrew/share/zsh-autopair/autopair.zsh
     source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 else
     source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.plugin.zsh

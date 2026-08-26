@@ -129,7 +129,6 @@ map <c-r> reload
 map <c-l> redraw
 map ? push :help<enter>
 map s $SHELL
-map : read
 map ; read
 map o open-with
 map O open-with
@@ -144,7 +143,7 @@ map X !$f
 map <space> toggle
 map v invert
 map V visual
-map u unselect
+map u
 map t tag-toggle
 map ut tag-clear
 map m

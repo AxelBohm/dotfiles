@@ -19,6 +19,11 @@ case "${1-}" in
     *.org)
         exec emacsclient -c -- "$@"
         ;;
+    *.xlsx|*.XLSX)
+        if [ "$(uname -s)" = Darwin ]; then
+            exec open -a LibreOffice -- "$@"
+        fi
+        ;;
 esac
 
 case "$(file --mime-type -Lb -- "$1")" in

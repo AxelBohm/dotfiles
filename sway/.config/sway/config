@@ -114,10 +114,10 @@ assign [instance="browser"] "2"
 bindsym $mod+z                  exec $term -n calcurse -e calcurse
 
 # phd directory 
-bindsym $mod+p                  exec $term -e ranger ~/PhD
+bindsym $mod+p                  exec $term -e lf ~/PhD
 
-# ranger file manager
-bindsym $mod+Shift+Return       exec $term -e ranger
+# terminal file manager
+bindsym $mod+Shift+Return       exec $term -e lf
 
 # mail
 bindsym $mod+m                  exec $term -n mail -e mutt.sh 
@@ -296,4 +296,3 @@ bar {
         inactive_workspace #32323200 #32323200 #5c5c5c
     }
 }
-

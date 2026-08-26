@@ -16,7 +16,7 @@
 # Dependancies
 	# -dmenu
 	# -kdeconnect
-	# -zenity, nnn, or ranger
+	# -zenity, nnn, or lf
 	# -qt5tools
 	# -dbus
 	# -dunst
@@ -24,8 +24,8 @@
 # options
 # nnn
 # zenity
-# ranger
-Picker='ranger'
+# lf
+Picker='lf'
 
 # Color Settings of dmenu 
 COLOR_DISCONNECTED='#000'       # Device Disconnected
@@ -118,9 +118,12 @@ show_menu () {
                     *'Send File') 
 						[ $Picker == 'nnn' ] && kdeconnect-cli --share "file://$($TERMINAL nnn -p -)" -d $2 ;
 						[ $Picker == 'zenity' ] && kdeconnect-cli --share "file://$(zenity --file-selection)" -d $2 ;
-						if [ $Picker == 'ranger' ]; then
- 							mkdir -p /tmp/ranger/ && touch /tmp/ranger/sentfile
-							kdeconnect-cli --share "file://$($TERMINAL ranger --choosefile=/tmp/ranger/sentfile)" -d $2 
+						if [ $Picker == 'lf' ]; then
+							selection_file=$(mktemp)
+							$TERMINAL lf -selection-path="$selection_file"
+							selected=$(sed -n '1p' "$selection_file")
+							rm -f "$selection_file"
+							[ -n "$selected" ] && kdeconnect-cli --share "file://$selected" -d $2
 						fi;;
                     *'Unpair' ) kdeconnect-cli --unpair -d $2 ;;
                     *'Send SMS' ) 

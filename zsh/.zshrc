@@ -89,7 +89,7 @@ fi
 
 ### lf - file browser
 # needs to come before aliases
-LFCD=".config/lf/lfcd.sh"
+LFCD="$HOME/.config/lf/lfcd.sh"
 if [ -f "$LFCD" ]; then
     source "$LFCD"
 fi

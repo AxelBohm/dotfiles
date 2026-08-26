@@ -51,9 +51,8 @@ alias nv="nvim"
 
 alias R="R --quiet --no-save"
 alias t="tmux"
-alias r="ranger"
+alias r="lfcd"
 alias s="startx"
-# alias lf="lfcd" # use modified lf that exits in pwd
 alias l=lf
 
 # quick access to config files
@@ -63,7 +62,8 @@ alias zrc="vim ~/.zshrc"
 alias mrc="vim ~/.config/mutt/muttrc"
 alias arc="vim ~/.config/mutt/etc/aliases"
 alias nrc="vim ~/.config/newsboat/config"
-alias rrc="vim ~/.config/ranger/rc.conf"
+alias lrc="vim ~/.config/lf/lfrc"
+alias rrc="vim ~/.config/lf/lfrc"
 alias brc="vim ~/.bashrc"
 
 

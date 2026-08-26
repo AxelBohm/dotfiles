@@ -22,6 +22,13 @@ case "${1-}" in
     *.xlsx|*.XLSX)
         if [ "$(uname -s)" = Darwin ]; then
             exec open -a LibreOffice -- "$@"
+        elif command -v libreoffice >/dev/null 2>&1; then
+            exec libreoffice -- "$@"
+        elif command -v soffice >/dev/null 2>&1; then
+            exec soffice -- "$@"
+        else
+            printf 'LibreOffice is required to open Excel workbooks\n' >&2
+            exit 1
         fi
         ;;
 esac

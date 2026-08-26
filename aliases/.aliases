@@ -51,7 +51,7 @@ alias nv="nvim"
 
 alias R="R --quiet --no-save"
 alias t="tmux"
-alias r="lfcd"
+alias r="ranger"
 alias s="startx"
 alias l=lf
 

@@ -48,6 +48,10 @@ unset prompt_host local_hostname
 # => fancy
 ###############################################################
 
+if [[ "$OSTYPE" == darwin* && -d /opt/homebrew/share/zsh/site-functions ]]; then
+    fpath=(/opt/homebrew/share/zsh/site-functions $fpath)
+fi
+
 autoload -Uz compinit
 zcompdump_old=(~/.zcompdump(N.mh+24))
 if [[ ! -e ~/.zcompdump ]] || (( ${#zcompdump_old} )); then
@@ -56,6 +60,13 @@ else
     compinit -C
 fi
 unset zcompdump_old
+
+# Homebrew's pass completion may not be present in an existing completion cache.
+if [[ -r /opt/homebrew/share/zsh/site-functions/_pass ]]; then
+    autoload -Uz _pass
+    compdef _pass pass
+fi
+
 # case insensitive completion
 zstyle ':completion:*' matcher-list 'm:{[:lower:]}={[:upper:]}'
 

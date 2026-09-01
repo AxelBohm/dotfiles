@@ -1,0 +1,8 @@
+#!/usr/bin/osascript
+
+tell application "System Events"
+    set frontProcess to first application process whose frontmost is true
+    tell frontProcess
+        click menu item "Zoom" of menu "Window" of menu bar 1
+    end tell
+end tell

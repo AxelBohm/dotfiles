@@ -18,9 +18,45 @@ Channel yahoo-inbox
 Far :yahoo-remote:INBOX
 Near :yahoo-local:INBOX
 Create Near
-Sync Pull
+Sync All
 Remove None
-Expunge None
+Expunge Both
+CopyArrivalDate yes
+SyncState *
+
+Channel yahoo-draft
+Far :yahoo-remote:Draft
+Near :yahoo-local:Draft
+Sync All
+Remove None
+Expunge Both
+CopyArrivalDate yes
+SyncState *
+
+Channel yahoo-sent
+Far :yahoo-remote:Sent
+Near :yahoo-local:Sent
+Sync All
+Remove None
+Expunge Both
+CopyArrivalDate yes
+SyncState *
+
+Channel yahoo-trash
+Far :yahoo-remote:Trash
+Near :yahoo-local:Trash
+Sync All
+Remove None
+Expunge Both
+CopyArrivalDate yes
+SyncState *
+
+Channel yahoo-archive
+Far :yahoo-remote:Archive
+Near :yahoo-local:Archive
+Sync All
+Remove None
+Expunge Both
 CopyArrivalDate yes
 SyncState *
 
@@ -43,9 +79,45 @@ Channel univie-inbox
 Far :univie-remote:INBOX
 Near :univie-local:INBOX
 Create Near
-Sync Pull
+Sync All
 Remove None
-Expunge None
+Expunge Both
+CopyArrivalDate yes
+SyncState *
+
+Channel univie-drafts
+Far :univie-remote:Drafts
+Near :univie-local:INBOX.Drafts
+Sync All
+Remove None
+Expunge Both
+CopyArrivalDate yes
+SyncState *
+
+Channel univie-sent
+Far :univie-remote:Sent
+Near :univie-local:INBOX.Sent
+Sync All
+Remove None
+Expunge Both
+CopyArrivalDate yes
+SyncState *
+
+Channel univie-trash
+Far :univie-remote:Trash
+Near :univie-local:INBOX.Trash
+Sync All
+Remove None
+Expunge Both
+CopyArrivalDate yes
+SyncState *
+
+Channel univie-archive
+Far :univie-remote:Archive
+Near :univie-local:INBOX.Archive
+Sync All
+Remove None
+Expunge Both
 CopyArrivalDate yes
 SyncState *
 

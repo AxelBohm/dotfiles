@@ -1,0 +1,54 @@
+IMAPAccount yahoo
+Host imap.mail.yahoo.com
+Port 993
+User axel.boehm@ymail.com
+PassCmd "/opt/homebrew/bin/pass show Email/yahoo.com | /usr/bin/sed -n 's/^one-time-yahoo-password:[[:space:]]*//p'"
+TLSType IMAPS
+AuthMechs LOGIN
+
+IMAPStore yahoo-remote
+Account yahoo
+
+MaildirStore yahoo-local
+SubFolders Verbatim
+Path ~/.mail/ymail/
+Inbox ~/.mail/ymail/Inbox
+
+Channel yahoo-inbox
+Far :yahoo-remote:INBOX
+Near :yahoo-local:INBOX
+Create Near
+Sync Pull
+Remove None
+Expunge None
+CopyArrivalDate yes
+SyncState *
+
+IMAPAccount univie
+Host imap.univie.ac.at
+Port 993
+User boehma53
+PassCmd "/opt/homebrew/bin/pass show Email/univie-employee | /usr/bin/head -n 1"
+TLSType IMAPS
+
+IMAPStore univie-remote
+Account univie
+
+MaildirStore univie-local
+SubFolders Verbatim
+Path ~/.mail/uniwien/
+Inbox ~/.mail/uniwien/INBOX
+
+Channel univie-inbox
+Far :univie-remote:INBOX
+Near :univie-local:INBOX
+Create Near
+Sync Pull
+Remove None
+Expunge None
+CopyArrivalDate yes
+SyncState *
+
+Group inboxes
+Channel yahoo-inbox
+Channel univie-inbox

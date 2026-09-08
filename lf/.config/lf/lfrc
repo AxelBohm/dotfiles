@@ -26,6 +26,12 @@ set previewer ~/.config/lf/preview.sh
 cmd open $~/.config/lf/open.sh $fx
 cmd open-with $~/.config/lf/open.sh --ask $fx
 
+# Match Ranger's mkdir prompt: treat the full name as one path.
+cmd mkdir ${{
+    IFS=' '
+    mkdir -p -- "$*"
+}}
+
 # Ranger was configured to delete without confirmation. "D" is the safer
 # recoverable alternative on macOS and on Linux systems with trash-cli.
 cmd delete ${{
